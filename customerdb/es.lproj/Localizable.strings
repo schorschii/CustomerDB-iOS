@@ -1,0 +1,147 @@
+/* 
+  Strings.strings - ES
+  Copyright © 2019 Georg Sieber. All rights reserved.
+*/
+
+// Main
+"customer_database" = "Base de datos de cliente";
+"search" = "Buscar";
+"information" = "Información";
+"tips" = "Consejos";
+"settings" = "Configuraciones";
+"close" = "Cerca";
+"input_only_mode" = "Modo de solo entrada";
+"lock_app" = "Aplicación de bloqueo";
+"filter" = "Filtrar";
+"order" = "Orden";
+"newsletter" = "Boletin informativo";
+"birthdays" = "Cumpleaños";
+"import_export" = "Importación y exportación";
+"close_database" = "Cerrar base de datos";
+"delete_selected" = "Seleccionar y eliminar";
+"syncing" = "Sincronizando ...";
+"sync_succeeded" = "Sincronización exitosa";
+"sync_failed" = "Sincronización fallida";
+"ok" = "Okay";
+"invalid_response" = "Respuesta invalida";
+"customers" = "Clientes";
+"vouchers" = "Vales";
+"sync_not_configured" = "Sincronización no configurada";
+"please_setup_sync" = "Configura la sincronización en la configuración.";
+"import_vcf" = "Importar archivo VCF";
+"import_csv" = "Importar archivo CSV";
+"export_vcf" = "Exportar archivo VCF";
+"export_csv" = "Exportar archivo CSV";
+"import_failed" = "Importación fallida";
+"import_succeeded" = "Importación exitosa";
+"imported_records" = "Registros importados:";
+"export_failed" = "Exportación fallida";
+"export_succeeded" = "Exportación exitosa";
+"unknown_file_format" = "Formato de archivo desconocido";
+"yes" = "si";
+"no" = "No";
+"no_newsletter_customers" = "No hay boletines disponibles para clientes";
+"no_newsletter_customers_text" = "No puede escribir un boletín porque no hay clientes con una dirección de correo electrónico válida que hayan aceptado el boletín.";
+"no_email_account" = "Sin cuenta de correo electrónico";
+"please_set_up_email" = "Configure una cuenta en la configuración del sistema.";
+"backup_note_menu" = "Haga una copia de seguridad de sus datos regularmente (consulte 'Información' para más detalles)";
+"file_does_not_contain_valid_records" = "El archivo no contiene ningún registro válido.";
+"not_supported" = "No es compatible con este dispositivo";
+"file_selection_not_supported" = "Su versión de iOS no admite la selección de archivos.";
+"eula_title" = "Acuerdo de licencia de usuario final";
+"eula" = "No hay garantía para este software, en la medida permitida por la ley aplicable. Los titulares de los derechos de autor proporcionan el programa »tal cual«, sin ninguna garantía, ni expresa ni implícitamente, incluidas, entre otras, las garantías implícitas de comerciabilidad e idoneidad para un propósito particular. Todo el riesgo en cuanto a la calidad y el rendimiento del programa está con usted. Si el programa resultara defectuoso, usted asume el costo de todos los servicios, reparaciones o correcciones necesarias. En ningún caso, a menos que lo exija la ley aplicable o se acuerde por escrito, cualquier titular de derechos de autor, o cualquier otra parte que modifique y / o transmita el programa, será responsable ante usted por los daños.\n\nAsegúrese de informar a sus clientes sobre el procesamiento digital de datos personales de acuerdo con el Reglamento General de Protección de Datos (EU GDPR).";
+
+// About
+"success" = "Éxito";
+"error" = "Error";
+"feature_now_available" = "La función ya está disponible";
+"more" = "Más...";
+"not_unlocked" = "Característica bloqueada";
+"unlock_feature_via_inapp" = "Puede desbloquear esta función mediante una compra en la aplicación.";
+"unlock_500_via_inapp" = "Puede desbloquear más de 500 clientes a través de una compra en la aplicación.";
+"purchased" = "Comprada";
+"buy" = "Comprar";
+"only_german_and_english_messages" = "Tenga en cuenta que solo se pueden considerar los mensajes en alemán e inglés.";
+"feedback_title" = "Feedback Customer Database iOS";
+
+// Settings
+"new_custom_field" = "Nuevo campo personalizado";
+"add_alphanumeric" = "Agregar campo alfanumérico";
+"add_alphanumeric_multiline" = "Agregar campo alfanumérico multilínea";
+"add_numeric" = "Agregar campo numérico";
+"add_dropdown" = "Agregar lista desplegable";
+"add_date" = "Agregar campo de fecha";
+"delete" = "Eliminar";
+"field_description" = "campo Descripción";
+"are_you_sure" = "Estas segura";
+"done" = "Hecho";
+"field_alphanumeric" = "Alfanumérica";
+"field_alphanumeric_multiline" = "Alfanumérico (Multilínea)";
+"field_numeric" = "Numérica";
+"field_drop_down" = "Desplegable";
+"field_date" = "Fecha";
+"logo_deleted" = "Imagen eliminada";
+
+// Details
+"first_name" = "Nombre de pila";
+"last_name" = "Apellido";
+"ascending" = "Ascendente";
+"descending" = "Descendente";
+"ID:" = "CARNÉ DE IDENTIDAD:";
+"export_single_customer_record" = "Exportar registro de cliente único";
+"export_single_customer_record_description" = "Elija en qué formato se deben exportar los datos.";
+"save_csv" = "Guardar archivo CSV";
+"save_vcf" = "Guardar archivo VCF";
+"email_csv" = "Email CSV File";
+"email_vcf" = "Correo electrónico archivo VCF";
+"consent" = "Consentimiento";
+"image" = "Imagen";
+"print_customer" = "Cliente impresa";
+"delete_customer" = "Eliminar cliente";
+"print_voucher" = "Imprimir cupón";
+"delete_voucher" = "Eliminar comprobante";
+"redeem" = "Redimir";
+"value" = "Valor";
+"notes" = "Notas";
+"cancel" = "Cancelar";
+"number_parse_error" = "Entrada de número inválido";
+"enter_valid_number" = "Por favor ingrese un número valido.";
+"start_call" = "Iniciar llamada";
+"send_message" = "Enviar mensaje";
+"copy_to_clipboard" = "Copiar al portapapeles";
+"open_map" = "Mapa abierto";
+
+// Edit
+"name_empty" = "Nombre vacía";
+"please_fill_name" = "Por favor ingrese un nombre";
+"email_empty" = "Correo electrónico vacía";
+"please_fill_email" = "El cambio del boletín se activó pero no se ingresó ninguna dirección de correo electrónico. Ingrese una dirección de correo electrónico o desactive el cambio del boletín informativo.";
+"data_processing_consent" = "Consentimiento de procesamiento de datos";
+"please_accept_data_processing" = "Por favor, acepte el procesamiento de datos.";
+"new_customer" = "Nueva cliente";
+"new_voucher" = "Vale nuevo";
+
+// Sync
+"reset_password" = "Restablecer la contraseña";
+"delete_account" = "Borrar cuenta";
+"email_address" = "Dirección de correo electrónico";
+"please_check_inbox" = "Por favor revise su bandeja de entrada";
+"passwords_do_not_match" = "Las contraseñas no coinciden";
+"settings_were_not_saved" = "La configuración no se guardó.";
+"please_wait" = "Por favor espera...";
+"registration_failed" = "Registro fallido";
+"registration_succeeded" = "Registro exitoso";
+"registration_succeeded_text" = "Haga clic en el enlace del correo electrónico que le enviamos a su dirección para activar su cuenta. (Compruebe también su carpeta de correo no deseado).";
+"register_now" = "Regístrate ahora";
+"sync_account_changed" = "¿Eliminar todos los datos de su dispositivo?";
+"sync_account_changed_text" = "Se cambió la cuenta de sincronización.\n\nSi elige 'Sí', todos los datos se eliminarán de su dispositivo. Con la próxima sincronización, puede descargar todos los datos de la cuenta recién ingresada del servidor.\n\nSi elige 'No', todos los datos permanecerán en su dispositivo. Con la próxima sincronización, los datos de su dispositivo se fusionarán con los de la cuenta recién ingresada desde el servidor.";
+"please_accept_privacy_policy" = "Acepte los términos del servicio y la política de privacidad.";
+
+// Input Only Mode
+"unlock" = "desbloquear";
+"please_enter_password_to_exit" = "Por favor, introduzca la contraseña para desbloquear.";
+"password" = "Contraseña";
+"incorrect_password" = "Contraseña incorrecta";
+
+// Birthday View
+"today_note" = "(hoy)";

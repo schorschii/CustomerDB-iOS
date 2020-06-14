@@ -1,0 +1,147 @@
+/* 
+  Strings.strings - EN
+  Copyright © 2019 Georg Sieber. All rights reserved.
+*/
+
+// Main
+"customer_database" = "Customer Database";
+"search" = "Search";
+"information" = "Information";
+"tips" = "Tips";
+"settings" = "Settings";
+"close" = "Close";
+"input_only_mode" = "Input-Only-Mode";
+"lock_app" = "Lock App";
+"filter" = "Filter";
+"order" = "Order";
+"newsletter" = "Newsletter";
+"birthdays" = "Birthdays";
+"import_export" = "Im-/ Export";
+"close_database" = "Close Database";
+"delete_selected" = "Select & Delete";
+"syncing" = "Syncing...";
+"sync_succeeded" = "Sync Succeeded";
+"sync_failed" = "Sync Failed";
+"ok" = "OK";
+"invalid_response" = "Invalid Response";
+"customers" = "Customers";
+"vouchers" = "Vouchers";
+"sync_not_configured" = "Sync not configured";
+"please_setup_sync" = "Please set up sync in settings.";
+"import_vcf" = "Import VCF File";
+"import_csv" = "Import CSV File";
+"export_vcf" = "Export VCF File";
+"export_csv" = "Export CSV File";
+"import_failed" = "Import Failed";
+"import_succeeded" = "Import Succeeded";
+"imported_records" = "Imported records:";
+"export_failed" = "Export Failed";
+"export_succeeded" = "Export Succeeded";
+"unknown_file_format" = "Unknown File Format";
+"yes" = "Yes";
+"no" = "No";
+"no_newsletter_customers" = "No Newsletter Customers Available";
+"no_newsletter_customers_text" = "You can not write a newsletter because there are no customers with a valid email address which have accepted the newsletter.";
+"no_email_account" = "No Email Account";
+"please_set_up_email" = "Please set up an account in the system settings.";
+"backup_note_menu" = "Please backup your data regularly (see 'Information' for details).";
+"file_does_not_contain_valid_records" = "The file does not contain any valid records.";
+"not_supported" = "Not Supported On This Device";
+"file_selection_not_supported" = "Your iOS version does not support file selection.";
+"eula_title" = "End User License Agreement";
+"eula" = "There is no warranty for this software, to the extent permitted by applicable law. The copyright holders provide the program \"as is\", without any guarantee, neither expressly nor implicitly, including - but not limited to - the implied warranties of merchantability and fitness for a particular purpose. The entire risk as to the quality and performance of the program is with you. Should the program prove defective, you assume the cost of all necessary servicing, repair or correction. In no event unless required by applicable law or agreed to in writing will any copyright holder, or any other party who modifies and/or conveys the program, be liable to you for damages.\n\nPlease make sure to inform your customers about the digital processing of personal data in accordance with the General Data Protection Regulation (EU GDPR).";
+
+// About
+"success" = "Success";
+"error" = "Error";
+"feature_now_available" = "Feature is now available";
+"more" = "More...";
+"not_unlocked" = "Feature Locked";
+"unlock_feature_via_inapp" = "You can unlock this feature via an in-app purchase.";
+"unlock_500_via_inapp" = "You can unlock more than 500 customers via an in-app purchase.";
+"purchased" = "Purchased";
+"buy" = "Buy";
+"only_german_and_english_messages" = "Please note that only messages in German and English can be considered.";
+"feedback_title" = "Feedback Customer Database iOS";
+
+// Settings
+"new_custom_field" = "New Custom Field";
+"add_alphanumeric" = "Add Alphanumeric Field";
+"add_alphanumeric_multiline" = "Add Alphanumeric Multiline Field";
+"add_numeric" = "Add Numeric Field";
+"add_dropdown" = "Add Dropdown List";
+"add_date" = "Add Date Field";
+"delete" = "Delete";
+"field_description" = "Field Description";
+"are_you_sure" = "Are you sure?";
+"done" = "Done";
+"field_alphanumeric" = "Alphanumeric";
+"field_alphanumeric_multiline" = "Alphanumeric (Multiline)";
+"field_numeric" = "Numeric";
+"field_drop_down" = "Drop Down";
+"field_date" = "Date";
+"logo_deleted" = "Image deleted.";
+
+// Details
+"first_name" = "First Name";
+"last_name" = "Last Name";
+"ascending" = "Ascending";
+"descending" = "Descending";
+"ID:" = "ID:";
+"export_single_customer_record" = "Export Single Customer Record";
+"export_single_customer_record_description" = "Please choose in which format the data should be exported.";
+"save_csv" = "Save CSV File";
+"save_vcf" = "Save VCF File";
+"email_csv" = "Email CSV File";
+"email_vcf" = "Email VCF File";
+"consent" = "Consent";
+"image" = "Image";
+"print_customer" = "Print Customer";
+"delete_customer" = "Delete Customer";
+"print_voucher" = "Print Voucher";
+"delete_voucher" = "Delete Voucher";
+"redeem" = "Redeem";
+"value" = "Value";
+"notes" = "Notes";
+"cancel" = "Cancel";
+"number_parse_error" = "Invalid Number Input";
+"enter_valid_number" = "Please enter a valid number.";
+"start_call" = "Start Call";
+"send_message" = "Send Message";
+"copy_to_clipboard" = "Copy to Clipboard";
+"open_map" = "Open Map";
+
+// Edit
+"name_empty" = "Name empty";
+"please_fill_name" = "Please enter a name";
+"email_empty" = "Email empty";
+"please_fill_email" = "Newsletter switch was activated but no email address was entered. Please enter an email address or disable the newsletter switch.";
+"data_processing_consent" = "Data Processing Consent";
+"please_accept_data_processing" = "Please agree to the data processing.";
+"new_customer" = "New Customer";
+"new_voucher" = "New Voucher";
+
+// Sync
+"reset_password" = "Reset Password";
+"delete_account" = "Delete Account";
+"email_address" = "Email Address";
+"please_check_inbox" = "Please check your inbox";
+"passwords_do_not_match" = "Passwords do not match";
+"settings_were_not_saved" = "Settings were not saved.";
+"please_wait" = "Please wait...";
+"registration_failed" = "Registration failed";
+"registration_succeeded" = "Registration succeeded";
+"registration_succeeded_text" = "Please click on the link in the email we've sent to your address to activate your account. (Please also check your spam folder.)";
+"register_now" = "Register Now";
+"sync_account_changed" = "Remove all data from your device?";
+"sync_account_changed_text" = "The sync account was changed.\n\nIf you choose 'Yes', all data will be removed from your device. With the next sync you can download all data from the newly entered account from the server.\n\nIf you choose 'No', all data will remain on your device. With the next sync, the data from your device will be merged with that from the newly entered account from the server.";
+"please_accept_privacy_policy" = "Please accept the terms of service and the privacy policy.";
+
+// Input Only Mode
+"unlock" = "Unlock";
+"please_enter_password_to_exit" = "Please enter the password to unlock.";
+"password" = "Password";
+"incorrect_password" = "Incorrect Password";
+
+// Birthday View
+"today_note" = "(today)";

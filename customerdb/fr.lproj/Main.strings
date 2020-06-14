@@ -1,0 +1,580 @@
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "014-ob-4m4"; */
+"014-ob-4m4.text" = "Étiquette";
+
+/* Class = "UINavigationItem"; title = "Birthdays"; ObjectID = "05Y-93-jpd"; */
+"05Y-93-jpd.title" = "Anniversaires";
+
+/* Class = "UINavigationItem"; title = "Customer Database"; ObjectID = "0Ad-hN-GzP"; */
+"0Ad-hN-GzP.title" = "Base de données clients";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "1W5-81-mIk"; */
+"1W5-81-mIk.placeholder" = "Mot de passe";
+
+/* Class = "UILabel"; text = "Please make sure that all devices are synchronized in order to not issue duplicate voucher numbers."; ObjectID = "1kX-R6-aJ4"; */
+"1kX-R6-aJ4.text" = "Veuillez vous assurer que tous les appareils sont synchronisés afin de ne pas émettre de numéros de bons en double.";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "1rv-JJ-pDw"; */
+"1rv-JJ-pDw.text" = "Adresse";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "1vI-Ic-1Tn"; */
+"1vI-Ic-1Tn.title" = "Réglages";
+
+/* Class = "UILabel"; text = "Valid Until"; ObjectID = "2rg-NO-PwJ"; */
+"2rg-NO-PwJ.text" = "Valable jusque";
+
+/* Class = "UILabel"; text = "Guided Access (Kiosk Mode)"; ObjectID = "3TB-PT-Svs"; */
+"3TB-PT-Svs.text" = "Accès guidé (mode kiosque)";
+
+/* Class = "UIButton"; normalTitle = "Unlock"; ObjectID = "3nc-A0-iIY"; */
+"3nc-A0-iIY.normalTitle" = "Ouvrir";
+
+/* Class = "UILabel"; text = "Third Party Components"; ObjectID = "3vf-3i-s9K"; */
+"3vf-3i-s9K.text" = "Composants tiers";
+
+/* Class = "UILabel"; text = "Custom Fields"; ObjectID = "3yn-nk-BSE"; */
+"3yn-nk-BSE.text" = "Les champs personnalisés";
+
+/* Class = "UILabel"; text = "Current Value"; ObjectID = "4VK-Rc-20L"; */
+"4VK-Rc-20L.text" = "Valeur actuelle";
+
+/* Class = "UITextField"; placeholder = "First Name"; ObjectID = "4na-ll-Zyt"; */
+"4na-ll-Zyt.placeholder" = "Prénom";
+
+/* Class = "UILabel"; text = "Create more than 500 customers."; ObjectID = "5yb-35-5h8"; */
+"5yb-35-5h8.text" = "Créez plus de 500 clients.";
+
+/* Class = "UIButton"; normalTitle = "Delete Account"; ObjectID = "6Ns-3b-kS1"; */
+"6Ns-3b-kS1.normalTitle" = "Supprimer le compte";
+
+/* Class = "UIButton"; normalTitle = "Unlock"; ObjectID = "6jx-Qi-WYe"; */
+"6jx-Qi-WYe.normalTitle" = "Ouvrir";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "6sK-Hw-bl6"; */
+"6sK-Hw-bl6.text" = "Étiquette";
+
+/* Class = "UILabel"; text = "Group"; ObjectID = "6zy-nj-mEv"; */
+"6zy-nj-mEv.text" = "Groupe";
+
+/* Class = "UIButton"; normalTitle = "eMail Text"; ObjectID = "79t-Ou-jNL"; */
+"79t-Ou-jNL.normalTitle" = "Texte de l'e-mail";
+
+/* Class = "UILabel"; text = "Group"; ObjectID = "7NR-XQ-jRP"; */
+"7NR-XQ-jRP.text" = "Groupe";
+
+/* Class = "UILabel"; text = "1234567890"; ObjectID = "7OY-se-Wxf"; */
+"7OY-se-Wxf.text" = "1234567890";
+
+/* Class = "UILabel"; text = "Notes"; ObjectID = "7UU-em-w4s"; */
+"7UU-em-w4s.text" = "Remarques";
+
+/* Class = "UINavigationItem"; title = "Detail View"; ObjectID = "7l4-fD-TXZ"; */
+"7l4-fD-TXZ.title" = "vue détaillée";
+
+/* Class = "UIButton"; normalTitle = "Buy"; ObjectID = "7vV-Dm-lf0"; */
+"7vV-Dm-lf0.normalTitle" = "Acheter";
+
+/* Class = "UILabel"; text = "1234567890"; ObjectID = "83c-Bs-KU9"; */
+"83c-Bs-KU9.text" = "1234567890";
+
+/* Class = "UIButton"; normalTitle = "Remove"; ObjectID = "8Iw-b6-Mz3"; */
+"8Iw-b6-Mz3.normalTitle" = "Retirer";
+
+/* Class = "UITextField"; placeholder = "URL to Web-API"; ObjectID = "8qE-uR-JCT"; */
+"8qE-uR-JCT.placeholder" = "URL vers Web-API";
+
+/* Class = "UILabel"; text = "Text Templates"; ObjectID = "9G0-cJ-HcG"; */
+"9G0-cJ-HcG.text" = "Modèles de texte";
+
+/* Class = "UIButton"; normalTitle = "More Information & Registration ..."; ObjectID = "9SZ-Zh-gRn"; */
+"9SZ-Zh-gRn.normalTitle" = "Plus d'informations et inscription ...";
+
+/* Class = "UINavigationItem"; title = "Detail View"; ObjectID = "A3t-Uh-2z5"; */
+"A3t-Uh-2z5.title" = "vue détaillée";
+
+/* Class = "UILabel"; text = "Newsletter / Consent for data processing"; ObjectID = "Ahn-xK-rIG"; */
+"Ahn-xK-rIG.text" = "Newsletter / Consentement au traitement des données";
+
+/* Class = "UILabel"; text = "Allows you to set your own title bar color in the settings."; ObjectID = "BAP-dq-wyr"; */
+"BAP-dq-wyr.text" = "Vous permet de définir votre propre couleur de barre de titre dans les paramètres.";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "BCv-uQ-hGV"; */
+"BCv-uQ-hGV.text" = "Nom";
+
+/* Class = "UILabel"; text = "Design Options"; ObjectID = "Bm6-Ca-eSk"; */
+"Bm6-Ca-eSk.text" = "Options de conception";
+
+/* Class = "UIButton"; normalTitle = "eMail Subject"; ObjectID = "Bwq-3k-kqt"; */
+"Bwq-3k-kqt.normalTitle" = "Sujet du courriel";
+
+/* Class = "UILabel"; text = "Birthday"; ObjectID = "CKI-OU-qcg"; */
+"CKI-OU-qcg.text" = "Anniversaire";
+
+/* Class = "UILabel"; text = "Show Phone Fields"; ObjectID = "CL1-Ng-7SD"; */
+"CL1-Ng-7SD.text" = "Afficher les champs du téléphone";
+
+/* Class = "UILabel"; text = "€"; ObjectID = "CnW-7w-2UH"; */
+"CnW-7w-2UH.text" = "€";
+
+/* Class = "UILabel"; text = "Sync Feature Capabilities"; ObjectID = "Cqd-eO-HmS"; */
+"Cqd-eO-HmS.text" = "Fonctionnalités de synchronisation";
+
+/* Class = "UILabel"; text = "0000-00-00 00:00:00"; ObjectID = "DDM-08-W7Z"; */
+"DDM-08-W7Z.text" = "0000-00-00 00:00:00";
+
+/* Class = "UILabel"; text = "Show Group Field"; ObjectID = "DFy-R6-0nl"; */
+"DFy-R6-0nl.text" = "Afficher le champ de groupe";
+
+/* Class = "UILabel"; text = "Currency"; ObjectID = "DK5-gg-Yue"; */
+"DK5-gg-Yue.text" = "Devise";
+
+/* Class = "UILabel"; text = "You can use the paid customer database cloud."; ObjectID = "Ddy-qL-n7v"; */
+"Ddy-qL-n7v.text" = "Vous pouvez utiliser le cloud de base de données client payant.";
+
+/* Class = "UILabel"; text = "Custom Fields"; ObjectID = "E4N-0z-FUj"; */
+"E4N-0z-FUj.text" = "Les champs personnalisés";
+
+/* Class = "UILabel"; text = "More Than 500 Customers"; ObjectID = "Eku-ST-oPU"; */
+"Eku-ST-oPU.text" = "Plus de 500 clients";
+
+/* Class = "UILabel"; text = "Phone Home"; ObjectID = "Ern-Et-EpP"; */
+"Ern-Et-EpP.text" = "Téléphone domicile";
+
+/* Class = "UILabel"; text = "Not licensed for commercial use."; ObjectID = "G1n-du-41I"; */
+"G1n-du-41I.text" = "Pas de licence pour un usage commercial.";
+
+/* Class = "UILabel"; text = "Person"; ObjectID = "G2H-g6-ik8"; */
+"G2H-g6-ik8.text" = "La personne";
+
+/* Class = "UITextField"; placeholder = "Your Email Address"; ObjectID = "GMk-gw-2ge"; */
+"GMk-gw-2ge.placeholder" = "Votre adresse email";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "Gx4-Wz-Key"; */
+"Gx4-Wz-Key.text" = "Adresse";
+
+/* Class = "UIButton"; normalTitle = "Subscribe"; ObjectID = "HEu-CO-Bv1"; */
+"HEu-CO-Bv1.normalTitle" = "Souscrire";
+
+/* Class = "UIButton"; normalTitle = "Add Custom Field"; ObjectID = "IFE-G3-j1o"; */
+"IFE-G3-j1o.normalTitle" = "Ajouter un champ personnalisé";
+
+/* Class = "UILabel"; text = "Original Value"; ObjectID = "IYg-5w-lxz"; */
+"IYg-5w-lxz.text" = "Valeur d'origine";
+
+/* Class = "UILabel"; text = "By default, the data is stored only locally on your device. Please back up your database regularly to not lose your data in case of malfunction or loss of your mobile device.\n\nTo backup your customer data, just regularly copy the database files from your iOS device to your computer or another external storage. You can find the files in the folder 'CustomerDatabase'.\n\nThe backup is even easier if you use the sync feature. The data will then be synchronized with an (own) MySQL server. For more information about this backup option, see the settings."; ObjectID = "In6-6A-pDm"; */
+"In6-6A-pDm.text" = "Par défaut, les données sont stockées uniquement localement sur votre appareil. Veuillez sauvegarder régulièrement votre base de données pour ne pas perdre vos données en cas de dysfonctionnement ou de perte de votre appareil mobile.\n\nPour sauvegarder vos données client, il suffit de copier régulièrement les fichiers de base de données de votre appareil iOS vers votre ordinateur ou un autre stockage externe. Vous pouvez trouver les fichiers dans le dossier 'CustomerDatabase'.\n\nLa sauvegarde est encore plus facile si vous utilisez la fonction de synchronisation. Les données seront ensuite synchronisées avec un (propre) serveur MySQL. Pour plus d'informations sur cette option de sauvegarde, consultez les paramètres.";
+
+/* Class = "UIButton"; normalTitle = "Remove"; ObjectID = "J5z-eY-YWf"; */
+"J5z-eY-YWf.normalTitle" = "Retirer";
+
+/* Class = "UIButton"; normalTitle = "How does the sync function work? (FAQ)"; ObjectID = "JWp-aD-hZ3"; */
+"JWp-aD-hZ3.normalTitle" = "Comment fonctionne la fonction de synchronisation? (FAQ)";
+
+/* Class = "UILabel"; text = "Open Source"; ObjectID = "Jp5-l9-MPC"; */
+"Jp5-l9-MPC.text" = "Open source";
+
+/* Class = "UILabel"; text = "Input-Only Mode and App Lock"; ObjectID = "KT3-ri-LEI"; */
+"KT3-ri-LEI.text" = "Mode entrée seule et verrouillage d'application";
+
+/* Class = "UILabel"; text = "Voucher"; ObjectID = "KrQ-8n-l8z"; */
+"KrQ-8n-l8z.text" = "Bon";
+
+/* Class = "UILabel"; text = "Cloud Service"; ObjectID = "LLl-au-ZIx"; */
+"LLl-au-ZIx.text" = "Service cloud";
+
+/* Class = "UILabel"; text = "Show Address Field"; ObjectID = "LN3-43-njX"; */
+"LN3-43-njX.text" = "Afficher le champ d'adresse";
+
+/* Class = "UIButton"; normalTitle = "Restore Purchases"; ObjectID = "LOf-JF-9JY"; */
+"LOf-JF-9JY.normalTitle" = "Restaurer les achats";
+
+/* Class = "UILabel"; text = "3. Press the sync button on the main screen regularly to upload your data in the cloud. Optionally, you can log in with the same account on other devices to sync the data to this device."; ObjectID = "LPQ-eR-9t1"; */
+"LPQ-eR-9t1.text" = "3. Appuyez régulièrement sur le bouton de synchronisation sur l'écran principal pour télécharger vos données dans le cloud. En option, vous pouvez vous connecter avec le même compte sur d'autres appareils pour synchroniser les données avec cet appareil.";
+
+/* Class = "UITextField"; placeholder = "Confirm Password"; ObjectID = "Lvv-ze-3xB"; */
+"Lvv-ze-3xB.placeholder" = "Confirmez le mot de passe";
+
+/* Class = "UILabel"; text = "Allows you to add any number of custom fields to customer records. You can also add drop down lists."; ObjectID = "N09-a4-S8u"; */
+"N09-a4-S8u.text" = "Vous permet d'ajouter un nombre quelconque de champs personnalisés aux enregistrements client. Vous pouvez également ajouter des listes déroulantes.";
+
+/* Class = "UITextField"; placeholder = "Title"; ObjectID = "NFE-cV-6ga"; */
+"NFE-cV-6ga.placeholder" = "Titre";
+
+/* Class = "UILabel"; text = "0000-00-00 00:00:00"; ObjectID = "NLQ-nd-Uc0"; */
+"NLQ-nd-Uc0.text" = "0000-00-00 00:00:00";
+
+/* Class = "UILabel"; text = "From Customer"; ObjectID = "NY9-Kl-myb"; */
+"NY9-Kl-myb.text" = "Du client";
+
+/* Class = "UIButton"; normalTitle = "Create Account"; ObjectID = "Nvh-Kw-UfX"; */
+"Nvh-Kw-UfX.normalTitle" = "Créer un compte";
+
+/* Class = "UINavigationItem"; title = "Edit Customer"; ObjectID = "Ofz-AY-gU2"; */
+"Ofz-AY-gU2.title" = "Modifier le client";
+
+/* Class = "UILabel"; text = "I agree to the processing of my data until further notice"; ObjectID = "Ogb-Yu-THK"; */
+"Ogb-Yu-THK.text" = "J'accepte le traitement de mes données jusqu'à nouvel ordre";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "PB4-vc-Hcf"; */
+"PB4-vc-Hcf.text" = "-";
+
+/* Class = "UILabel"; text = "2. Please subscribe to the customer database cloud access license to connect to the cloud. (A recurring payment is necessary because the database server incurs running costs.)"; ObjectID = "PIl-as-zjn"; */
+"PIl-as-zjn.text" = "2. Veuillez vous abonner à la licence d'accès au cloud de la base de données client pour vous connecter au cloud. (Un paiement récurrent est nécessaire car le serveur de base de données entraîne des frais de fonctionnement.)";
+
+/* Class = "UILabel"; text = "This app is Open Source. If you want to contribute (e.g. for translating in other languages) please visit the GitHub page."; ObjectID = "PNY-Ex-yUh"; */
+"PNY-Ex-yUh.text" = "Cette application est Open Source. Si vous souhaitez contribuer (par exemple pour la traduction dans d'autres langues), veuillez visiter la page GitHub.";
+
+/* Class = "UILabel"; text = "Newsletter"; ObjectID = "PYa-eK-3CO"; */
+"PYa-eK-3CO.text" = "Bulletin";
+
+/* Class = "UILabel"; text = "Own Server"; ObjectID = "QZa-NI-Quc"; */
+"QZa-NI-Quc.text" = "Propre serveur";
+
+/* Class = "UITextField"; placeholder = "Phone Work"; ObjectID = "QZo-z6-nBD"; */
+"QZo-z6-nBD.placeholder" = "Téléphone";
+
+/* Class = "UITextField"; placeholder = "Voucher Number"; ObjectID = "RCG-IE-piD"; */
+"RCG-IE-piD.placeholder" = "Numéro de bon";
+
+/* Class = "UITabBarItem"; title = "Vouchers"; ObjectID = "Rde-ds-wAi"; */
+"Rde-ds-wAi.title" = "Pièces justificatives";
+
+/* Class = "UILabel"; text = "Commercial Usage"; ObjectID = "Ru1-yi-LkT"; */
+"Ru1-yi-LkT.text" = "Utilisation commerciale";
+
+/* Class = "UITextField"; placeholder = "Choose a Password"; ObjectID = "SdJ-qE-415"; */
+"SdJ-qE-415.placeholder" = "Choisissez un mot de passe";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "Ssn-1g-Z2D"; */
+"Ssn-1g-Z2D.text" = "-";
+
+/* Class = "UIButton"; normalTitle = "Choose Logo..."; ObjectID = "Ta1-nH-ryU"; */
+"Ta1-nH-ryU.normalTitle" = "Choisissez le logo ...";
+
+/* Class = "UIButton"; normalTitle = "Reset Password"; ObjectID = "Tkq-jF-a4z"; */
+"Tkq-jF-a4z.normalTitle" = "réinitialiser le mot de passe";
+
+/* Class = "UILabel"; text = "Subscribe to the cloud sync service to backup your customer data in the cloud and sync it over multiple devices."; ObjectID = "UjQ-6k-UuY"; */
+"UjQ-6k-UuY.text" = "Abonnez-vous au service de synchronisation dans le cloud pour sauvegarder vos données client dans le cloud et synchronisez-les sur plusieurs appareils.";
+
+/* Class = "UILabel"; text = "Red"; ObjectID = "VIb-tK-plR"; */
+"VIb-tK-plR.text" = "rouge";
+
+/* Class = "UIButton"; normalTitle = "Export eMail Text"; ObjectID = "VKV-Jb-RaS"; */
+"VKV-Jb-RaS.normalTitle" = "Exporter le texte de l'e-mail";
+
+/* Class = "UILabel"; text = "You can use Guided Access to prevent using other apps and to prevent deletion of the Customer Database app. Please go to iOS settings - 'Accessibility' - 'Guided Access' to enable this feature."; ObjectID = "VY3-ob-Wjk"; */
+"VY3-ob-Wjk.text" = "Vous pouvez utiliser l'accès guidé pour empêcher l'utilisation d'autres applications et pour empêcher la suppression de l'application de base de données client. Veuillez accéder aux paramètres iOS - «Accessibilité» - «Accès guidé» pour activer cette fonctionnalité.";
+
+/* Class = "UILabel"; text = "Phone Mobile"; ObjectID = "VmC-tt-RC6"; */
+"VmC-tt-RC6.text" = "Téléphone portable";
+
+/* Class = "UILabel"; text = "Green"; ObjectID = "WNo-Ol-mbJ"; */
+"WNo-Ol-mbJ.text" = "Verte";
+
+/* Class = "UILabel"; text = "Issued"; ObjectID = "WOq-Fn-qTv"; */
+"WOq-Fn-qTv.text" = "Publié";
+
+/* Class = "UILabel"; text = "Confirm Password"; ObjectID = "WP9-XR-yON"; */
+"WP9-XR-yON.text" = "Confirmez le mot de passe";
+
+/* Class = "UIButton"; normalTitle = "Newsletter Text"; ObjectID = "WbU-vC-Isj"; */
+"WbU-vC-Isj.normalTitle" = "Texte de la newsletter";
+
+/* Class = "UILabel"; text = "#"; ObjectID = "WzH-VC-nxV"; */
+"WzH-VC-nxV.text" = "#";
+
+/* Class = "UITextField"; placeholder = "Value"; ObjectID = "XDM-EI-VMm"; */
+"XDM-EI-VMm.placeholder" = "Valeur";
+
+/* Class = "UILabel"; text = "123 Ocean Boulevard\nCity Country"; ObjectID = "XYX-6T-L35"; */
+"XYX-6T-L35.text" = "123 Ocean Boulevard\nPays de la ville";
+
+/* Class = "UILabel"; text = "Last Changed"; ObjectID = "Xna-OT-GIX"; */
+"Xna-OT-GIX.text" = "Dernière modification";
+
+/* Class = "UITextField"; placeholder = "Group name"; ObjectID = "Xzs-ld-Zgk"; */
+"Xzs-ld-Zgk.placeholder" = "Nom de groupe";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "YCt-ws-Aiq"; */
+"YCt-ws-Aiq.text" = "Nom";
+
+/* Class = "UIButton"; normalTitle = "Remove Custom Field"; ObjectID = "YSX-xF-87p"; */
+"YSX-xF-87p.normalTitle" = "Supprimer un champ personnalisé";
+
+/* Class = "UILabel"; text = "Show Note Field"; ObjectID = "Yfc-TF-ht4"; */
+"Yfc-TF-ht4.text" = "Afficher le champ de note";
+
+/* Class = "UILabel"; text = "Field Configuration"; ObjectID = "YzH-pZ-ZBO"; */
+"YzH-pZ-ZBO.text" = "Configuration de champ";
+
+/* Class = "UIButton"; normalTitle = "https://georg-sieber.de"; ObjectID = "ZHU-KM-ije"; */
+"ZHU-KM-ije.normalTitle" = "https://georg-sieber.de";
+
+/* Class = "UILabel"; text = "Miscellaneous"; ObjectID = "ZLM-OW-LBz"; */
+"ZLM-OW-LBz.text" = "Divers";
+
+/* Class = "UITextField"; placeholder = "Country"; ObjectID = "ZSG-fK-2T2"; */
+"ZSG-fK-2T2.placeholder" = "Pays";
+
+/* Class = "UILabel"; text = "For Customer"; ObjectID = "Zlm-by-Rm8"; */
+"Zlm-by-Rm8.text" = "Pour le client";
+
+/* Class = "UILabel"; text = "Optonal activatable mode that allows only data entry. For example, the device can be handed to showroom visitors. Furthermore you can lock the app completely."; ObjectID = "a3w-jB-j03"; */
+"a3w-jB-j03.text" = "Mode activable en option qui permet uniquement la saisie de données. Par exemple, l'appareil peut être remis aux visiteurs du showroom. De plus, vous pouvez verrouiller complètement l'application.";
+
+/* Class = "UINavigationItem"; title = "Edit Voucher"; ObjectID = "aQN-x7-NUJ"; */
+"aQN-x7-NUJ.title" = "Modifier le bon";
+
+/* Class = "UILabel"; text = "Voucher Number"; ObjectID = "aeU-PV-vYP"; */
+"aeU-PV-vYP.text" = "Numéro de bon";
+
+/* Class = "UITextField"; placeholder = "Zipcode"; ObjectID = "ayr-WM-678"; */
+"ayr-WM-678.placeholder" = "Code postal";
+
+/* Class = "UINavigationItem"; title = "Locked"; ObjectID = "c43-fC-EhI"; */
+"c43-fC-EhI.title" = "Fermé à clé";
+
+/* Class = "UILabel"; text = "1234567890"; ObjectID = "c5c-2p-9F8"; */
+"c5c-2p-9F8.text" = "1234567890";
+
+/* Class = "UILabel"; text = "App Lock Password"; ObjectID = "cUw-3d-uV7"; */
+"cUw-3d-uV7.text" = "Mot de passe de verrouillage de l'application";
+
+/* Class = "UIButton"; normalTitle = "Buy"; ObjectID = "cfr-HQ-AEn"; */
+"cfr-HQ-AEn.normalTitle" = "Acheter";
+
+/* Class = "UITextField"; placeholder = "City"; ObjectID = "ciZ-gE-ep7"; */
+"ciZ-gE-ep7.placeholder" = "Ville";
+
+/* Class = "UILabel"; text = "Allow all Chars in Phone Numbers"; ObjectID = "ctf-u1-ZoG"; */
+"ctf-u1-ZoG.text" = "Autoriser tous les caractères dans les numéros de téléphone";
+
+/* Class = "UIButton"; normalTitle = "I accept the terms of service and privacy policy"; ObjectID = "dIF-Z6-yfw"; */
+"dIF-Z6-yfw.normalTitle" = "J'accepte les conditions d'utilisation et la politique de confidentialité";
+
+/* Class = "UINavigationItem"; title = "Sync"; ObjectID = "dMa-s6-QnY"; */
+"dMa-s6-QnY.title" = "Sync";
+
+/* Class = "UILabel"; text = "Design Options"; ObjectID = "doB-WO-m5c"; */
+"doB-WO-m5c.text" = "Options de conception";
+
+/* Class = "UIButton"; normalTitle = "Edit Custom Field"; ObjectID = "eKc-om-3g7"; */
+"eKc-om-3g7.normalTitle" = "Modifier un champ personnalisé";
+
+/* Class = "UILabel"; text = "Simple Customer Management"; ObjectID = "eOk-yi-0EL"; */
+"eOk-yi-0EL.text" = "Gestion simple du client";
+
+/* Class = "UITextField"; placeholder = "Username / eMail"; ObjectID = "eZz-qc-HQN"; */
+"eZz-qc-HQN.placeholder" = "Nom d'utilisateur / eMail";
+
+/* Class = "UILabel"; text = "Contact"; ObjectID = "eqv-cE-qMn"; */
+"eqv-cE-qMn.text" = "Contact";
+
+/* Class = "UIButton"; normalTitle = "Buy"; ObjectID = "fdH-Rp-LgK"; */
+"fdH-Rp-LgK.normalTitle" = "Acheter";
+
+/* Class = "UIButton"; normalTitle = "Reset Color"; ObjectID = "ffo-FK-rCO"; */
+"ffo-FK-rCO.normalTitle" = "Supprimer le logo";
+"TU5-Cn-x0R.normalTitle" = "Réinitialiser la couleur";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "fob-2D-7Zm"; */
+"fob-2D-7Zm.text" = "Étiquette";
+
+/* Class = "UILabel"; text = "Notes"; ObjectID = "fuF-Uw-g8O"; */
+"fuF-Uw-g8O.text" = "Remarques";
+
+/* Class = "UILabel"; text = "Birthday"; ObjectID = "g4Y-fE-ikd"; */
+"g4Y-fE-ikd.text" = "Anniversaire";
+
+/* Class = "UILabel"; text = "A verification link will be sent to your email address."; ObjectID = "gA3-Ab-qGa"; */
+"gA3-Ab-qGa.text" = "Un lien de vérification sera envoyé à votre adresse e-mail.";
+
+/* Class = "UIButton"; normalTitle = "Buy"; ObjectID = "gI8-fB-QMp"; */
+"gI8-fB-QMp.normalTitle" = "Acheter";
+
+/* Class = "UILabel"; text = "Phone Work"; ObjectID = "go8-4M-Qia"; */
+"go8-4M-Qia.text" = "Téléphone";
+
+/* Class = "UILabel"; text = "Synchronization"; ObjectID = "goJ-2Y-nXQ"; */
+"goJ-2Y-nXQ.text" = "Synchronisation";
+
+/* Class = "UILabel"; text = "v0.0.0"; ObjectID = "h3Y-y0-LXw"; */
+"h3Y-y0-LXw.text" = "v0.0.0";
+
+/* Class = "UILabel"; text = "Show Data Processing Consent Checkbox in Input-Only Mode"; ObjectID = "h6L-Z8-ttl"; */
+"h6L-Z8-ttl.text" = "Afficher la case à cocher Consentement au traitement des données en mode entrée seule";
+
+/* Class = "UILabel"; text = "0.00 €"; ObjectID = "i0x-Ab-FCO"; */
+"i0x-Ab-FCO.text" = "0,00 €";
+
+/* Class = "UILabel"; text = "0000-00-00"; ObjectID = "iTV-gI-eGD"; */
+"iTV-gI-eGD.text" = "0000-00-00";
+
+/* Class = "UILabel"; text = "Notes"; ObjectID = "iXf-Ng-c9q"; */
+"iXf-Ng-c9q.text" = "Remarques";
+
+/* Class = "UILabel"; text = "0000-00-00 00:00:00"; ObjectID = "j9w-L7-qkw"; */
+"j9w-L7-qkw.text" = "0000-00-00 00:00:00";
+
+/* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "jMS-dn-Ffb"; */
+"jMS-dn-Ffb.title" = "Retour";
+
+/* Class = "UISegmentedControl"; jbm-SX-J6v.segmentTitles[0] = "Disabled"; ObjectID = "jbm-SX-J6v"; */
+"jbm-SX-J6v.segmentTitles[0]" = "désactivé";
+
+/* Class = "UISegmentedControl"; jbm-SX-J6v.segmentTitles[1] = "Cloud Service"; ObjectID = "jbm-SX-J6v"; */
+"jbm-SX-J6v.segmentTitles[1]" = "Service cloud";
+
+/* Class = "UISegmentedControl"; jbm-SX-J6v.segmentTitles[2] = "Own Server"; ObjectID = "jbm-SX-J6v"; */
+"jbm-SX-J6v.segmentTitles[2]" = "Propre serveur";
+
+/* Class = "UIButton"; normalTitle = "Buy"; ObjectID = "jwF-22-HFl"; */
+"jwF-22-HFl.normalTitle" = "Acheter";
+
+/* Class = "UILabel"; text = "0.00 €"; ObjectID = "kLP-Ll-mdx"; */
+"kLP-Ll-mdx.text" = "0,00 €";
+
+/* Class = "UINavigationItem"; title = "Customer Registration"; ObjectID = "ke2-OY-2ln"; */
+"ke2-OY-2ln.title" = "Inscription client";
+
+/* Class = "UITextField"; placeholder = "Last Name"; ObjectID = "kgS-oa-sxY"; */
+"kgS-oa-sxY.placeholder" = "Nom de famille";
+
+/* Class = "UILabel"; text = "Redeemed"; ObjectID = "lkn-L0-yMC"; */
+"lkn-L0-yMC.text" = "Rachetée";
+
+/* Class = "UITextField"; placeholder = "Phone Mobile"; ObjectID = "lsR-gi-5j5"; */
+"lsR-gi-5j5.placeholder" = "Téléphone portable";
+
+/* Class = "UIButton"; normalTitle = "Register Now"; ObjectID = "m33-tJ-KZc"; */
+"m33-tJ-KZc.normalTitle" = "S'inscrire maintenant";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "m8b-bA-TPB"; */
+"m8b-bA-TPB.text" = "-";
+
+/* Class = "UILabel"; text = "0000-00-00 00:00:00"; ObjectID = "mA8-yL-xHn"; */
+"mA8-yL-xHn.text" = "0000-00-00 00:00:00";
+
+/* Class = "UIButton"; normalTitle = "Customer Database Server on GitHub"; ObjectID = "mwc-km-vKJ"; */
+"mwc-km-vKJ.normalTitle" = "Serveur de base de données client sur GitHub";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "n9t-1L-TzA"; */
+"n9t-1L-TzA.text" = "Étiquette";
+
+/* Class = "UILabel"; text = "abcdef"; ObjectID = "ngX-Be-zKQ"; */
+"ngX-Be-zKQ.text" = "abcdef";
+
+/* Class = "UILabel"; text = "Your Text here..."; ObjectID = "nlh-HO-Ff5"; */
+"nlh-HO-Ff5.text" = "Votre texte ici...";
+
+/* Class = "UIButton"; normalTitle = "Default Group"; ObjectID = "nw3-Xh-pfY"; */
+"nw3-Xh-pfY.normalTitle" = "Groupe par défaut";
+
+/* Class = "UIButton"; normalTitle = "Default Title"; ObjectID = "oGa-7s-0Do"; */
+"oGa-7s-0Do.normalTitle" = "Titre par défaut";
+
+/* Class = "UILabel"; text = "For Customer"; ObjectID = "olT-ph-VJP"; */
+"olT-ph-VJP.text" = "Pour le client";
+
+/* Class = "UILabel"; text = "Cloud Access License"; ObjectID = "pGa-89-PQX"; */
+"pGa-89-PQX.text" = "Licence d'accès au cloud";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "per-Ow-d7g"; */
+"per-Ow-d7g.text" = "Étiquette";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "q28-jW-C1J"; */
+"q28-jW-C1J.placeholder" = "Email";
+
+/* Class = "UILabel"; text = "Last Changed"; ObjectID = "q36-Mq-pKm"; */
+"q36-Mq-pKm.text" = "Dernière modification";
+
+/* Class = "UINavigationItem"; title = "Create Account"; ObjectID = "qAm-xZ-WHk"; */
+"qAm-xZ-WHk.title" = "Créer un compte";
+
+/* Class = "UILabel"; text = "Valid Until"; ObjectID = "qEu-j8-OcW"; */
+"qEu-j8-OcW.text" = "Valable jusque";
+
+/* Class = "UIButton"; normalTitle = "Export eMail Subject"; ObjectID = "qRo-pe-v0f"; */
+"qRo-pe-v0f.normalTitle" = "Exporter le sujet de l'e-mail";
+
+/* Class = "UILabel"; text = "Blue"; ObjectID = "qU6-dt-IYM"; */
+"qU6-dt-IYM.text" = "Bleue";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "qyG-d8-MKg"; */
+"qyG-d8-MKg.text" = "Étiquette";
+
+/* Class = "UILabel"; text = "Backup Notes"; ObjectID = "rBE-hy-Oyh"; */
+"rBE-hy-Oyh.text" = "Notes de sauvegarde";
+
+/* Class = "UILabel"; text = "Data Processing Consent"; ObjectID = "rCh-Ts-eBc"; */
+"rCh-Ts-eBc.text" = "Consentement au traitement des données";
+
+/* Class = "UITabBarItem"; title = "Customers"; ObjectID = "rL6-MY-BWb"; */
+"rL6-MY-BWb.title" = "Les clients";
+
+/* Class = "UILabel"; text = "The customer database server is Open Source, so you can set up an own database server. This assumes that you are familiar with the Apache Webserver, PHP and MySQL. Please visit the GitHub page for more information."; ObjectID = "rWa-ed-461"; */
+"rWa-ed-461.text" = "Le serveur de base de données client est Open Source, vous pouvez donc configurer un propre serveur de base de données. Cela suppose que vous connaissez le serveur Web Apache, PHP et MySQL. Veuillez visiter la page GitHub pour plus d'informations.";
+
+/* Class = "UIButton"; normalTitle = "Register Now..."; ObjectID = "sS9-EG-fiU"; */
+"sS9-EG-fiU.normalTitle" = "S'inscrire maintenant...";
+
+/* Class = "UILabel"; text = "Features"; ObjectID = "t1n-iE-y8C"; */
+"t1n-iE-y8C.text" = "Caractéristiques";
+
+/* Class = "UILabel"; text = "Free only for private use, non-profit organisations and educational or testing purposes. Please contact me via email if you are not sure whether your application needs commercial licensing."; ObjectID = "t6w-wc-FFY"; */
+"t6w-wc-FFY.text" = "Gratuit uniquement pour un usage privé, des organisations à but non lucratif et à des fins éducatives ou de test. Veuillez me contacter par e-mail si vous n'êtes pas sûr que votre application nécessite une licence commerciale.";
+
+/* Class = "UILabel"; text = "Notes"; ObjectID = "taZ-fW-vCN"; */
+"taZ-fW-vCN.text" = "Remarques";
+
+/* Class = "UINavigationItem"; title = "Information"; ObjectID = "tov-8i-WRr"; */
+"tov-8i-WRr.title" = "Information";
+
+/* Class = "UILabel"; text = "© 2017-2020 Georg Sieber"; ObjectID = "ug1-Uu-I6b"; */
+"ug1-Uu-I6b.text" = "© 2017-2020 Georg Sieber";
+
+/* Class = "UILabel"; text = "0000-00-00 00:00:00"; ObjectID = "vGu-e5-EnH"; */
+"vGu-e5-EnH.text" = "0000-00-00 00:00:00";
+
+/* Class = "UILabel"; text = "From Customer"; ObjectID = "vHU-SC-tZV"; */
+"vHU-SC-tZV.text" = "Du client";
+
+/* Class = "UILabel"; text = "Email"; ObjectID = "vP6-oE-8PE"; */
+"vP6-oE-8PE.text" = "Email";
+
+/* Class = "UILabel"; text = "Show Newsletter Field"; ObjectID = "w8H-Wu-mqJ"; */
+"w8H-Wu-mqJ.text" = "Afficher le champ de la newsletter";
+
+/* Class = "UILabel"; text = "1. Create an account."; ObjectID = "waD-0c-hrC"; */
+"waD-0c-hrC.text" = "1. Créez un compte.";
+
+/* Class = "UILabel"; text = "Show Email Field"; ObjectID = "wsD-IC-YBd"; */
+"wsD-IC-YBd.text" = "Afficher le champ e-mail";
+
+/* Class = "UILabel"; text = "Mode Description"; ObjectID = "wuy-Yy-e8W"; */
+"wuy-Yy-e8W.text" = "Description du mode";
+
+/* Class = "UIButton"; normalTitle = "Remove"; ObjectID = "xUm-GQ-WID"; */
+"xUm-GQ-WID.normalTitle" = "Retirer";
+
+/* Class = "UILabel"; text = "test@example.com"; ObjectID = "xo0-ne-NN8"; */
+"xo0-ne-NN8.text" = "test@example.com";
+
+/* Class = "UIButton"; normalTitle = "Buy"; ObjectID = "yTD-OD-hjE"; */
+"yTD-OD-hjE.normalTitle" = "Acheter";
+
+/* Class = "UILabel"; text = "With the sync feature you can backup your customer data on a database server and sync it over multiple devices. You have the following options to use this feature."; ObjectID = "yvi-lu-Hmc"; */
+"yvi-lu-Hmc.text" = "Avec la fonction de synchronisation, vous pouvez sauvegarder vos données client sur un serveur de base de données et les synchroniser sur plusieurs appareils. Vous disposez des options suivantes pour utiliser cette fonction.";
+
+/* Class = "UILabel"; text = "No / No"; ObjectID = "z6Z-Sh-bgI"; */
+"z6Z-Sh-bgI.text" = "Non non";
+
+/* Class = "UILabel"; text = "Show Birthday Field"; ObjectID = "zKb-do-QVF"; */
+"zKb-do-QVF.text" = "Afficher le champ d'anniversaire";
+
+/* Class = "UILabel"; text = "Group"; ObjectID = "zv9-Dt-CYR"; */
+"zv9-Dt-CYR.text" = "Groupe";
+
+/* Class = "UITextField"; placeholder = "Phone Home"; ObjectID = "zzj-fc-m6j"; */
+"zzj-fc-m6j.placeholder" = "Téléphone domicile";
