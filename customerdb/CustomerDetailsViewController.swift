@@ -250,7 +250,7 @@ class CustomerDetailsViewController : UIViewController, MFMessageComposeViewCont
     }
     
     func exportCsv(_ sender: UIBarButtonItem) {
-        let csv = CsvWriter(customers: [mCurrentCustomer!], customFields: self.mDb.getCustomFields())
+        let csv = CustomerCsvWriter(customers: [mCurrentCustomer!], customFields: self.mDb.getCustomFields())
         
         let fileurl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("export."+String(mCurrentCustomer!.mId)+".csv")
 
@@ -269,7 +269,7 @@ class CustomerDetailsViewController : UIViewController, MFMessageComposeViewCont
     }
     
     func exportVcf(_ sender: UIBarButtonItem) {
-        let vcf = VcfWriter(customers: [mCurrentCustomer!])
+        let vcf = CustomerVcfWriter(customers: [mCurrentCustomer!])
         
         let fileurl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("export."+String(mCurrentCustomer!.mId)+".vcf")
 

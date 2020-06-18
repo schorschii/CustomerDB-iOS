@@ -57,8 +57,8 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
         alpha: CGFloat(1.0)
     ).cgColor
     var mBorderColor = CustomerEditViewController.BORDER_COLOR_LIGHT
-    let mBorderWidth:CGFloat = 1.0
-    let mBorderRadius:CGFloat = 5
+    static var BORDER_WIDTH:CGFloat = 1.0
+    static var BORDER_RADIUS:CGFloat = 5
     
     override func viewDidLoad() {
         if(splitViewController!.isCollapsed ||
@@ -111,11 +111,11 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
             }
         }
         textViewStreet.layer.borderColor = mBorderColor
-        textViewStreet.layer.borderWidth = mBorderWidth
-        textViewStreet.layer.cornerRadius = mBorderRadius
+        textViewStreet.layer.borderWidth = CustomerEditViewController.BORDER_WIDTH
+        textViewStreet.layer.cornerRadius = CustomerEditViewController.BORDER_RADIUS
         textViewNotes.layer.borderColor = mBorderColor
-        textViewNotes.layer.borderWidth = mBorderWidth
-        textViewNotes.layer.cornerRadius = mBorderRadius
+        textViewNotes.layer.borderWidth = CustomerEditViewController.BORDER_WIDTH
+        textViewNotes.layer.cornerRadius = CustomerEditViewController.BORDER_RADIUS
         
         // birthday date picker view
         let toolBar = UIToolbar()
@@ -450,8 +450,8 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
             textView.text = finalText
             textView.font = textFieldTitle.font
             textView.layer.borderColor = mBorderColor
-            textView.layer.borderWidth = mBorderWidth
-            textView.layer.cornerRadius = mBorderRadius
+            textView.layer.borderWidth = CustomerEditViewController.BORDER_WIDTH
+            textView.layer.cornerRadius = CustomerEditViewController.BORDER_RADIUS
             inputView = textView
         } else {
             let textField = UITextField()

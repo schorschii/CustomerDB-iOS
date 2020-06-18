@@ -385,7 +385,11 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
         let importExportAction = UIAlertAction(
             title: NSLocalizedString("import_export", comment: ""),
             style: .default) { (action) in
-                self.menuImportExport(sender)
+                if let _ = self.selectedViewController as? CustomerTableViewController {
+                    self.menuImportExportCustomer(sender)
+                } else if let _ = self.selectedViewController as? VoucherTableViewController {
+                    self.menuImportExportVoucher(sender)
+                }
         }
         importExportAction.setValue(UIImage(named:"baseline_import_export_black_24pt"), forKey: "image")
         
@@ -444,12 +448,12 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
         self.present(alert, animated: true)
     }
     
-    func menuImportExport(_ sender: UIBarButtonItem) {
+    func menuImportExportCustomer(_ sender: UIBarButtonItem) {
         let importVcfAction = UIAlertAction(
             title: NSLocalizedString("import_vcf", comment: ""),
             style: .default) { (action) in
                 if #available(iOS 11, *) {
-                    let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.vcard"], in: .import)
+                    let documentPicker = CustomerDocumentPickerViewController(documentTypes: ["public.vcard"], in: .import)
                     documentPicker.delegate = self
                     self.present(documentPicker, animated: true, completion: nil)
                 } else {
@@ -470,7 +474,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
             title: NSLocalizedString("import_csv", comment: ""),
             style: .default) { (action) in
                 if #available(iOS 11, *) {
-                    let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.comma-separated-values-text"], in: .import)
+                    let documentPicker = CustomerDocumentPickerViewController(documentTypes: ["public.comma-separated-values-text"], in: .import)
                     documentPicker.delegate = self
                     self.present(documentPicker, animated: true, completion: nil)
                 } else {
@@ -495,7 +499,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
         let exportCsvAction = UIAlertAction(
             title: NSLocalizedString("export_csv", comment: ""),
             style: .default) { (action) in
-                self.exportCsv()
+                self.exportCsvCustomer()
         }
         let cancelAction = UIAlertAction(
             title: NSLocalizedString("close", comment: ""),
@@ -509,13 +513,71 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
         alert.addAction(exportCsvAction)
         alert.addAction(cancelAction)
         
-        // On iPad, action sheets must be presented from a popover.
         alert.popoverPresentationController?.barButtonItem = sender
         self.present(alert, animated: true)
     }
     
-    func exportCsv() {
-        let csv = CsvWriter(customers: self.mDb.getCustomers(showDeleted: false), customFields: self.mDb.getCustomFields())
+    func menuImportExportVoucher(_ sender: UIBarButtonItem) {
+        let importCsvAction = UIAlertAction(
+            title: NSLocalizedString("import_csv", comment: ""),
+            style: .default) { (action) in
+                if #available(iOS 11, *) {
+                    let documentPicker = VoucherDocumentPickerViewController(documentTypes: ["public.comma-separated-values-text"], in: .import)
+                    documentPicker.delegate = self
+                    self.present(documentPicker, animated: true, completion: nil)
+                } else {
+                    let alert = UIAlertController(
+                        title: NSLocalizedString("not_supported", comment: ""),
+                        message: NSLocalizedString("file_selection_not_supported", comment: ""),
+                        preferredStyle: .alert
+                    )
+                    alert.addAction(UIAlertAction(
+                        title: NSLocalizedString("ok", comment: ""),
+                        style: .default,
+                        handler: nil)
+                    )
+                    self.present(alert, animated: true)
+                }
+        }
+        let exportCsvAction = UIAlertAction(
+            title: NSLocalizedString("export_csv", comment: ""),
+            style: .default) { (action) in
+                self.exportCsvVoucher()
+        }
+        let cancelAction = UIAlertAction(
+            title: NSLocalizedString("close", comment: ""),
+            style: .cancel) { (action) in
+        }
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(importCsvAction)
+        alert.addAction(exportCsvAction)
+        alert.addAction(cancelAction)
+        
+        alert.popoverPresentationController?.barButtonItem = sender
+        self.present(alert, animated: true)
+    }
+    
+    func exportCsvCustomer() {
+        let csv = CustomerCsvWriter(customers: self.mDb.getCustomers(showDeleted: false), customFields: self.mDb.getCustomFields())
+        
+        let fileurl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("export.csv")
+
+        do {
+            try csv.buildCsvContent().write(to: fileurl, atomically: true, encoding: .utf8)
+
+            let activityController = UIActivityViewController(
+                activityItems: [fileurl], applicationActivities: nil
+            )
+            self.present(activityController, animated: true, completion: nil)
+
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func exportCsvVoucher() {
+        let csv = VoucherCsvWriter(vouchers: self.mDb.getVouchers(showDeleted: false))
         
         let fileurl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("export.csv")
 
@@ -533,7 +595,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
     }
     
     func exportVcf() {
-        let vcf = VcfWriter(customers: self.mDb.getCustomers(showDeleted: false))
+        let vcf = CustomerVcfWriter(customers: self.mDb.getCustomers(showDeleted: false))
         
         let fileurl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("export.vcf")
 
@@ -551,52 +613,77 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
     }
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
-        if(url.pathExtension.lowercased() == "csv") {
+        if let _ = controller as? CustomerDocumentPickerViewController {
             
-            do {
-                var inserted = 0
-                let csv: CSV = try CSV(url: url)
-                for row in csv.namedRows {
-                    let newCustomer = Customer()
-                    for field in row {
-                        newCustomer.putAttribute(title: field.key, value: field.value)
-                    }
-                    if(newCustomer.mTitle != "" || newCustomer.mFirstName != "" || newCustomer.mLastName != "") {
-                        if(newCustomer.mId < 0 || mDb.getCustomer(id: newCustomer.mId) != nil) {
-                            // generate new ID if exists in db or not set in csv file
-                            newCustomer.mId = Customer.generateID(suffix: inserted)
+            if(url.pathExtension.lowercased() == "csv") {
+                do {
+                    var inserted = 0
+                    let csv: CSV = try CSV(url: url)
+                    for row in csv.namedRows {
+                        let newCustomer = Customer()
+                        for field in row {
+                            newCustomer.putAttribute(title: field.key, value: field.value)
                         }
+                        if(newCustomer.mTitle != "" || newCustomer.mFirstName != "" || newCustomer.mLastName != "") {
+                            if(newCustomer.mId < 0 || mDb.getCustomer(id: newCustomer.mId) != nil) {
+                                // generate new ID if exists in db or not set in csv file
+                                newCustomer.mId = Customer.generateID(suffix: inserted)
+                            }
+                            if(mDb.insertCustomer(c: newCustomer)) {
+                                inserted += 1
+                            }
+                        }
+                    }
+                    handleImportSuccess(imported: inserted)
+                } catch let error {
+                    handleImportError(message: error.localizedDescription)
+                }
+            } else if(url.pathExtension.lowercased() == "vcf") {
+                var inserted = 0
+                for newCustomer in CustomerVcfWriter.readVcfFile(url: url) {
+                    if(newCustomer.mTitle != "" || newCustomer.mFirstName != "" || newCustomer.mLastName != "") {
+                        // generate new ID because ID is not present in vcf file
+                        newCustomer.mId = Customer.generateID(suffix: inserted)
                         if(mDb.insertCustomer(c: newCustomer)) {
                             inserted += 1
                         }
                     }
                 }
-                handleImportSuccess(imported: inserted)
-            } catch let error {
-                handleImportError(message: error.localizedDescription)
-            }
-            
-        } else if(url.pathExtension.lowercased() == "vcf") {
-            
-            var inserted = 0
-            for newCustomer in VcfWriter.readVcfFile(url: url) {
-                if(newCustomer.mTitle != "" || newCustomer.mFirstName != "" || newCustomer.mLastName != "") {
-                    // generate new ID because ID is not present in vcf file
-                    newCustomer.mId = Customer.generateID(suffix: inserted)
-                    if(mDb.insertCustomer(c: newCustomer)) {
-                        inserted += 1
-                    }
+                if(inserted > 0) {
+                    handleImportSuccess(imported: inserted)
+                } else {
+                    handleImportError(message: NSLocalizedString("file_does_not_contain_valid_records", comment: ""))
                 }
-            }
-            if(inserted > 0) {
-                handleImportSuccess(imported: inserted)
             } else {
-                handleImportError(message: NSLocalizedString("file_does_not_contain_valid_records", comment: ""))
+                handleImportError(message: NSLocalizedString("unknown_file_format", comment: ""))
             }
             
-        } else {
+        } else if let _ = controller as? VoucherDocumentPickerViewController {
             
-            handleImportError(message: NSLocalizedString("unknown_file_format", comment: ""))
+            if(url.pathExtension.lowercased() == "csv") {
+                do {
+                    var inserted = 0
+                    let csv: CSV = try CSV(url: url)
+                    for row in csv.namedRows {
+                        let newVoucher = Voucher()
+                        for field in row {
+                            newVoucher.putAttribute(title: field.key, value: field.value)
+                        }
+                        if(newVoucher.mId < 0 || mDb.getVoucher(id: newVoucher.mId) != nil) {
+                            // generate new ID if exists in db or not set in csv file
+                            newVoucher.mId = Voucher.generateID(suffix: inserted)
+                        }
+                        if(mDb.insertVoucher(v: newVoucher)) {
+                            inserted += 1
+                        }
+                    }
+                    handleImportSuccess(imported: inserted)
+                } catch let error {
+                    handleImportError(message: error.localizedDescription)
+                }
+            } else {
+                handleImportError(message: NSLocalizedString("unknown_file_format", comment: ""))
+            }
             
         }
         
@@ -619,7 +706,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
     func handleImportSuccess(imported:Int) {
         let alert = UIAlertController(
             title: NSLocalizedString("import_succeeded", comment: ""),
-            message: NSLocalizedString("imported_records", comment: "") + String(imported), preferredStyle: .alert
+            message: NSLocalizedString("imported_records", comment: "") + " " + String(imported), preferredStyle: .alert
         )
         alert.addAction(UIAlertAction(
             title: NSLocalizedString("ok", comment: ""),

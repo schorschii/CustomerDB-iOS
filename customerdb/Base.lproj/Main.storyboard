@@ -582,7 +582,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="uPk-40-GUW">
-                                        <rect key="frame" x="20" y="20" width="374" height="434"/>
+                                        <rect key="frame" x="20" y="20" width="374" height="433"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="oyf-Wy-UDj">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="128"/>
@@ -693,7 +693,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="xYq-uU-6o1">
-                                                <rect key="frame" x="0.0" y="301" width="374" height="56.5"/>
+                                                <rect key="frame" x="0.0" y="301" width="374" height="55.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fuF-Uw-g8O">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
@@ -701,15 +701,17 @@
                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pt8-8Z-dQI">
-                                                        <rect key="frame" x="0.0" y="22.5" width="374" height="34"/>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="12" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RVs-SK-RvN">
+                                                        <rect key="frame" x="0.0" y="22.5" width="374" height="33"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
-                                                    </textField>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="QRa-ms-Ruy">
-                                                <rect key="frame" x="0.0" y="377.5" width="374" height="56.5"/>
+                                                <rect key="frame" x="0.0" y="376.5" width="374" height="56.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Valid Until" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2rg-NO-PwJ">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
@@ -778,9 +780,9 @@
                         <outlet property="textFieldCurrentValue" destination="XDM-EI-VMm" id="1zb-aa-57A"/>
                         <outlet property="textFieldForCustomer" destination="hkH-Oe-J6z" id="js1-nK-yrF"/>
                         <outlet property="textFieldFromCustomer" destination="n1J-eQ-Wlt" id="vOF-ti-Hc6"/>
-                        <outlet property="textFieldNotes" destination="Pt8-8Z-dQI" id="nZa-JO-xKd"/>
                         <outlet property="textFieldValidUntil" destination="tp8-r3-rWs" id="Cr4-3X-GOK"/>
                         <outlet property="textFieldVoucherNumber" destination="RCG-IE-piD" id="AvF-2X-ZUw"/>
+                        <outlet property="textViewNotes" destination="RVs-SK-RvN" id="8VC-U2-zDN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sS7-v9-BIQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

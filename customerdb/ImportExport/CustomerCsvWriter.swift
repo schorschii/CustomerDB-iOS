@@ -5,7 +5,7 @@
 
 import Foundation
 
-class CsvWriter {
+class CustomerCsvWriter {
     
     static var DELIMITER = ","
     
@@ -54,7 +54,7 @@ class CsvWriter {
     private func putLine(fields: [String]) -> String {
         var content = ""
         for field in fields {
-            content += escapeField(value: field) + CsvWriter.DELIMITER
+            content += escapeField(value: field) + CustomerCsvWriter.DELIMITER
         }
         return content + "\n"
     }

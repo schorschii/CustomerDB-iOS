@@ -14,7 +14,7 @@ class VoucherEditViewController : UIViewController {
     @IBOutlet weak var textFieldVoucherNumber: UITextField!
     @IBOutlet weak var textFieldFromCustomer: UITextField!
     @IBOutlet weak var textFieldForCustomer: UITextField!
-    @IBOutlet weak var textFieldNotes: UITextField!
+    @IBOutlet weak var textViewNotes: UITextView!
     @IBOutlet weak var textFieldValidUntil: UITextField!
     @IBOutlet weak var textFieldCurrency: UILabel!
     @IBOutlet weak var stackViewSyncInfo: UIStackView!
@@ -33,6 +33,16 @@ class VoucherEditViewController : UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
+        
+        var mBorderColor = CustomerEditViewController.BORDER_COLOR_LIGHT
+        if #available(iOS 12.0, *) {
+            if self.traitCollection.userInterfaceStyle == .dark {
+                mBorderColor = CustomerEditViewController.BORDER_COLOR_DARK
+            }
+        }
+        textViewNotes.layer.borderColor = mBorderColor
+        textViewNotes.layer.borderWidth = CustomerEditViewController.BORDER_WIDTH
+        textViewNotes.layer.cornerRadius = CustomerEditViewController.BORDER_RADIUS
         
         let datePickerView = UIDatePicker()
         datePickerView.datePickerMode = .date
@@ -105,7 +115,7 @@ class VoucherEditViewController : UIViewController {
             }
             textFieldFromCustomer.text = mCurrentVoucher?.mFromCustomer
             textFieldForCustomer.text = mCurrentVoucher?.mForCustomer
-            textFieldNotes.text = mCurrentVoucher?.mNotes
+            textViewNotes.text = mCurrentVoucher?.mNotes
             textFieldVoucherNumber.isEnabled = false
             mIsNewVoucher = false
         } else {
@@ -176,7 +186,7 @@ class VoucherEditViewController : UIViewController {
         mCurrentVoucher?.mVoucherNo = textFieldVoucherNumber.text!
         mCurrentVoucher?.mFromCustomer = textFieldFromCustomer.text!
         mCurrentVoucher?.mForCustomer = textFieldForCustomer.text!
-        mCurrentVoucher?.mNotes = textFieldNotes.text!
+        mCurrentVoucher?.mNotes = textViewNotes.text!
         mCurrentVoucher?.mValidUntil = mCurrentVoucherValidUntil
         mCurrentVoucher?.mLastModified = Date()
         

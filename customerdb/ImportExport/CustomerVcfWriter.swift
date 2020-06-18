@@ -5,7 +5,7 @@
 
 import Foundation
 
-class VcfWriter {
+class CustomerVcfWriter {
     
     class VcfEntry {
         var mFields: [VcfField] = []
@@ -30,7 +30,7 @@ class VcfWriter {
     static var FORMAT_WITHOUT_DASHES = "yyyyMMdd"
     static func formatWithoutDashes(date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = VcfWriter.FORMAT_WITHOUT_DASHES
+        dateFormatter.dateFormat = CustomerVcfWriter.FORMAT_WITHOUT_DASHES
         return dateFormatter.string(from: date)
     }
     
@@ -61,7 +61,7 @@ class VcfWriter {
                 content += "ORG:"+escapeVcfValue(currentCustomer.mGroup)+"\n";
             }
             if(currentCustomer.mBirthday != nil) {
-                content += "BDAY:"+VcfWriter.formatWithoutDashes(date:currentCustomer.mBirthday!)+"\n";
+                content += "BDAY:"+CustomerVcfWriter.formatWithoutDashes(date:currentCustomer.mBirthday!)+"\n";
             }
             if(currentCustomer.mNotes != "") {
                 content += "NOTE;ENCODING=QUOTED-PRINTABLE:"+escapeVcfValue(currentCustomer.mNotes)+"\n";

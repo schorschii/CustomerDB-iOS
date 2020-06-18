@@ -37,10 +37,59 @@ class Voucher {
         mRemoved = removed
     }
     
+    func putAttribute(title:String, value:String) {
+        switch(title) {
+        case "id":
+            mId = Int64(value) ?? -1; break
+        case "current_value":
+            mCurrentValue = Double(value) ?? 0; break
+        case "original_value":
+            mOriginalValue = Double(value) ?? 0; break
+        case "voucher_no":
+            mVoucherNo = value; break
+        case "from_customer":
+            mFromCustomer = value; break
+        case "for_customer":
+            mForCustomer = value; break
+        case "issued":
+            if let date = CustomerDatabase.parseDate(strDate: value) {
+                mIssued = date
+            }
+            break
+        case "redeemed":
+            if let date = CustomerDatabase.parseDate(strDate: value) {
+                mRedeemed = date
+            }
+            break
+        case "valid_until":
+            if let date = CustomerDatabase.parseDate(strDate: value) {
+                mValidUntil = date
+            }
+            break
+        case "notes":
+            mNotes = value; break
+        case "last_modified":
+            if let lastMofified = CustomerDatabase.parseDate(strDate: value) {
+                mLastModified = lastMofified
+            }
+            break
+        case "removed":
+            mRemoved = (value=="1" ? 1 : 0); break
+        default:
+            break
+        }
+    }
+    
     static func generateID() -> Int64 {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMddkkmmss"
         let strId = dateFormatter.string(from: Date()) + String(Int.random(in: 1..<100))
+        return Int64(strId) ?? -1
+    }
+    static func generateID(suffix: Int) -> Int64 {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMddkkmmss"
+        let strId = dateFormatter.string(from: Date()) + String(suffix)
         return Int64(strId) ?? -1
     }
     
