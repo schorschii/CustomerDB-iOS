@@ -132,6 +132,8 @@
 "end_date_before_start_date" = "¡La fecha de finalización es anterior a la fecha de inicio!";
 "appointment_too_short" = "¡Cita demasiado corta! Cree una cita con una duración de al menos 5 minutos.";
 "no_calendar_selected" = "¡Ningún calendario seleccionado! Crea un calendario en la configuración.";
+"file_too_big" = "¡Archivo demasiado grande! Solo puede adjuntar archivos con un tamaño máximo de 1 MB.";
+"file_limit_reached" = "¡Se alcanzó el límite de archivos!";
 
 // Sync
 "reset_password" = "Restablecer la contraseña";

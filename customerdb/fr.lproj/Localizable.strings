@@ -132,6 +132,8 @@
 "end_date_before_start_date" = "La date de fin est antérieure à la date de début!";
 "appointment_too_short" = "Rendez-vous trop court! Veuillez créer un rendez-vous d'une durée d'au moins 5 minutes.";
 "no_calendar_selected" = "Aucun calendrier sélectionné! Veuillez créer un calendrier dans les paramètres.";
+"file_too_big" = "Fichier trop gros! Vous ne pouvez joindre que des fichiers d'une taille maximale de 1 Mo.";
+"file_limit_reached" = "Limite de fichiers atteinte!";
 
 // Sync
 "reset_password" = "réinitialiser le mot de passe";

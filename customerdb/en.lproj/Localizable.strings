@@ -132,6 +132,8 @@
 "end_date_before_start_date" = "The end date is before the start date!";
 "appointment_too_short" = "Appointment too short! Please create an appointment with a length of at least 5 minutes.";
 "no_calendar_selected" = "No calendar selected! Please create a calendar in the settings.";
+"file_too_big" = "File too big! You can only attach files with a maximum size of 1MB.";
+"file_limit_reached" = "File limit reached!";
 
 // Sync
 "reset_password" = "Reset Password";

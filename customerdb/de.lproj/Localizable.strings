@@ -132,6 +132,8 @@
 "end_date_before_start_date" = "Das Enddatum liegt vor dem Startdatum!";
 "appointment_too_short" = "Termin zu kurz! Bitte erstellen Sie einen Termin, welcher mindestens 5 Minuten lang ist.";
 "no_calendar_selected" = "Kein Kalender ausgewählt! Bitte erstellen Sie einen Kalender in den Einstellungen.";
+"file_too_big" = "Datei zu groß! Sie können nur Dateien mit einer maximalen Größe von 1MB anhängen.";
+"file_limit_reached" = "Dateilimit erreicht!";
 
 // Sync
 "reset_password" = "Passwort zurücksetzen";

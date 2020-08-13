@@ -413,9 +413,24 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
         do {
             try mCurrentCustomer?.addFile(file: CustomerFile(name: url.lastPathComponent, content: Data(contentsOf: url)))
             refreshFiles()
+        } catch Customer.FileErrors.fileTooBig {
+            dialog(title: NSLocalizedString("error", comment: ""), text: NSLocalizedString("file_too_big", comment: ""))
+        } catch Customer.FileErrors.fileLimitReached {
+            dialog(title: NSLocalizedString("error", comment: ""), text: NSLocalizedString("file_limit_reached", comment: ""))
         } catch let error {
-            print(error.localizedDescription)
+            dialog(title: NSLocalizedString("error", comment: ""), text: error.localizedDescription)
         }
+    }
+    
+    func dialog(title: String, text: String) {
+        let alert = UIAlertController(
+            title: title, message: text, preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(
+            title: NSLocalizedString("ok", comment: ""),
+            style: .cancel) { (action) in
+        })
+        self.present(alert, animated: true)
     }
     
     func saveCustomer() -> Bool {
