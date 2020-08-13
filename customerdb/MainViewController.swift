@@ -138,6 +138,9 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
         else if let vc = self.selectedViewController as? VoucherTableViewController {
             vc.reloadVouchers(search: nil, refreshTable: true)
         }
+        else if let vc = self.selectedViewController as? AppointmentViewController {
+            vc.drawEvents()
+        }
     }
     func setupStatusIndicator(visible: Bool, message: String?, completion: (()->Void)?) {
         if(visible) {
@@ -258,7 +261,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
     }
     @IBAction func onClickMenu(_ sender: UIBarButtonItem) {
         let db = CustomerDatabase()
-        let infoString = String(db.getCustomers(showDeleted: false).count) + " " + NSLocalizedString("customers", comment: "")
+        let infoString = String(db.getCustomers(showDeleted: false, withFiles: false).count) + " " + NSLocalizedString("customers", comment: "")
             + "\n" + String(db.getVouchers(showDeleted: false).count) + " " + NSLocalizedString("vouchers", comment: "")
         
         var infoString2:String? = NSLocalizedString("backup_note_menu", comment: "")
@@ -336,7 +339,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
             style: .default) { (action) in
                 if(MFMailComposeViewController.canSendMail()) {
                     var recipients:[String] = []
-                    for c in self.mDb.getCustomers(showDeleted: false) {
+                    for c in self.mDb.getCustomers(showDeleted: false, withFiles: false) {
                         if(c.mNewsletter && self.isValidEmail(c.mEmail)) {
                             recipients.append(c.mEmail)
                         }
@@ -389,6 +392,8 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                     self.menuImportExportCustomer(sender)
                 } else if let _ = self.selectedViewController as? VoucherTableViewController {
                     self.menuImportExportVoucher(sender)
+                } else if let _ = self.selectedViewController as? AppointmentViewController {
+                    self.menuImportExportAppointments(sender)
                 }
         }
         importExportAction.setValue(UIImage(named:"baseline_import_export_black_24pt"), forKey: "image")
@@ -558,8 +563,77 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
         self.present(alert, animated: true)
     }
     
+    func menuImportExportAppointments(_ sender: UIBarButtonItem) {
+        let importIcsAction = UIAlertAction(
+            title: NSLocalizedString("import_ics", comment: ""),
+            style: .default) { (action) in
+                if #available(iOS 11, *) {
+                    let documentPicker = AppointmentDocumentPickerViewController(documentTypes: ["public.calendar-event"], in: .import)
+                    documentPicker.delegate = self
+                    self.present(documentPicker, animated: true, completion: nil)
+                } else {
+                    let alert = UIAlertController(
+                        title: NSLocalizedString("not_supported", comment: ""),
+                        message: NSLocalizedString("file_selection_not_supported", comment: ""),
+                        preferredStyle: .alert
+                    )
+                    alert.addAction(UIAlertAction(
+                        title: NSLocalizedString("ok", comment: ""),
+                        style: .default,
+                        handler: nil)
+                    )
+                    self.present(alert, animated: true)
+                }
+        }
+        let importCsvAction = UIAlertAction(
+            title: NSLocalizedString("import_csv", comment: ""),
+            style: .default) { (action) in
+                if #available(iOS 11, *) {
+                    let documentPicker = AppointmentDocumentPickerViewController(documentTypes: ["public.comma-separated-values-text"], in: .import)
+                    documentPicker.delegate = self
+                    self.present(documentPicker, animated: true, completion: nil)
+                } else {
+                    let alert = UIAlertController(
+                        title: NSLocalizedString("not_supported", comment: ""),
+                        message: NSLocalizedString("file_selection_not_supported", comment: ""),
+                        preferredStyle: .alert
+                    )
+                    alert.addAction(UIAlertAction(
+                        title: NSLocalizedString("ok", comment: ""),
+                        style: .default,
+                        handler: nil)
+                    )
+                    self.present(alert, animated: true)
+                }
+        }
+        let exportIcsAction = UIAlertAction(
+            title: NSLocalizedString("export_ics", comment: ""),
+            style: .default) { (action) in
+                self.exportIcs()
+        }
+        let exportCsvAction = UIAlertAction(
+            title: NSLocalizedString("export_csv", comment: ""),
+            style: .default) { (action) in
+                self.exportCsvAppointment()
+        }
+        let cancelAction = UIAlertAction(
+            title: NSLocalizedString("close", comment: ""),
+            style: .cancel) { (action) in
+        }
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(importIcsAction)
+        alert.addAction(importCsvAction)
+        alert.addAction(exportIcsAction)
+        alert.addAction(exportCsvAction)
+        alert.addAction(cancelAction)
+        
+        alert.popoverPresentationController?.barButtonItem = sender
+        self.present(alert, animated: true)
+    }
+    
     func exportCsvCustomer() {
-        let csv = CustomerCsvWriter(customers: self.mDb.getCustomers(showDeleted: false), customFields: self.mDb.getCustomFields())
+        let csv = CustomerCsvWriter(customers: self.mDb.getCustomers(showDeleted: false, withFiles: false), customFields: self.mDb.getCustomFields())
         
         let fileurl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("export.csv")
 
@@ -594,8 +668,36 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
         }
     }
     
+    func exportCsvAppointment() {
+        if let calendarSelectionAlert = createCalendarSelectAlert() {
+            calendarSelectionAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
+                let csv = CalendarCsvWriter(
+                    appointments: self.mDb.getAppointments(
+                        calendarId: Int64(self.mCalendars[self.mCalendarPicker!.selectedRow(inComponent: 0)].key),
+                        day: nil, showDeleted: false
+                    )
+                )
+                
+                let fileurl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("export.csv")
+
+                do {
+                    try csv.buildCsvContent().write(to: fileurl, atomically: true, encoding: .utf8)
+
+                    let activityController = UIActivityViewController(
+                        activityItems: [fileurl], applicationActivities: nil
+                    )
+                    self.present(activityController, animated: true, completion: nil)
+
+                } catch let error {
+                    print(error.localizedDescription)
+                }
+            }))
+            self.present(calendarSelectionAlert, animated: true)
+        }
+    }
+    
     func exportVcf() {
-        let vcf = CustomerVcfWriter(customers: self.mDb.getCustomers(showDeleted: false))
+        let vcf = CustomerVcfWriter(customers: self.mDb.getCustomers(showDeleted: false, withFiles: false))
         
         let fileurl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("export.vcf")
 
@@ -612,6 +714,71 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
         }
     }
     
+    var mCalendarPickerController:PickerDataController? = nil
+    var mCalendarPicker:UIPickerView? = nil
+    var mCalendars:[KeyValueItem] = []
+    func createCalendarSelectAlert() -> UIAlertController? {
+        mCalendars = []
+        mCalendars.removeAll()
+        for c in mDb.getCalendars(showDeleted: false) {
+            mCalendars.append(KeyValueItem(String(c.mId), c.mTitle))
+        }
+        if(mCalendars.count == 0) {
+            let alert = UIAlertController(
+                title: nil,
+                message: NSLocalizedString("no_calendar_selected", comment: ""),
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(
+                title: NSLocalizedString("ok", comment: ""),
+                style: .default,
+                handler: nil)
+            )
+            self.present(alert, animated: true)
+            return nil
+        }
+        
+        let vc = UIViewController()
+        vc.preferredContentSize = CGSize(width: 250, height: 300)
+        mCalendarPicker = UIPickerView(frame: CGRect(x: 0, y: 0, width: 250, height: 300))
+        mCalendarPickerController = PickerDataController(data: mCalendars)
+        mCalendarPicker!.dataSource = mCalendarPickerController
+        mCalendarPicker!.delegate = mCalendarPickerController
+        vc.view.addSubview(mCalendarPicker!)
+        let calendarSelectionAlert = UIAlertController(title: "", message: "", preferredStyle: .alert)
+        calendarSelectionAlert.setValue(vc, forKey: "contentViewController")
+        calendarSelectionAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil))
+        return calendarSelectionAlert
+    }
+    
+    func exportIcs() {
+        if let calendarSelectionAlert = createCalendarSelectAlert() {
+            calendarSelectionAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
+                let ics = CalendarIcsWriter(
+                    appointments: self.mDb.getAppointments(
+                        calendarId: Int64(self.mCalendars[self.mCalendarPicker!.selectedRow(inComponent: 0)].key),
+                        day: nil, showDeleted: false
+                    )
+                )
+                
+                let fileurl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("export.ics")
+
+                do {
+                    try ics.buildIcsContent().write(to: fileurl, atomically: true, encoding: .utf8)
+
+                    let activityController = UIActivityViewController(
+                        activityItems: [fileurl], applicationActivities: nil
+                    )
+                    self.present(activityController, animated: true, completion: nil)
+
+                } catch let error {
+                    print(error.localizedDescription)
+                }
+            }))
+            self.present(calendarSelectionAlert, animated: true)
+        }
+    }
+    
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         if let _ = controller as? CustomerDocumentPickerViewController {
             
@@ -622,7 +789,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                     for row in csv.namedRows {
                         let newCustomer = Customer()
                         for field in row {
-                            newCustomer.putAttribute(title: field.key, value: field.value)
+                            newCustomer.putAttribute(key: field.key, value: field.value)
                         }
                         if(newCustomer.mTitle != "" || newCustomer.mFirstName != "" || newCustomer.mLastName != "") {
                             if(newCustomer.mId < 0 || mDb.getCustomer(id: newCustomer.mId) != nil) {
@@ -658,6 +825,59 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                 handleImportError(message: NSLocalizedString("unknown_file_format", comment: ""))
             }
             
+        } else if let _ = controller as? AppointmentDocumentPickerViewController {
+            
+            if let calendarSelectionAlert = createCalendarSelectAlert() {
+                calendarSelectionAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
+                    let calendarId = Int64(self.mCalendars[self.mCalendarPicker!.selectedRow(inComponent: 0)].key)
+                    if(url.pathExtension.lowercased() == "csv") {
+                        do {
+                            var inserted = 0
+                            let csv: CSV = try CSV(url: url)
+                            for row in csv.namedRows {
+                                let newAppointment = CustomerAppointment()
+                                newAppointment.mCalendarId = calendarId!
+                                for field in row {
+                                    newAppointment.putAttribute(key: field.key, value: field.value)
+                                }
+                                if(newAppointment.mTitle != "" && newAppointment.mTimeStart != nil && newAppointment.mTimeEnd != nil) {
+                                    if(newAppointment.mId < 0 || self.mDb.getAppointment(id: newAppointment.mId) != nil) {
+                                        // generate new ID if exists in db or not set in csv file
+                                        newAppointment.mId = CustomerAppointment.generateID(suffix: inserted)
+                                    }
+                                    if(self.mDb.insertAppointment(a: newAppointment)) {
+                                        inserted += 1
+                                    }
+                                }
+                            }
+                            self.handleImportSuccess(imported: inserted)
+                        } catch let error {
+                            self.handleImportError(message: error.localizedDescription)
+                        }
+                    } else if(url.pathExtension.lowercased() == "ics") {
+                        var inserted = 0
+                        for newAppointment in CalendarIcsWriter.readIcsFile(url: url) {
+                            if(newAppointment.mTitle != "" && newAppointment.mTimeStart != nil && newAppointment.mTimeEnd != nil) {
+                                // generate new ID because ID is not present in ics file
+                                newAppointment.mId = CustomerAppointment.generateID(suffix: inserted)
+                                newAppointment.mCalendarId = calendarId!
+                                if(self.mDb.insertAppointment(a: newAppointment)) {
+                                    inserted += 1
+                                }
+                            }
+                        }
+                        if(inserted > 0) {
+                            self.handleImportSuccess(imported: inserted)
+                        } else {
+                            self.handleImportError(message: NSLocalizedString("file_does_not_contain_valid_records", comment: ""))
+                        }
+                    } else {
+                        self.handleImportError(message: NSLocalizedString("unknown_file_format", comment: ""))
+                    }
+                }))
+                self.present(calendarSelectionAlert, animated: true)
+            }
+            
         } else if let _ = controller as? VoucherDocumentPickerViewController {
             
             if(url.pathExtension.lowercased() == "csv") {
@@ -667,7 +887,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                     for row in csv.namedRows {
                         let newVoucher = Voucher()
                         for field in row {
-                            newVoucher.putAttribute(title: field.key, value: field.value)
+                            newVoucher.putAttribute(key: field.key, value: field.value)
                         }
                         if(newVoucher.mId < 0 || mDb.getVoucher(id: newVoucher.mId) != nil) {
                             // generate new ID if exists in db or not set in csv file

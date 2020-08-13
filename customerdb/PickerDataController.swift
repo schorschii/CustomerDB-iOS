@@ -13,6 +13,9 @@ class PickerDataController: NSObject, UIPickerViewDelegate, UIPickerViewDataSour
     var data: [KeyValueItem]
     var changed: ((_ item: KeyValueItem)->()?)? = nil
     
+    init(data: [KeyValueItem]) {
+        self.data = data
+    }
     init(pickerView: UIPickerView, data: [KeyValueItem]) {
         self.pickerView = pickerView
         self.data = data

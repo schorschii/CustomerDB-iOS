@@ -17,7 +17,7 @@ class FilterPickerController: NSObject, UIPickerViewDataSource, UIPickerViewDele
     var mSelectedCountry = ""
     
     init(db: CustomerDatabase) {
-        for customer in db.getCustomers(showDeleted: false) {
+        for customer in db.getCustomers(showDeleted: false, withFiles: false) {
             if(!mGroups.contains(customer.mGroup)) {
                 mGroups.append(customer.mGroup)
             }

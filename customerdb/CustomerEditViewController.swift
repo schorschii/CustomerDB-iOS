@@ -6,7 +6,7 @@
 import Foundation
 import UIKit
 
-class CustomerEditViewController : UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class CustomerEditViewController : UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIDocumentPickerDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imageViewImage: UIImageView!
@@ -27,6 +27,7 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
     @IBOutlet weak var switchConsent: UISwitch!
     @IBOutlet weak var textFieldBirthday: UITextField!
     @IBOutlet weak var stackViewAttributes: UIStackView!
+    @IBOutlet weak var stackViewFiles: UIStackView!
     @IBOutlet weak var stackViewConsent: UIStackView!
     @IBOutlet weak var stackViewContact: UIStackView!
     @IBOutlet weak var stackViewAddress: UIStackView!
@@ -34,6 +35,8 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
     @IBOutlet weak var stackViewNotes: UIStackView!
     @IBOutlet weak var stackViewNewsletter: UIStackView!
     @IBOutlet weak var stackViewBirthday: UIStackView!
+    @IBOutlet weak var stackViewFilesContainer: UIStackView!
+    @IBOutlet weak var buttonAddFile: UIButton!
     
     let mDb = CustomerDatabase()
     
@@ -103,6 +106,9 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
         }
         if(!UserDefaults.standard.bool(forKey: "show-birthday-field")) {
             stackViewBirthday.isHidden = true
+        }
+        if(!UserDefaults.standard.bool(forKey: "show-files")) {
+            stackViewFilesContainer.isHidden = true
         }
         
         if #available(iOS 12.0, *) {
@@ -194,6 +200,7 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
         
         if(mCurrentCustomer == nil) {
             navigationItem.title = NSLocalizedString("new_customer", comment: "")
+            mCurrentCustomer = Customer()
             mIsNewCustomer = true
         } else {
             mIsNewCustomer = false
@@ -243,6 +250,19 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
             
             attribute!.mTextFieldHandle = insertDetail(title: field.mTitle, text: attribute?.mValue, type: field.mType)
             mDisplayAttributes.append(attribute!)
+        }
+        
+        refreshFiles()
+    }
+    func refreshFiles() {
+        for view in stackViewFiles.arrangedSubviews {
+            view.removeFromSuperview()
+        }
+        if let files = mCurrentCustomer?.getFiles() {
+            for (index, file) in files.enumerated() {
+                if file.mContent == nil { continue }
+                insertFile(file: file, index: index)
+            }
         }
     }
     
@@ -356,9 +376,51 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
         }
     }
     
+    @IBAction func onClickAddFile(_ sender: UIButton) {
+        if #available(iOS 11, *) {
+            if(!UserDefaults.standard.bool(forKey: "unlocked-fs")) {
+                let alert = UIAlertController(
+                    title: NSLocalizedString("not_unlocked", comment: ""),
+                    message: NSLocalizedString("unlock_feature_via_inapp", comment: ""),
+                    preferredStyle: .alert
+                )
+                alert.addAction(UIAlertAction(
+                    title: NSLocalizedString("ok", comment: ""),
+                    style: .default,
+                    handler: nil)
+                )
+                self.present(alert, animated: true)
+                return
+            }
+            let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data"], in: .import)
+            documentPicker.delegate = self
+            self.present(documentPicker, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(
+                title: NSLocalizedString("not_supported", comment: ""),
+                message: NSLocalizedString("file_selection_not_supported", comment: ""),
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(
+                title: NSLocalizedString("ok", comment: ""),
+                style: .default,
+                handler: nil)
+            )
+            self.present(alert, animated: true)
+        }
+    }
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        do {
+            try mCurrentCustomer?.addFile(file: CustomerFile(name: url.lastPathComponent, content: Data(contentsOf: url)))
+            refreshFiles()
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
     func saveCustomer() -> Bool {
         if(mCurrentCustomer == nil) {
-            if(mDb.getCustomers(showDeleted: false).count >= 500 && !UserDefaults.standard.bool(forKey: "unlocked-lc")) {
+            if(mDb.getCustomers(showDeleted: false, withFiles: false).count >= 500 && !UserDefaults.standard.bool(forKey: "unlocked-lc")) {
                 let alert = UIAlertController(
                     title: NSLocalizedString("not_unlocked", comment: ""),
                     message: NSLocalizedString("unlock_500_via_inapp", comment: ""),
@@ -488,6 +550,33 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
         return inputView
     }
     
+    func insertFile(file:CustomerFile, index:Int) {
+        let buttonFile = FileButton(file: file)
+
+        let buttonRemove = FileIndexButton(index: index)
+        buttonRemove.setTitle(NSLocalizedString("remove", comment: ""), for: .normal)
+        buttonRemove.addTarget(self, action: #selector(onClickFileRemove), for: .touchUpInside)
+        buttonRemove.setContentHuggingPriority(.required, for: .horizontal)
+        buttonRemove.setContentCompressionResistancePriority(.required, for: .horizontal)
+        
+        let imageClip = UIImageView(image: UIImage(named: "baseline_attach_file_black_24pt"))
+        imageClip.tintColor = UIColor.init(hex: "#828282")
+        imageClip.contentMode = .scaleAspectFill
+        imageClip.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        imageClip.widthAnchor.constraint(equalToConstant: 10).isActive = true
+        
+        let stackView = UIStackView(arrangedSubviews: [imageClip, buttonFile, buttonRemove])
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        
+        stackViewFiles.addArrangedSubview(stackView)
+    }
+    
+    @objc func onClickFileRemove(sender: FileIndexButton!) {
+        mCurrentCustomer?.removeFile(index: sender.mIndex)
+        refreshFiles()
+    }
+    
     @objc func handleCustomDatePicker(sender: UITextFieldDatePicker) {
         if(sender.textFieldReference != nil) {
             sender.textFieldReference!.text = CustomerDatabase.dateToDisplayStringWithoutTime(date: sender.date)
@@ -518,5 +607,21 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
         UIGraphicsEndImageContext()
 
         return newImage
+    }
+}
+
+class FileIndexButton: UIButton {
+    var mIndex:Int = -1
+    required init(index:Int) {
+        super.init(frame: .zero)
+        mIndex = index
+        if #available(iOS 13.0, *) {
+            setTitleColor(.link, for: .normal)
+        } else {
+            setTitleColor(UIColor.init(hex: "#0f7c9d"), for: .normal)
+        }
+    }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 }

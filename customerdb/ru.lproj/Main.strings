@@ -93,7 +93,7 @@
 "A3t-Uh-2z5.title" = "Подробный вид";
 
 /* Class = "UILabel"; text = "Newsletter / Consent for data processing"; ObjectID = "Ahn-xK-rIG"; */
-"Ahn-xK-rIG.text" = "Информационный бюллетень / Согласие на обработку данных";
+"Ahn-xK-rIG.text" = "Информационный бюллетень";
 
 /* Class = "UILabel"; text = "Allows you to set your own title bar color in the settings."; ObjectID = "BAP-dq-wyr"; */
 "BAP-dq-wyr.text" = "Позволяет установить собственный цвет строки заголовка в настройках.";
@@ -156,7 +156,7 @@
 "HEu-CO-Bv1.normalTitle" = "Подписывайся";
 
 /* Class = "UIButton"; normalTitle = "Add Custom Field"; ObjectID = "IFE-G3-j1o"; */
-"IFE-G3-j1o.normalTitle" = "Добавить настраиваемое поле";
+"IFE-G3-j1o.normalTitle" = "Добавить";
 
 /* Class = "UILabel"; text = "Original Value"; ObjectID = "IYg-5w-lxz"; */
 "IYg-5w-lxz.text" = "Исходное значение";
@@ -300,7 +300,7 @@
 "YCt-ws-Aiq.text" = "имя";
 
 /* Class = "UIButton"; normalTitle = "Remove Custom Field"; ObjectID = "YSX-xF-87p"; */
-"YSX-xF-87p.normalTitle" = "Удалить настраиваемое поле";
+"YSX-xF-87p.normalTitle" = "Удалить";
 
 /* Class = "UILabel"; text = "Show Note Field"; ObjectID = "Yfc-TF-ht4"; */
 "Yfc-TF-ht4.text" = "Показать поле заметки";
@@ -360,7 +360,7 @@
 "doB-WO-m5c.text" = "Варианты дизайна";
 
 /* Class = "UIButton"; normalTitle = "Edit Custom Field"; ObjectID = "eKc-om-3g7"; */
-"eKc-om-3g7.normalTitle" = "Изменить настраиваемое поле";
+"eKc-om-3g7.normalTitle" = "Изменить";
 
 /* Class = "UILabel"; text = "Simple Customer Management"; ObjectID = "eOk-yi-0EL"; */
 "eOk-yi-0EL.text" = "Простое управление клиентами";
@@ -568,7 +568,7 @@
 "yvi-lu-Hmc.text" = "С помощью функции синхронизации вы можете создавать резервные копии данных ваших клиентов на сервере базы данных и синхронизировать их на нескольких устройствах. У вас есть следующие варианты использования этой функции.";
 
 /* Class = "UILabel"; text = "No / No"; ObjectID = "z6Z-Sh-bgI"; */
-"z6Z-Sh-bgI.text" = "Нет / Нет";
+"z6Z-Sh-bgI.text" = "Нет";
 
 /* Class = "UILabel"; text = "Show Birthday Field"; ObjectID = "zKb-do-QVF"; */
 "zKb-do-QVF.text" = "Показать поле рождения";
@@ -578,3 +578,21 @@
 
 /* Class = "UITextField"; placeholder = "Phone Home"; ObjectID = "zzj-fc-m6j"; */
 "zzj-fc-m6j.placeholder" = "Домашний телефон";
+
+"3B8-Gq-pus.text" = "файлы";
+"5QI-kN-hwV.text" = "файлы";
+"QUK-XO-amn.normalTitle" = "Добавить файл";
+
+"7EC-pT-lyN.text" = "файлы";
+"KoK-NQ-8nE.text" = "Прикрепите файлы к записям клиентов (максимум 5 файлов и 1 МБ на файл).";
+"Xk1-bC-0w5.text" = "Календарь";
+"8sP-Eh-96i.text" = "Разблокирует функции календаря.";
+
+"TTf-X6-kdL.text" = "Показать файлы";
+
+"MQh-mS-8vU.title" = "Календарь";
+
+"xQZ-GW-AaP.text" = "Календарь";
+"tMu-Oi-YW5.normalTitle" = "Новый";
+"Wgy-0k-4q3.normalTitle" = "Редактировать";
+"063-8X-vRe.normalTitle" = "Удалять";

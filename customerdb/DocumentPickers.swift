@@ -12,3 +12,6 @@ class CustomerDocumentPickerViewController : UIDocumentPickerViewController {
 class VoucherDocumentPickerViewController : UIDocumentPickerViewController {
     
 }
+class AppointmentDocumentPickerViewController : UIDocumentPickerViewController {
+    
+}

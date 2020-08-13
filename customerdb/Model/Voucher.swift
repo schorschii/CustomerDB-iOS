@@ -37,8 +37,8 @@ class Voucher {
         mRemoved = removed
     }
     
-    func putAttribute(title:String, value:String) {
-        switch(title) {
+    func putAttribute(key:String, value:String) {
+        switch(key) {
         case "id":
             mId = Int64(value) ?? -1; break
         case "current_value":

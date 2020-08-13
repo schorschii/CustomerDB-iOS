@@ -28,8 +28,10 @@
 "vouchers" = "Gutscheine";
 "sync_not_configured" = "Synchronisierung nicht eingerichtet";
 "please_setup_sync" = "Bitte richten Sie die Synchronisierung in den Einstellungen ein.";
+"import_ics" = "ICS-Datei importieren";
 "import_vcf" = "VCF-Datei importieren";
 "import_csv" = "CSV-Datei importieren";
+"export_ics" = "ICS-Datei exportieren";
 "export_vcf" = "VCF-Datei exportieren";
 "export_csv" = "CSV-Datei exportieren";
 "import_failed" = "Import fehlgeschlagen";
@@ -81,6 +83,10 @@
 "field_numeric" = "Numerisch";
 "field_drop_down" = "Drop Down";
 "field_date" = "Datum";
+"new_calendar" = "Neuer Kalender";
+"red" = "Rot";
+"green" = "Grün";
+"blue" = "Blau";
 
 // Details
 "first_name" = "Vorname";
@@ -110,6 +116,7 @@
 "send_message" = "Nachricht senden";
 "copy_to_clipboard" = "In Zwischenablage kopieren";
 "open_map" = "Karte öffnen";
+"delete_appointment" = "Termin löschen";
 
 // Edit
 "name_empty" = "Kein Name eingegeben";
@@ -120,6 +127,11 @@
 "please_accept_data_processing" = "Bitte stimmen Sie der Datenverarbeitung zu.";
 "new_customer" = "Neuer Kunde";
 "new_voucher" = "Neuer Gutschein";
+"new_appointment" = "Neuer Termin";
+"remove" = "Entfernen";
+"end_date_before_start_date" = "Das Enddatum liegt vor dem Startdatum!";
+"appointment_too_short" = "Termin zu kurz! Bitte erstellen Sie einen Termin, welcher mindestens 5 Minuten lang ist.";
+"no_calendar_selected" = "Kein Kalender ausgewählt! Bitte erstellen Sie einen Kalender in den Einstellungen.";
 
 // Sync
 "reset_password" = "Passwort zurücksetzen";

@@ -23,11 +23,11 @@ class Customer {
     var mGroup = ""
     var mNewsletter = false
     var mNotes = ""
-    
     var mCustomFields = ""
     
     var mImage:Data? = nil
     var mConsentImage:Data? = nil
+    var mFiles:[CustomerFile]? = nil
     
     var mLastModified:Date = Date()
     var mRemoved = 0
@@ -80,8 +80,8 @@ class Customer {
         mRemoved = removed
     }
     
-    func putAttribute(title:String, value:String) {
-        switch(title) {
+    func putAttribute(key:String, value:String) {
+        switch(key) {
         case "id":
             mId = Int64(value) ?? -1; break
         case "title":
@@ -125,11 +125,50 @@ class Customer {
         case "removed":
             mRemoved = (value=="1" ? 1 : 0); break
         case "image":
-            mImage = Data(base64Encoded: value, options: .ignoreUnknownCharacters)
+            mImage = Data(base64Encoded: value, options: .ignoreUnknownCharacters); break
+        case "custom_fields":
+            mCustomFields = value; break
+        case "files":
+            do {
+                if let filesData = value.data(using: .utf8, allowLossyConversion: false) {
+                    if let jsonFiles = try JSONSerialization.jsonObject(with: filesData, options: []) as? [[String : Any]] {
+                        for file in jsonFiles {
+                            if let strName = file["name"] as? String, let strContent = file["content"] as? String {
+                                if let content = Data(base64Encoded: strContent, options: .ignoreUnknownCharacters) {
+                                    try addFile(file: CustomerFile(name: strName, content: content))
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch {}
             break
         default:
-            setCustomField(title: title, value: value)
+            setCustomField(title: key, value: value)
         }
+    }
+    
+    enum FileErrors: Error {
+        case fileTooBig
+        case fileLimitReached
+    }
+    func getFiles() -> [CustomerFile] {
+        if(mFiles == nil) { mFiles = [] }
+        return mFiles!
+    }
+    func addFile(file:CustomerFile) throws {
+        if(mFiles == nil) { mFiles = [] }
+        if(file.mContent!.count > 1024 * 1024) {
+            throw FileErrors.fileTooBig
+        }
+        if(mFiles!.count >= 5) {
+            throw FileErrors.fileLimitReached
+        }
+        mFiles?.append(file)
+    }
+    func removeFile(index:Int) {
+        if(mFiles == nil) { mFiles = [] }
+        mFiles?.remove(at: index)
     }
     
     static func generateID() -> Int64 {

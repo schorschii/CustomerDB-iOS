@@ -107,7 +107,7 @@ class CustomerVcfWriter {
     private static func isVcfField(_ text: String) -> Bool {
         let upperText = text.uppercased()
         let keyValue = upperText.split(separator: ":")
-        if(keyValue.count > 1) {
+        if(keyValue.count >= 1) {
             let subKeys = keyValue[0].split(separator: ";")
             if(String(subKeys[0]).starts(with: "X-")) {
                 return true
@@ -256,7 +256,7 @@ class CustomerVcfWriter {
                         break
 
                     case "PHOTO":
-                        newCustomer.putAttribute(title: "image", value: String(f.mValues[0]))
+                        newCustomer.putAttribute(key: "image", value: String(f.mValues[0]))
                         break
                     
                     default:

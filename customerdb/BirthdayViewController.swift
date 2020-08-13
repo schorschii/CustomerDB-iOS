@@ -50,7 +50,7 @@ class CustomerBirthdayTableViewController : UIViewController, UITableViewDelegat
     }
     
     func reloadCustomers() {
-        mCustomers = getSoonBirthdayCustomers(customers: mDb.getCustomers(showDeleted: false) )
+        mCustomers = getSoonBirthdayCustomers(customers: mDb.getCustomers(showDeleted: false, withFiles: false) )
         tableView.reloadData()
     }
     

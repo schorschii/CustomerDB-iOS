@@ -63,7 +63,18 @@ class CustomerDatabaseApi {
     
     private func putCustomers() {
         var customersDataArray:[[String:Any?]] = []
-        for customer in mDb.getAllCustomers() {
+        for customer in mDb.getCustomers(showDeleted: true, withFiles: true) {
+            var customerFilesDataArray:[[String:Any?]] = []
+            for file in customer.getFiles() {
+                if file.mContent != nil {
+                    customerFilesDataArray.append([
+                        "name": file.mName,
+                        "content": file.mContent!.base64EncodedString()
+                    ])
+                }
+            }
+            let filesJson = (try? JSONSerialization.data(withJSONObject: customerFilesDataArray))!
+            
             customersDataArray.append([
                 "id": customer.mId,
                 "title": customer.mTitle,
@@ -83,9 +94,39 @@ class CustomerDatabaseApi {
                 "notes": customer.mNotes,
                 "custom_fields": customer.mCustomFields,
                 "image": customer.mImage==nil ? nil : customer.mImage!.base64EncodedString(),
-                "consent": customer.mConsentImage==nil ? nil : customer.mConsentImage!.base64EncodedString(),
+                "consent": nil,
+                "files": customerFilesDataArray.count==0 ? nil : String(decoding:filesJson, as:UTF8.self),
                 "last_modified": CustomerDatabase.dateToString(date: customer.mLastModified),
                 "removed": customer.mRemoved
+            ])
+        }
+        
+        var calendarsDataArray:[[String:Any?]] = []
+        for calendar in mDb.getCalendars(showDeleted: true) {
+            calendarsDataArray.append([
+                "id": calendar.mId,
+                "title": calendar.mTitle,
+                "color": calendar.mColor,
+                "notes": calendar.mNotes,
+                "last_modified": CustomerDatabase.dateToString(date: calendar.mLastModified),
+                "removed": calendar.mRemoved,
+            ])
+        }
+        
+        var appointmentsDataArray:[[String:Any?]] = []
+        for appointment in mDb.getAppointments(calendarId: nil, day: nil, showDeleted: true) {
+            appointmentsDataArray.append([
+                "id": appointment.mId,
+                "calendar_id": appointment.mCalendarId,
+                "title": appointment.mTitle,
+                "notes": appointment.mNotes,
+                "time_start": ((appointment.mTimeStart == nil) ? nil : CustomerDatabase.dateToString(date: appointment.mTimeStart!)),
+                "time_end": ((appointment.mTimeEnd == nil) ? nil : CustomerDatabase.dateToString(date: appointment.mTimeEnd!)),
+                "fullday": appointment.mFullday,
+                "customer": appointment.mCustomer,
+                "location": appointment.mLocation,
+                "last_modified": CustomerDatabase.dateToString(date: appointment.mLastModified),
+                "removed": appointment.mRemoved,
             ])
         }
         
@@ -116,8 +157,10 @@ class CustomerDatabaseApi {
                 "password": mPassword,
                 "appstore_receipt": mReceipt,
                 "customers": customersDataArray,
-                "vouchers": vouchersDataArray
-                ] as [String:Any?]
+                "vouchers": vouchersDataArray,
+                "calendars": calendarsDataArray,
+                "appointments": appointmentsDataArray
+            ] as [String:Any?]
         ]
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
 
@@ -199,99 +242,84 @@ class CustomerDatabaseApi {
     }
     func parseReadCustomersResponse(response:Data) {
         do {
+            mDb.deleteAllCustomers()
+            mDb.deleteAllVouchers()
+            mDb.deleteAllCalendars()
+            mDb.deleteAllAppointments()
+            
             if let response = try JSONSerialization.jsonObject(with: response, options: []) as? [String : Any] {
                 if let result = response["result"] as? [String:Any] {
                     if let customers = result["customers"] as? [[String:Any]] {
                         for customer in customers {
-                            let id = customer["id"] as! Int64
-                            let title = customer["title"] as! String
-                            let firstName = customer["first_name"] as! String
-                            let lastName = customer["last_name"] as! String
-                            let phoneHome = customer["phone_home"] as! String
-                            let phoneMobile = customer["phone_mobile"] as! String
-                            let phoneWork = customer["phone_work"] as! String
-                            let email = customer["email"] as! String
-                            let street = customer["street"] as! String
-                            let zipcode = customer["zipcode"] as! String
-                            let city = customer["city"] as! String
-                            let country = customer["country"] as! String
-                            let strBirthday = customer["birthday"] as? String
-                            //let birthday = CustomerDatabase.parseDate(strDate: strBirthday)
-                            let customerGroup = customer["customer_group"] as! String
-                            let newsletter = customer["newsletter"] as! Int
-                            let notes = customer["notes"] as! String
-                            let customFields = customer["custom_fields"] as! String
-                            let base64Image = customer["image"] as? String
-                            var image:Data? = nil
-                            if(base64Image != nil) {
-                                image = Data(base64Encoded: base64Image!, options: .ignoreUnknownCharacters)
+                            let c = Customer()
+                            for (key, value) in customer {
+                                var parsedValue = ""
+                                if let int64Value = value as? Int64 {
+                                    parsedValue = String(int64Value)
+                                } else if let strValue = value as? String {
+                                    parsedValue = strValue
+                                }
+                                c.putAttribute(key: key, value: parsedValue)
                             }
-                            let base64ConsentImage = customer["consent"] as? String
-                            var consentImage:Data? = nil
-                            if(base64ConsentImage != nil) {
-                                consentImage = Data(base64Encoded: base64ConsentImage!, options: .ignoreUnknownCharacters)
+                            if(c.mId > 0) {
+                                _ = mDb.insertCustomer(c: c)
                             }
-                            let strLastModified = customer["last_modified"] as! String
-                            //let lastModified = CustomerDatabase.parseDate(strDate: strLastModified) ?? Date()
-                            let removed = customer["removed"] as! Int
-                            _ = mDb.insertUpdateCustomerRecord(
-                                id: id,
-                                title: title,
-                                firstName: firstName,
-                                lastName: lastName,
-                                phoneHome: phoneHome,
-                                phoneMobile: phoneMobile,
-                                phoneWork: phoneWork,
-                                email: email,
-                                street: street,
-                                zipcode: zipcode,
-                                city: city,
-                                country: country,
-                                birthday: strBirthday,
-                                notes: notes,
-                                newsletter: newsletter,
-                                group: customerGroup,
-                                customFields: customFields,
-                                image: image,
-                                consentImage: consentImage,
-                                lastModified: strLastModified,
-                                removed: removed
-                            )
+                        }
+                    }
+                    
+                    if let calendars = result["calendars"] as? [[String:Any]] {
+                        for calendar in calendars {
+                            let c = CustomerCalendar()
+                            for (key, value) in calendar {
+                                var parsedValue = ""
+                                if let int64Value = value as? Int64 {
+                                    parsedValue = String(int64Value)
+                                } else if let strValue = value as? String {
+                                    parsedValue = strValue
+                                }
+                                c.putAttribute(key: key, value: parsedValue)
+                            }
+                            if(c.mId > 0) {
+                                _ = mDb.insertCalendar(c: c)
+                            }
+                        }
+                    }
+                    
+                    if let appointments = result["appointments"] as? [[String:Any]] {
+                        for appointment in appointments {
+                            let a = CustomerAppointment()
+                            for (key, value) in appointment {
+                                var parsedValue = ""
+                                if let int64Value = value as? Int64 {
+                                    parsedValue = String(int64Value)
+                                } else if let strValue = value as? String {
+                                    parsedValue = strValue
+                                }
+                                a.putAttribute(key: key, value: parsedValue)
+                            }
+                            if(a.mId > 0) {
+                                _ = mDb.insertAppointment(a: a)
+                            }
                         }
                     }
                     
                     if let vouchers = result["vouchers"] as? [[String:Any]] {
                         for voucher in vouchers {
-                            let id = voucher["id"] as! Int64
-                            let originalValue = voucher["original_value"] as! Double
-                            let currentValue = voucher["current_value"] as! Double
-                            let voucherNo = voucher["voucher_no"] as! String
-                            let fromCustomer = voucher["from_customer"] as! String
-                            let forCustomer = voucher["for_customer"] as! String
-                            let strIssued = voucher["issued"] as! String
-                            //let issued = CustomerDatabase.parseDate(strDate: strIssued) ?? Date()
-                            let strValidUntil = voucher["valid_until"] as? String
-                            //let validUntil = CustomerDatabase.parseDate(strDate: strValidUntil)
-                            let strRedeemed = voucher["redeemed"] as? String
-                            //let redeemed = CustomerDatabase.parseDate(strDate: strRedeemed)
-                            let notes = voucher["notes"] as! String
-                            let strLastModified = voucher["last_modified"] as! String
-                            //let lastModified = CustomerDatabase.parseDate(strDate: strLastModified) ?? Date()
-                            let removed = voucher["removed"] as! Int
-                            _ = mDb.insertUpdateVoucherRecord(
-                                id: id,
-                                originalValue: originalValue,
-                                currentValue: currentValue,
-                                voucherNo: voucherNo,
-                                fromCustomer: fromCustomer,
-                                forCustomer: forCustomer,
-                                issued: strIssued,
-                                validUntil: strValidUntil,
-                                redeemed: strRedeemed,
-                                notes: notes,
-                                lastModified: strLastModified,
-                                removed: removed
-                            )
+                            let v = Voucher()
+                            for (key, value) in voucher {
+                                var parsedValue = ""
+                                if let int64Value = value as? Int64 {
+                                    parsedValue = String(int64Value)
+                                } else if let doubleValue = value as? Double {
+                                    parsedValue = String(doubleValue)
+                                } else if let strValue = value as? String {
+                                    parsedValue = strValue
+                                }
+                                v.putAttribute(key: key, value: parsedValue)
+                            }
+                            if(v.mId > 0) {
+                                _ = mDb.insertVoucher(v: v)
+                            }
                         }
                     }
                     

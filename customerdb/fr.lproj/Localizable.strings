@@ -28,8 +28,10 @@
 "vouchers" = "Pièces justificatives";
 "sync_not_configured" = "Sync non configuré";
 "please_setup_sync" = "Veuillez configurer la synchronisation dans les paramètres.";
+"import_ics" = "Importer un fichier ICS";
 "import_vcf" = "Importer un fichier VCF";
 "import_csv" = "Importer un fichier CSV";
+"export_ics" = "Exporter un fichier ICS";
 "export_vcf" = "Exporter un fichier VCF";
 "export_csv" = "Exporter un fichier CSV";
 "import_failed" = "Échec de l'importation";
@@ -81,6 +83,10 @@
 "field_drop_down" = "Menu déroulant";
 "field_date" = "Date";
 "logo_deleted" = "Image supprimée.";
+"new_calendar" = "Nouveau calendrier";
+"red" = "Rouge";
+"green" = "Vert";
+"blue" = "Bleu";
 
 // Details
 "first_name" = "Prénom";
@@ -110,6 +116,7 @@
 "send_message" = "Envoyer le message";
 "copy_to_clipboard" = "Copier dans le presse-papier";
 "open_map" = "Ouvrir la carte";
+"delete_appointment" = "Supprimer le rendez-vous";
 
 // Edit
 "name_empty" = "Nom vide";
@@ -120,6 +127,11 @@
 "please_accept_data_processing" = "Veuillez accepter le traitement des données.";
 "new_customer" = "Nouveau client";
 "new_voucher" = "Nouveau bon";
+"new_appointment" = "Nouveau rendez-vous";
+"remove" = "Retirer";
+"end_date_before_start_date" = "La date de fin est antérieure à la date de début!";
+"appointment_too_short" = "Rendez-vous trop court! Veuillez créer un rendez-vous d'une durée d'au moins 5 minutes.";
+"no_calendar_selected" = "Aucun calendrier sélectionné! Veuillez créer un calendrier dans les paramètres.";
 
 // Sync
 "reset_password" = "réinitialiser le mot de passe";

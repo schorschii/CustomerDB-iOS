@@ -14,10 +14,7 @@ class CustomerDatabase {
         "CREATE TABLE IF NOT EXISTS customer_extra_fields (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR UNIQUE NOT NULL, type INTEGER NOT NULL, last_modified DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, removed INTEGER DEFAULT 0 NOT NULL);",
         "CREATE TABLE IF NOT EXISTS customer_extra_presets (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR NOT NULL, extra_field_id INTEGER NOT NULL);",
         
-        "CREATE TABLE IF NOT EXISTS voucher (id INTEGER PRIMARY KEY AUTOINCREMENT, current_value REAL NOT NULL, original_value REAL NOT NULL, voucher_no VARCHAR NOT NULL, from_customer VARCHAR NOT NULL, for_customer VARCHAR NOT NULL, issued DATETIME NOT NULL, valid_until DATETIME DEFAULT NULL, redeemed DATETIME DEFAULT NULL, last_modified DATETIME NOT NULL, notes VARCHAR NOT NULL, removed INTEGER DEFAULT 0 NOT NULL);",
-        
-        //"CREATE TABLE IF NOT EXISTS calendar (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR, color VARCHAR, last_modified INTEGER, removed INTEGER DEFAULT 0);",
-        //"CREATE TABLE IF NOT EXISTS calendar_item (id INTEGER PRIMARY KEY AUTOINCREMENT, calendar_id INTEGER, fullday INTEGER, start INTEGER, end INTEGER, title VARCHAR, notes VARCHAR, customer INTEGER, last_modified INTEGER, removed INTEGER DEFAULT 0);",
+        "CREATE TABLE IF NOT EXISTS voucher (id INTEGER PRIMARY KEY AUTOINCREMENT, current_value REAL NOT NULL, original_value REAL NOT NULL, voucher_no VARCHAR NOT NULL, from_customer VARCHAR NOT NULL, for_customer VARCHAR NOT NULL, issued DATETIME NOT NULL, valid_until DATETIME DEFAULT NULL, redeemed DATETIME DEFAULT NULL, last_modified DATETIME NOT NULL, notes VARCHAR NOT NULL, removed INTEGER DEFAULT 0 NOT NULL);"
     ]
     
     var db: OpaquePointer?
@@ -33,9 +30,82 @@ class CustomerDatabase {
                 print("error creating table: "+String(cString: sqlite3_errmsg(db)!))
             }
         }
+        upgradeDatabase()
+    }
+    
+    func columnNotExists(table:String, column:String) -> Bool {
+        var result = true
+        var stmt:OpaquePointer?
+        if(sqlite3_prepare(self.db, "PRAGMA table_info("+table+")", -1, &stmt, nil) == SQLITE_OK) {
+            while sqlite3_step(stmt) == SQLITE_ROW {
+                if(sqlite3_column_text(stmt, 1) != nil) {
+                    let cString = String(cString: sqlite3_column_text(stmt, 1))
+                    if(cString == column) {
+                        result = false
+                    }
+                }
+            }
+        }
+        return result
+    }
+    
+    func upgradeDatabase() {
+        if(columnNotExists(table: "customer_file", column: "content")) {
+            let currentDateString = CustomerDatabase.dateToString(date: Date()) as NSString
+            
+            beginTransaction()
+            sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS calendar (id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR NOT NULL, color VARCHAR NOT NULL, notes VARCHAR NOT NULL, last_modified DATETIME DEFAULT CURRENT_TIMESTAMP, removed INTEGER DEFAULT 0);", nil,nil,nil)
+            sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS appointment (id INTEGER PRIMARY KEY AUTOINCREMENT, calendar_id INTEGER NOT NULL, title VARCHAR NOT NULL, notes VARCHAR NOT NULL, time_start DATETIME, time_end DATETIME, fullday INTEGER DEFAULT 0, customer VARCHAR NOT NULL, location VARCHAR NOT NULL, last_modified DATETIME DEFAULT CURRENT_TIMESTAMP, removed INTEGER DEFAULT 0);", nil,nil,nil)
+            sqlite3_exec(db, "CREATE TABLE IF NOT EXISTS customer_file (id INTEGER PRIMARY KEY AUTOINCREMENT, customer_id INTEGER NOT NULL, name VARCHAR NOT NULL, content BLOB NOT NULL);", nil,nil,nil)
+
+            var stmt:OpaquePointer?
+            if(sqlite3_prepare(self.db, "SELECT id, consent FROM customer", -1, &stmt, nil) == SQLITE_OK) {
+                while sqlite3_step(stmt) == SQLITE_ROW {
+                    var consent:Data? = nil
+                    if let pointer = sqlite3_column_blob(stmt, 1) {
+                        let length = Int(sqlite3_column_bytes(stmt, 1))
+                        consent = Data(bytes: pointer, count: length)
+                        var stmt2:OpaquePointer?
+                        if sqlite3_prepare(self.db, "INSERT INTO customer_file (customer_id, name, content) VALUES (?, ?, ?)", -1, &stmt2, nil) == SQLITE_OK {
+                            let name = NSLocalizedString("consent", comment: "")+".jpg" as NSString
+                            sqlite3_bind_int64(stmt2, 1, sqlite3_column_int64(stmt, 0))
+                            sqlite3_bind_text(stmt2, 2, name.utf8String, -1, nil)
+                            if(consent == nil && consent!.count == 0) {
+                                sqlite3_bind_null(stmt2, 3)
+                            } else {
+                                let tempData: NSMutableData = NSMutableData(length: 0)!
+                                tempData.append(consent!)
+                                sqlite3_bind_blob(stmt2, 3, tempData.bytes, Int32(tempData.length), nil)
+                            }
+                            if sqlite3_step(stmt2) == SQLITE_DONE {
+                                sqlite3_finalize(stmt2)
+                            }
+                        }
+                    }
+                    var stmt2:OpaquePointer?
+                    if sqlite3_prepare(self.db, "UPDATE customer SET consent = ?, last_modified = ? WHERE id = ?", -1, &stmt2, nil) == SQLITE_OK {
+                        sqlite3_bind_null(stmt2, 1)
+                        sqlite3_bind_text(stmt2, 2, currentDateString.utf8String, -1, nil)
+                        sqlite3_bind_int64(stmt2, 3, sqlite3_column_int64(stmt, 0))
+                        if sqlite3_step(stmt2) == SQLITE_DONE {
+                            sqlite3_finalize(stmt2)
+                        }
+                    }
+                }
+            }
+            commitTransaction()
+        }
+    }
+    
+    func beginTransaction() {
+        sqlite3_exec(self.db, "BEGIN EXCLUSIVE TRANSACTION", nil, nil, nil)
+    }
+    func commitTransaction() {
+        sqlite3_exec(self.db, "COMMIT TRANSACTION", nil, nil, nil)
     }
     
     static var STORAGE_FORMAT = "yyyy-MM-dd HH:mm:ss"
+    static var STORAGE_FORMAT_WITHOUT_TIME = "yyyy-MM-dd"
     static func dateToDisplayString(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
@@ -52,10 +122,12 @@ class CustomerDatabase {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = CustomerDatabase.STORAGE_FORMAT
         return dateFormatter.string(from: date)
-    }/*
-    static func unixTimeToString(unixTimestamp: Int) -> String {
-        return CustomerDatabase.dateToString(date: Date(timeIntervalSince1970: Double(unixTimestamp)))
-    }*/
+    }
+    static func dateToStringWithoutTime(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = CustomerDatabase.STORAGE_FORMAT_WITHOUT_TIME
+        return dateFormatter.string(from: date)
+    }
     static func parseDisplayDateWithoutTime(strDate: String) -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
@@ -71,8 +143,307 @@ class CustomerDatabase {
         return Int((CustomerDatabase.parseDate(strDate: strDate) ?? Date()).timeIntervalSince1970)
     }
     
+    // Calendar Operations
+    func getCalendars(showDeleted:Bool) -> [CustomerCalendar] {
+        var calendars:[CustomerCalendar] = []
+        var stmt:OpaquePointer?
+        var sql = "SELECT id, title, color, notes, last_modified, removed FROM calendar WHERE removed = 0"
+        if(showDeleted) {
+            sql = "SELECT id, title, color, notes, last_modified, removed FROM calendar"
+        }
+        if sqlite3_prepare(self.db, sql, -1, &stmt, nil) == SQLITE_OK {
+            while sqlite3_step(stmt) == SQLITE_ROW {
+                calendars.append(
+                    CustomerCalendar(
+                        id: Int64(sqlite3_column_int64(stmt, 0)),
+                        title: String(cString: sqlite3_column_text(stmt, 1)),
+                        color: String(cString: sqlite3_column_text(stmt, 2)),
+                        notes: String(cString: sqlite3_column_text(stmt, 3)),
+                        lastModified: CustomerDatabase.parseDate(strDate: String(cString: sqlite3_column_text(stmt, 4))) ?? Date(),
+                        removed: Int(sqlite3_column_int(stmt, 5))
+                    )
+                )
+            }
+        }
+        return calendars
+    }
+    func getCalendar(id:Int64) -> CustomerCalendar? {
+        var calendar:CustomerCalendar? = nil
+        var stmt:OpaquePointer?
+        let sql = "SELECT id, title, color, notes, last_modified, removed FROM calendar WHERE id = ? AND removed = 0"
+        if sqlite3_prepare(self.db, sql, -1, &stmt, nil) == SQLITE_OK {
+            sqlite3_bind_int64(stmt, 1, id)
+            while sqlite3_step(stmt) == SQLITE_ROW {
+                calendar = (
+                    CustomerCalendar(
+                        id: Int64(sqlite3_column_int64(stmt, 0)),
+                        title: String(cString: sqlite3_column_text(stmt, 1)),
+                        color: String(cString: sqlite3_column_text(stmt, 2)),
+                        notes: String(cString: sqlite3_column_text(stmt, 3)),
+                        lastModified: CustomerDatabase.parseDate(strDate: String(cString: sqlite3_column_text(stmt, 4))) ?? Date(),
+                        removed: Int(sqlite3_column_int(stmt, 5))
+                    )
+                )
+            }
+        }
+        return calendar
+    }
+    func updateCalendar(c: CustomerCalendar) -> Bool {
+        beginTransaction()
+        var stmt:OpaquePointer?
+        if sqlite3_prepare(self.db, "UPDATE calendar SET title = ?, color = ?, notes = ?, last_modified = ? WHERE id = ?", -1, &stmt, nil) == SQLITE_OK {
+            let title = c.mTitle as NSString
+            let color = c.mColor as NSString
+            let notes = c.mNotes as NSString
+            let lastModified = CustomerDatabase.dateToString(date: c.mLastModified) as NSString
+            sqlite3_bind_text(stmt, 1, title.utf8String, -1, nil)
+            sqlite3_bind_text(stmt, 2, color.utf8String, -1, nil)
+            sqlite3_bind_text(stmt, 3, notes.utf8String, -1, nil)
+            sqlite3_bind_text(stmt, 4, lastModified.utf8String, -1, nil)
+            sqlite3_bind_int64(stmt, 5, c.mId)
+            if sqlite3_step(stmt) == SQLITE_DONE {
+                sqlite3_finalize(stmt)
+            }
+        }
+        commitTransaction()
+        return true
+    }
+    func insertCalendar(c: CustomerCalendar) -> Bool {
+        beginTransaction()
+        var stmt:OpaquePointer?
+        if sqlite3_prepare(self.db, "INSERT INTO calendar (id, title, color, notes, last_modified, removed) VALUES (?,?,?,?,?,?)", -1, &stmt, nil) == SQLITE_OK {
+            let title = c.mTitle as NSString
+            let color = c.mColor as NSString
+            let notes = c.mNotes as NSString
+            let lastModified = CustomerDatabase.dateToString(date: c.mLastModified) as NSString
+            sqlite3_bind_int64(stmt, 1, c.mId)
+            sqlite3_bind_text(stmt, 2, title.utf8String, -1, nil)
+            sqlite3_bind_text(stmt, 3, color.utf8String, -1, nil)
+            sqlite3_bind_text(stmt, 4, notes.utf8String, -1, nil)
+            sqlite3_bind_text(stmt, 5, lastModified.utf8String, -1, nil)
+            sqlite3_bind_int(stmt, 6, Int32(c.mRemoved))
+            if sqlite3_step(stmt) == SQLITE_DONE {
+                sqlite3_finalize(stmt)
+            }
+        }
+        commitTransaction()
+        return true
+    }
+    func removeCalendar(id: Int64) {
+        let lastModified = CustomerDatabase.dateToString(date: Date()) as NSString
+        var stmt:OpaquePointer?
+        if sqlite3_prepare(self.db, "UPDATE calendar SET title = '', color = '', notes = '', last_modified = ?, removed = 1 WHERE id = ?", -1, &stmt, nil) == SQLITE_OK {
+            sqlite3_bind_text(stmt, 1, lastModified.utf8String, -1, nil)
+            sqlite3_bind_int64(stmt, 2, id)
+            if sqlite3_step(stmt) == SQLITE_DONE {
+                sqlite3_finalize(stmt)
+            }
+        }
+        
+        if sqlite3_prepare(self.db, "UPDATE appointment SET removed = 1, calendar_id = -1, title = '', notes = '', time_start = NULL, time_end = NULL, fullday = 0, customer = '', location = '', last_modified = ? WHERE calendar_id = ?", -1, &stmt, nil) == SQLITE_OK {
+            sqlite3_bind_text(stmt, 1, lastModified.utf8String, -1, nil)
+            sqlite3_bind_int64(stmt, 2, id)
+            if sqlite3_step(stmt) == SQLITE_DONE {
+                sqlite3_finalize(stmt)
+            }
+        }
+    }
+    func deleteAllCalendars() {
+        var stmt:OpaquePointer?
+        if sqlite3_prepare(self.db, "DELETE FROM calendar WHERE 1=1", -1, &stmt, nil) == SQLITE_OK {
+            if sqlite3_step(stmt) == SQLITE_DONE {
+                sqlite3_finalize(stmt)
+            }
+        }
+    }
+    
+    // Appointment Operations
+    func getAppointment(id:Int64) -> CustomerAppointment? {
+        var appointment:CustomerAppointment? = nil
+        var stmt:OpaquePointer?
+        let sql = "SELECT id, calendar_id, title, notes, time_start, time_end, fullday, customer, location, last_modified, removed FROM appointment WHERE removed = 0 AND id = ?"
+        if sqlite3_prepare(self.db, sql, -1, &stmt, nil) == SQLITE_OK {
+            sqlite3_bind_int64(stmt, 1, id)
+            while sqlite3_step(stmt) == SQLITE_ROW {
+                var start:Date? = nil
+                if(sqlite3_column_text(stmt, 4) != nil) {
+                    start = CustomerDatabase.parseDate(strDate: String(cString: sqlite3_column_text(stmt, 4)))
+                }
+                var end:Date? = nil
+                if(sqlite3_column_text(stmt, 5) != nil) {
+                    end = CustomerDatabase.parseDate(strDate: String(cString: sqlite3_column_text(stmt, 5)))
+                }
+                appointment = (
+                    CustomerAppointment(
+                        id: Int64(sqlite3_column_int64(stmt, 0)),
+                        calendarId: Int64(sqlite3_column_int64(stmt, 1)),
+                        title: String(cString: sqlite3_column_text(stmt, 2)),
+                        notes: String(cString: sqlite3_column_text(stmt, 3)),
+                        timeStart: start,
+                        timeEnd: end,
+                        fullday: sqlite3_column_int(stmt, 6) > 0,
+                        customer: String(cString: sqlite3_column_text(stmt, 7)),
+                        location: String(cString: sqlite3_column_text(stmt, 8)),
+                        lastModified: CustomerDatabase.parseDate(strDate: String(cString: sqlite3_column_text(stmt, 9))) ?? Date(),
+                        removed: Int(sqlite3_column_int(stmt, 10))
+                    )
+                )
+            }
+        }
+        return appointment
+    }
+    func getAppointments(calendarId:Int64?, day:Date?, showDeleted:Bool) -> [CustomerAppointment] {
+        var appointments:[CustomerAppointment] = []
+        var stmt:OpaquePointer?
+        if(calendarId != nil && day != nil && !showDeleted) {
+            let sql = "SELECT id, calendar_id, title, notes, time_start, time_end, fullday, customer, location, last_modified, removed FROM appointment WHERE calendar_id = ? AND removed = 0" // BUG : "strftime('%Y-%m-%d',time_start) = ?" returns only one row
+            if sqlite3_prepare(self.db, sql, -1, &stmt, nil) != SQLITE_OK { return [] }
+            sqlite3_bind_int64(stmt, 1, calendarId!)
+            //sqlite3_bind_text(stmt, 2, CustomerDatabase.dateToStringWithoutTime(date: day!), -1, nil)
+        } else if(calendarId != nil && day == nil && !showDeleted) {
+            let sql = "SELECT id, calendar_id, title, notes, time_start, time_end, fullday, customer, location, last_modified, removed FROM appointment WHERE calendar_id = ? AND removed = 0"
+            if sqlite3_prepare(self.db, sql, -1, &stmt, nil) != SQLITE_OK { return [] }
+            sqlite3_bind_int64(stmt, 1, calendarId!)
+        } else {
+            var sql = ""
+            if(showDeleted) {
+                sql = "SELECT id, calendar_id, title, notes, time_start, time_end, fullday, customer, location, last_modified, removed FROM appointment"
+            } else {
+                sql = "SELECT id, calendar_id, title, notes, time_start, time_end, fullday, customer, location, last_modified, removed FROM appointment WHERE removed = 0"
+            }
+            if sqlite3_prepare(self.db, sql, -1, &stmt, nil) != SQLITE_OK { return [] }
+        }
+        while sqlite3_step(stmt) == SQLITE_ROW {
+            let strStart = sqlite3_column_text(stmt, 4)
+            var dateStart:Date? = nil
+            if(strStart != nil) {
+                dateStart = CustomerDatabase.parseDate(strDate: String(cString: strStart!))
+            }
+            let strEnd = sqlite3_column_text(stmt, 5)
+            var dateEnd:Date? = nil
+            if(strEnd != nil) {
+                dateEnd = CustomerDatabase.parseDate(strDate: String(cString: strEnd!))
+            }
+            
+            // workaround for sqlite's strftime() bug
+            if(day != nil && dateStart != nil &&
+                CustomerDatabase.dateToStringWithoutTime(date: dateStart!) != CustomerDatabase.dateToStringWithoutTime(date: day!)) {
+                continue
+            }
+            
+            appointments.append(
+                CustomerAppointment(
+                    id: Int64(sqlite3_column_int64(stmt, 0)),
+                    calendarId: Int64(sqlite3_column_int64(stmt, 1)),
+                    title: String(cString: sqlite3_column_text(stmt, 2)),
+                    notes: String(cString: sqlite3_column_text(stmt, 3)),
+                    timeStart: dateStart,
+                    timeEnd: dateEnd,
+                    fullday: sqlite3_column_int(stmt, 6) > 0,
+                    customer: String(cString: sqlite3_column_text(stmt, 7)),
+                    location: String(cString: sqlite3_column_text(stmt, 8)),
+                    lastModified: CustomerDatabase.parseDate(strDate: String(cString: sqlite3_column_text(stmt, 9))) ?? Date(),
+                    removed: Int(sqlite3_column_int(stmt, 10))
+                )
+            )
+        }
+        return appointments
+    }
+    func updateAppointment(a: CustomerAppointment) -> Bool {
+        beginTransaction()
+        var stmt:OpaquePointer?
+        if sqlite3_prepare(self.db, "UPDATE appointment SET calendar_id = ?, title = ?, notes = ?, time_start = ?, time_end = ?, fullday = ?, customer = ?, location = ?, last_modified = ? WHERE id = ?", -1, &stmt, nil) == SQLITE_OK {
+            let title = a.mTitle as NSString
+            let notes = a.mNotes as NSString
+            let customer = a.mCustomer as NSString
+            let location = a.mLocation as NSString
+            let start:NSString? = (a.mTimeStart==nil) ? nil : CustomerDatabase.dateToString(date: a.mTimeStart!) as NSString
+            let end:NSString? = (a.mTimeEnd==nil) ? nil : CustomerDatabase.dateToString(date: a.mTimeEnd!) as NSString
+            let lastModified = CustomerDatabase.dateToString(date: a.mLastModified) as NSString
+            sqlite3_bind_int64(stmt, 1, a.mCalendarId)
+            sqlite3_bind_text(stmt, 2, title.utf8String, -1, nil)
+            sqlite3_bind_text(stmt, 3, notes.utf8String, -1, nil)
+            if(start == nil) {
+                sqlite3_bind_null(stmt, 4)
+            } else {
+                sqlite3_bind_text(stmt, 4, start!.utf8String, -1, nil)
+            }
+            if(end == nil) {
+                sqlite3_bind_null(stmt, 5)
+            } else {
+                sqlite3_bind_text(stmt, 5, end!.utf8String, -1, nil)
+            }
+            sqlite3_bind_int64(stmt, 6, a.mFullday ? 1 : 0)
+            sqlite3_bind_text(stmt, 7, customer.utf8String, -1, nil)
+            sqlite3_bind_text(stmt, 8, location.utf8String, -1, nil)
+            sqlite3_bind_text(stmt, 9, lastModified.utf8String, -1, nil)
+            sqlite3_bind_int64(stmt, 10, a.mId)
+            if sqlite3_step(stmt) == SQLITE_DONE {
+                sqlite3_finalize(stmt)
+            }
+        }
+        commitTransaction()
+        return true
+    }
+    func insertAppointment(a: CustomerAppointment) -> Bool {
+        beginTransaction()
+        var stmt:OpaquePointer?
+        if sqlite3_prepare(self.db, "INSERT INTO appointment (id, calendar_id, title, notes, time_start, time_end, fullday, customer, location, last_modified, removed) VALUES (?,?,?,?,?,?,?,?,?,?,?)", -1, &stmt, nil) == SQLITE_OK {
+            let title = a.mTitle as NSString
+            let notes = a.mNotes as NSString
+            let customer = a.mCustomer as NSString
+            let location = a.mLocation as NSString
+            let start:NSString? = (a.mTimeStart==nil) ? nil : CustomerDatabase.dateToString(date: a.mTimeStart!) as NSString
+            let end:NSString? = (a.mTimeEnd==nil) ? nil : CustomerDatabase.dateToString(date: a.mTimeEnd!) as NSString
+            let lastModified = CustomerDatabase.dateToString(date: a.mLastModified) as NSString
+            sqlite3_bind_int64(stmt, 1, a.mId)
+            sqlite3_bind_int64(stmt, 2, a.mCalendarId)
+            sqlite3_bind_text(stmt, 3, title.utf8String, -1, nil)
+            sqlite3_bind_text(stmt, 4, notes.utf8String, -1, nil)
+            if(start == nil) {
+                sqlite3_bind_null(stmt, 5)
+            } else {
+                sqlite3_bind_text(stmt, 5, start!.utf8String, -1, nil)
+            }
+            if(end == nil) {
+                sqlite3_bind_null(stmt, 6)
+            } else {
+                sqlite3_bind_text(stmt, 6, end!.utf8String, -1, nil)
+            }
+            sqlite3_bind_int(stmt, 7, a.mFullday ? 1 : 0)
+            sqlite3_bind_text(stmt, 8, customer.utf8String, -1, nil)
+            sqlite3_bind_text(stmt, 9, location.utf8String, -1, nil)
+            sqlite3_bind_text(stmt, 10, lastModified.utf8String, -1, nil)
+            sqlite3_bind_int(stmt, 11, Int32(a.mRemoved))
+            if sqlite3_step(stmt) == SQLITE_DONE {
+                sqlite3_finalize(stmt)
+            }
+        }
+        commitTransaction()
+        return true
+    }
+    func removeAppointment(id: Int64) {
+        var stmt:OpaquePointer?
+        if sqlite3_prepare(self.db, "UPDATE appointment SET calendar_id = -1, title = '', notes = '', time_start = NULL, time_end = NULL, fullday = 0, customer = '', location = '', last_modified = ?, removed = 1 WHERE id = ?", -1, &stmt, nil) == SQLITE_OK {
+            let lastModified = CustomerDatabase.dateToString(date: Date()) as NSString
+            sqlite3_bind_text(stmt, 1, lastModified.utf8String, -1, nil)
+            sqlite3_bind_int64(stmt, 2, id)
+            if sqlite3_step(stmt) == SQLITE_DONE {
+                sqlite3_finalize(stmt)
+            }
+        }
+    }
+    func deleteAllAppointments() {
+        var stmt:OpaquePointer?
+        if sqlite3_prepare(self.db, "DELETE FROM appointment WHERE 1=1", -1, &stmt, nil) == SQLITE_OK {
+            if sqlite3_step(stmt) == SQLITE_DONE {
+                sqlite3_finalize(stmt)
+            }
+        }
+    }
+    
     // Customer Operations
-    func getCustomers(showDeleted:Bool) -> [Customer] {
+    func getCustomers(showDeleted:Bool, withFiles:Bool) -> [Customer] {
         var customers:[Customer] = []
         var stmt:OpaquePointer?
         var sql = "SELECT id, title, first_name, last_name, phone_home, phone_mobile, phone_work, email, street, zipcode, city, country, birthday, customer_group, newsletter, notes, custom_fields, last_modified, removed FROM customer WHERE removed = 0 ORDER BY last_name, first_name"
@@ -110,7 +481,45 @@ class CustomerDatabase {
                 )
             }
         }
+        
+        if(withFiles) {
+            var customersWithFiles:[Customer] = []
+            for customer in customers {
+                customersWithFiles.append(getCustomerFiles(c: customer))
+            }
+            return customersWithFiles
+        }
+        
         return customers
+    }
+    func getCustomerFiles(c: Customer) -> Customer {
+        var stmt:OpaquePointer?
+        if sqlite3_prepare(self.db, "SELECT image FROM customer WHERE id = ?", -1, &stmt, nil) == SQLITE_OK {
+            sqlite3_bind_int64(stmt, 1, c.mId)
+            while sqlite3_step(stmt) == SQLITE_ROW {
+                if let pointer = sqlite3_column_blob(stmt, 0) {
+                    let length = Int(sqlite3_column_bytes(stmt, 0))
+                    c.mImage = Data(bytes: pointer, count: length)
+                }
+            }
+        }
+        
+        c.mFiles = []
+        var stmt2:OpaquePointer?
+        if sqlite3_prepare(self.db, "SELECT name, content FROM customer_file WHERE customer_id = ?", -1, &stmt2, nil) == SQLITE_OK {
+            sqlite3_bind_int64(stmt2, 1, c.mId)
+            while sqlite3_step(stmt2) == SQLITE_ROW {
+                if let pointer = sqlite3_column_blob(stmt2, 1) {
+                    let length = Int(sqlite3_column_bytes(stmt2, 1))
+                    c.mFiles?.append(CustomerFile(
+                        name: String(cString: sqlite3_column_text(stmt2, 0)),
+                        content: Data(bytes: pointer, count: length)
+                    ))
+                }
+            }
+        }
+        
+        return c
     }
     func getCustomer(id:Int64) -> Customer? {
         var customer:Customer? = nil
@@ -119,18 +528,8 @@ class CustomerDatabase {
             sqlite3_bind_int64(stmt, 1, id)
             while sqlite3_step(stmt) == SQLITE_ROW {
                 var birthday:Date? = nil
-                var image:Data? = nil
-                var consent:Data? = nil
                 if(sqlite3_column_text(stmt, 12) != nil) {
                     birthday = CustomerDatabase.parseDate(strDate: String(cString: sqlite3_column_text(stmt, 12)))
-                }
-                if let pointer = sqlite3_column_blob(stmt, 17) {
-                    let length = Int(sqlite3_column_bytes(stmt, 17))
-                    image = Data(bytes: pointer, count: length)
-                }
-                if let pointer = sqlite3_column_blob(stmt, 18) {
-                    let length = Int(sqlite3_column_bytes(stmt, 18))
-                    consent = Data(bytes: pointer, count: length)
                 }
                 customer = (
                     Customer(
@@ -151,18 +550,17 @@ class CustomerDatabase {
                         newsletter: Int(sqlite3_column_int(stmt, 14)) > 0,
                         notes: String(cString: sqlite3_column_text(stmt, 15)),
                         customFields: String(cString: sqlite3_column_text(stmt, 16)),
-                        image: image,
-                        consentImage: consent,
                         lastModified: CustomerDatabase.parseDate(strDate: String(cString: sqlite3_column_text(stmt, 19))) ?? Date(),
                         removed: Int(sqlite3_column_int(stmt, 20))
                     )
                 )
+                customer = getCustomerFiles(c: customer!)
             }
         }
         return customer
     }
     func updateCustomer(c: Customer) -> Bool {
-        sqlite3_exec(self.db, "BEGIN EXCLUSIVE TRANSACTION", nil, nil, nil)
+        beginTransaction()
         var stmt:OpaquePointer?
         if sqlite3_prepare(self.db, "UPDATE customer SET title = ?, first_name = ?, last_name = ?, phone_home = ?, phone_mobile = ?, phone_work = ?, email = ?, street = ?, zipcode = ?, city = ?, country = ?, birthday = ?, notes = ?, newsletter = ?, customer_group = ?, custom_fields = ?, image = ?, consent = ?, last_modified = ? WHERE id = ?", -1, &stmt, nil) == SQLITE_OK {
             let title = c.mTitle as NSString
@@ -221,13 +619,36 @@ class CustomerDatabase {
                 sqlite3_finalize(stmt)
             }
         }
-        sqlite3_exec(self.db, "COMMIT TRANSACTION", nil, nil, nil)
+        
+        if(c.mFiles != nil) {
+            var stmt:OpaquePointer?
+            if sqlite3_prepare(self.db, "DELETE FROM customer_file WHERE customer_id = ?", -1, &stmt, nil) == SQLITE_OK {
+                sqlite3_bind_int64(stmt, 1, c.mId)
+                if sqlite3_step(stmt) == SQLITE_DONE { sqlite3_finalize(stmt) }
+            }
+            for file in c.mFiles! {
+                if(file.mContent == nil || file.mContent?.count == 0) { continue }
+                if sqlite3_prepare(self.db, "INSERT INTO customer_file (customer_id, name, content) VALUES (?,?,?)", -1, &stmt, nil) == SQLITE_OK {
+                    let name = file.mName as NSString
+                    let tempData: NSMutableData = NSMutableData(length: 0)!
+                    tempData.append(file.mContent!)
+                    sqlite3_bind_int64(stmt, 1, c.mId)
+                    sqlite3_bind_text(stmt, 2, name.utf8String, -1, nil)
+                    sqlite3_bind_blob(stmt, 3, tempData.bytes, Int32(tempData.length), nil)
+                    if sqlite3_step(stmt) == SQLITE_DONE { sqlite3_finalize(stmt) }
+                }
+            }
+        }
+        commitTransaction()
         return true
     }
     func insertCustomer(c: Customer) -> Bool {
-        sqlite3_exec(self.db, "BEGIN EXCLUSIVE TRANSACTION", nil, nil, nil)
+        if(c.mId == -1) {
+            c.mId = Customer.generateID()
+        }
+        beginTransaction()
         var stmt:OpaquePointer?
-        if sqlite3_prepare(self.db, "INSERT INTO customer (id, title, first_name, last_name, phone_home, phone_mobile, phone_work, email, street, zipcode, city, country, birthday, notes, newsletter, customer_group, custom_fields, image, consent, last_modified, removed) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0)", -1, &stmt, nil) == SQLITE_OK {
+        if sqlite3_prepare(self.db, "INSERT INTO customer (id, title, first_name, last_name, phone_home, phone_mobile, phone_work, email, street, zipcode, city, country, birthday, notes, newsletter, customer_group, custom_fields, image, consent, last_modified, removed) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", -1, &stmt, nil) == SQLITE_OK {
             let title = c.mTitle as NSString
             let firstName = c.mFirstName as NSString
             let lastName = c.mLastName as NSString
@@ -279,200 +700,58 @@ class CustomerDatabase {
                 sqlite3_bind_blob(stmt, 19, tempData.bytes, Int32(tempData.length), nil)
             }
             sqlite3_bind_text(stmt, 20, lastModified.utf8String, -1, nil)
+            sqlite3_bind_int(stmt, 21, Int32(c.mRemoved))
             if sqlite3_step(stmt) == SQLITE_DONE {
                 sqlite3_finalize(stmt)
             }
         }
-        sqlite3_exec(self.db, "COMMIT TRANSACTION", nil, nil, nil)
+        
+        if(c.mFiles != nil) {
+            var stmt2:OpaquePointer?
+            for file in c.mFiles! {
+                if(file.mContent == nil || file.mContent?.count == 0) { continue }
+                if sqlite3_prepare(self.db, "INSERT INTO customer_file (customer_id, name, content) VALUES (?,?,?)", -1, &stmt2, nil) == SQLITE_OK {
+                    let name = file.mName as NSString
+                    let tempData: NSMutableData = NSMutableData(length: 0)!
+                    tempData.append(file.mContent!)
+                    sqlite3_bind_int64(stmt2, 1, c.mId)
+                    sqlite3_bind_text(stmt2, 2, name.utf8String, -1, nil)
+                    sqlite3_bind_blob(stmt2, 3, tempData.bytes, Int32(tempData.length), nil)
+                    if sqlite3_step(stmt2) == SQLITE_DONE { sqlite3_finalize(stmt2) }
+                }
+            }
+        }
+        commitTransaction()
         return true
     }
     func removeCustomer(id: Int64) {
         var stmt:OpaquePointer?
+        beginTransaction()
         if sqlite3_prepare(self.db, "UPDATE customer SET title = '', first_name = '', last_name = '', custom_fields = '', image = '', consent = '', last_modified = ?, removed = 1 WHERE id = ?", -1, &stmt, nil) == SQLITE_OK {
             let lastModified = CustomerDatabase.dateToString(date: Date()) as NSString
             sqlite3_bind_text(stmt, 1, lastModified.utf8String, -1, nil)
             sqlite3_bind_int64(stmt, 2, id)
-            if sqlite3_step(stmt) == SQLITE_DONE {
-                sqlite3_finalize(stmt)
-            }
+            if sqlite3_step(stmt) == SQLITE_DONE { sqlite3_finalize(stmt) }
         }
+        if sqlite3_prepare(self.db, "DELETE FROM customer_file WHERE customer_id = ?", -1, &stmt, nil) == SQLITE_OK {
+            sqlite3_bind_int64(stmt, 1, id)
+            if sqlite3_step(stmt) == SQLITE_DONE { sqlite3_finalize(stmt) }
+        }
+        commitTransaction()
     }
-    func deleteAllCustomer() {
+    func deleteAllCustomers() {
         var stmt:OpaquePointer?
         if sqlite3_prepare(self.db, "DELETE FROM customer WHERE 1=1", -1, &stmt, nil) == SQLITE_OK {
             if sqlite3_step(stmt) == SQLITE_DONE {
                 sqlite3_finalize(stmt)
             }
         }
-    }
-    
-    // direct customer access for API
-    func getAllCustomers() -> [Customer] {
-        var customers:[Customer] = []
-        var stmt:OpaquePointer?
-        let sql = "SELECT id, title, first_name, last_name, phone_home, phone_mobile, phone_work, email, street, zipcode, city, country, birthday, customer_group, newsletter, notes, custom_fields, image, consent, last_modified, removed FROM customer"
-        if sqlite3_prepare(self.db, sql, -1, &stmt, nil) == SQLITE_OK {
-            while sqlite3_step(stmt) == SQLITE_ROW {
-                var birthday:Date? = nil
-                if(sqlite3_column_text(stmt, 12) != nil) {
-                    birthday = CustomerDatabase.parseDate(strDate: String(cString: sqlite3_column_text(stmt, 12)))
-                }
-                var image:Data? = nil
-                if let pointer = sqlite3_column_blob(stmt, 17) {
-                    let length = Int(sqlite3_column_bytes(stmt, 17))
-                    image = Data(bytes: pointer, count: length)
-                }
-                var consent:Data? = nil
-                if let pointer = sqlite3_column_blob(stmt, 18) {
-                    let length = Int(sqlite3_column_bytes(stmt, 18))
-                    consent = Data(bytes: pointer, count: length)
-                }
-                customers.append(
-                    Customer(
-                        id: Int64(sqlite3_column_int64(stmt, 0)),
-                        title: String(cString: sqlite3_column_text(stmt, 1)),
-                        firstName: String(cString: sqlite3_column_text(stmt, 2)),
-                        lastName: String(cString: sqlite3_column_text(stmt, 3)),
-                        phoneHome: String(cString: sqlite3_column_text(stmt, 4)),
-                        phoneMobile: String(cString: sqlite3_column_text(stmt, 5)),
-                        phoneWork: String(cString: sqlite3_column_text(stmt, 6)),
-                        email: String(cString: sqlite3_column_text(stmt, 7)),
-                        street: String(cString: sqlite3_column_text(stmt, 8)),
-                        zipcode: String(cString: sqlite3_column_text(stmt, 9)),
-                        city: String(cString: sqlite3_column_text(stmt, 10)),
-                        country: String(cString: sqlite3_column_text(stmt, 11)),
-                        birthday: birthday,
-                        group: String(cString: sqlite3_column_text(stmt, 13)),
-                        newsletter: Int(sqlite3_column_int(stmt, 14)) > 0,
-                        notes: String(cString: sqlite3_column_text(stmt, 15)),
-                        customFields: String(cString: sqlite3_column_text(stmt, 16)),
-                        image: image,
-                        consentImage: consent,
-                        lastModified: CustomerDatabase.parseDate(strDate: String(cString: sqlite3_column_text(stmt, 19))) ?? Date(),
-                        removed: Int(sqlite3_column_int(stmt, 20))
-                    )
-                )
+        var stmt2:OpaquePointer?
+        if sqlite3_prepare(self.db, "DELETE FROM customer_file WHERE 1=1", -1, &stmt2, nil) == SQLITE_OK {
+            if sqlite3_step(stmt2) == SQLITE_DONE {
+                sqlite3_finalize(stmt2)
             }
         }
-        return customers
-    }
-    func insertUpdateCustomerRecord(id:Int64, title:String, firstName:String, lastName:String, phoneHome:String, phoneMobile:String, phoneWork:String, email:String, street:String, zipcode:String, city:String, country:String, birthday:String?, notes:String, newsletter:Int, group:String, customFields:String, image:Data?, consentImage:Data?, lastModified:String, removed:Int) -> Bool {
-        let title2 = title as NSString
-        let firstName2 = firstName as NSString
-        let lastName2 = lastName as NSString
-        let phoneHome2 = phoneHome as NSString
-        let phoneMobile2 = phoneMobile as NSString
-        let phoneWork2 = phoneWork as NSString
-        let email2 = email as NSString
-        let street2 = street as NSString
-        let zipcode2 = zipcode as NSString
-        let city2 = city as NSString
-        let country2 = country as NSString
-        let birthday2:NSString? = (birthday==nil) ? nil : birthday! as NSString
-        let notes2 = notes as NSString
-        let group2 = group as NSString
-        let customFields2 = customFields as NSString
-        let lastModified2 = lastModified as NSString
-        sqlite3_exec(self.db, "BEGIN EXCLUSIVE TRANSACTION", nil, nil, nil)
-        var stmt:OpaquePointer?
-        if sqlite3_prepare(self.db, "SELECT id FROM customer WHERE id = ?", -1, &stmt, nil) == SQLITE_OK {
-            sqlite3_bind_int64(stmt, 1, id)
-            if(sqlite3_step(stmt) == SQLITE_ROW) {
-                sqlite3_finalize(stmt)
-                // update
-                var stmt2:OpaquePointer?
-                if sqlite3_prepare(self.db, "UPDATE customer SET title = ?, first_name = ?, last_name = ?, phone_home = ?, phone_mobile = ?, phone_work = ?, email = ?, street = ?, zipcode = ?, city = ?, country = ?, birthday = ?, notes = ?, newsletter = ?, customer_group = ?, custom_fields = ?, image = ?, consent = ?, last_modified = ?, removed = ? WHERE id = ? AND last_modified < ?", -1, &stmt2, nil) == SQLITE_OK {
-                    sqlite3_bind_text(stmt2, 1, title2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 2, firstName2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 3, lastName2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 4, phoneHome2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 5, phoneMobile2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 6, phoneWork2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 7, email2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 8, street2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 9, zipcode2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 10, city2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 11, country2.utf8String, -1, nil)
-                    if(birthday2 == nil) {
-                        sqlite3_bind_null(stmt2, 12)
-                    } else {
-                        sqlite3_bind_text(stmt2, 12, birthday2!.utf8String, -1, nil)
-                    }
-                    sqlite3_bind_text(stmt2, 13, notes2.utf8String, -1, nil)
-                    sqlite3_bind_int(stmt2, 14, Int32(newsletter))
-                    sqlite3_bind_text(stmt2, 15, group2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 16, customFields2.utf8String, -1, nil)
-                    if(image == nil) {
-                        sqlite3_bind_null(stmt2, 17)
-                    } else {
-                        let tempData: NSMutableData = NSMutableData(length: 0)!
-                        tempData.append(image!)
-                        sqlite3_bind_blob(stmt2, 17, tempData.bytes, Int32(tempData.length), nil)
-                    }
-                    if(consentImage == nil) {
-                        sqlite3_bind_null(stmt2, 18)
-                    } else {
-                        let tempData: NSMutableData = NSMutableData(length: 0)!
-                        tempData.append(consentImage!)
-                        sqlite3_bind_blob(stmt2, 18, tempData.bytes, Int32(tempData.length), nil)
-                    }
-                    sqlite3_bind_text(stmt2, 19, lastModified2.utf8String, -1, nil)
-                    sqlite3_bind_int(stmt2, 20, Int32(removed))
-                    sqlite3_bind_int64(stmt2, 21, id)
-                    sqlite3_bind_text(stmt2, 22, lastModified2.utf8String, -1, nil)
-                    if sqlite3_step(stmt2) == SQLITE_DONE {
-                        sqlite3_finalize(stmt2)
-                    }
-                }
-            } else {
-                // insert
-                var stmt2:OpaquePointer?
-                if sqlite3_prepare(self.db, "INSERT INTO customer (id, title, first_name, last_name, phone_home, phone_mobile, phone_work, email, street, zipcode, city, country, birthday, notes, newsletter, customer_group, custom_fields, image, consent, last_modified, removed) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", -1, &stmt2, nil) == SQLITE_OK {
-                    sqlite3_bind_int64(stmt2, 1, id)
-                    sqlite3_bind_text(stmt2, 2, title2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 3, firstName2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 4, lastName2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 5, phoneHome2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 6, phoneMobile2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 7, phoneWork2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 8, email2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 9, street2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 10, zipcode2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 11, city2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 12, country2.utf8String, -1, nil)
-                    if(birthday2 == nil) {
-                        sqlite3_bind_null(stmt2, 13)
-                    } else {
-                        sqlite3_bind_text(stmt2, 13, birthday2!.utf8String, -1, nil)
-                    }
-                    sqlite3_bind_text(stmt2, 14, notes2.utf8String, -1, nil)
-                    sqlite3_bind_int(stmt2, 15, Int32(newsletter))
-                    sqlite3_bind_text(stmt2, 16, group2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 17, customFields2.utf8String, -1, nil)
-                    if(image == nil) {
-                        sqlite3_bind_null(stmt2, 18)
-                    } else {
-                        let tempData: NSMutableData = NSMutableData(length: 0)!
-                        tempData.append(image!)
-                        sqlite3_bind_blob(stmt2, 18, tempData.bytes, Int32(tempData.length), nil)
-                    }
-                    if(consentImage == nil) {
-                        sqlite3_bind_null(stmt2, 19)
-                    } else {
-                        let tempData: NSMutableData = NSMutableData(length: 0)!
-                        tempData.append(consentImage!)
-                        sqlite3_bind_blob(stmt2, 19, tempData.bytes, Int32(tempData.length), nil)
-                    }
-                    sqlite3_bind_text(stmt2, 20, lastModified2.utf8String, -1, nil)
-                    sqlite3_bind_int(stmt2, 21, Int32(removed))
-                    if sqlite3_step(stmt2) == SQLITE_DONE {
-                        sqlite3_finalize(stmt2)
-                    }
-                }
-            }
-        }
-        sqlite3_exec(self.db, "COMMIT TRANSACTION", nil, nil, nil)
-        return true
     }
     
     // Custom Field Operations
@@ -617,7 +896,7 @@ class CustomerDatabase {
         return voucher
     }
     func updateVoucher(v: Voucher) -> Bool {
-        sqlite3_exec(self.db, "BEGIN EXCLUSIVE TRANSACTION", nil, nil, nil)
+        beginTransaction()
         var stmt:OpaquePointer?
         if sqlite3_prepare(self.db, "UPDATE voucher SET original_value = ?, current_value = ?, voucher_no = ?, from_customer = ?, for_customer = ?, issued = ?, valid_until = ?, redeemed = ?, notes = ?, last_modified = ? WHERE id = ?", -1, &stmt, nil) == SQLITE_OK {
             let voucherNo = v.mVoucherNo as NSString
@@ -651,13 +930,16 @@ class CustomerDatabase {
                 sqlite3_finalize(stmt)
             }
         }
-        sqlite3_exec(self.db, "COMMIT TRANSACTION", nil, nil, nil)
+        commitTransaction()
         return true
     }
     func insertVoucher(v: Voucher) -> Bool {
-        sqlite3_exec(self.db, "BEGIN EXCLUSIVE TRANSACTION", nil, nil, nil)
+        if(v.mId == -1) {
+            v.mId = Voucher.generateID()
+        }
+        beginTransaction()
         var stmt:OpaquePointer?
-        if sqlite3_prepare(self.db, "INSERT INTO voucher (id, original_value, current_value, voucher_no, from_customer, for_customer, issued, valid_until, redeemed, notes, last_modified, removed) VALUES (?,?,?,?,?,?,?,?,?,?,?,0)", -1, &stmt, nil) == SQLITE_OK {
+        if sqlite3_prepare(self.db, "INSERT INTO voucher (id, original_value, current_value, voucher_no, from_customer, for_customer, issued, valid_until, redeemed, notes, last_modified, removed) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", -1, &stmt, nil) == SQLITE_OK {
             let voucherNo = v.mVoucherNo as NSString
             let fromCustomer = v.mFromCustomer as NSString
             let forCustomer = v.mForCustomer as NSString
@@ -685,11 +967,12 @@ class CustomerDatabase {
             }
             sqlite3_bind_text(stmt, 10, notes.utf8String, -1, nil)
             sqlite3_bind_text(stmt, 11, lastModified.utf8String, -1, nil)
+            sqlite3_bind_int(stmt, 12, Int32(v.mRemoved))
             if sqlite3_step(stmt) == SQLITE_DONE {
                 sqlite3_finalize(stmt)
             }
         }
-        sqlite3_exec(self.db, "COMMIT TRANSACTION", nil, nil, nil)
+        commitTransaction()
         return true
     }
     func removeVoucher(id: Int64) {
@@ -703,88 +986,12 @@ class CustomerDatabase {
             }
         }
     }
-    func deleteAllVoucher() {
+    func deleteAllVouchers() {
         var stmt:OpaquePointer?
         if sqlite3_prepare(self.db, "DELETE FROM voucher WHERE 1=1", -1, &stmt, nil) == SQLITE_OK {
             if sqlite3_step(stmt) == SQLITE_DONE {
                 sqlite3_finalize(stmt)
             }
         }
-    }
-    func insertUpdateVoucherRecord(id:Int64, originalValue:Double, currentValue:Double, voucherNo:String, fromCustomer:String, forCustomer:String, issued:String, validUntil:String?, redeemed:String?, notes:String, lastModified:String, removed:Int) -> Bool {
-        let voucherNo2 = voucherNo as NSString
-        let fromCustomer2 = fromCustomer as NSString
-        let forCustomer2 = forCustomer as NSString
-        let notes2 = notes as NSString
-        let issued2 = issued as NSString
-        let validUntil2 = validUntil as NSString?
-        let redeemed2 = redeemed as NSString?
-        let lastModified2 = lastModified as NSString
-        sqlite3_exec(self.db, "BEGIN EXCLUSIVE TRANSACTION", nil, nil, nil)
-        var stmt:OpaquePointer?
-        if sqlite3_prepare(self.db, "SELECT id FROM voucher WHERE id = ?", -1, &stmt, nil) == SQLITE_OK {
-            sqlite3_bind_int64(stmt, 1, id)
-            if(sqlite3_step(stmt) == SQLITE_ROW) {
-                // update
-                var stmt2:OpaquePointer?
-                if sqlite3_prepare(self.db, "UPDATE voucher SET original_value = ?, current_value = ?, voucher_no = ?, from_customer = ?, for_customer = ?, issued = ?, valid_until = ?, redeemed = ?, notes = ?, last_modified = ?, removed = ? WHERE id = ? AND last_modified < ?", -1, &stmt2, nil) == SQLITE_OK {
-                    sqlite3_bind_double(stmt2, 1, originalValue)
-                    sqlite3_bind_double(stmt2, 2, currentValue)
-                    sqlite3_bind_text(stmt2, 3, voucherNo2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 4, fromCustomer2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 5, forCustomer2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 6, issued2.utf8String, -1, nil)
-                    if(validUntil2 == nil) {
-                        sqlite3_bind_null(stmt2, 7)
-                    } else {
-                        sqlite3_bind_text(stmt2, 7, validUntil2?.utf8String, -1, nil)
-                    }
-                    if(redeemed == nil) {
-                        sqlite3_bind_null(stmt2, 8)
-                    } else {
-                        sqlite3_bind_text(stmt2, 8, redeemed2?.utf8String, -1, nil)
-                    }
-                    sqlite3_bind_text(stmt2, 9, notes2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 10, lastModified2.utf8String, -1, nil)
-                    sqlite3_bind_int(stmt2, 11, Int32(removed))
-                    sqlite3_bind_int64(stmt2, 12, id)
-                    sqlite3_bind_text(stmt2, 13, lastModified2.utf8String, -1, nil)
-                    if sqlite3_step(stmt2) == SQLITE_DONE {
-                        sqlite3_finalize(stmt2)
-                    }
-                }
-            } else {
-                // insert
-                var stmt2:OpaquePointer?
-                if sqlite3_prepare(self.db, "INSERT INTO voucher (id, original_value, current_value, voucher_no, from_customer, for_customer, issued, valid_until, redeemed, notes, last_modified, removed) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", -1, &stmt2, nil) == SQLITE_OK {
-                    sqlite3_bind_int64(stmt2, 1, id)
-                    sqlite3_bind_double(stmt2, 2, originalValue)
-                    sqlite3_bind_double(stmt2, 3, currentValue)
-                    sqlite3_bind_text(stmt2, 4, voucherNo2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 5, fromCustomer2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 6, forCustomer2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 7, issued2.utf8String, -1, nil)
-                    if(validUntil2 == nil) {
-                        sqlite3_bind_null(stmt2, 8)
-                    } else {
-                        sqlite3_bind_text(stmt2, 8, validUntil2?.utf8String, -1, nil)
-                    }
-                    if(redeemed == nil) {
-                        sqlite3_bind_null(stmt2, 9)
-                    } else {
-                        sqlite3_bind_text(stmt2, 9, redeemed2?.utf8String, -1, nil)
-                    }
-                    sqlite3_bind_text(stmt2, 10, notes2.utf8String, -1, nil)
-                    sqlite3_bind_text(stmt2, 11, lastModified2.utf8String, -1, nil)
-                    sqlite3_bind_int(stmt2, 12, Int32(removed))
-                    if sqlite3_step(stmt2) == SQLITE_DONE {
-                        sqlite3_finalize(stmt2)
-                    }
-                }
-            }
-            sqlite3_finalize(stmt)
-        }
-        sqlite3_exec(self.db, "COMMIT TRANSACTION", nil, nil, nil)
-        return true
     }
 }

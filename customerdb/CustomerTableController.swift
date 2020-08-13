@@ -82,7 +82,7 @@ class CustomerTableViewController : UIViewController, UITableViewDelegate, UITab
     }
     
     func reloadCustomers(search:String?, refreshTable:Bool) {
-        var tempCustomers = mDb.getCustomers(showDeleted: false)
+        var tempCustomers = mDb.getCustomers(showDeleted: false, withFiles: false)
         var title = ""
         
         // apply filter

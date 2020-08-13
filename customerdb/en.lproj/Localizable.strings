@@ -28,8 +28,10 @@
 "vouchers" = "Vouchers";
 "sync_not_configured" = "Sync not configured";
 "please_setup_sync" = "Please set up sync in settings.";
+"import_ics" = "Import ICS File";
 "import_vcf" = "Import VCF File";
 "import_csv" = "Import CSV File";
+"export_ics" = "Export ICS File";
 "export_vcf" = "Export VCF File";
 "export_csv" = "Export CSV File";
 "import_failed" = "Import Failed";
@@ -81,6 +83,10 @@
 "field_drop_down" = "Drop Down";
 "field_date" = "Date";
 "logo_deleted" = "Image deleted.";
+"new_calendar" = "New Calendar";
+"red" = "Red";
+"green" = "Green";
+"blue" = "Blue";
 
 // Details
 "first_name" = "First Name";
@@ -110,6 +116,7 @@
 "send_message" = "Send Message";
 "copy_to_clipboard" = "Copy to Clipboard";
 "open_map" = "Open Map";
+"delete_appointment" = "Delete Appointment";
 
 // Edit
 "name_empty" = "Name empty";
@@ -120,6 +127,11 @@
 "please_accept_data_processing" = "Please agree to the data processing.";
 "new_customer" = "New Customer";
 "new_voucher" = "New Voucher";
+"new_appointment" = "New Appointment";
+"remove" = "Remove";
+"end_date_before_start_date" = "The end date is before the start date!";
+"appointment_too_short" = "Appointment too short! Please create an appointment with a length of at least 5 minutes.";
+"no_calendar_selected" = "No calendar selected! Please create a calendar in the settings.";
 
 // Sync
 "reset_password" = "Reset Password";

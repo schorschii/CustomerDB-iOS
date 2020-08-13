@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		562A8BAF249B9EF4003CB9C4 /* VoucherCsvWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562A8BAE249B9EF4003CB9C4 /* VoucherCsvWriter.swift */; };
 		562A8BB1249BA20A003CB9C4 /* DocumentPickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562A8BB0249BA20A003CB9C4 /* DocumentPickers.swift */; };
+		562A8BB324A66DA6003CB9C4 /* CustomerAppointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562A8BB224A66DA6003CB9C4 /* CustomerAppointment.swift */; };
+		562A8BB524A66FEB003CB9C4 /* CustomerCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562A8BB424A66FEB003CB9C4 /* CustomerCalendar.swift */; };
+		562A8BB724A67DF5003CB9C4 /* CustomerFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562A8BB624A67DF5003CB9C4 /* CustomerFile.swift */; };
 		5637142323E2104B00F6719E /* UISearchBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5637142223E2104B00F6719E /* UISearchBarExtension.swift */; };
 		563903C92374C75D00753D93 /* CustomerTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563903C82374C75D00753D93 /* CustomerTableController.swift */; };
 		563D8AC223C52E1300A759E3 /* VoucherDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563D8AC123C52E1300A759E3 /* VoucherDetailsViewController.swift */; };
@@ -32,6 +35,8 @@
 		56B2B7CF23E5EAFF00295569 /* MasterNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B2B7CE23E5EAFF00295569 /* MasterNavigationViewController.swift */; };
 		56B2B7D123E5F65D00295569 /* PickerDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B2B7D023E5F65D00295569 /* PickerDataController.swift */; };
 		56B34E7724802FF600DEDEA4 /* QuotedPrintable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B34E7624802FF600DEDEA4 /* QuotedPrintable.swift */; };
+		56B8725424E07F0900E5F32D /* CalendarCsvWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B8725324E07F0900E5F32D /* CalendarCsvWriter.swift */; };
+		56B8725624E080A500E5F32D /* CalendarIcsWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B8725524E080A500E5F32D /* CalendarIcsWriter.swift */; };
 		56C089D3244A32D9005F8A1B /* FilterPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C089D2244A32D9005F8A1B /* FilterPickerController.swift */; };
 		56D51FC02376D97E0097DBDE /* CustomerDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D51FBF2376D97E0097DBDE /* CustomerDetailsViewController.swift */; };
 		56D51FC2237898E70097DBDE /* CustomerEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D51FC1237898E70097DBDE /* CustomerEditViewController.swift */; };
@@ -51,6 +56,9 @@
 		56DDADCB23E8B8EA00879CBD /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DDADCA23E8B8EA00879CBD /* CreateAccountViewController.swift */; };
 		56E9C02D246C64CA00DBB9DA /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E9C02C246C64CA00DBB9DA /* MainSplitViewController.swift */; };
 		56E9C02F246C6E6E00DBB9DA /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E9C02E246C6E6E00DBB9DA /* NavigationController.swift */; };
+		56F4E60D24B1D64C002F5569 /* AppointmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F4E60C24B1D64C002F5569 /* AppointmentViewController.swift */; };
+		56F4E60F24B1D660002F5569 /* AppointmentEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F4E60E24B1D660002F5569 /* AppointmentEditViewController.swift */; };
+		56F4E61124B2208D002F5569 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F4E61024B2208D002F5569 /* UIColor.swift */; };
 		56FDB94323FDC54A0018004C /* CustomerVcfWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FDB94223FDC54A0018004C /* CustomerVcfWriter.swift */; };
 		56FDB94524083CB60018004C /* InputOnlyModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FDB94424083CB60018004C /* InputOnlyModeViewController.swift */; };
 		56FDB947240840620018004C /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FDB946240840620018004C /* LockViewController.swift */; };
@@ -60,6 +68,9 @@
 /* Begin PBXFileReference section */
 		562A8BAE249B9EF4003CB9C4 /* VoucherCsvWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoucherCsvWriter.swift; sourceTree = "<group>"; };
 		562A8BB0249BA20A003CB9C4 /* DocumentPickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickers.swift; sourceTree = "<group>"; };
+		562A8BB224A66DA6003CB9C4 /* CustomerAppointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerAppointment.swift; sourceTree = "<group>"; };
+		562A8BB424A66FEB003CB9C4 /* CustomerCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerCalendar.swift; sourceTree = "<group>"; };
+		562A8BB624A67DF5003CB9C4 /* CustomerFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerFile.swift; sourceTree = "<group>"; };
 		5637142223E2104B00F6719E /* UISearchBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISearchBarExtension.swift; sourceTree = "<group>"; };
 		56386B4E23F74CFE007D32DC /* customerdb.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = customerdb.entitlements; sourceTree = "<group>"; };
 		563903C82374C75D00753D93 /* CustomerTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerTableController.swift; sourceTree = "<group>"; };
@@ -93,6 +104,8 @@
 		56B2B7CE23E5EAFF00295569 /* MasterNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterNavigationViewController.swift; sourceTree = "<group>"; };
 		56B2B7D023E5F65D00295569 /* PickerDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerDataController.swift; sourceTree = "<group>"; };
 		56B34E7624802FF600DEDEA4 /* QuotedPrintable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotedPrintable.swift; sourceTree = "<group>"; };
+		56B8725324E07F0900E5F32D /* CalendarCsvWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCsvWriter.swift; sourceTree = "<group>"; };
+		56B8725524E080A500E5F32D /* CalendarIcsWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarIcsWriter.swift; sourceTree = "<group>"; };
 		56BF995F24745AEE00EBFDA5 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		56BF996024745AEE00EBFDA5 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
 		56BF996124745AEE00EBFDA5 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -125,6 +138,9 @@
 		56DDADCA23E8B8EA00879CBD /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		56E9C02C246C64CA00DBB9DA /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSplitViewController.swift; sourceTree = "<group>"; };
 		56E9C02E246C6E6E00DBB9DA /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		56F4E60C24B1D64C002F5569 /* AppointmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentViewController.swift; sourceTree = "<group>"; };
+		56F4E60E24B1D660002F5569 /* AppointmentEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentEditViewController.swift; sourceTree = "<group>"; };
+		56F4E61024B2208D002F5569 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		56FDB94223FDC54A0018004C /* CustomerVcfWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerVcfWriter.swift; sourceTree = "<group>"; };
 		56FDB94424083CB60018004C /* InputOnlyModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputOnlyModeViewController.swift; sourceTree = "<group>"; };
 		56FDB946240840620018004C /* LockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
@@ -195,8 +211,11 @@
 				563D8AC523C52E6800A759E3 /* VoucherTableViewController.swift */,
 				563D8AC123C52E1300A759E3 /* VoucherDetailsViewController.swift */,
 				563D8AC323C52E2100A759E3 /* VoucherEditViewController.swift */,
+				56F4E60C24B1D64C002F5569 /* AppointmentViewController.swift */,
+				56F4E60E24B1D660002F5569 /* AppointmentEditViewController.swift */,
 				569E144D23745792007BFAF0 /* CustomerDatabase.swift */,
 				56D51FCD239C4A5C0097DBDE /* CustomerDatabaseApi.swift */,
+				56F4E61024B2208D002F5569 /* UIColor.swift */,
 				569E1448237310C2007BFAF0 /* Localizable.strings */,
 			);
 			path = customerdb;
@@ -205,8 +224,11 @@
 		569E144F23745950007BFAF0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				562A8BB424A66FEB003CB9C4 /* CustomerCalendar.swift */,
+				562A8BB224A66DA6003CB9C4 /* CustomerAppointment.swift */,
 				569E145223748DFF007BFAF0 /* KeyValueItem.swift */,
 				569E14502374595F007BFAF0 /* Customer.swift */,
+				562A8BB624A67DF5003CB9C4 /* CustomerFile.swift */,
 				56D51FC3237DEA080097DBDE /* CustomField.swift */,
 				569E145423748EFA007BFAF0 /* Voucher.swift */,
 			);
@@ -219,6 +241,8 @@
 				56DDADB923E780BF00879CBD /* SwiftCSV */,
 				56D55EC023EC407100FA8B7F /* CustomerCsvWriter.swift */,
 				56FDB94223FDC54A0018004C /* CustomerVcfWriter.swift */,
+				56B8725324E07F0900E5F32D /* CalendarCsvWriter.swift */,
+				56B8725524E080A500E5F32D /* CalendarIcsWriter.swift */,
 				56B34E7624802FF600DEDEA4 /* QuotedPrintable.swift */,
 				562A8BAE249B9EF4003CB9C4 /* VoucherCsvWriter.swift */,
 			);
@@ -322,6 +346,7 @@
 				566FBD9E245F0F19003433FA /* UICopyLabel.swift in Sources */,
 				56D51FC2237898E70097DBDE /* CustomerEditViewController.swift in Sources */,
 				566FBD9C245B69E3003433FA /* FieldTypePickerController.swift in Sources */,
+				56B8725624E080A500E5F32D /* CalendarIcsWriter.swift in Sources */,
 				56D51FCE239C4A5C0097DBDE /* CustomerDatabaseApi.swift in Sources */,
 				56E9C02D246C64CA00DBB9DA /* MainSplitViewController.swift in Sources */,
 				56DDADC923E8AF5000879CBD /* SyncInfoViewController.swift in Sources */,
@@ -333,6 +358,7 @@
 				56DDADC723E780DC00879CBD /* Description.swift in Sources */,
 				569E144E23745792007BFAF0 /* CustomerDatabase.swift in Sources */,
 				563D8AC223C52E1300A759E3 /* VoucherDetailsViewController.swift in Sources */,
+				56F4E61124B2208D002F5569 /* UIColor.swift in Sources */,
 				56C089D3244A32D9005F8A1B /* FilterPickerController.swift in Sources */,
 				56B2B7CF23E5EAFF00295569 /* MasterNavigationViewController.swift in Sources */,
 				56FDB949240947E70018004C /* BirthdayViewController.swift in Sources */,
@@ -343,24 +369,30 @@
 				563FEE8420FFD6C500DFD7B7 /* AppDelegate.swift in Sources */,
 				56DDADC223E780DC00879CBD /* Parser.swift in Sources */,
 				569E145323748DFF007BFAF0 /* KeyValueItem.swift in Sources */,
+				56F4E60D24B1D64C002F5569 /* AppointmentViewController.swift in Sources */,
 				56B34E7724802FF600DEDEA4 /* QuotedPrintable.swift in Sources */,
 				56DDADC523E780DC00879CBD /* EnumeratedView.swift in Sources */,
 				562A8BAF249B9EF4003CB9C4 /* VoucherCsvWriter.swift in Sources */,
 				56B2B7D123E5F65D00295569 /* PickerDataController.swift in Sources */,
+				562A8BB324A66DA6003CB9C4 /* CustomerAppointment.swift in Sources */,
 				563903C92374C75D00753D93 /* CustomerTableController.swift in Sources */,
 				5637142323E2104B00F6719E /* UISearchBarExtension.swift in Sources */,
 				56DDADC623E780DC00879CBD /* CSV.swift in Sources */,
+				56F4E60F24B1D660002F5569 /* AppointmentEditViewController.swift in Sources */,
 				56FDB94524083CB60018004C /* InputOnlyModeViewController.swift in Sources */,
 				56DDADC323E780DC00879CBD /* ParsingState.swift in Sources */,
 				56DDADC423E780DC00879CBD /* NamedView.swift in Sources */,
 				56D51FCC2392C7A70097DBDE /* SettingsViewController.swift in Sources */,
+				562A8BB724A67DF5003CB9C4 /* CustomerFile.swift in Sources */,
 				56D51FCA2392C7810097DBDE /* InfoViewController.swift in Sources */,
+				562A8BB524A66FEB003CB9C4 /* CustomerCalendar.swift in Sources */,
 				56FDB947240840620018004C /* LockViewController.swift in Sources */,
 				56FDB94323FDC54A0018004C /* CustomerVcfWriter.swift in Sources */,
 				56D55EC123EC407100FA8B7F /* CustomerCsvWriter.swift in Sources */,
 				569E14512374595F007BFAF0 /* Customer.swift in Sources */,
 				56858C762469C79500B1A3AE /* SortPickerViewController.swift in Sources */,
 				56DDADC123E780DC00879CBD /* String+Lines.swift in Sources */,
+				56B8725424E07F0900E5F32D /* CalendarCsvWriter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -544,7 +576,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = customerdb/customerdb.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 96G8V7UY3M;
 				INFOPLIST_FILE = customerdb/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -552,7 +584,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = systems.sieber.customerdb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -567,7 +599,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = customerdb/customerdb.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 96G8V7UY3M;
 				INFOPLIST_FILE = customerdb/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -575,7 +607,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 3.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = systems.sieber.customerdb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;

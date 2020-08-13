@@ -8,8 +8,9 @@ import UIKit
 import MessageUI
 import CoreLocation
 import MapKit
+import QuickLook
 
-class CustomerDetailsViewController : UIViewController, MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate {
+class CustomerDetailsViewController : UIViewController, MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate, QLPreviewControllerDataSource {
     
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var imageViewImage: UIImageView!
@@ -24,6 +25,8 @@ class CustomerDetailsViewController : UIViewController, MFMessageComposeViewCont
     @IBOutlet weak var stackViewNotes: UIStackView!
     @IBOutlet weak var stackViewNewsletter: UIStackView!
     @IBOutlet weak var stackViewBirthday: UIStackView!
+    @IBOutlet weak var stackViewFilesContainer: UIStackView!
+    @IBOutlet weak var stackViewFiles: UIStackView!
     
     @IBOutlet weak var labelPhoneHome: UILabel!
     @IBOutlet weak var labelPhoneMobile: UILabel!
@@ -66,6 +69,9 @@ class CustomerDetailsViewController : UIViewController, MFMessageComposeViewCont
         }
         if(!UserDefaults.standard.bool(forKey: "show-birthday-field")) {
             stackViewBirthday.isHidden = true
+        }
+        if(!UserDefaults.standard.bool(forKey: "show-files")) {
+            stackViewFilesContainer.isHidden = true
         }
         
         loadCustomer()
@@ -138,19 +144,6 @@ class CustomerDetailsViewController : UIViewController, MFMessageComposeViewCont
             imageViewImage.image = UIImage(data: mCurrentCustomer!.mImage!)
         }
         
-        var additionalInfoString = ""
-        if(mCurrentCustomer!.mNewsletter) {
-            additionalInfoString += NSLocalizedString("Yes", comment: "")
-        } else {
-            additionalInfoString += NSLocalizedString("No", comment: "")
-        }
-        additionalInfoString += " / "
-        if(mCurrentCustomer!.mConsentImage != nil && mCurrentCustomer!.mConsentImage!.count != 0) {
-            additionalInfoString += NSLocalizedString("Yes", comment: "")
-        } else {
-            additionalInfoString += NSLocalizedString("No", comment: "")
-        }
-        
         labelName.text = mCurrentCustomer?.getFullName(lastNameFirst: false)
         labelPhoneHome.text = mCurrentCustomer?.mPhoneHome
         labelPhoneMobile.text = mCurrentCustomer?.mPhoneMobile
@@ -159,7 +152,7 @@ class CustomerDetailsViewController : UIViewController, MFMessageComposeViewCont
         labelAddress.text = mCurrentCustomer?.getAddressString()
         labelGroup.text = mCurrentCustomer?.mGroup
         labelNotes.text = mCurrentCustomer?.mNotes
-        labelNewsletter.text = additionalInfoString
+        labelNewsletter.text = mCurrentCustomer!.mNewsletter ? NSLocalizedString("Yes", comment: "") : NSLocalizedString("No", comment: "")
         if(mCurrentCustomer?.mBirthday == nil) {
             labelBirthday.text = ""
         } else {
@@ -167,12 +160,13 @@ class CustomerDetailsViewController : UIViewController, MFMessageComposeViewCont
         }
         labelLastModified.text = CustomerDatabase.dateToDisplayString(date: mCurrentCustomer!.mLastModified)
         
+        let customFields = mDb.getCustomFields()
         for view in stackViewAttributes.arrangedSubviews {
             view.removeFromSuperview()
         }
-        for field in mDb.getCustomFields() {
+        for field in customFields {
             var finalText = mCurrentCustomer?.getCustomFieldString(key: field.mTitle) ?? ""
-            
+                
             // convert date to display format
             if(field.mType == CustomField.TYPE.DATE) {
                 let date = CustomerDatabase.parseDate(strDate: finalText)
@@ -180,8 +174,17 @@ class CustomerDetailsViewController : UIViewController, MFMessageComposeViewCont
                     finalText = CustomerDatabase.dateToDisplayStringWithoutTime(date: date!)
                 }
             }
-            
+                
             insertDetail(title: field.mTitle, text: finalText)
+        }
+
+        let files = mCurrentCustomer!.getFiles()
+        for view in stackViewFiles.arrangedSubviews {
+            view.removeFromSuperview()
+        }
+        for file in files {
+            if file.mContent == nil { continue }
+            insertFile(file: file)
         }
     }
     
@@ -464,12 +467,7 @@ class CustomerDetailsViewController : UIViewController, MFMessageComposeViewCont
         var finalText = text
         if(title == nil) { return }
         if(finalText == nil) { finalText = "" }
-        let labelTitle = UILabel()
-        if #available(iOS 13.0, *) {
-            labelTitle.textColor = UIColor.secondaryLabel
-        } else {
-            labelTitle.textColor = UIColor.gray
-        }
+        let labelTitle = SecondaryLabel()
         labelTitle.text = title
         
         let labelText = UICopyLabel()
@@ -480,5 +478,90 @@ class CustomerDetailsViewController : UIViewController, MFMessageComposeViewCont
         stackView.axis = .vertical
         
         stackViewAttributes.addArrangedSubview(stackView)
+    }
+    
+    func insertFile(file:CustomerFile) {
+        let button = FileButton(file: file)
+        button.addTarget(self, action: #selector(onClickFileButton), for: .touchUpInside)
+        
+        let imageClip = UIImageView(image: UIImage(named: "baseline_attach_file_black_24pt"))
+        imageClip.tintColor = UIColor.init(hex: "#828282")
+        imageClip.contentMode = .scaleAspectFill
+        imageClip.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        
+        let stackView = UIStackView(arrangedSubviews: [imageClip, button])
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        
+        stackViewFiles.addArrangedSubview(stackView)
+    }
+    
+    var mCurrentFileUrl:URL?
+    @objc func onClickFileButton(sender: FileButton!) {
+        do {
+            let tmpurl = try! FileManager.default.url(
+                for: .documentDirectory, in: .userDomainMask,
+                appropriateFor: nil, create: true
+            ).appendingPathComponent("tmp")
+            try FileManager.default.createDirectory(
+                atPath: tmpurl.path, withIntermediateDirectories: true, attributes: nil
+            )
+            let fileurl = tmpurl.appendingPathComponent(sender.mFile!.mName)
+            try sender.mFile?.mContent?.write(to: fileurl)
+            mCurrentFileUrl = fileurl
+            
+            let previewController = QLPreviewController()
+            previewController.dataSource = self
+            present(previewController, animated: true)
+        } catch {
+            print(error)
+        }
+    }
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return 1
+    }
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        return mCurrentFileUrl! as QLPreviewItem
+    }
+}
+
+class SecondaryLabel: UILabel {
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        self.commonInit()
+
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.commonInit()
+    }
+    func commonInit() {
+        if #available(iOS 13.0, *) {
+            textColor = UIColor.secondaryLabel
+        } else {
+            textColor = UIColor.gray
+        }
+    }
+}
+
+class FileButton: UIButton {
+    var mFile: CustomerFile?
+    required init(file:CustomerFile) {
+        super.init(frame: .zero)
+        mFile = file
+        setTitle(file.mName, for: .normal)
+        if #available(iOS 13.0, *) {
+            setTitleColor(.link, for: .normal)
+        } else {
+            setTitleColor(UIColor.init(hex: "#0f7c9d"), for: .normal)
+        }
+        if #available(iOS 11.0, *) {
+            contentHorizontalAlignment = .leading
+        } else {
+            contentHorizontalAlignment = .left
+        }
+    }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 }

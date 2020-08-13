@@ -22,6 +22,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
     @IBOutlet weak var switchShowNoteField: UISwitch!
     @IBOutlet weak var switchShowNewsletterField: UISwitch!
     @IBOutlet weak var switchShowBirthdayField: UISwitch!
+    @IBOutlet weak var switchShowFiles: UISwitch!
     @IBOutlet weak var switchShowConsentField: UISwitch!
     @IBOutlet weak var textFieldCurrency: UITextField!
     @IBOutlet weak var textFieldAppPassword: UITextField!
@@ -35,6 +36,9 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
     @IBOutlet weak var buttonRemoveLogo: UIButton!
     @IBOutlet weak var buttonEditCustomField: UIButton!
     @IBOutlet weak var buttonRemoveCustomField: UIButton!
+    @IBOutlet weak var textFieldCalendars: UITextField!
+    @IBOutlet weak var buttonEditCalendar: UIButton!
+    @IBOutlet weak var buttonRemoveCalendar: UIButton!
     
     static var DEFAULT_COLOR_R = 15
     static var DEFAULT_COLOR_G = 124
@@ -47,6 +51,9 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
     
     var mCustomFieldsController: PickerDataController? = nil
     var mCurrentCustomField: CustomField? = nil
+    
+    var mCalendarsController: PickerDataController? = nil
+    var mCurrentCalendar: CustomerCalendar? = nil
     
     override func viewDidLoad() {
         navigationController?.navigationBar.barStyle = .default
@@ -71,6 +78,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         switchShowNoteField.isOn = mDefaults.bool(forKey: "show-note-field")
         switchShowNewsletterField.isOn = mDefaults.bool(forKey: "show-newsletter-field")
         switchShowBirthdayField.isOn = mDefaults.bool(forKey: "show-birthday-field")
+        switchShowFiles.isOn = mDefaults.bool(forKey: "show-files")
         switchShowConsentField.isOn = mDefaults.bool(forKey: "show-consent-field")
         textFieldCurrency.text = mDefaults.string(forKey: "currency")
         textFieldAppPassword.text = mDefaults.string(forKey: "iom-password")
@@ -86,6 +94,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         onSyncModeChanged(segmentedControlSync)
         
         reloadCustomFields()
+        reloadCalendars()
     }
     func saveSettings() -> Bool {
         if(textFieldAppPassword.text != textFieldAppPasswordConfirm.text) {
@@ -115,6 +124,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         mDefaults.set(switchShowNoteField.isOn, forKey: "show-note-field")
         mDefaults.set(switchShowNewsletterField.isOn, forKey: "show-newsletter-field")
         mDefaults.set(switchShowBirthdayField.isOn, forKey: "show-birthday-field")
+        mDefaults.set(switchShowFiles.isOn, forKey: "show-files")
         mDefaults.set(switchShowConsentField.isOn, forKey: "show-consent-field")
         mDefaults.set(textFieldCurrency.text!, forKey: "currency")
         mDefaults.set(textFieldAppPassword.text!, forKey: "iom-password")
@@ -149,7 +159,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
                 self.reloadCustomField()
             }
         )
-        self.createPicker(pickerDataController: self.mCustomFieldsController!, defaultValue: "")
+        self.createPickerCustomFields(pickerDataController: self.mCustomFieldsController!, defaultValue: "")
         reloadCustomField()
     }
     func reloadCustomField() {
@@ -159,7 +169,34 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
             buttonRemoveCustomField.isEnabled = false
         } else {
             buttonEditCustomField.isEnabled = true
-            self.buttonRemoveCustomField.isEnabled = true
+            buttonRemoveCustomField.isEnabled = true
+        }
+    }
+    
+    func reloadCalendars() {
+        var parsedData: [KeyValueItem] = []
+        for field in mDb.getCalendars(showDeleted: false) {
+            parsedData.append(KeyValueItem(String(field.mId), field.mTitle))
+        }
+        mCalendarsController = PickerDataController(
+            textField: textFieldCalendars,
+            data: parsedData,
+            changed: { item in
+                self.mCurrentCalendar = self.mDb.getCalendar(id: Int64(item.key)!)
+                self.reloadCalendar()
+            }
+        )
+        self.createPickerCalendars(pickerDataController: self.mCalendarsController!, defaultValue: "")
+        reloadCalendar()
+    }
+    func reloadCalendar() {
+        if(self.mCurrentCalendar == nil) {
+            textFieldCalendars.text = ""
+            buttonEditCalendar.isEnabled = false
+            buttonRemoveCalendar.isEnabled = false
+        } else {
+            buttonEditCalendar.isEnabled = true
+            buttonRemoveCalendar.isEnabled = true
         }
     }
     
@@ -169,6 +206,12 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         imgViewForDropDown.image = UIImage(named: "baseline_arrow_drop_down_circle_black_24pt")
         textFieldCustomFields.rightView = imgViewForDropDown
         textFieldCustomFields.rightViewMode = .always
+        
+        let imgViewForDropDown2 = UIImageView()
+        imgViewForDropDown2.frame = CGRect(x: 0, y: 0, width: 30, height: 48)
+        imgViewForDropDown2.image = UIImage(named: "baseline_arrow_drop_down_circle_black_24pt")
+        textFieldCalendars.rightView = imgViewForDropDown2
+        textFieldCalendars.rightViewMode = .always
     }
     
     @objc func keyboardWillShow(notification:NSNotification){
@@ -202,8 +245,10 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
                 title: NSLocalizedString("yes", comment: ""),
                 style: .default) { (action) in
                     if(self.saveSettings()) {
-                        self.mDb.deleteAllCustomer()
-                        self.mDb.deleteAllVoucher()
+                        self.mDb.deleteAllCustomers()
+                        self.mDb.deleteAllVouchers()
+                        self.mDb.deleteAllCalendars()
+                        self.mDb.deleteAllAppointments()
                         if(self.mMainViewControllerRef != nil) {
                             self.mMainViewControllerRef!.reloadData()
                         }
@@ -314,7 +359,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         toolBar.setItems([doneButton], animated: false)
         toolBar.isUserInteractionEnabled = true
     }
-    func createPicker(pickerDataController: PickerDataController, defaultValue: String) {
+    func createPickerCustomFields(pickerDataController: PickerDataController, defaultValue: String) {
         pickerDataController.textField?.text = ""
         mCurrentCustomField = nil
         let uiPicker = UIPickerView()
@@ -336,6 +381,30 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
                 }
             }
             reloadCustomField()
+        }
+    }
+    func createPickerCalendars(pickerDataController: PickerDataController, defaultValue: String) {
+        pickerDataController.textField?.text = ""
+        mCurrentCalendar = nil
+        let uiPicker = UIPickerView()
+        uiPicker.delegate = pickerDataController
+        pickerDataController.textField?.inputView = uiPicker
+        pickerDataController.textField?.inputAccessoryView = toolBar
+        if(pickerDataController.data.count > 0) {
+            // select first item
+            uiPicker.selectRow(0, inComponent: 0, animated: false)
+            pickerDataController.textField?.text = pickerDataController.data[0].value
+            mCurrentCalendar = mDb.getCalendar(id: Int64(pickerDataController.data[0].key)!)
+            // select given default if exists
+            for i in 0...pickerDataController.data.count-1 {
+                if(pickerDataController.data[i].key == defaultValue) {
+                    uiPicker.selectRow(i, inComponent: 0, animated: false)
+                    pickerDataController.textField?.text = pickerDataController.data[i].value
+                    mCurrentCalendar = mDb.getCalendar(id: Int64(pickerDataController.data[i].key)!)
+                    break
+                }
+            }
+            reloadCalendar()
         }
     }
     @objc func dismissKeyboard() {
@@ -440,7 +509,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
             let newFieldTitle = textField.text!
             // rebase custom fields
             if(textField.text != prevFieldTitle) {
-                for customer in self.mDb.getCustomers(showDeleted: false) {
+                for customer in self.mDb.getCustomers(showDeleted: false, withFiles: false) {
                     var fields = customer.getCustomFields()
                     for (index, field) in fields.enumerated() {
                         if field.mTitle == prevFieldTitle {
@@ -493,6 +562,163 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         if(title != "") {
             _ = self.mDb.insertCustomField(cf: CustomField(id: -1, title: title, type: type))
             reloadCustomFields()
+        }
+    }
+    
+    var mCurrentCalendarTextField:UITextField? = nil
+    var mCurrentCalendarSliderRed:UISlider? = nil
+    var mCurrentCalendarSliderGreen:UISlider? = nil
+    var mCurrentCalendarSliderBlue:UISlider? = nil
+    var mCurrentCalendarColorPreview:UIView? = nil
+    func createCalendarAlert() -> UIAlertController {
+        let vc = UIViewController()
+        vc.preferredContentSize = CGSize(width: 250, height: 200)
+        mCurrentCalendarTextField = UITextField()
+        mCurrentCalendarTextField!.borderStyle = .roundedRect
+        mCurrentCalendarTextField!.delegate = self
+        mCurrentCalendarTextField!.becomeFirstResponder()
+        if #available(iOS 11.0, *) {
+            mCurrentCalendarTextField!.smartInsertDeleteType = .no
+        }
+        
+        let stackViewRed = UIStackView()
+        stackViewRed.spacing = 5
+        stackViewRed.axis = .horizontal
+        let labelRed = UILabel()
+        labelRed.text = NSLocalizedString("red", comment: "")
+        stackViewRed.addArrangedSubview(labelRed)
+        mCurrentCalendarSliderRed = UISlider()
+        mCurrentCalendarSliderRed!.maximumValue = 255
+        mCurrentCalendarSliderRed!.value = 200
+        mCurrentCalendarSliderRed!.addTarget(self, action: #selector(refreshCalendarColorPreview), for: .valueChanged)
+        stackViewRed.addArrangedSubview(mCurrentCalendarSliderRed!)
+        
+        let stackViewGreen = UIStackView()
+        stackViewGreen.spacing = 5
+        stackViewGreen.axis = .horizontal
+        let labelGreen = UILabel()
+        labelGreen.text = NSLocalizedString("green", comment: "")
+        stackViewGreen.addArrangedSubview(labelGreen)
+        mCurrentCalendarSliderGreen = UISlider()
+        mCurrentCalendarSliderGreen!.maximumValue = 255
+        mCurrentCalendarSliderGreen!.value = 200
+        mCurrentCalendarSliderGreen!.addTarget(self, action: #selector(refreshCalendarColorPreview), for: .valueChanged)
+        stackViewGreen.addArrangedSubview(mCurrentCalendarSliderGreen!)
+        
+        let stackViewBlue = UIStackView()
+        stackViewBlue.spacing = 5
+        stackViewBlue.axis = .horizontal
+        let labelBlue = UILabel()
+        labelBlue.text = NSLocalizedString("blue", comment: "")
+        stackViewBlue.addArrangedSubview(labelBlue)
+        mCurrentCalendarSliderBlue = UISlider()
+        mCurrentCalendarSliderBlue!.maximumValue = 255
+        mCurrentCalendarSliderBlue!.value = 200
+        mCurrentCalendarSliderBlue!.addTarget(self, action: #selector(refreshCalendarColorPreview), for: .valueChanged)
+        stackViewBlue.addArrangedSubview(mCurrentCalendarSliderBlue!)
+        
+        let stackViewColorsInner = UIStackView()
+        stackViewColorsInner.axis = .vertical
+        stackViewColorsInner.addArrangedSubview(stackViewRed)
+        stackViewColorsInner.addArrangedSubview(stackViewGreen)
+        stackViewColorsInner.addArrangedSubview(stackViewBlue)
+        
+        mCurrentCalendarColorPreview = UIView(frame: CGRect(x: 0, y: 0, width: 1, height: 10))
+        mCurrentCalendarColorPreview!.backgroundColor = UIColor.blue
+        NSLayoutConstraint.activate([
+            mCurrentCalendarColorPreview!.widthAnchor.constraint(equalToConstant: 30),
+            mCurrentCalendarSliderRed!.widthAnchor.constraint(equalTo: mCurrentCalendarSliderGreen!.widthAnchor),
+            mCurrentCalendarSliderGreen!.widthAnchor.constraint(equalTo: mCurrentCalendarSliderBlue!.widthAnchor)
+        ])
+        
+        let stackViewColorsOuter = UIStackView()
+        stackViewColorsOuter.axis = .horizontal
+        stackViewColorsOuter.distribution = .fill
+        stackViewColorsOuter.addArrangedSubview(stackViewColorsInner)
+        stackViewColorsOuter.addArrangedSubview(mCurrentCalendarColorPreview!)
+        
+        let stackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 250, height: 200))
+        stackView.axis = .vertical
+        stackView.addArrangedSubview(mCurrentCalendarTextField!)
+        stackView.addArrangedSubview(stackViewColorsOuter)
+        
+        vc.view.addSubview(stackView)
+        let alert = UIAlertController(title: NSLocalizedString("new_calendar", comment: ""), message: nil, preferredStyle: UIAlertController.Style.alert)
+        alert.setValue(vc, forKey: "contentViewController")
+        return alert
+    }
+    @objc func refreshCalendarColorPreview() {
+           mCurrentCalendarColorPreview?.backgroundColor = UIColor(
+               red: CGFloat(self.mCurrentCalendarSliderRed!.value / 255),
+               green: CGFloat(self.mCurrentCalendarSliderGreen!.value / 255),
+               blue: CGFloat(self.mCurrentCalendarSliderBlue!.value / 255),
+               alpha: 1
+           )
+    }
+    @IBAction func onClickAddCalendar(_ sender: UIButton) {
+        if(!mDefaults.bool(forKey: "unlocked-cl")) {
+            purchaseDialog()
+            return
+        }
+        
+        let alert = createCalendarAlert()
+        alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { (_) in
+            if(self.mCurrentCalendarTextField!.text == nil || self.mCurrentCalendarTextField!.text == "") {
+                return
+            }
+            let c = CustomerCalendar()
+            c.mId = CustomerCalendar.generateID()
+            c.mTitle = self.mCurrentCalendarTextField!.text!
+            c.mColor = UIColor(
+                red: CGFloat(self.mCurrentCalendarSliderRed!.value / 255),
+                green: CGFloat(self.mCurrentCalendarSliderGreen!.value / 255),
+                blue: CGFloat(self.mCurrentCalendarSliderBlue!.value / 255),
+                alpha: 1
+            ).toHexString()
+            _ = self.mDb.insertCalendar(c: c)
+            self.reloadCalendars()
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil))
+        self.present(alert, animated: true)
+        refreshCalendarColorPreview()
+    }
+    @IBAction func onClickEditCalendar(_ sender: UIButton) {
+        let alert = createCalendarAlert()
+        mCurrentCalendarTextField?.text = mCurrentCalendar?.mTitle
+        mCurrentCalendarSliderRed?.value = Float(UIColor(hex: mCurrentCalendar!.mColor).red()) * 255
+        mCurrentCalendarSliderGreen?.value = Float(UIColor(hex: mCurrentCalendar!.mColor).green()) * 255
+        mCurrentCalendarSliderBlue?.value = Float(UIColor(hex: mCurrentCalendar!.mColor).blue()) * 255
+        alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { (_) in
+            if(self.mCurrentCalendarTextField!.text == nil || self.mCurrentCalendarTextField!.text == "") {
+                return
+            }
+            self.mCurrentCalendar!.mTitle = self.mCurrentCalendarTextField!.text!
+            self.mCurrentCalendar!.mColor = UIColor(
+                red: CGFloat(self.mCurrentCalendarSliderRed!.value / 255),
+                green: CGFloat(self.mCurrentCalendarSliderGreen!.value / 255),
+                blue: CGFloat(self.mCurrentCalendarSliderBlue!.value / 255),
+                alpha: 1
+            ).toHexString()
+            self.mCurrentCalendar!.mLastModified = Date()
+            _ = self.mDb.updateCalendar(c: self.mCurrentCalendar!)
+            self.reloadCalendars()
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil))
+        self.present(alert, animated: true)
+        refreshCalendarColorPreview()
+    }
+    @IBAction func onClickRemoveCalendar(_ sender: UIButton) {
+        if(mCurrentCalendar != nil) {
+            let alert = UIAlertController(
+                title: NSLocalizedString("are_you_sure", comment: ""),
+                message: "",
+                preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("delete", comment: ""), style: .destructive, handler: { (_) in
+                self.mDb.removeCalendar(id: self.mCurrentCalendar!.mId)
+                self.reloadCalendars()
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     

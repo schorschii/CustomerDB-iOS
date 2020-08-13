@@ -93,7 +93,7 @@
 "A3t-Uh-2z5.title" = "vista dettagliata";
 
 /* Class = "UILabel"; text = "Newsletter / Consent for data processing"; ObjectID = "Ahn-xK-rIG"; */
-"Ahn-xK-rIG.text" = "Newsletter / Consenso al trattamento dei dati";
+"Ahn-xK-rIG.text" = "Newsletter";
 
 /* Class = "UILabel"; text = "Allows you to set your own title bar color in the settings."; ObjectID = "BAP-dq-wyr"; */
 "BAP-dq-wyr.text" = "Consente di impostare il colore della barra del titolo nelle impostazioni.";
@@ -156,7 +156,7 @@
 "HEu-CO-Bv1.normalTitle" = "sottoscrivi";
 
 /* Class = "UIButton"; normalTitle = "Add Custom Field"; ObjectID = "IFE-G3-j1o"; */
-"IFE-G3-j1o.normalTitle" = "Aggiungi campo personalizzato";
+"IFE-G3-j1o.normalTitle" = "Nuovo";
 
 /* Class = "UILabel"; text = "Original Value"; ObjectID = "IYg-5w-lxz"; */
 "IYg-5w-lxz.text" = "Valore originale";
@@ -300,7 +300,7 @@
 "YCt-ws-Aiq.text" = "Nome";
 
 /* Class = "UIButton"; normalTitle = "Remove Custom Field"; ObjectID = "YSX-xF-87p"; */
-"YSX-xF-87p.normalTitle" = "Rimuovi campo personalizzato";
+"YSX-xF-87p.normalTitle" = "Rimuovere";
 
 /* Class = "UILabel"; text = "Show Note Field"; ObjectID = "Yfc-TF-ht4"; */
 "Yfc-TF-ht4.text" = "Mostra campo note";
@@ -360,7 +360,7 @@
 "doB-WO-m5c.text" = "Opzioni di progettazione";
 
 /* Class = "UIButton"; normalTitle = "Edit Custom Field"; ObjectID = "eKc-om-3g7"; */
-"eKc-om-3g7.normalTitle" = "Modifica campo personalizzato";
+"eKc-om-3g7.normalTitle" = "Modificare";
 
 /* Class = "UILabel"; text = "Simple Customer Management"; ObjectID = "eOk-yi-0EL"; */
 "eOk-yi-0EL.text" = "Semplice gestione dei clienti";
@@ -568,7 +568,7 @@
 "yvi-lu-Hmc.text" = "Con la funzione di sincronizzazione è possibile eseguire il backup dei dati dei clienti su un server di database e sincronizzarli su più dispositivi. Hai le seguenti opzioni per usare questa funzione.";
 
 /* Class = "UILabel"; text = "No / No"; ObjectID = "z6Z-Sh-bgI"; */
-"z6Z-Sh-bgI.text" = "No / No";
+"z6Z-Sh-bgI.text" = "No";
 
 /* Class = "UILabel"; text = "Show Birthday Field"; ObjectID = "zKb-do-QVF"; */
 "zKb-do-QVF.text" = "Mostra campo compleanno";
@@ -578,3 +578,21 @@
 
 /* Class = "UITextField"; placeholder = "Phone Home"; ObjectID = "zzj-fc-m6j"; */
 "zzj-fc-m6j.placeholder" = "Telefono casa";
+
+"3B8-Gq-pus.text" = "File";
+"5QI-kN-hwV.text" = "File";
+"QUK-XO-amn.normalTitle" = "Aggiungi file";
+
+"7EC-pT-lyN.text" = "File";
+"KoK-NQ-8nE.text" = "Allegare file ai record dei clienti (massimo 5 file e 1 MB per file).";
+"Xk1-bC-0w5.text" = "Calendario";
+"8sP-Eh-96i.text" = "Sblocca le funzioni del calendario.";
+
+"TTf-X6-kdL.text" = "Mostra file";
+
+"MQh-mS-8vU.title" = "Calendario";
+
+"xQZ-GW-AaP.text" = "Calendario";
+"tMu-Oi-YW5.normalTitle" = "Nuovo";
+"Wgy-0k-4q3.normalTitle" = "Modificare";
+"063-8X-vRe.normalTitle" = "Rimuovere";

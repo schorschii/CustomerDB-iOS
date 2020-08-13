@@ -28,8 +28,10 @@
 "vouchers" = "Vales";
 "sync_not_configured" = "Sincronización no configurada";
 "please_setup_sync" = "Configura la sincronización en la configuración.";
+"import_ics" = "Importar archivo ICS";
 "import_vcf" = "Importar archivo VCF";
 "import_csv" = "Importar archivo CSV";
+"export_ics" = "Exportar archivo ICS";
 "export_vcf" = "Exportar archivo VCF";
 "export_csv" = "Exportar archivo CSV";
 "import_failed" = "Importación fallida";
@@ -81,6 +83,10 @@
 "field_drop_down" = "Desplegable";
 "field_date" = "Fecha";
 "logo_deleted" = "Imagen eliminada";
+"new_calendar" = "Nuevo calendario";
+"red" = "Rojo";
+"green" = "Verde";
+"blue" = "Azul";
 
 // Details
 "first_name" = "Nombre de pila";
@@ -110,6 +116,7 @@
 "send_message" = "Enviar mensaje";
 "copy_to_clipboard" = "Copiar al portapapeles";
 "open_map" = "Mapa abierto";
+"delete_appointment" = "Eliminar cita";
 
 // Edit
 "name_empty" = "Nombre vacía";
@@ -120,6 +127,11 @@
 "please_accept_data_processing" = "Por favor, acepte el procesamiento de datos.";
 "new_customer" = "Nueva cliente";
 "new_voucher" = "Vale nuevo";
+"new_appointment" = "Nueva cita";
+"remove" = "Eliminar";
+"end_date_before_start_date" = "¡La fecha de finalización es anterior a la fecha de inicio!";
+"appointment_too_short" = "¡Cita demasiado corta! Cree una cita con una duración de al menos 5 minutos.";
+"no_calendar_selected" = "¡Ningún calendario seleccionado! Crea un calendario en la configuración.";
 
 // Sync
 "reset_password" = "Restablecer la contraseña";

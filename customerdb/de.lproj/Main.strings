@@ -17,9 +17,10 @@
 "Gx4-Wz-Key.text" = "Adresse";
 "6zy-nj-mEv.text" = "Gruppe";
 "iXf-Ng-c9q.text" = "Notizen";
-"Ahn-xK-rIG.text" = "Newsletter / Einwilligung zur Datenverarbeitung hinterlegt";
+"Ahn-xK-rIG.text" = "Newsletter";
 "CKI-OU-qcg.text" = "Geburtstag";
 "A3t-Uh-2z5.title" = "Detailansicht";
+"3B8-Gq-pus.text" = "Dateien";
 "q36-Mq-pKm.text" = "Zuletzt geändert";
 "DDM-08-W7Z.text" = "0000-00-00 00:00:00";
 
@@ -44,6 +45,8 @@
 "J5z-eY-YWf.normalTitle" = "Entfernen";
 "rCh-Ts-eBc.text" = "Zustimmung zur Datenverarbeitung";
 "Ogb-Yu-THK.text" = "Ich stimme der Datenverarbeitung bis auf Widerruf zu";
+"5QI-kN-hwV.text" = "Dateien";
+"QUK-XO-amn.normalTitle" = "Datei hinzufügen";
 
 "Ofz-AY-gU2.title" = "Kunden bearbeiten";
 "G2H-g6-ik8.text" = "Person";
@@ -52,7 +55,7 @@
 
 "rL6-MY-BWb.title" = "Kunden";
 "Rde-ds-wAi.title" = "Gutscheine";
-"zpm-8s-jLT.title" = "Kalender";
+"MQh-mS-8vU.title" = "Kalender";
 
 "7l4-fD-TXZ.title" = "Detailansicht";
 
@@ -96,6 +99,10 @@
 "BAP-dq-wyr.text" = "Ermöglicht es eine eigene Akzentfarbe in den Einstellungen festzulegen.";
 "3yn-nk-BSE.text" = "Benutzerdefinierte Felder";
 "N09-a4-S8u.text" = "Ermöglicht es beliebig viele eigene Felder zu Kundendatensätzen hinzuzufügen. Sie können auch Auswahllisten erstellen und die Kundenliste nach benutzerdefinierten Feldern zu sortieren.";
+"7EC-pT-lyN.text" = "Dateien";
+"KoK-NQ-8nE.text" = "Fügen Sie Dateien an Kundendatensätze an (maximal 5 Dateien und 1MB pro Datei).";
+"Xk1-bC-0w5.text" = "Kalender";
+"8sP-Eh-96i.text" = "Schaltet die Kalenderfunktionen frei.";
 "In6-6A-pDm.text" = "Standardmäßig werden die Daten nur lokal auf diesem Gerät gespeichert. Bitte sichern Sie Ihre Datenbank regelmäßig, um die Daten im Falle eines Defekts oder Verlusts des mobilen Endgerätes nicht zu verlieren.\n\nKopieren Sie dazu einfach regelmäßig die Datenbankdateien von Ihrem iOS-Gerät auf Ihren Computer oder ein anderes externes Speichermedium. Sie finden die Dateien im Ordner 'Kundendatenbank'.\n\nNoch einfacher geht das Backup, wenn Sie die Synchronisierungsfunktion verwenden. Hierbei werden die Daten auf Knopfdruck mit einem MySQL-Server abgegelichen. Weitere Informationen zu dieser Backupmethode finden Sie in den Einstellungen.";
 "3TB-PT-Svs.text" = "Geführter Zugriff (Kiosk-Modus)";
 "VY3-ob-Wjk.text" = "Sie können den geführten Zugriff verwenden um zu verhindern dass andere Apps verwendet werden sowie dass die App gelöscht wird. Bitte öffnen Sie die iOS-Einstellungen 'Erleichterte Bedienung' - 'Geführter Zugriff' um die Funktion zu aktivieren.";
@@ -136,12 +143,17 @@
 "DFy-R6-0nl.text" = "Gruppen-Feld anzeigen";
 "Yfc-TF-ht4.text" = "Notiz-Feld anzeigen";
 "w8H-Wu-mqJ.text" = "Newsletter-Feld anzeigen";
+"TTf-X6-kdL.text" = "Dateien anzeigen";
 "zKb-do-QVF.text" = "Geburtstag-Feld anzeigen";
 "h6L-Z8-ttl.text" = "Zeige Checkbox zur Zustimmung zur Datenverarbeitung im Nur-Eingabe-Modus";
 "E4N-0z-FUj.text" = "Benutzerdefinierte Felder";
-"IFE-G3-j1o.normalTitle" = "Neues benutzerdefiniertes Feld";
-"eKc-om-3g7.normalTitle" = "Benutzerdefiniertes Feld bearbeiten";
-"YSX-xF-87p.normalTitle" = "Benutzerdefiniertes Feld entfernen";
+"IFE-G3-j1o.normalTitle" = "Neu";
+"eKc-om-3g7.normalTitle" = "Bearbeiten";
+"YSX-xF-87p.normalTitle" = "Entfernen";
+"xQZ-GW-AaP.text" = "Kalender";
+"tMu-Oi-YW5.normalTitle" = "Neu";
+"Wgy-0k-4q3.normalTitle" = "Bearbeiten";
+"063-8X-vRe.normalTitle" = "Entfernen";
 
 "dMa-s6-QnY.title" = "Synchronisierung";
 "Cqd-eO-HmS.text" = "Möglichkeiten der Synchronisierungsfunktion";

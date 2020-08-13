@@ -28,8 +28,10 @@
 "vouchers" = "Ваучеры";
 "sync_not_configured" = "Синхронизация не настроена";
 "please_setup_sync" = "Пожалуйста, настройте синхронизацию в настройках.";
+"import_ics" = "Импортировать файл ICS";
 "import_vcf" = "Импортировать файл VCF";
 "import_csv" = "Импортировать файл CSV";
+"export_ics" = "Экспорт файла ICS";
 "export_vcf" = "Экспорт файла VCF";
 "export_csv" = "Экспорт файла CSV";
 "import_failed" = "Ошибка импорта";
@@ -81,6 +83,10 @@
 "field_drop_down" = "Падать";
 "field_date" = "Свидание";
 "logo_deleted" = "Изображение удалено.";
+"new_calendar" = "Новый календарь";
+"red" = "Красный";
+"green" = "Зеленый";
+"blue" = "Синий";
 
 // Details
 "first_name" = "Имя";
@@ -110,6 +116,7 @@
 "send_message" = "Отправить сообщение";
 "copy_to_clipboard" = "Скопировать в буфер обмена";
 "open_map" = "Открытая карта";
+"delete_appointment" = "Удалить встречу";
 
 // Edit
 "name_empty" = "Имя пустое";
@@ -120,6 +127,11 @@
 "please_accept_data_processing" = "Пожалуйста, согласитесь на обработку данных.";
 "new_customer" = "Новый покупатель";
 "new_voucher" = "Новый ваучер";
+"new_appointment" = "Новая встреча";
+"remove" = "удалять";
+"end_date_before_start_date" = "Дата окончания раньше даты начала!";
+"appointment_too_short" = "Назначение слишком короткое! Пожалуйста, назначьте встречу продолжительностью не менее 5 минут.";
+"no_calendar_selected" = "Календарь не выбран! Пожалуйста, создайте календарь в настройках.";
 
 // Sync
 "reset_password" = "Сброс пароля";

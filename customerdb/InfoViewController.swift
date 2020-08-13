@@ -21,12 +21,16 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
     private static let inappInputOnlyModeId = "systems.sieber.customerdb.iom"
     private static let inappDesignOptionsId = "systems.sieber.customerdb.do"
     private static let inappCustomFieldsId = "systems.sieber.customerdb.cf"
+    private static let inappFilesId = "systems.sieber.customerdb.fs"
+    private static let inappCalendarId = "systems.sieber.customerdb.cl"
     private var inappCloudAccessLicenseProduct: SKProduct?
     private var inappCommercialUsageProduct: SKProduct?
     private var inappCustomFieldsProduct: SKProduct?
     private var inappInputOnlyModeProduct: SKProduct?
     private var inappDesignOptionsProduct: SKProduct?
     private var inappLargeCompanyProduct: SKProduct?
+    private var inappFilesProduct: SKProduct?
+    private var inappCalendarProduct: SKProduct?
     
     @IBOutlet weak var imageLogo: UIImageView!
     @IBOutlet weak var buttonBuyCloudAccessLicense: UIButton!
@@ -35,6 +39,8 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
     @IBOutlet weak var buttonBuyInputOnlyMode: UIButton!
     @IBOutlet weak var buttonBuyDesignOptions: UIButton!
     @IBOutlet weak var buttonBuyCustomFields: UIButton!
+    @IBOutlet weak var buttonBuyFiles: UIButton!
+    @IBOutlet weak var buttonBuyCalendar: UIButton!
     @IBOutlet weak var buttonRestore: UIButton!
     
     override func viewDidLoad() {
@@ -125,6 +131,8 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
         let unlockedInputOnlyMode = UserDefaults.standard.bool(forKey: "unlocked-iom")
         let unlockedDesignOptions = UserDefaults.standard.bool(forKey: "unlocked-do")
         let unlockedCustomFields = UserDefaults.standard.bool(forKey: "unlocked-cf")
+        let unlockedFiles = UserDefaults.standard.bool(forKey: "unlocked-fs")
+        let unlockedCalendar = UserDefaults.standard.bool(forKey: "unlocked-cl")
         if(unlockedCommercialUsage) {
             buttonBuyCommercialUsage.setTitle(NSLocalizedString("purchased", comment: ""), for: UIControl.State.normal)
         } else {
@@ -157,6 +165,20 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
             buttonBuyCustomFields.setTitle(NSLocalizedString("purchased", comment: ""), for: UIControl.State.normal)
         } else {
             let IAPrequest = SKProductsRequest(productIdentifiers: Set([InfoViewController.inappCustomFieldsId]))
+            IAPrequest.delegate = self
+            IAPrequest.start()
+        }
+        if(unlockedFiles) {
+            buttonBuyFiles.setTitle(NSLocalizedString("purchased", comment: ""), for: UIControl.State.normal)
+        } else {
+            let IAPrequest = SKProductsRequest(productIdentifiers: Set([InfoViewController.inappFilesId]))
+            IAPrequest.delegate = self
+            IAPrequest.start()
+        }
+        if(unlockedCalendar) {
+            buttonBuyCalendar.setTitle(NSLocalizedString("purchased", comment: ""), for: UIControl.State.normal)
+        } else {
+            let IAPrequest = SKProductsRequest(productIdentifiers: Set([InfoViewController.inappCalendarId]))
             IAPrequest.delegate = self
             IAPrequest.start()
         }
@@ -240,6 +262,30 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
                 }
                 inappCustomFieldsProduct = iap
             }
+            else if(iap.productIdentifier == InfoViewController.inappFilesId) {
+                DispatchQueue.main.async {
+                    self.buttonBuyFiles.titleLabel?.textAlignment = .center
+                    self.buttonBuyFiles.setTitle(
+                        numberFormatter.string(from: iap.price)! + "\n" + NSLocalizedString("buy", comment: ""),
+                        for: UIControl.State.normal
+                    )
+                    self.buttonBuyFiles.isEnabled = true
+                    self.buttonRestore.isEnabled = true
+                }
+                inappFilesProduct = iap
+            }
+            else if(iap.productIdentifier == InfoViewController.inappCalendarId) {
+                DispatchQueue.main.async {
+                    self.buttonBuyCalendar.titleLabel?.textAlignment = .center
+                    self.buttonBuyCalendar.setTitle(
+                        numberFormatter.string(from: iap.price)! + "\n" + NSLocalizedString("buy", comment: ""),
+                        for: UIControl.State.normal
+                    )
+                    self.buttonBuyCalendar.isEnabled = true
+                    self.buttonRestore.isEnabled = true
+                }
+                inappCalendarProduct = iap
+            }
         }
     }
     func request(_ request: SKRequest, didFailWithError error: Error) {
@@ -275,27 +321,35 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
             case InfoViewController.inappCloudAccessLicenseId:
                 UserDefaults.standard.set(true, forKey: "unlocked-cal")
                 handleSuccess()
-                break;
+                break
             case InfoViewController.inappCommercialUsageId:
                 UserDefaults.standard.set(true, forKey: "unlocked-cu")
                 handleSuccess()
-                break;
+                break
             case InfoViewController.inappLargeCompanyId:
                 UserDefaults.standard.set(true, forKey: "unlocked-lc")
                 handleSuccess()
-                break;
+                break
             case InfoViewController.inappInputOnlyModeId:
                 UserDefaults.standard.set(true, forKey: "unlocked-iom")
                 handleSuccess()
-                break;
+                break
             case InfoViewController.inappDesignOptionsId:
                 UserDefaults.standard.set(true, forKey: "unlocked-do")
                 handleSuccess()
-                break;
+                break
             case InfoViewController.inappCustomFieldsId:
                 UserDefaults.standard.set(true, forKey: "unlocked-cf")
                 handleSuccess()
-                break;
+                break
+            case InfoViewController.inappFilesId:
+                UserDefaults.standard.set(true, forKey: "unlocked-fs")
+                handleSuccess()
+                break
+            case InfoViewController.inappCalendarId:
+                UserDefaults.standard.set(true, forKey: "unlocked-cl")
+                handleSuccess()
+                break
             default:
                 print("UNKNOWN: "+productId)
         }
@@ -314,6 +368,8 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
                 self.unlock(productId: InfoViewController.inappInputOnlyModeId)
                 self.unlock(productId: InfoViewController.inappDesignOptionsId)
                 self.unlock(productId: InfoViewController.inappCustomFieldsId)
+                self.unlock(productId: InfoViewController.inappFilesId)
+                self.unlock(productId: InfoViewController.inappCalendarId)
             }
         }))
         self.present(alert, animated: true, completion: nil)
@@ -358,6 +414,20 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
             let payment = SKPayment(product: inappCustomFieldsProduct!)
             SKPaymentQueue.default().add(payment)
             buttonBuyCustomFields.isEnabled = false
+        }
+    }
+    @IBAction func onClickBuyFiles(_ sender: UIButton) {
+        if(inappFilesProduct != nil) {
+            let payment = SKPayment(product: inappFilesProduct!)
+            SKPaymentQueue.default().add(payment)
+            buttonBuyFiles.isEnabled = false
+        }
+    }
+    @IBAction func onClickBuyCalendar(_ sender: UIButton) {
+        if(inappCalendarProduct != nil) {
+            let payment = SKPayment(product: inappCalendarProduct!)
+            SKPaymentQueue.default().add(payment)
+            buttonBuyCalendar.isEnabled = false
         }
     }
     @IBAction func onClickRestore(_ sender: UIButton) {
