@@ -166,8 +166,12 @@ class Customer {
         }
         mFiles?.append(file)
     }
+    func renameFile(index:Int, newName: String) {
+        if(mFiles == nil || newName == "") { return }
+        mFiles![index].mName = newName
+    }
     func removeFile(index:Int) {
-        if(mFiles == nil) { mFiles = [] }
+        if(mFiles == nil) { return }
         mFiles?.remove(at: index)
     }
     

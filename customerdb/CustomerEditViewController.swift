@@ -575,9 +575,11 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
     }
     
     func insertFile(file:CustomerFile, index:Int) {
-        let buttonFile = FileButton(file: file)
-
-        let buttonRemove = FileIndexButton(index: index)
+        let buttonFile = FileIndexButton(file: file, index: index)
+        buttonFile.setTitle(file.mName, for: .normal)
+        buttonFile.addTarget(self, action: #selector(onClickFile), for: .touchUpInside)
+        
+        let buttonRemove = FileIndexButton(file: file, index: index)
         buttonRemove.setTitle(NSLocalizedString("remove", comment: ""), for: .normal)
         buttonRemove.addTarget(self, action: #selector(onClickFileRemove), for: .touchUpInside)
         buttonRemove.setContentHuggingPriority(.required, for: .horizontal)
@@ -595,10 +597,32 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
         
         stackViewFiles.addArrangedSubview(stackView)
     }
-    
+    @objc func onClickFile(sender: FileIndexButton!) {
+        inputBox(title: NSLocalizedString("file_name", comment: ""), defaultText: sender.mFile!.mName, callback: { newText in
+            if(newText != nil) {
+                self.mCurrentCustomer?.renameFile(index: sender.mIndex, newName: newText!)
+                self.refreshFiles()
+            }
+        })
+    }
     @objc func onClickFileRemove(sender: FileIndexButton!) {
         mCurrentCustomer?.removeFile(index: sender.mIndex)
         refreshFiles()
+    }
+    
+    func inputBox(title: String, defaultText: String, callback: @escaping (String?)->()) {
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        alert.addTextField(configurationHandler: { (textField) -> Void in
+            textField.text = defaultText
+        })
+        alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { [weak alert] (action) -> Void in
+            let textField = (alert?.textFields![0])! as UITextField
+            callback(textField.text)
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: { (action) -> Void in
+            callback(nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     @objc func handleCustomDatePicker(sender: UITextFieldDatePicker) {
@@ -636,13 +660,20 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
 
 class FileIndexButton: UIButton {
     var mIndex:Int = -1
-    required init(index:Int) {
+    var mFile:CustomerFile? = nil
+    required init(file:CustomerFile, index:Int) {
         super.init(frame: .zero)
+        mFile = file
         mIndex = index
         if #available(iOS 13.0, *) {
             setTitleColor(.link, for: .normal)
         } else {
             setTitleColor(UIColor.init(hex: "#0f7c9d"), for: .normal)
+        }
+        if #available(iOS 11.0, *) {
+            contentHorizontalAlignment = .leading
+        } else {
+            contentHorizontalAlignment = .left
         }
     }
     required init?(coder aDecoder: NSCoder) {
