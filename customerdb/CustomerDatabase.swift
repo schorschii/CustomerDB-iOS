@@ -189,7 +189,6 @@ class CustomerDatabase {
         return calendar
     }
     func updateCalendar(c: CustomerCalendar) -> Bool {
-        beginTransaction()
         var stmt:OpaquePointer?
         if sqlite3_prepare(self.db, "UPDATE calendar SET title = ?, color = ?, notes = ?, last_modified = ? WHERE id = ?", -1, &stmt, nil) == SQLITE_OK {
             let title = c.mTitle as NSString
@@ -205,11 +204,9 @@ class CustomerDatabase {
                 sqlite3_finalize(stmt)
             }
         }
-        commitTransaction()
         return true
     }
     func insertCalendar(c: CustomerCalendar) -> Bool {
-        beginTransaction()
         var stmt:OpaquePointer?
         if sqlite3_prepare(self.db, "INSERT INTO calendar (id, title, color, notes, last_modified, removed) VALUES (?,?,?,?,?,?)", -1, &stmt, nil) == SQLITE_OK {
             let title = c.mTitle as NSString
@@ -226,10 +223,10 @@ class CustomerDatabase {
                 sqlite3_finalize(stmt)
             }
         }
-        commitTransaction()
         return true
     }
     func removeCalendar(id: Int64) {
+        beginTransaction()
         let lastModified = CustomerDatabase.dateToString(date: Date()) as NSString
         var stmt:OpaquePointer?
         if sqlite3_prepare(self.db, "UPDATE calendar SET title = '', color = '', notes = '', last_modified = ?, removed = 1 WHERE id = ?", -1, &stmt, nil) == SQLITE_OK {
@@ -247,6 +244,7 @@ class CustomerDatabase {
                 sqlite3_finalize(stmt)
             }
         }
+        commitTransaction()
     }
     func deleteAllCalendars() {
         var stmt:OpaquePointer?
@@ -350,7 +348,6 @@ class CustomerDatabase {
         return appointments
     }
     func updateAppointment(a: CustomerAppointment) -> Bool {
-        beginTransaction()
         var stmt:OpaquePointer?
         if sqlite3_prepare(self.db, "UPDATE appointment SET calendar_id = ?, title = ?, notes = ?, time_start = ?, time_end = ?, fullday = ?, customer = ?, location = ?, last_modified = ? WHERE id = ?", -1, &stmt, nil) == SQLITE_OK {
             let title = a.mTitle as NSString
@@ -382,11 +379,9 @@ class CustomerDatabase {
                 sqlite3_finalize(stmt)
             }
         }
-        commitTransaction()
         return true
     }
     func insertAppointment(a: CustomerAppointment) -> Bool {
-        beginTransaction()
         var stmt:OpaquePointer?
         if sqlite3_prepare(self.db, "INSERT INTO appointment (id, calendar_id, title, notes, time_start, time_end, fullday, customer, location, last_modified, removed) VALUES (?,?,?,?,?,?,?,?,?,?,?)", -1, &stmt, nil) == SQLITE_OK {
             let title = a.mTitle as NSString
@@ -419,7 +414,6 @@ class CustomerDatabase {
                 sqlite3_finalize(stmt)
             }
         }
-        commitTransaction()
         return true
     }
     func removeAppointment(id: Int64) {
@@ -740,6 +734,7 @@ class CustomerDatabase {
         commitTransaction()
     }
     func deleteAllCustomers() {
+        beginTransaction()
         var stmt:OpaquePointer?
         if sqlite3_prepare(self.db, "DELETE FROM customer WHERE 1=1", -1, &stmt, nil) == SQLITE_OK {
             if sqlite3_step(stmt) == SQLITE_DONE {
@@ -752,6 +747,7 @@ class CustomerDatabase {
                 sqlite3_finalize(stmt2)
             }
         }
+        commitTransaction()
     }
     
     // Custom Field Operations
@@ -896,7 +892,6 @@ class CustomerDatabase {
         return voucher
     }
     func updateVoucher(v: Voucher) -> Bool {
-        beginTransaction()
         var stmt:OpaquePointer?
         if sqlite3_prepare(self.db, "UPDATE voucher SET original_value = ?, current_value = ?, voucher_no = ?, from_customer = ?, for_customer = ?, issued = ?, valid_until = ?, redeemed = ?, notes = ?, last_modified = ? WHERE id = ?", -1, &stmt, nil) == SQLITE_OK {
             let voucherNo = v.mVoucherNo as NSString
@@ -930,14 +925,12 @@ class CustomerDatabase {
                 sqlite3_finalize(stmt)
             }
         }
-        commitTransaction()
         return true
     }
     func insertVoucher(v: Voucher) -> Bool {
         if(v.mId == -1) {
             v.mId = Voucher.generateID()
         }
-        beginTransaction()
         var stmt:OpaquePointer?
         if sqlite3_prepare(self.db, "INSERT INTO voucher (id, original_value, current_value, voucher_no, from_customer, for_customer, issued, valid_until, redeemed, notes, last_modified, removed) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", -1, &stmt, nil) == SQLITE_OK {
             let voucherNo = v.mVoucherNo as NSString
@@ -972,7 +965,6 @@ class CustomerDatabase {
                 sqlite3_finalize(stmt)
             }
         }
-        commitTransaction()
         return true
     }
     func removeVoucher(id: Int64) {
