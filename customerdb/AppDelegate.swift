@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let defaults = UserDefaults.standard
         defaults.register(defaults: [
             "unsynced-changes" : false,
+            "show-customer-picture" : true,
             "show-phone-field" : true,
             "show-email-field" : true,
             "show-address-field" : true,

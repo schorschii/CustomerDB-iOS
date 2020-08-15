@@ -52,6 +52,9 @@ class CustomerDetailsViewController : UIViewController, MFMessageComposeViewCont
             stackViewPhoneMobile.isHidden = true
             stackViewPhoneWork.isHidden = true
         }
+        if(!UserDefaults.standard.bool(forKey: "show-customer-picture")) {
+            imageViewImage.isHidden = true
+        }
         if(!UserDefaults.standard.bool(forKey: "show-email-field")) {
             stackViewEmail.isHidden = true
         }

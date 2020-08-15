@@ -9,6 +9,7 @@ import UIKit
 class CustomerEditViewController : UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIDocumentPickerDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var stackViewImage: UIStackView!
     @IBOutlet weak var imageViewImage: UIImageView!
     @IBOutlet weak var textFieldTitle: UITextField!
     @IBOutlet weak var textFieldFirstName: UITextField!
@@ -80,6 +81,9 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
         if(UserDefaults.standard.bool(forKey: "iom") && UserDefaults.standard.bool(forKey: "show-consent-field")) {
             mIsInputOnlyModeActive = true
             stackViewConsent.isHidden = false
+        }
+        if(!UserDefaults.standard.bool(forKey: "show-customer-picture")) {
+            stackViewImage.isHidden = true
         }
         if(!UserDefaults.standard.bool(forKey: "show-phone-field")) {
             textFieldPhoneHome.isHidden = true

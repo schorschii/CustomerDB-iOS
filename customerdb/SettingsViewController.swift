@@ -15,6 +15,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
     @IBOutlet weak var textFieldSyncUsername: UITextField!
     @IBOutlet weak var textFieldSyncPassword: UITextField!
     @IBOutlet weak var switchAllowCharsInNumbers: UISwitch!
+    @IBOutlet weak var switchShowPicture: UISwitch!
     @IBOutlet weak var switchShowPhoneField: UISwitch!
     @IBOutlet weak var switchShowEmailField: UISwitch!
     @IBOutlet weak var switchShowAddressField: UISwitch!
@@ -71,6 +72,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         textFieldSyncUsername.text = mDefaults.string(forKey: "sync-username")
         textFieldSyncPassword.text = mDefaults.string(forKey: "sync-password")
         switchAllowCharsInNumbers.isOn = mDefaults.bool(forKey: "phone-allow-chars")
+        switchShowPicture.isOn = mDefaults.bool(forKey: "show-customer-picture")
         switchShowPhoneField.isOn = mDefaults.bool(forKey: "show-phone-field")
         switchShowEmailField.isOn = mDefaults.bool(forKey: "show-email-field")
         switchShowAddressField.isOn = mDefaults.bool(forKey: "show-address-field")
@@ -117,6 +119,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         mDefaults.set(textFieldSyncUsername.text!, forKey: "sync-username")
         mDefaults.set(textFieldSyncPassword.text!, forKey: "sync-password")
         mDefaults.set(switchAllowCharsInNumbers.isOn, forKey: "phone-allow-chars")
+        mDefaults.set(switchShowPicture.isOn, forKey: "show-customer-picture")
         mDefaults.set(switchShowPhoneField.isOn, forKey: "show-phone-field")
         mDefaults.set(switchShowEmailField.isOn, forKey: "show-email-field")
         mDefaults.set(switchShowAddressField.isOn, forKey: "show-address-field")
