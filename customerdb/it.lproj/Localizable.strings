@@ -87,6 +87,7 @@
 "red" = "Rosso";
 "green" = "Verde";
 "blue" = "Blu";
+"change_text_template" = "Cambia modello di testo";
 
 // Details
 "first_name" = "Nome di battesimo";

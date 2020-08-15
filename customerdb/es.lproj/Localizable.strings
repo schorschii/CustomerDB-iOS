@@ -87,6 +87,7 @@
 "red" = "Rojo";
 "green" = "Verde";
 "blue" = "Azul";
+"change_text_template" = "Cambiar plantilla de texto";
 
 // Details
 "first_name" = "Nombre de pila";

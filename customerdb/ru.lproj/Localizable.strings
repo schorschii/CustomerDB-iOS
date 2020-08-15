@@ -87,6 +87,7 @@
 "red" = "Красный";
 "green" = "Зеленый";
 "blue" = "Синий";
+"change_text_template" = "Изменить текстовый шаблон";
 
 // Details
 "first_name" = "Имя";

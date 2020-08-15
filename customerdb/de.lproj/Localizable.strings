@@ -87,6 +87,7 @@
 "red" = "Rot";
 "green" = "Grün";
 "blue" = "Blau";
+"change_text_template" = "Textvorlage ändern";
 
 // Details
 "first_name" = "Vorname";

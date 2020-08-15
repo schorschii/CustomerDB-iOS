@@ -316,8 +316,8 @@ class CustomerDetailsViewController : UIViewController, MFMessageComposeViewCont
                     composeVC.mailComposeDelegate = self
                     // Configure the fields of the interface.
                     composeVC.setToRecipients([self.mCurrentCustomer!.mEmail])
-                    //composeVC.setSubject("Message Subject")
-                    //composeVC.setMessageBody("Message content.", isHTML: false)
+                    composeVC.setSubject(UserDefaults.standard.string(forKey: "email-subject") ?? "")
+                    composeVC.setMessageBody(UserDefaults.standard.string(forKey: "email-template") ?? "", isHTML: false)
                     // Present the view controller modally.
                     self.present(composeVC, animated: true, completion: nil)
                 } else {

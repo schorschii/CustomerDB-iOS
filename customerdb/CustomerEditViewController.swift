@@ -115,6 +115,12 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
             stackViewFilesContainer.isHidden = true
         }
         
+        // load default values
+        textFieldTitle.text = UserDefaults.standard.string(forKey: "default-customer-title") ?? ""
+        textFieldCity.text = UserDefaults.standard.string(forKey: "default-customer-city") ?? ""
+        textFieldCountry.text = UserDefaults.standard.string(forKey: "default-customer-country") ?? ""
+        textFieldGroup.text = UserDefaults.standard.string(forKey: "default-customer-group") ?? ""
+        
         if #available(iOS 12.0, *) {
             if self.traitCollection.userInterfaceStyle == .dark {
                 mBorderColor = CustomerEditViewController.BORDER_COLOR_DARK
@@ -208,32 +214,31 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
             mIsNewCustomer = true
         } else {
             mIsNewCustomer = false
-        }
-        
-        textFieldTitle.text = mCurrentCustomer?.mTitle
-        textFieldFirstName.text = mCurrentCustomer?.mFirstName
-        textFieldLastName.text = mCurrentCustomer?.mLastName
-        textFieldPhoneHome.text = mCurrentCustomer?.mPhoneHome
-        textFieldPhoneMobile.text = mCurrentCustomer?.mPhoneMobile
-        textFieldPhoneWork.text = mCurrentCustomer?.mPhoneWork
-        textFieldEmail.text = mCurrentCustomer?.mEmail
-        textViewStreet.text = mCurrentCustomer?.mStreet
-        textFieldZipcode.text = mCurrentCustomer?.mZipcode
-        textFieldCity.text = mCurrentCustomer?.mCity
-        textFieldCountry.text = mCurrentCustomer?.mCountry
-        textFieldGroup.text = mCurrentCustomer?.mGroup
-        textViewNotes.text = mCurrentCustomer?.mNotes
-        if(mCurrentCustomer != nil) {
-            switchNewsletter.isOn = mCurrentCustomer!.mNewsletter
-        }
-        mCurrentCustomerBirthday = mCurrentCustomer?.mBirthday
-        if(mCurrentCustomer?.mBirthday != nil) {
-            textFieldBirthday.text = CustomerDatabase.dateToDisplayStringWithoutTime(date: mCurrentCustomer!.mBirthday!)
-        }
-        
-        mCurrentCustomerImage = mCurrentCustomer?.mImage
-        if(mCurrentCustomerImage != nil && mCurrentCustomerImage?.count != 0) {
-            imageViewImage.image = UIImage(data: mCurrentCustomerImage!)
+            
+            textFieldTitle.text = mCurrentCustomer?.mTitle
+            textFieldFirstName.text = mCurrentCustomer?.mFirstName
+            textFieldLastName.text = mCurrentCustomer?.mLastName
+            textFieldPhoneHome.text = mCurrentCustomer?.mPhoneHome
+            textFieldPhoneMobile.text = mCurrentCustomer?.mPhoneMobile
+            textFieldPhoneWork.text = mCurrentCustomer?.mPhoneWork
+            textFieldEmail.text = mCurrentCustomer?.mEmail
+            textViewStreet.text = mCurrentCustomer?.mStreet
+            textFieldZipcode.text = mCurrentCustomer?.mZipcode
+            textFieldCity.text = mCurrentCustomer?.mCity
+            textFieldCountry.text = mCurrentCustomer?.mCountry
+            textFieldGroup.text = mCurrentCustomer?.mGroup
+            textViewNotes.text = mCurrentCustomer?.mNotes
+            if(mCurrentCustomer != nil) {
+                switchNewsletter.isOn = mCurrentCustomer!.mNewsletter
+            }
+            mCurrentCustomerBirthday = mCurrentCustomer?.mBirthday
+            if(mCurrentCustomer?.mBirthday != nil) {
+                textFieldBirthday.text = CustomerDatabase.dateToDisplayStringWithoutTime(date: mCurrentCustomer!.mBirthday!)
+            }
+            mCurrentCustomerImage = mCurrentCustomer?.mImage
+            if(mCurrentCustomerImage != nil && mCurrentCustomerImage?.count != 0) {
+                imageViewImage.image = UIImage(data: mCurrentCustomerImage!)
+            }
         }
         
         mDisplayAttributes = []

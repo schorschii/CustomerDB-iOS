@@ -361,7 +361,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                     composeVC.mailComposeDelegate = self
                     composeVC.setBccRecipients(recipients)
                     composeVC.setSubject("Newsletter")
-                    composeVC.setMessageBody("", isHTML: false)
+                    composeVC.setMessageBody(UserDefaults.standard.string(forKey: "email-newsletter-template") ?? "", isHTML: false)
                     self.present(composeVC, animated: true, completion: nil)
                 } else {
                     let alert = UIAlertController(

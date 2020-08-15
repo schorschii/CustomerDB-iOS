@@ -91,6 +91,13 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         sliderRed.value = Float(mDefaults.integer(forKey: "color-red"))
         sliderGreen.value = Float(mDefaults.integer(forKey: "color-green"))
         sliderBlue.value = Float(mDefaults.integer(forKey: "color-blue"))
+        mDefaultCustomerTitle = mDefaults.string(forKey: "default-customer-title") ?? ""
+        mDefaultCustomerCity = mDefaults.string(forKey: "default-customer-city") ?? ""
+        mDefaultCustomerCountry = mDefaults.string(forKey: "default-customer-country") ?? ""
+        mDefaultCustomerGroup = mDefaults.string(forKey: "default-customer-group") ?? ""
+        mEmailSubject = mDefaults.string(forKey: "email-subject") ?? ""
+        mEmailTemplate = mDefaults.string(forKey: "email-template") ?? ""
+        mNewsletterText = mDefaults.string(forKey: "email-newsletter-template") ?? ""
         
         updateColorPreview()
         onSyncModeChanged(segmentedControlSync)
@@ -134,6 +141,13 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         mDefaults.set(Int(sliderRed.value), forKey: "color-red")
         mDefaults.set(Int(sliderGreen.value), forKey: "color-green")
         mDefaults.set(Int(sliderBlue.value), forKey: "color-blue")
+        mDefaults.set(mDefaultCustomerTitle, forKey: "default-customer-title")
+        mDefaults.set(mDefaultCustomerCity, forKey: "default-customer-city")
+        mDefaults.set(mDefaultCustomerCountry, forKey: "default-customer-country")
+        mDefaults.set(mDefaultCustomerGroup, forKey: "default-customer-group")
+        mDefaults.set(mEmailSubject, forKey: "email-subject")
+        mDefaults.set(mEmailTemplate, forKey: "email-template")
+        mDefaults.set(mNewsletterText, forKey: "email-newsletter-template")
 
         if let msvc = presentingViewController as? MainSplitViewController {
             if let mnvc = msvc.viewControllers[0] as? MasterNavigationController {
@@ -430,6 +444,64 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
             style: .cancel) { (action) in
         })
         self.present(alert, animated: true)
+    }
+    
+    var mDefaultCustomerTitle = ""
+    var mDefaultCustomerCity = ""
+    var mDefaultCustomerCountry = ""
+    var mDefaultCustomerGroup = ""
+    var mEmailSubject = ""
+    var mEmailTemplate = ""
+    var mNewsletterText = ""
+    @IBAction func onClickChangeDefaultCustomerTitle(_ sender: UIButton) {
+        inputBox(title: NSLocalizedString("change_text_template", comment: ""), defaultText: mDefaultCustomerTitle, callback: { newText in
+            if(newText != nil) { self.mDefaultCustomerTitle = newText! }
+        })
+    }
+    @IBAction func onClickChangeDefaultCustomerCity(_ sender: UIButton) {
+        inputBox(title: NSLocalizedString("change_text_template", comment: ""), defaultText: mDefaultCustomerCity, callback: { newText in
+            if(newText != nil) { self.mDefaultCustomerCity = newText! }
+        })
+    }
+    @IBAction func onClickChangeDefaultCustomerCountry(_ sender: UIButton) {
+        inputBox(title: NSLocalizedString("change_text_template", comment: ""), defaultText: mDefaultCustomerCountry, callback: { newText in
+            if(newText != nil) { self.mDefaultCustomerCountry = newText! }
+        })
+    }
+    @IBAction func onClickChangeDefaultCustomerGroup(_ sender: UIButton) {
+        inputBox(title: NSLocalizedString("change_text_template", comment: ""), defaultText: mDefaultCustomerGroup, callback: { newText in
+            if(newText != nil) { self.mDefaultCustomerGroup = newText! }
+        })
+    }
+    @IBAction func onClickChangeEmailSubject(_ sender: UIButton) {
+        inputBox(title: NSLocalizedString("change_text_template", comment: ""), defaultText: mEmailSubject, callback: { newText in
+            if(newText != nil) { self.mEmailSubject = newText! }
+        })
+    }
+    @IBAction func onClickChangeEmailTemplate(_ sender: UIButton) {
+        inputBox(title: NSLocalizedString("change_text_template", comment: ""), defaultText: mEmailTemplate, callback: { newText in
+            if(newText != nil) { self.mEmailTemplate = newText! }
+        })
+    }
+    @IBAction func onClickChangeNewsletterText(_ sender: UIButton) {
+        inputBox(title: NSLocalizedString("change_text_template", comment: ""), defaultText: mNewsletterText, callback: { newText in
+            if(newText != nil) { self.mNewsletterText = newText! }
+        })
+    }
+    
+    func inputBox(title: String, defaultText: String, callback: @escaping (String?)->()) {
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        alert.addTextField(configurationHandler: { (textField) -> Void in
+            textField.text = defaultText
+        })
+        alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { [weak alert] (action) -> Void in
+            let textField = (alert?.textFields![0])! as UITextField
+            callback(textField.text)
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: { (action) -> Void in
+            callback(nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     var mFieldTypePickerController:FieldTypePickerController? = nil

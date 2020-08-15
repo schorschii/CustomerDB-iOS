@@ -87,6 +87,7 @@
 "red" = "Red";
 "green" = "Green";
 "blue" = "Blue";
+"change_text_template" = "Change Text Template";
 
 // Details
 "first_name" = "First Name";

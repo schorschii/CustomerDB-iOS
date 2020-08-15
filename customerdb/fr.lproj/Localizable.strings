@@ -87,6 +87,7 @@
 "red" = "Rouge";
 "green" = "Vert";
 "blue" = "Bleu";
+"change_text_template" = "Modifier le modèle de texte";
 
 // Details
 "first_name" = "Prénom";
