@@ -106,6 +106,8 @@
 "In6-6A-pDm.text" = "Standardmäßig werden die Daten nur lokal auf diesem Gerät gespeichert. Bitte sichern Sie Ihre Datenbank regelmäßig, um die Daten im Falle eines Defekts oder Verlusts des mobilen Endgerätes nicht zu verlieren.\n\nKopieren Sie dazu einfach regelmäßig die Datenbankdateien von Ihrem iOS-Gerät auf Ihren Computer oder ein anderes externes Speichermedium. Sie finden die Dateien im Ordner 'Kundendatenbank'.\n\nNoch einfacher geht das Backup, wenn Sie die Synchronisierungsfunktion verwenden. Hierbei werden die Daten auf Knopfdruck mit einem MySQL-Server abgegelichen. Weitere Informationen zu dieser Backupmethode finden Sie in den Einstellungen.";
 "3TB-PT-Svs.text" = "Geführter Zugriff (Kiosk-Modus)";
 "VY3-ob-Wjk.text" = "Sie können den geführten Zugriff verwenden um zu verhindern dass andere Apps verwendet werden sowie dass die App gelöscht wird. Bitte öffnen Sie die iOS-Einstellungen 'Erleichterte Bedienung' - 'Geführter Zugriff' um die Funktion zu aktivieren.";
+"CZ8-Cn-piH.text" = "Weitere Apps";
+"O2Q-Hr-2qq.normalTitle" = "Kundendatenbank für Android";
 
 "1vI-Ic-1Tn.title" = "Einstellungen";
 "goJ-2Y-nXQ.text" = "Synchronisierung";

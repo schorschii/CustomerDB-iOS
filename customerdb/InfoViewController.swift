@@ -115,6 +115,11 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
             self.present(alert, animated: true, completion: nil)
         }
     }
+    @IBAction func onClickCustomerDatbaseAndroid(_ sender: UIButton) {
+        if let url = URL(string: "https://play.google.com/store/apps/details?id=de.georgsieber.customerdb") {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
     }
