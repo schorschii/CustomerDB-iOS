@@ -117,6 +117,7 @@
 "copy_to_clipboard" = "Copy to Clipboard";
 "open_map" = "Open Map";
 "delete_appointment" = "Delete Appointment";
+"copy_postal_address" = "Copy Postal Address";
 
 // Edit
 "name_empty" = "Name empty";

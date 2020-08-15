@@ -117,6 +117,7 @@
 "copy_to_clipboard" = "Скопировать в буфер обмена";
 "open_map" = "Открытая карта";
 "delete_appointment" = "Удалить встречу";
+"copy_postal_address" = "Копировать почтовый адрес";
 
 // Edit
 "name_empty" = "Имя пустое";

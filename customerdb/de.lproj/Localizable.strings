@@ -117,6 +117,7 @@
 "copy_to_clipboard" = "In Zwischenablage kopieren";
 "open_map" = "Karte öffnen";
 "delete_appointment" = "Termin löschen";
+"copy_postal_address" = "Postanschrift kopieren";
 
 // Edit
 "name_empty" = "Kein Name eingegeben";

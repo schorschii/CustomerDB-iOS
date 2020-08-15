@@ -377,6 +377,11 @@ class CustomerDetailsViewController : UIViewController, MFMessageComposeViewCont
             style: .default) { (action) in
                 UIPasteboard.general.string = self.mCurrentCustomer!.getAddressString()
         }
+        let copyPostalAddressAction = UIAlertAction(
+            title: NSLocalizedString("copy_postal_address", comment: ""),
+            style: .default) { (action) in
+                UIPasteboard.general.string = self.mCurrentCustomer!.getFullName(lastNameFirst: false) + "\n" + self.mCurrentCustomer!.getAddressString()
+        }
         let cancelAction = UIAlertAction(
             title: NSLocalizedString("close", comment: ""),
             style: .cancel) { (action) in
@@ -386,6 +391,7 @@ class CustomerDetailsViewController : UIViewController, MFMessageComposeViewCont
         )
         alert.addAction(viewAction)
         alert.addAction(copyAction)
+        alert.addAction(copyPostalAddressAction)
         alert.addAction(cancelAction)
         self.present(alert, animated: true)
     }
