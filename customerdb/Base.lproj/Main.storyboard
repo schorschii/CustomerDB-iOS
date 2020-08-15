@@ -52,7 +52,7 @@
             </objects>
             <point key="canvasLocation" x="-957" y="1148"/>
         </scene>
-        <!--Customer Registration-->
+        <!--Registration-->
         <scene sceneID="ceg-Qi-XoU">
             <objects>
                 <viewController id="PgL-5M-hcZ" customClass="InputOnlyModeViewController" customModule="customerdb" customModuleProvider="target" sceneMemberID="viewController">
@@ -99,7 +99,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wJE-1l-DqE"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Customer Registration" id="ke2-OY-2ln"/>
+                    <navigationItem key="navigationItem" title="Registration" id="ke2-OY-2ln"/>
                     <connections>
                         <outlet property="imageViewLogo" destination="OXK-xU-IFU" id="fQP-S9-pXN"/>
                     </connections>

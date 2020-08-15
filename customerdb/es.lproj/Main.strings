@@ -436,7 +436,7 @@
 "kLP-Ll-mdx.text" = "0.00 €";
 
 /* Class = "UINavigationItem"; title = "Customer Registration"; ObjectID = "ke2-OY-2ln"; */
-"ke2-OY-2ln.title" = "Registro de cliente";
+"ke2-OY-2ln.title" = "Registro";
 
 /* Class = "UITextField"; placeholder = "Last Name"; ObjectID = "kgS-oa-sxY"; */
 "kgS-oa-sxY.placeholder" = "Apellido";
