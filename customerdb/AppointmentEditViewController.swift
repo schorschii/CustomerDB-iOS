@@ -27,8 +27,7 @@ class AppointmentEditViewController : UIViewController, UIPickerViewDelegate, UI
     var mIsNewAppointment = true
     
     override func viewDidLoad() {
-        if(splitViewController!.isCollapsed ||
-            (!splitViewController!.isCollapsed && mCurrentAppointment != nil)) {
+        if(splitViewController!.isCollapsed) {
             navigationItem.leftBarButtonItem = nil
         }
         
