@@ -111,7 +111,7 @@ class Customer {
                 mBirthday = birthday
             }
             break
-        case "group":
+        case "group", "customer_group":
             mGroup = value; break
         case "newsletter":
             mNewsletter = value=="1"; break
