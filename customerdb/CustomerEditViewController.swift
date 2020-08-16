@@ -277,19 +277,56 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
     
     var imagePicker = UIImagePickerController()
     @IBAction func onImageClick(_ sender: UITapGestureRecognizer) {
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            imagePicker.delegate = self
-            imagePicker.sourceType = .photoLibrary
-            imagePicker.allowsEditing = false
-            present(imagePicker, animated: true, completion: nil)
+        let alert = UIAlertController(
+            title: NSLocalizedString("image", comment: ""),
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            alert.addAction(UIAlertAction(
+                title: NSLocalizedString("image_from_camera", comment: ""),
+                style: .default,
+                handler: { alert in
+                    self.imagePicker = ImagePickerCustomerPicture()
+                    self.imagePicker.delegate = self
+                    self.imagePicker.sourceType = .camera
+                    self.imagePicker.allowsEditing = false
+                    self.present(self.imagePicker, animated: true, completion: nil)
+            }))
         }
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            alert.addAction(UIAlertAction(
+                title: NSLocalizedString("choose_from_gallery", comment: ""),
+                style: .default,
+                handler: { alert in
+                    self.imagePicker = ImagePickerCustomerPicture()
+                    self.imagePicker.delegate = self
+                    self.imagePicker.sourceType = .photoLibrary
+                    self.imagePicker.allowsEditing = false
+                    self.present(self.imagePicker, animated: true, completion: nil)
+            }))
+        }
+        alert.addAction(UIAlertAction(
+            title: NSLocalizedString("cancel", comment: ""),
+            style: .cancel,
+            handler: nil)
+        )
+        alert.popoverPresentationController?.sourceView = sender.view
+        self.present(alert, animated: true)
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage {
             if let compressedImage = resizeImage(image: image, targetSize: CGSize(width: 800, height: 600)) {
-                if let jpeg = compressedImage.jpegData(compressionQuality: 0.20) {
-                    self.imageViewImage.image = compressedImage
-                    mCurrentCustomerImage = jpeg
+                if picker is ImagePickerCustomerPicture {
+                    if let jpeg = compressedImage.jpegData(compressionQuality: 0.20) {
+                        self.imageViewImage.image = compressedImage
+                        mCurrentCustomerImage = jpeg
+                    }
+                }
+                else if picker is ImagePickerCustomerFile {
+                    if let jpeg = compressedImage.jpegData(compressionQuality: 0.60) {
+                        self.addFile(name: NSLocalizedString("image", comment: "")+".jpg", content: jpeg)
+                    }
                 }
             }
         }
@@ -401,9 +438,50 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
                 self.present(alert, animated: true)
                 return
             }
-            let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data"], in: .import)
-            documentPicker.delegate = self
-            self.present(documentPicker, animated: true, completion: nil)
+            
+            let alert = UIAlertController(
+                title: nil, message: nil,
+                preferredStyle: .actionSheet
+            )
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                alert.addAction(UIAlertAction(
+                    title: NSLocalizedString("image_from_camera", comment: ""),
+                    style: .default,
+                    handler: { alert in
+                        self.imagePicker = ImagePickerCustomerFile()
+                        self.imagePicker.delegate = self
+                        self.imagePicker.sourceType = .camera
+                        self.imagePicker.allowsEditing = false
+                        self.present(self.imagePicker, animated: true, completion: nil)
+                }))
+            }
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                alert.addAction(UIAlertAction(
+                    title: NSLocalizedString("choose_from_gallery", comment: ""),
+                    style: .default,
+                    handler: { alert in
+                        self.imagePicker = ImagePickerCustomerFile()
+                        self.imagePicker.delegate = self
+                        self.imagePicker.sourceType = .photoLibrary
+                        self.imagePicker.allowsEditing = false
+                        self.present(self.imagePicker, animated: true, completion: nil)
+                }))
+            }
+            alert.addAction(UIAlertAction(
+                title: NSLocalizedString("choose_from_files", comment: ""),
+                style: .default,
+                handler: { alert in
+                    let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data"], in: .import)
+                    documentPicker.delegate = self
+                    self.present(documentPicker, animated: true, completion: nil)
+            }))
+            alert.addAction(UIAlertAction(
+                title: NSLocalizedString("cancel", comment: ""),
+                style: .cancel,
+                handler: nil)
+            )
+            alert.popoverPresentationController?.sourceView = sender
+            self.present(alert, animated: true)
         } else {
             let alert = UIAlertController(
                 title: NSLocalizedString("not_supported", comment: ""),
@@ -420,7 +498,12 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
     }
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         do {
-            try mCurrentCustomer?.addFile(file: CustomerFile(name: url.lastPathComponent, content: Data(contentsOf: url)))
+            try addFile(name: url.lastPathComponent, content: Data(contentsOf: url))
+        } catch {}
+    }
+    func addFile(name: String, content: Data) {
+        do {
+            try mCurrentCustomer?.addFile(file: CustomerFile(name: name, content: content))
             refreshFiles()
         } catch Customer.FileErrors.fileTooBig {
             dialog(title: NSLocalizedString("error", comment: ""), text: NSLocalizedString("file_too_big", comment: ""))
@@ -679,4 +762,8 @@ class FileIndexButton: UIButton {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+}
+class ImagePickerCustomerPicture: UIImagePickerController {
+}
+class ImagePickerCustomerFile: UIImagePickerController {
 }

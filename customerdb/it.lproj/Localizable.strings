@@ -136,6 +136,10 @@
 "no_calendar_selected" = "Nessun calendario selezionato! Crea un calendario nelle impostazioni.";
 "file_too_big" = "File troppo grande! Puoi allegare solo file con una dimensione massima di 1 MB.";
 "file_limit_reached" = "Limite di file raggiunto!";
+"image" = "Immagine";
+"image_from_camera" = "Immagine dalla fotocamera";
+"choose_from_gallery" = "Scegli dalla Galleria";
+"choose_from_files" = "Scegli da File";
 
 // Sync
 "reset_password" = "Resetta la password";

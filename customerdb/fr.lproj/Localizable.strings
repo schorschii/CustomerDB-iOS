@@ -136,6 +136,10 @@
 "no_calendar_selected" = "Aucun calendrier sélectionné! Veuillez créer un calendrier dans les paramètres.";
 "file_too_big" = "Fichier trop gros! Vous ne pouvez joindre que des fichiers d'une taille maximale de 1 Mo.";
 "file_limit_reached" = "Limite de fichiers atteinte!";
+"image" = "Image";
+"image_from_camera" = "Image de la caméra";
+"choose_from_gallery" = "Choisir depuis la galerie";
+"choose_from_files" = "Choisissez parmi les fichiers";
 
 // Sync
 "reset_password" = "réinitialiser le mot de passe";

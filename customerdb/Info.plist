@@ -28,6 +28,8 @@
 	<true/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Access to photo library is used to pick images for customers.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Access to camera is used to take images for customers.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
