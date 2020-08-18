@@ -5,9 +5,10 @@
 
 import UIKit
 import CallKit
+import StoreKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, SKPaymentTransactionObserver {
 
     var window: UIWindow?
 
@@ -66,6 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        refreshRecipe()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -95,7 +97,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    func refreshRecipe() {
+        // update cloud access license receipt after auto-renewal
+        SKPaymentQueue.default().add(self)
+        SKPaymentQueue.default().restoreCompletedTransactions()
+    }
+    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+    }
+    func request(_ request: SKRequest, didFailWithError error: Error) {
+    }
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        for tx in transactions {
+            switch (tx.transactionState) {
+                case .purchased, .restored:
+                    queue.finishTransaction(tx)
+                    break
+                case .failed, .purchasing, .deferred: break
+                @unknown default: break
+            }
+        }
+    }
+    
 }
 
 extension AppDelegate: CXCallObserverDelegate {

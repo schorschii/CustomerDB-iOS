@@ -15,14 +15,14 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
     static let homepageURL = "https://georg-sieber.de/"
     static let supportEmail = "support@georg-sieber.de"
     
-    private static let inappCloudAccessLicenseId = "systems.sieber.customerdb.cal"
-    private static let inappCommercialUsageId = "systems.sieber.customerdb.cu"
-    private static let inappLargeCompanyId = "systems.sieber.customerdb.lc"
-    private static let inappInputOnlyModeId = "systems.sieber.customerdb.iom"
-    private static let inappDesignOptionsId = "systems.sieber.customerdb.do"
-    private static let inappCustomFieldsId = "systems.sieber.customerdb.cf"
-    private static let inappFilesId = "systems.sieber.customerdb.fs"
-    private static let inappCalendarId = "systems.sieber.customerdb.cl"
+    static let inappCloudAccessLicenseId = "systems.sieber.customerdb.cal"
+    static let inappCommercialUsageId = "systems.sieber.customerdb.cu"
+    static let inappLargeCompanyId = "systems.sieber.customerdb.lc"
+    static let inappInputOnlyModeId = "systems.sieber.customerdb.iom"
+    static let inappDesignOptionsId = "systems.sieber.customerdb.do"
+    static let inappCustomFieldsId = "systems.sieber.customerdb.cf"
+    static let inappFilesId = "systems.sieber.customerdb.fs"
+    static let inappCalendarId = "systems.sieber.customerdb.cl"
     private var inappCloudAccessLicenseProduct: SKProduct?
     private var inappCommercialUsageProduct: SKProduct?
     private var inappCustomFieldsProduct: SKProduct?
@@ -127,9 +127,7 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
     func initIAP() {
         SKPaymentQueue.default().add(self)
 
-        let IAPrequest = SKProductsRequest(productIdentifiers: Set([InfoViewController.inappCloudAccessLicenseId]))
-        IAPrequest.delegate = self
-        IAPrequest.start()
+        var productIdentifiers:[String] = [InfoViewController.inappCloudAccessLicenseId]
 
         let unlockedCommercialUsage = UserDefaults.standard.bool(forKey: "unlocked-cu")
         let unlockedLargeCompany = UserDefaults.standard.bool(forKey: "unlocked-lc")
@@ -141,52 +139,42 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
         if(unlockedCommercialUsage) {
             buttonBuyCommercialUsage.setTitle(NSLocalizedString("purchased", comment: ""), for: UIControl.State.normal)
         } else {
-            let IAPrequest = SKProductsRequest(productIdentifiers: Set([InfoViewController.inappCommercialUsageId]))
-            IAPrequest.delegate = self
-            IAPrequest.start()
+            productIdentifiers.append(InfoViewController.inappCommercialUsageId)
         }
         if(unlockedLargeCompany) {
             buttonBuyLargeCompany.setTitle(NSLocalizedString("purchased", comment: ""), for: UIControl.State.normal)
         } else {
-            let IAPrequest = SKProductsRequest(productIdentifiers: Set([InfoViewController.inappLargeCompanyId]))
-            IAPrequest.delegate = self
-            IAPrequest.start()
+            productIdentifiers.append(InfoViewController.inappLargeCompanyId)
         }
         if(unlockedInputOnlyMode) {
             buttonBuyInputOnlyMode.setTitle(NSLocalizedString("purchased", comment: ""), for: UIControl.State.normal)
         } else {
-            let IAPrequest = SKProductsRequest(productIdentifiers: Set([InfoViewController.inappInputOnlyModeId]))
-            IAPrequest.delegate = self
-            IAPrequest.start()
+            productIdentifiers.append(InfoViewController.inappInputOnlyModeId)
         }
         if(unlockedDesignOptions) {
             buttonBuyDesignOptions.setTitle(NSLocalizedString("purchased", comment: ""), for: UIControl.State.normal)
         } else {
-            let IAPrequest = SKProductsRequest(productIdentifiers: Set([InfoViewController.inappDesignOptionsId]))
-            IAPrequest.delegate = self
-            IAPrequest.start()
+            productIdentifiers.append(InfoViewController.inappDesignOptionsId)
         }
         if(unlockedCustomFields) {
             buttonBuyCustomFields.setTitle(NSLocalizedString("purchased", comment: ""), for: UIControl.State.normal)
         } else {
-            let IAPrequest = SKProductsRequest(productIdentifiers: Set([InfoViewController.inappCustomFieldsId]))
-            IAPrequest.delegate = self
-            IAPrequest.start()
+            productIdentifiers.append(InfoViewController.inappCustomFieldsId)
         }
         if(unlockedFiles) {
             buttonBuyFiles.setTitle(NSLocalizedString("purchased", comment: ""), for: UIControl.State.normal)
         } else {
-            let IAPrequest = SKProductsRequest(productIdentifiers: Set([InfoViewController.inappFilesId]))
-            IAPrequest.delegate = self
-            IAPrequest.start()
+            productIdentifiers.append(InfoViewController.inappFilesId)
         }
         if(unlockedCalendar) {
             buttonBuyCalendar.setTitle(NSLocalizedString("purchased", comment: ""), for: UIControl.State.normal)
         } else {
-            let IAPrequest = SKProductsRequest(productIdentifiers: Set([InfoViewController.inappCalendarId]))
-            IAPrequest.delegate = self
-            IAPrequest.start()
+            productIdentifiers.append(InfoViewController.inappCalendarId)
         }
+        
+        let IAPrequest = SKProductsRequest(productIdentifiers: Set(productIdentifiers))
+        IAPrequest.delegate = self
+        IAPrequest.start()
     }
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         for iap in response.products {
