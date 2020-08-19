@@ -65,6 +65,15 @@
 "buy" = "Buy";
 "only_german_and_english_messages" = "Please note that only messages in German and English can be considered.";
 "feedback_title" = "Feedback Customer Database iOS";
+"manual_unlock" = "Manual Unlock";
+"unlock_code" = "Unlock Code";
+"invalid_unlock_code" = "Invalid Unlock Code";
+"commercial_usage" = "Commercial Usage";
+"more_than_500_customers" = "More Than 500 Customers";
+"design_options" = "Design Options";
+"custom_fields" = "Custom Fields";
+"files" = "Files";
+"calendar" = "Calendar";
 
 // Settings
 "new_custom_field" = "New Custom Field";

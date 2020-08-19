@@ -66,6 +66,15 @@
 "only_german_and_english_messages" = "Bitte beachten Sie, dass nur Nachrichten in Deutsch und Englisch beachtet werden können.";
 "logo_deleted" = "Logo entfernt.";
 "feedback_title" = "Feedback Kundendatenbank iOS";
+"manual_unlock" = "Manual Unlock";
+"unlock_code" = "Freischaltcode";
+"invalid_unlock_code" = "Ungültiger Freischaltcode";
+"commercial_usage" = "Kommerzielle Verwendung";
+"more_than_500_customers" = "Mehr als 500 Kunden";
+"design_options" = "Design-Optionen";
+"custom_fields" = "Benutzerdefinierte Felder";
+"files" = "Dateien";
+"calendar" = "Kalender";
 
 // Settings
 "new_custom_field" = "Neues benutzerdefiniertes Feld";

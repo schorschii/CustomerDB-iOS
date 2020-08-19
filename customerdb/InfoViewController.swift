@@ -12,6 +12,8 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
     
     @IBOutlet weak var labelVersion: UILabel!
     
+    static let activateURL = "https://apps.georg-sieber.de/activate/app.php"
+    
     static let homepageURL = "https://georg-sieber.de/"
     static let supportEmail = "support@georg-sieber.de"
     
@@ -349,22 +351,30 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
     }
     
     @IBAction func onClickDebugUnlock(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Manual Unlock", message: nil, preferredStyle: .alert)
-        alert.addTextField { (textField) in
-            textField.placeholder = "Unlock Code"
-        }
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
-            if(textField?.text == "hesitate") {
-                self.unlock(productId: InfoViewController.inappCommercialUsageId)
-                self.unlock(productId: InfoViewController.inappLargeCompanyId)
-                self.unlock(productId: InfoViewController.inappInputOnlyModeId)
-                self.unlock(productId: InfoViewController.inappDesignOptionsId)
-                self.unlock(productId: InfoViewController.inappCustomFieldsId)
-                self.unlock(productId: InfoViewController.inappFilesId)
-                self.unlock(productId: InfoViewController.inappCalendarId)
-            }
+        let alert = UIAlertController(title: NSLocalizedString("manual_unlock", comment: ""), message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("commercial_usage", comment: ""), style: .default, handler: { (_) in
+            self.openUnlockInputBox(productId: InfoViewController.inappCommercialUsageId)
         }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("more_than_500_customers", comment: ""), style: .default, handler: { (_) in
+            self.openUnlockInputBox(productId: InfoViewController.inappLargeCompanyId)
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("input_only_mode", comment: ""), style: .default, handler: { (_) in
+            self.openUnlockInputBox(productId: InfoViewController.inappInputOnlyModeId)
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("design_options", comment: ""), style: .default, handler: { (_) in
+            self.openUnlockInputBox(productId: InfoViewController.inappDesignOptionsId)
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("custom_fields", comment: ""), style: .default, handler: { (_) in
+            self.openUnlockInputBox(productId: InfoViewController.inappCustomFieldsId)
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("files", comment: ""), style: .default, handler: { (_) in
+            self.openUnlockInputBox(productId: InfoViewController.inappFilesId)
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("calendar", comment: ""), style: .default, handler: { (_) in
+            self.openUnlockInputBox(productId: InfoViewController.inappCalendarId)
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil))
+        alert.popoverPresentationController?.sourceView = sender
         self.present(alert, animated: true, completion: nil)
     }
     @IBAction func onClickBuyCloudAccessLicense(_ sender: UIButton) {
@@ -425,6 +435,44 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
     }
     @IBAction func onClickRestore(_ sender: UIButton) {
         SKPaymentQueue.default().restoreCompletedTransactions()
+    }
+    
+    func openUnlockInputBox(productId: String) {
+        let alert = UIAlertController(
+            title: NSLocalizedString("unlock_code", comment: ""),
+            message: "",
+            preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.text = ""
+        }
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .destructive, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { [weak alert] (_) in
+            let text = alert?.textFields![0].text
+            let url = URL(string: InfoViewController.activateURL)!
+            let session = URLSession.shared
+            var request = URLRequest(url: url, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: 5.0)
+            request.httpMethod = "POST"
+            request.addValue(productId, forHTTPHeaderField: "X-Unlock-Feature")
+            request.addValue(text!, forHTTPHeaderField: "X-Unlock-Code")
+            let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+                guard error == nil else { return }
+                if let httpResponse = response as? HTTPURLResponse {
+                    //print(String(httpResponse.statusCode))
+                    //print(String(data: data!, encoding: String.Encoding.utf8))
+                    if(httpResponse.statusCode == 999) {
+                        DispatchQueue.main.async {
+                            self.unlock(productId: productId)
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.handleError(text: NSLocalizedString("invalid_unlock_code", comment: ""))
+                        }
+                    }
+                }
+            })
+            task.resume()
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func handleError(text: String) {
