@@ -128,10 +128,18 @@ class AppointmentViewController : UIViewController {
                     )
 
                     viewAppointments.addSubview(appointmentView)
+                    var customerText = ""
+                    if(a.mCustomerId != nil) {
+                        if let c = mDb.getCustomer(id: a.mCustomerId!) {
+                            customerText = c.getFullName(lastNameFirst: false)
+                        }
+                    } else {
+                        customerText = a.mCustomer
+                    }
                     appointmentView.setValues(
                         appointment: a,
                         text: a.mTitle,
-                        subtitle: (a.mCustomer+"  "+a.mLocation).trimmingCharacters(in: .whitespacesAndNewlines),
+                        subtitle: (customerText+"  "+a.mLocation).trimmingCharacters(in: .whitespacesAndNewlines),
                         time: AppointmentViewController.timeToDisplayString(date: a.mTimeStart!)+" - "+AppointmentViewController.timeToDisplayString(date: a.mTimeEnd!),
                         backgroundColor: color
                     )

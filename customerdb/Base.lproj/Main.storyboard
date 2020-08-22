@@ -1287,11 +1287,37 @@
                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n1J-eQ-Wlt">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="AVx-dy-J5g">
                                                         <rect key="frame" x="0.0" y="22.5" width="374" height="34"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
-                                                    </textField>
+                                                        <subviews>
+                                                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n1J-eQ-Wlt">
+                                                                <rect key="frame" x="0.0" y="0.0" width="287" height="34"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8kR-Mr-UKB">
+                                                                <rect key="frame" x="292" y="0.0" width="24" height="34"/>
+                                                                <state key="normal" image="baseline_person_black_24pt"/>
+                                                                <connections>
+                                                                    <action selector="onClickShowFromCustomer:" destination="kvK-me-Sob" eventType="touchUpInside" id="ttd-Nd-S7Y"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="noG-JP-GyJ">
+                                                                <rect key="frame" x="321" y="0.0" width="24" height="34"/>
+                                                                <state key="normal" image="baseline_people_black_24pt"/>
+                                                                <connections>
+                                                                    <action selector="onClickAddFromCustomer:" destination="kvK-me-Sob" eventType="touchUpInside" id="cQy-MH-I6O"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Dc-Hl-rze">
+                                                                <rect key="frame" x="350" y="0.0" width="24" height="34"/>
+                                                                <state key="normal" image="baseline_clear_black_24pt"/>
+                                                                <connections>
+                                                                    <action selector="onClickRemoveFromCustomer:" destination="kvK-me-Sob" eventType="touchUpInside" id="CnK-tw-Wez"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="cPc-Ni-ai2">
@@ -1303,11 +1329,37 @@
                                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hkH-Oe-J6z">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cA3-hF-Ty2">
                                                         <rect key="frame" x="0.0" y="22.5" width="374" height="34"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
-                                                    </textField>
+                                                        <subviews>
+                                                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hkH-Oe-J6z">
+                                                                <rect key="frame" x="0.0" y="0.0" width="287" height="34"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <textInputTraits key="textInputTraits"/>
+                                                            </textField>
+                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ngk-C1-Iq5">
+                                                                <rect key="frame" x="292" y="0.0" width="24" height="34"/>
+                                                                <state key="normal" image="baseline_person_black_24pt"/>
+                                                                <connections>
+                                                                    <action selector="onClickShowForCustomer:" destination="kvK-me-Sob" eventType="touchUpInside" id="egf-eS-y5c"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HrE-ao-4u3">
+                                                                <rect key="frame" x="321" y="0.0" width="24" height="34"/>
+                                                                <state key="normal" image="baseline_people_black_24pt"/>
+                                                                <connections>
+                                                                    <action selector="onClickAddForCustomer:" destination="kvK-me-Sob" eventType="touchUpInside" id="r0o-j2-Jsl"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLb-nL-nJ4">
+                                                                <rect key="frame" x="350" y="0.0" width="24" height="34"/>
+                                                                <state key="normal" image="baseline_clear_black_24pt"/>
+                                                                <connections>
+                                                                    <action selector="onClickRemoveForCustomer:" destination="kvK-me-Sob" eventType="touchUpInside" id="QtA-SG-pD6"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="xYq-uU-6o1">
@@ -1341,13 +1393,13 @@
                                                         <rect key="frame" x="0.0" y="22.5" width="374" height="34"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tp8-r3-rWs">
-                                                                <rect key="frame" x="0.0" y="0.0" width="314" height="34"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="345" height="34"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
-                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Iw-b6-Mz3">
-                                                                <rect key="frame" x="319" y="0.0" width="55" height="34"/>
-                                                                <state key="normal" title="Remove"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Iw-b6-Mz3">
+                                                                <rect key="frame" x="350" y="0.0" width="24" height="34"/>
+                                                                <state key="normal" image="baseline_clear_black_24pt"/>
                                                                 <connections>
                                                                     <action selector="onClickBirthdayRemove:" destination="kvK-me-Sob" eventType="touchUpInside" id="DNY-Wo-Ez8"/>
                                                                 </connections>
@@ -1392,6 +1444,8 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="buttonShowForCustomer" destination="Ngk-C1-Iq5" id="gPg-Yi-vjB"/>
+                        <outlet property="buttonShowFromCustomer" destination="8kR-Mr-UKB" id="Bf1-h2-7Vd"/>
                         <outlet property="scrollView" destination="3fb-Nk-4Af" id="sV7-dB-QN4"/>
                         <outlet property="stackViewSyncInfo" destination="m0F-n0-RTx" id="BIE-Wd-pkd"/>
                         <outlet property="textFieldCurrency" destination="CnW-7w-2UH" id="a6h-Ob-Qic"/>
@@ -3021,7 +3075,7 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="D2W-4B-6xO">
-                                        <rect key="frame" x="20" y="20" width="374" height="981"/>
+                                        <rect key="frame" x="20" y="20" width="374" height="1462"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Hjw-hQ-VtA">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="93.5"/>
@@ -3355,6 +3409,34 @@ City Country</string>
                                                     </label>
                                                 </subviews>
                                             </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Qxy-uR-ny5">
+                                                <rect key="frame" x="0.0" y="1001" width="374" height="220.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assigned Vouchers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bQi-wo-ZdU">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xqS-Yy-WQr">
+                                                        <rect key="frame" x="0.0" y="20.5" width="374" height="200"/>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="WAC-La-f2S">
+                                                <rect key="frame" x="0.0" y="1241.5" width="374" height="220.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assigned Appointments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pg-Gy-7Vs">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="F0g-bF-7Tn">
+                                                        <rect key="frame" x="0.0" y="20.5" width="374" height="200"/>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -3437,6 +3519,7 @@ City Country</string>
                         <outlet property="labelPhoneMobile" destination="c5c-2p-9F8" id="ShY-Lt-gTQ"/>
                         <outlet property="labelPhoneWork" destination="83c-Bs-KU9" id="p5j-cu-w2Y"/>
                         <outlet property="stackViewAddress" destination="geW-2l-acg" id="j6V-vG-e8O"/>
+                        <outlet property="stackViewAppointments" destination="F0g-bF-7Tn" id="IuW-NG-ZFi"/>
                         <outlet property="stackViewAttributes" destination="RqH-wG-7sX" id="YMK-bF-yjU"/>
                         <outlet property="stackViewBirthday" destination="gh0-cl-VR6" id="Tbn-bc-G6W"/>
                         <outlet property="stackViewEmail" destination="Ihc-HA-Cq0" id="KR3-mk-Duw"/>
@@ -3448,6 +3531,7 @@ City Country</string>
                         <outlet property="stackViewPhoneHome" destination="VQg-8D-Y7k" id="MUj-MU-f86"/>
                         <outlet property="stackViewPhoneMobile" destination="zW8-Xo-cgV" id="e55-XP-d5P"/>
                         <outlet property="stackViewPhoneWork" destination="jVD-ro-ERc" id="q1O-p1-3ku"/>
+                        <outlet property="stackViewVouchers" destination="xqS-Yy-WQr" id="dqb-Vx-rNU"/>
                         <segue destination="zPY-ZJ-7WK" kind="show" identifier="segueCustomerEdit" id="b4I-Iy-NtL"/>
                     </connections>
                 </viewController>
@@ -3770,13 +3854,13 @@ City Country</string>
                                                         <rect key="frame" x="0.0" y="22.5" width="374" height="34"/>
                                                         <subviews>
                                                             <textField opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="krw-j4-Taf">
-                                                                <rect key="frame" x="0.0" y="0.0" width="314" height="34"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="345" height="34"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
-                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J5z-eY-YWf">
-                                                                <rect key="frame" x="319" y="0.0" width="55" height="34"/>
-                                                                <state key="normal" title="Remove"/>
+                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J5z-eY-YWf">
+                                                                <rect key="frame" x="350" y="0.0" width="24" height="34"/>
+                                                                <state key="normal" image="baseline_clear_black_24pt"/>
                                                                 <connections>
                                                                     <action selector="onClickBirthdayRemove:" destination="zPY-ZJ-7WK" eventType="touchUpInside" id="5F1-oD-SGH"/>
                                                                 </connections>
@@ -3996,10 +4080,10 @@ City Country</string>
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="pqp-pb-FKp">
-                                        <rect key="frame" x="20" y="20" width="374" height="732"/>
+                                        <rect key="frame" x="20" y="20" width="374" height="812"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="n9e-nD-grr">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="172.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="142.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Calendar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X1K-Ts-YxB">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
@@ -4008,49 +4092,75 @@ City Country</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YWd-OW-xjM">
-                                                        <rect key="frame" x="0.0" y="22.5" width="374" height="150"/>
+                                                        <rect key="frame" x="0.0" y="22.5" width="374" height="120"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="150" id="PaY-Rx-vKr"/>
+                                                            <constraint firstAttribute="height" constant="120" id="PaY-Rx-vKr"/>
                                                         </constraints>
                                                     </pickerView>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="It3-CP-UB3">
-                                                <rect key="frame" x="0.0" y="192.5" width="374" height="156.5"/>
+                                                <rect key="frame" x="0.0" y="162.5" width="374" height="266.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="nO1-NS-gvm">
-                                                        <rect key="frame" x="0.0" y="0.0" width="194.5" height="156.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="194.5" height="266.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Appointment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wzp-Sy-hzi">
-                                                                <rect key="frame" x="0.0" y="0.0" width="194.5" height="20.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="194.5" height="130.5"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Subject" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fv6-4M-6rg">
-                                                                <rect key="frame" x="0.0" y="20.5" width="194.5" height="34"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
-                                                            </textField>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Customer" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4hb-Wg-FbJ">
-                                                                <rect key="frame" x="0.0" y="54.5" width="194.5" height="34"/>
+                                                                <rect key="frame" x="0.0" y="130.5" width="194.5" height="34"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nj1-VX-ETV">
-                                                                <rect key="frame" x="0.0" y="88.5" width="194.5" height="34"/>
+                                                                <rect key="frame" x="0.0" y="164.5" width="194.5" height="34"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Notes" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wIf-px-xB2">
-                                                                <rect key="frame" x="0.0" y="122.5" width="194.5" height="34"/>
+                                                                <rect key="frame" x="0.0" y="198.5" width="194.5" height="34"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="kmo-X6-ged">
+                                                                <rect key="frame" x="0.0" y="232.5" width="194.5" height="34"/>
+                                                                <subviews>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Customer" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4hb-Wg-FbJ">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="107.5" height="34"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <textInputTraits key="textInputTraits"/>
+                                                                    </textField>
+                                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9C4-1z-VYl">
+                                                                        <rect key="frame" x="112.5" y="0.0" width="24" height="34"/>
+                                                                        <state key="normal" image="baseline_person_black_24pt"/>
+                                                                        <connections>
+                                                                            <action selector="onClickShowCustomer:" destination="Eui-Sc-9YZ" eventType="touchUpInside" id="aTY-mn-41P"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hcA-QC-L5R">
+                                                                        <rect key="frame" x="141.5" y="0.0" width="24" height="34"/>
+                                                                        <state key="normal" image="baseline_people_black_24pt"/>
+                                                                        <connections>
+                                                                            <action selector="onClickAddCustomer:" destination="Eui-Sc-9YZ" eventType="touchUpInside" id="wEb-VG-IUp"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4bR-dE-qR3">
+                                                                        <rect key="frame" x="170.5" y="0.0" width="24" height="34"/>
+                                                                        <state key="normal" image="baseline_clear_black_24pt"/>
+                                                                        <connections>
+                                                                            <action selector="onClickRemoveCustomer:" destination="Eui-Sc-9YZ" eventType="touchUpInside" id="sWP-j8-GXm"/>
+                                                                        </connections>
+                                                                    </button>
+                                                                </subviews>
+                                                            </stackView>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="83S-An-Yac">
-                                                        <rect key="frame" x="205.5" y="0.0" width="168.5" height="156.5"/>
+                                                        <rect key="frame" x="205.5" y="0.0" width="168.5" height="266.5"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QR code for customer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDo-xA-yx8">
                                                                 <rect key="frame" x="0.0" y="0.0" width="168.5" height="20.5"/>
@@ -4059,14 +4169,14 @@ City Country</string>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="www-h7-Dnh">
-                                                                <rect key="frame" x="0.0" y="20.5" width="168.5" height="136"/>
+                                                                <rect key="frame" x="0.0" y="20.5" width="168.5" height="246"/>
                                                             </imageView>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="yMf-4Z-1fg">
-                                                <rect key="frame" x="0.0" y="369" width="374" height="172.5"/>
+                                                <rect key="frame" x="0.0" y="449" width="374" height="172.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nl9-2i-B5p">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
@@ -4083,7 +4193,7 @@ City Country</string>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="M9t-mJ-3R6">
-                                                <rect key="frame" x="0.0" y="561.5" width="374" height="170.5"/>
+                                                <rect key="frame" x="0.0" y="641.5" width="374" height="170.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="po0-Fc-3LB">
                                                         <rect key="frame" x="0.0" y="0.0" width="182" height="170.5"/>
@@ -4164,6 +4274,7 @@ City Country</string>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="buttonShowCustomer" destination="9C4-1z-VYl" id="VHQ-Bl-95X"/>
                         <outlet property="datePicker" destination="TZR-Lr-YKE" id="ONI-UY-8hu"/>
                         <outlet property="datePickerEnd" destination="csI-1T-NOu" id="R01-6t-1bp"/>
                         <outlet property="datePickerStart" destination="OQb-5m-TnM" id="G7G-di-yDD"/>
@@ -4200,6 +4311,7 @@ City Country</string>
         <image name="baseline_menu_black_24pt" width="24" height="24"/>
         <image name="baseline_more_vert_black_24pt" width="24" height="24"/>
         <image name="baseline_people_black_24pt" width="24" height="24"/>
+        <image name="baseline_person_black_24pt" width="24" height="24"/>
         <image name="baseline_search_black_24pt" width="24" height="24"/>
         <image name="icon_gray" width="1024" height="1024"/>
         <image name="icon_plain" width="1024" height="1024"/>

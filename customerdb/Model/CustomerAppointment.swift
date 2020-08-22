@@ -15,6 +15,7 @@ class CustomerAppointment {
     var mTimeEnd:Date? = nil
     var mFullday = false
     var mCustomer = ""
+    var mCustomerId:Int64? = nil
     var mLocation = ""
     var mLastModified = Date()
     var mRemoved = 0
@@ -24,7 +25,7 @@ class CustomerAppointment {
     init() {
         mId = Int64(Customer.generateID())
     }
-    init(id:Int64, calendarId:Int64, title:String, notes:String, timeStart:Date?, timeEnd:Date?, fullday:Bool, customer:String, location:String, lastModified:Date, removed:Int) {
+    init(id:Int64, calendarId:Int64, title:String, notes:String, timeStart:Date?, timeEnd:Date?, fullday:Bool, customer:String, customerId:Int64?, location:String, lastModified:Date, removed:Int) {
         mId = id
         mCalendarId = calendarId
         mTitle = title
@@ -33,6 +34,7 @@ class CustomerAppointment {
         mTimeEnd = timeEnd
         mFullday = fullday
         mCustomer = customer
+        mCustomerId = customerId
         mLocation = location
         mLastModified = lastModified
         mRemoved = removed
@@ -75,6 +77,8 @@ class CustomerAppointment {
                 mRemoved = (value=="1" ? 1 : 0); break
             case "customer":
                 mCustomer = value; break
+            case "customer_id":
+                mCustomerId = Int64(value); break
             case "location":
                 mLocation = value; break
             case "last_modified":

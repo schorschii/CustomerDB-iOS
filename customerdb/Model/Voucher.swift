@@ -11,7 +11,9 @@ class Voucher {
     var mCurrentValue = 0.0
     var mVoucherNo = ""
     var mFromCustomer = ""
+    var mFromCustomerId:Int64? = nil
     var mForCustomer = ""
+    var mForCustomerId:Int64? = nil
     var mIssued:Date = Date()
     var mValidUntil:Date? = nil
     var mRedeemed:Date? = nil
@@ -22,13 +24,15 @@ class Voucher {
     init() {
         mId = Int64(Voucher.generateID())
     }
-    init(id:Int64, originalValue:Double, currentValue:Double, voucherNo:String, fromCustomer:String, forCustomer:String, issued:Date, validUntil:Date?, redeemed:Date?, notes:String, lastModified: Date, removed:Int) {
+    init(id:Int64, originalValue:Double, currentValue:Double, voucherNo:String, fromCustomer:String, fromCustomerId:Int64?, forCustomer:String, forCustomerId:Int64?, issued:Date, validUntil:Date?, redeemed:Date?, notes:String, lastModified: Date, removed:Int) {
         mId = id
         mOriginalValue = originalValue
         mCurrentValue = currentValue
         mVoucherNo = voucherNo
         mFromCustomer = fromCustomer
+        mFromCustomerId = fromCustomerId
         mForCustomer = forCustomer
+        mForCustomerId = forCustomerId
         mIssued = issued
         mValidUntil = validUntil
         mRedeemed = redeemed
@@ -49,8 +53,12 @@ class Voucher {
             mVoucherNo = value; break
         case "from_customer":
             mFromCustomer = value; break
+        case "from_customer_id":
+            mFromCustomerId = Int64(value); break
         case "for_customer":
             mForCustomer = value; break
+        case "for_customer_id":
+            mForCustomerId = Int64(value); break
         case "issued":
             if let date = CustomerDatabase.parseDate(strDate: value) {
                 mIssued = date

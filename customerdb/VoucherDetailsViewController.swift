@@ -95,8 +95,20 @@ class VoucherDetailsViewController : UIViewController {
         labelCurrentValue.text = Voucher.format(value: mCurrentVoucher!.mCurrentValue) + " " + mCurrency
         labelOriginalValue.text = Voucher.format(value: mCurrentVoucher!.mOriginalValue) + " " + mCurrency
         labelVoucherNumber.text = mCurrentVoucher?.mVoucherNo
-        labelFromCustomer.text = mCurrentVoucher?.mFromCustomer
-        labelForCustomer.text = mCurrentVoucher?.mForCustomer
+        if(mCurrentVoucher!.mFromCustomerId != nil) {
+            if let c = mDb.getCustomer(id: mCurrentVoucher!.mFromCustomerId!) {
+                labelFromCustomer.text = c.getFullName(lastNameFirst: false)
+            }
+        } else {
+            labelFromCustomer.text = mCurrentVoucher?.mFromCustomer
+        }
+        if(mCurrentVoucher!.mForCustomerId != nil) {
+            if let c = mDb.getCustomer(id: mCurrentVoucher!.mForCustomerId!) {
+                labelForCustomer.text = c.getFullName(lastNameFirst: false)
+            }
+        } else {
+            labelForCustomer.text = mCurrentVoucher?.mForCustomer
+        }
         labelNotes.text = mCurrentVoucher?.mNotes
         labelIssued.text = CustomerDatabase.dateToDisplayString(date: mCurrentVoucher!.mIssued)
         if(mCurrentVoucher!.mValidUntil != nil) {

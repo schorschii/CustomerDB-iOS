@@ -18,6 +18,7 @@ class AppointmentEditViewController : UIViewController, UIPickerViewDelegate, UI
     @IBOutlet weak var datePickerStart: UIDatePicker!
     @IBOutlet weak var datePickerEnd: UIDatePicker!
     @IBOutlet weak var imageQrCode: UIImageView!
+    @IBOutlet weak var buttonShowCustomer: UIButton!
     
     let mDb = CustomerDatabase()
     var mCalendars:[CustomerCalendar] = []
@@ -60,6 +61,48 @@ class AppointmentEditViewController : UIViewController, UIPickerViewDelegate, UI
         return mCalendars[row].mTitle
     }
     
+    var mCustomerPickerController:CustomerPickerController? = nil
+    @IBAction func onClickAddCustomer(_ sender: UIButton) {
+        self.mCustomerPickerController = CustomerPickerController(db: self.mDb)
+        let vc = UIViewController()
+        vc.preferredContentSize = CGSize(width: 250, height: 300)
+        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 250, height: 300))
+        pickerView.delegate = self.mCustomerPickerController
+        pickerView.dataSource = self.mCustomerPickerController
+        vc.view.addSubview(pickerView)
+        let filterAlert = UIAlertController(title: NSLocalizedString("customer", comment: ""), message: nil, preferredStyle: UIAlertController.Style.alert)
+        filterAlert.setValue(vc, forKey: "contentViewController")
+        filterAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { (alert) in
+            if(self.mCustomerPickerController!.mSelectedCustomer != nil) {
+                self.buttonShowCustomer.isEnabled = true
+                self.mCurrentAppointment?.mCustomerId = self.mCustomerPickerController!.mSelectedCustomer?.mId
+                self.mCurrentAppointment?.mCustomer = ""
+                self.textFieldCustomer.text = self.mCustomerPickerController!.mSelectedCustomer?.getFullName(lastNameFirst: false)
+            }
+        }))
+        filterAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil))
+        self.present(filterAlert, animated: true)
+    }
+    @IBAction func onClickShowCustomer(_ sender: UIButton) {
+        if let id = mCurrentAppointment?.mCustomerId {
+            showCustomerDetails(id: id)
+        }
+    }
+    @IBAction func onClickRemoveCustomer(_ sender: UIButton) {
+        mCurrentAppointment?.mCustomer = ""
+        mCurrentAppointment?.mCustomerId = nil
+        textFieldCustomer.text = ""
+        buttonShowCustomer.isEnabled = false
+    }
+    
+    func showCustomerDetails(id: Int64) {
+        let detailViewController = storyboard?.instantiateViewController(withIdentifier:"CustomerDetailsNavigationViewController") as! UINavigationController
+        if let cdvc = detailViewController.viewControllers.first as? CustomerDetailsViewController {
+            cdvc.mCurrentCustomerId = id
+        }
+        splitViewController?.showDetailViewController(detailViewController, sender: nil)
+    }
+    
     @objc func keyboardWillShow(notification:NSNotification){
         //give room at the bottom of the scroll view, so it doesn't cover up anything the user needs to tap
         let userInfo = notification.userInfo!
@@ -88,14 +131,22 @@ class AppointmentEditViewController : UIViewController, UIPickerViewDelegate, UI
                 count += 1
             }
             textFieldSubject.text = mCurrentAppointment?.mTitle
-            textFieldCustomer.text = mCurrentAppointment?.mCustomer
             textFieldLocation.text = mCurrentAppointment?.mLocation
             textFieldNotes.text = mCurrentAppointment?.mNotes
             datePickerStart.date = mCurrentAppointment!.mTimeStart!
             datePickerEnd.date = mCurrentAppointment!.mTimeEnd!
             datePicker.date = mCurrentAppointment!.mTimeStart!
+            if(mCurrentAppointment!.mCustomerId != nil) {
+                if let c = mDb.getCustomer(id: mCurrentAppointment!.mCustomerId!) {
+                    textFieldCustomer.text = c.getFullName(lastNameFirst: false)
+                    buttonShowCustomer.isEnabled = true
+                }
+            } else {
+                textFieldCustomer.text = mCurrentAppointment?.mCustomer
+            }
             mIsNewAppointment = false
         } else {
+            mCurrentAppointment = CustomerAppointment()
             navigationItem.title = NSLocalizedString("new_appointment", comment: "")
             mIsNewAppointment = true
         }
@@ -228,10 +279,6 @@ class AppointmentEditViewController : UIViewController, UIPickerViewDelegate, UI
     }
     
     func saveAppointment() -> Bool {
-        if(mCurrentAppointment == nil) {
-            mCurrentAppointment = CustomerAppointment()
-        }
-        
         let dateFormatterDateTime = DateFormatter()
         dateFormatterDateTime.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
@@ -266,7 +313,6 @@ class AppointmentEditViewController : UIViewController, UIPickerViewDelegate, UI
         
         mCurrentAppointment?.mCalendarId = mCalendars[pickerCalendar.selectedRow(inComponent: 0)].mId
         mCurrentAppointment?.mTitle = textFieldSubject.text!
-        mCurrentAppointment?.mCustomer = textFieldCustomer.text!
         mCurrentAppointment?.mLocation = textFieldLocation.text!
         mCurrentAppointment?.mNotes = textFieldNotes.text!
         mCurrentAppointment?.mLastModified = Date()

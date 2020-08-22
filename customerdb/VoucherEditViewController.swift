@@ -18,6 +18,8 @@ class VoucherEditViewController : UIViewController {
     @IBOutlet weak var textFieldValidUntil: UITextField!
     @IBOutlet weak var textFieldCurrency: UILabel!
     @IBOutlet weak var stackViewSyncInfo: UIStackView!
+    @IBOutlet weak var buttonShowFromCustomer: UIButton!
+    @IBOutlet weak var buttonShowForCustomer: UIButton!
     
     let mDb = CustomerDatabase()
     
@@ -84,7 +86,72 @@ class VoucherEditViewController : UIViewController {
         mCurrentVoucherValidUntil = nil
         textFieldValidUntil.text = ""
     }
-
+    @IBAction func onClickAddFromCustomer(_ sender: UIButton) {
+        chooseCustomerDialog(setFromCustomer: true)
+    }
+    @IBAction func onClickShowFromCustomer(_ sender: UIButton) {
+        if let id = mCurrentVoucher?.mFromCustomerId {
+            showCustomerDetails(id: id)
+        }
+    }
+    @IBAction func onClickRemoveFromCustomer(_ sender: UIButton) {
+        mCurrentVoucher?.mFromCustomer = ""
+        mCurrentVoucher?.mFromCustomerId = nil
+        textFieldFromCustomer.text = ""
+        buttonShowFromCustomer.isEnabled = false
+    }
+    @IBAction func onClickAddForCustomer(_ sender: UIButton) {
+        chooseCustomerDialog(setFromCustomer: false)
+    }
+    @IBAction func onClickShowForCustomer(_ sender: UIButton) {
+        if let id = mCurrentVoucher?.mForCustomerId {
+            showCustomerDetails(id: id)
+        }
+    }
+    @IBAction func onClickRemoveForCustomer(_ sender: UIButton) {
+        mCurrentVoucher?.mForCustomer = ""
+        mCurrentVoucher?.mForCustomerId = nil
+        textFieldForCustomer.text = ""
+        buttonShowForCustomer.isEnabled = false
+    }
+    
+    var mCustomerPickerController:CustomerPickerController? = nil
+    func chooseCustomerDialog(setFromCustomer:Bool) {
+        self.mCustomerPickerController = CustomerPickerController(db: self.mDb)
+        let vc = UIViewController()
+        vc.preferredContentSize = CGSize(width: 250, height: 300)
+        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 250, height: 300))
+        pickerView.delegate = self.mCustomerPickerController
+        pickerView.dataSource = self.mCustomerPickerController
+        vc.view.addSubview(pickerView)
+        let filterAlert = UIAlertController(title: NSLocalizedString("customer", comment: ""), message: nil, preferredStyle: UIAlertController.Style.alert)
+        filterAlert.setValue(vc, forKey: "contentViewController")
+        filterAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { (alert) in
+            if(self.mCustomerPickerController!.mSelectedCustomer != nil) {
+                if(setFromCustomer) {
+                    self.mCurrentVoucher?.mFromCustomerId = self.mCustomerPickerController!.mSelectedCustomer?.mId
+                    self.mCurrentVoucher?.mFromCustomer = ""
+                    self.textFieldFromCustomer.text = self.mCustomerPickerController!.mSelectedCustomer?.getFullName(lastNameFirst: false)
+                    self.buttonShowFromCustomer.isEnabled = true
+                } else {
+                    self.mCurrentVoucher?.mForCustomerId = self.mCustomerPickerController!.mSelectedCustomer?.mId
+                    self.mCurrentVoucher?.mForCustomer = ""
+                    self.textFieldForCustomer.text = self.mCustomerPickerController!.mSelectedCustomer?.getFullName(lastNameFirst: false)
+                    self.buttonShowForCustomer.isEnabled = true
+                }
+            }
+        }))
+        filterAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil))
+        self.present(filterAlert, animated: true)
+    }
+    func showCustomerDetails(id: Int64) {
+        let detailViewController = storyboard?.instantiateViewController(withIdentifier:"CustomerDetailsNavigationViewController") as! UINavigationController
+        if let cdvc = detailViewController.viewControllers.first as? CustomerDetailsViewController {
+            cdvc.mCurrentCustomerId = id
+        }
+        splitViewController?.showDetailViewController(detailViewController, sender: nil)
+    }
+    
     @objc func keyboardWillShow(notification:NSNotification){
         //give room at the bottom of the scroll view, so it doesn't cover up anything the user needs to tap
         let userInfo = notification.userInfo!
@@ -113,12 +180,27 @@ class VoucherEditViewController : UIViewController {
                 mCurrentVoucherValidUntil = mCurrentVoucher!.mValidUntil
                 textFieldValidUntil.text = CustomerDatabase.dateToDisplayString(date: mCurrentVoucher!.mValidUntil!)
             }
-            textFieldFromCustomer.text = mCurrentVoucher?.mFromCustomer
-            textFieldForCustomer.text = mCurrentVoucher?.mForCustomer
             textViewNotes.text = mCurrentVoucher?.mNotes
             textFieldVoucherNumber.isEnabled = false
+            if(mCurrentVoucher!.mFromCustomerId != nil) {
+                if let c = mDb.getCustomer(id: mCurrentVoucher!.mFromCustomerId!) {
+                    textFieldFromCustomer.text = c.getFullName(lastNameFirst: false)
+                    buttonShowFromCustomer.isEnabled = true
+                }
+            } else {
+                textFieldFromCustomer.text = mCurrentVoucher?.mFromCustomer
+            }
+            if(mCurrentVoucher!.mForCustomerId != nil) {
+                if let c = mDb.getCustomer(id: mCurrentVoucher!.mForCustomerId!) {
+                    textFieldForCustomer.text = c.getFullName(lastNameFirst: false)
+                    buttonShowForCustomer.isEnabled = true
+                }
+            } else {
+                textFieldForCustomer.text = mCurrentVoucher?.mForCustomer
+            }
             mIsNewVoucher = false
         } else {
+            mCurrentVoucher = Voucher()
             navigationItem.title = NSLocalizedString("new_voucher", comment: "")
             mIsNewVoucher = true
         }
@@ -175,17 +257,11 @@ class VoucherEditViewController : UIViewController {
     }
     
     func saveVoucher() -> Bool {
-        if(mCurrentVoucher == nil) {
-            mCurrentVoucher = Voucher()
-        }
-        
         mCurrentVoucher?.mCurrentValue = Double(textFieldCurrentValue.text!) ?? mCurrentVoucher!.mCurrentValue
         if(mIsNewVoucher) {
             mCurrentVoucher?.mOriginalValue = mCurrentVoucher!.mCurrentValue
         }
         mCurrentVoucher?.mVoucherNo = textFieldVoucherNumber.text!
-        mCurrentVoucher?.mFromCustomer = textFieldFromCustomer.text!
-        mCurrentVoucher?.mForCustomer = textFieldForCustomer.text!
         mCurrentVoucher?.mNotes = textViewNotes.text!
         mCurrentVoucher?.mValidUntil = mCurrentVoucherValidUntil
         mCurrentVoucher?.mLastModified = Date()
