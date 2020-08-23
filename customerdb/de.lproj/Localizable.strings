@@ -149,6 +149,7 @@
 "image_from_camera" = "Mit Kamera aufnehmen";
 "choose_from_gallery" = "Aus Galerie auswählen";
 "choose_from_files" = "Aus Dateien auswählen";
+"file_name" = "Dateiname";
 
 // Sync
 "reset_password" = "Passwort zurücksetzen";

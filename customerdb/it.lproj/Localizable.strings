@@ -140,6 +140,7 @@
 "image_from_camera" = "Immagine dalla fotocamera";
 "choose_from_gallery" = "Scegli dalla Galleria";
 "choose_from_files" = "Scegli da File";
+"file_name" = "Nome del file";
 
 // Sync
 "reset_password" = "Resetta la password";

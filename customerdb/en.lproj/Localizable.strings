@@ -149,6 +149,7 @@
 "image_from_camera" = "Image from Camera";
 "choose_from_gallery" = "Choose from Gallery";
 "choose_from_files" = "Choose from Files";
+"file_name" = "File Name";
 
 // Sync
 "reset_password" = "Reset Password";

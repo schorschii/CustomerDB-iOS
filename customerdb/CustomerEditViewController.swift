@@ -6,7 +6,7 @@
 import Foundation
 import UIKit
 
-class CustomerEditViewController : UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIDocumentPickerDelegate {
+class CustomerEditViewController : UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIDocumentPickerDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var stackViewImage: UIStackView!
@@ -663,7 +663,7 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
         buttonFile.addTarget(self, action: #selector(onClickFile), for: .touchUpInside)
         
         let buttonRemove = FileIndexButton(file: file, index: index)
-        buttonRemove.setTitle(NSLocalizedString("remove", comment: ""), for: .normal)
+        buttonRemove.setImage(UIImage(named: "baseline_clear_black_24pt"), for: .normal)
         buttonRemove.addTarget(self, action: #selector(onClickFileRemove), for: .touchUpInside)
         buttonRemove.setContentHuggingPriority(.required, for: .horizontal)
         buttonRemove.setContentCompressionResistancePriority(.required, for: .horizontal)
@@ -697,6 +697,7 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         alert.addTextField(configurationHandler: { (textField) -> Void in
             textField.text = defaultText
+            textField.delegate = self
         })
         alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { [weak alert] (action) -> Void in
             let textField = (alert?.textFields![0])! as UITextField
@@ -706,6 +707,15 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
             callback(nil)
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if let idx = textField.text!.lastIndex(of: ".") {
+            textField.selectedTextRange = textField.textRange(
+                from: textField.position(from: textField.beginningOfDocument, offset: 0)!,
+                to: textField.position(from: textField.beginningOfDocument, offset: idx)!
+            )
+        }
+        textField.becomeFirstResponder()
     }
     
     @objc func handleCustomDatePicker(sender: UITextFieldDatePicker) {
@@ -738,6 +748,12 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
         UIGraphicsEndImageContext()
 
         return newImage
+    }
+}
+
+public extension String {
+    func lastIndex(of char: Character) -> Int? {
+        return lastIndex(of: char)?.utf16Offset(in: self)
     }
 }
 
