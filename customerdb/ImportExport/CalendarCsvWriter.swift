@@ -19,7 +19,7 @@ class CalendarCsvWriter {
         var content = ""
         
         let headers = [
-            "id", "title", "notes", "time_start", "time_end", "fullday", "customer", "location", "last_modified"
+            "id", "title", "notes", "time_start", "time_end", "fullday", "customer", "customer_id", "location", "last_modified"
         ]
         content += putLine(fields: headers)
         
@@ -32,6 +32,7 @@ class CalendarCsvWriter {
                 c.mTimeEnd==nil ? "" : CustomerDatabase.dateToString(date: c.mTimeEnd!),
                 c.mFullday ? "1" : "0",
                 c.mCustomer,
+                c.mCustomerId==nil ? "" : String(c.mCustomerId!),
                 c.mLocation,
                 CustomerDatabase.dateToString(date: c.mLastModified)
             ]

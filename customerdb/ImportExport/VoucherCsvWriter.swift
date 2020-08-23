@@ -20,7 +20,7 @@ class VoucherCsvWriter {
         
         let headers = [
             "id", "voucher_no", "original_value", "current_value",
-            "from_customer", "for_customer",
+            "from_customer", "from_customer_id", "for_customer", "for_customer_id",
             "issued", "valid_until", "redeemed", "last_modified",
             "notes"
         ]
@@ -31,7 +31,10 @@ class VoucherCsvWriter {
             let fields:[String] = [
                 String(v.mId), v.mVoucherNo,
                 String(v.mOriginalValue), String(v.mCurrentValue),
-                v.mFromCustomer, v.mForCustomer,
+                v.mFromCustomer,
+                v.mFromCustomerId==nil ? "" : String(v.mFromCustomerId!),
+                v.mForCustomer,
+                v.mForCustomerId==nil ? "" : String(v.mForCustomerId!),
                 CustomerDatabase.dateToString(date: v.mIssued),
                 v.mValidUntil==nil ? "" : CustomerDatabase.dateToString(date: v.mValidUntil!),
                 v.mRedeemed==nil ? "" : CustomerDatabase.dateToString(date: v.mRedeemed!),
