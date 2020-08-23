@@ -20,6 +20,7 @@ class VoucherEditViewController : UIViewController {
     @IBOutlet weak var stackViewSyncInfo: UIStackView!
     @IBOutlet weak var buttonShowFromCustomer: UIButton!
     @IBOutlet weak var buttonShowForCustomer: UIButton!
+    @IBOutlet weak var buttonGenerateVoucherNumber: UIButton!
     
     let mDb = CustomerDatabase()
     
@@ -181,7 +182,10 @@ class VoucherEditViewController : UIViewController {
                 textFieldValidUntil.text = CustomerDatabase.dateToDisplayString(date: mCurrentVoucher!.mValidUntil!)
             }
             textViewNotes.text = mCurrentVoucher?.mNotes
-            textFieldVoucherNumber.isEnabled = false
+            if(mCurrentVoucher?.mVoucherNo != "") {
+                textFieldVoucherNumber.isEnabled = false
+                buttonGenerateVoucherNumber.isEnabled = false
+            }
             if(mCurrentVoucher!.mFromCustomerId != nil) {
                 if let c = mDb.getCustomer(id: mCurrentVoucher!.mFromCustomerId!) {
                     textFieldFromCustomer.text = c.getFullName(lastNameFirst: false)

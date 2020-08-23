@@ -1445,6 +1445,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="buttonGenerateVoucherNumber" destination="9K0-Bg-dGz" id="eku-Dw-U3f"/>
                         <outlet property="buttonShowForCustomer" destination="Ngk-C1-Iq5" id="gPg-Yi-vjB"/>
                         <outlet property="buttonShowFromCustomer" destination="8kR-Mr-UKB" id="Bf1-h2-7Vd"/>
                         <outlet property="scrollView" destination="3fb-Nk-4Af" id="sV7-dB-QN4"/>
