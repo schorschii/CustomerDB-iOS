@@ -584,7 +584,7 @@
 "QUK-XO-amn.normalTitle" = "Agregar archivo";
 
 "7EC-pT-lyN.text" = "Archivos";
-"KoK-NQ-8nE.text" = "Adjunte archivos a registros de clientes (máximo 5 archivos y 1 MB por archivo).";
+"KoK-NQ-8nE.text" = "Adjunte archivos a los registros del cliente (máximo 20 archivos por cliente y 1 MB por archivo).";
 "Xk1-bC-0w5.text" = "Calendario";
 "8sP-Eh-96i.text" = "Desbloquea las funciones del calendario.";
 

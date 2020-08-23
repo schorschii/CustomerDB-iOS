@@ -161,7 +161,7 @@ class Customer {
         if(file.mContent!.count > 1024 * 1024) {
             throw FileErrors.fileTooBig
         }
-        if(mFiles!.count >= 5) {
+        if(mFiles!.count >= 20) {
             throw FileErrors.fileLimitReached
         }
         mFiles?.append(file)

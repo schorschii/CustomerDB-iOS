@@ -102,7 +102,7 @@
 "3yn-nk-BSE.text" = "Benutzerdefinierte Felder";
 "N09-a4-S8u.text" = "Ermöglicht es beliebig viele eigene Felder zu Kundendatensätzen hinzuzufügen. Sie können auch Auswahllisten erstellen und die Kundenliste nach benutzerdefinierten Feldern zu sortieren.";
 "7EC-pT-lyN.text" = "Dateien";
-"KoK-NQ-8nE.text" = "Fügen Sie Dateien an Kundendatensätze an (maximal 5 Dateien und 1MB pro Datei).";
+"KoK-NQ-8nE.text" = "Fügen Sie Dateien an Kundendatensätze an (maximal 20 Dateien pro Kunde und 1MB pro Datei).";
 "Xk1-bC-0w5.text" = "Kalender";
 "8sP-Eh-96i.text" = "Schaltet die Kalenderfunktionen frei.";
 "In6-6A-pDm.text" = "Standardmäßig werden die Daten nur lokal auf diesem Gerät gespeichert. Bitte sichern Sie Ihre Datenbank regelmäßig, um die Daten im Falle eines Defekts oder Verlusts des mobilen Endgerätes nicht zu verlieren.\n\nKopieren Sie dazu einfach regelmäßig die Datenbankdateien von Ihrem iOS-Gerät auf Ihren Computer oder ein anderes externes Speichermedium. Sie finden die Dateien im Ordner 'Kundendatenbank'.\n\nNoch einfacher geht das Backup, wenn Sie die Synchronisierungsfunktion verwenden. Hierbei werden die Daten auf Knopfdruck mit einem MySQL-Server abgegelichen. Weitere Informationen zu dieser Backupmethode finden Sie in den Einstellungen.";

@@ -584,7 +584,7 @@
 "QUK-XO-amn.normalTitle" = "Ajouter le fichier";
 
 "7EC-pT-lyN.text" = "Des dossiers";
-"KoK-NQ-8nE.text" = "Joignez des fichiers aux enregistrements client (maximum 5 fichiers et 1 Mo par fichier).";
+"KoK-NQ-8nE.text" = "Joindre des fichiers aux enregistrements des clients (maximum 20 fichiers par client et 1 Mo par fichier).";
 "Xk1-bC-0w5.text" = "Calendrier";
 "8sP-Eh-96i.text" = "Déverrouille les fonctions du calendrier.";
 
