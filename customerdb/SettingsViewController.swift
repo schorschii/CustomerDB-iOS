@@ -98,6 +98,8 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         mEmailSubject = mDefaults.string(forKey: "email-subject") ?? ""
         mEmailTemplate = mDefaults.string(forKey: "email-template") ?? ""
         mNewsletterText = mDefaults.string(forKey: "email-newsletter-template") ?? ""
+        mDefaultAppointmentTitle = mDefaults.string(forKey: "default-appointment-title") ?? ""
+        mDefaultAppointmentLocation = mDefaults.string(forKey: "default-appointment-location") ?? ""
         
         updateColorPreview()
         onSyncModeChanged(segmentedControlSync)
@@ -148,7 +150,9 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         mDefaults.set(mEmailSubject, forKey: "email-subject")
         mDefaults.set(mEmailTemplate, forKey: "email-template")
         mDefaults.set(mNewsletterText, forKey: "email-newsletter-template")
-
+        mDefaults.set(mDefaultAppointmentTitle, forKey: "default-appointment-title")
+        mDefaults.set(mDefaultAppointmentLocation, forKey: "default-appointment-location")
+        
         if let msvc = presentingViewController as? MainSplitViewController {
             if let mnvc = msvc.viewControllers[0] as? MasterNavigationController {
                 mnvc.setNavigationBarColor(UIColor.init(
@@ -453,6 +457,8 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
     var mEmailSubject = ""
     var mEmailTemplate = ""
     var mNewsletterText = ""
+    var mDefaultAppointmentTitle = ""
+    var mDefaultAppointmentLocation = ""
     @IBAction func onClickChangeDefaultCustomerTitle(_ sender: UIButton) {
         inputBox(title: NSLocalizedString("change_text_template", comment: ""), defaultText: mDefaultCustomerTitle, callback: { newText in
             if(newText != nil) { self.mDefaultCustomerTitle = newText! }
@@ -486,6 +492,16 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
     @IBAction func onClickChangeNewsletterText(_ sender: UIButton) {
         inputBox(title: NSLocalizedString("change_text_template", comment: ""), defaultText: mNewsletterText, callback: { newText in
             if(newText != nil) { self.mNewsletterText = newText! }
+        })
+    }
+    @IBAction func onClickChangeAppointmentTitle(_ sender: UIButton) {
+        inputBox(title: NSLocalizedString("change_text_template", comment: ""), defaultText: mDefaultAppointmentTitle, callback: { newText in
+            if(newText != nil) { self.mDefaultAppointmentTitle = newText! }
+        })
+    }
+    @IBAction func onClickChangeAppointmentLocation(_ sender: UIButton) {
+        inputBox(title: NSLocalizedString("change_text_template", comment: ""), defaultText: mDefaultAppointmentLocation, callback: { newText in
+            if(newText != nil) { self.mDefaultAppointmentLocation = newText! }
         })
     }
     

@@ -42,6 +42,10 @@ class AppointmentEditViewController : UIViewController, UIPickerViewDelegate, UI
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
         
+        // load default values
+        textFieldSubject.text = UserDefaults.standard.string(forKey: "default-appointment-title") ?? ""
+        textFieldLocation.text = UserDefaults.standard.string(forKey: "default-appointment-location") ?? ""
+        
         loadAppointment()
         
         Timer.scheduledTimer(

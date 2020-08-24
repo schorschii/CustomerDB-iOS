@@ -135,11 +135,13 @@
 "9G0-cJ-HcG.text" = "Textvorlagen";
 "oGa-7s-0Do.normalTitle" = "Standard-Anrede";
 "nw3-Xh-pfY.normalTitle" = "Standard-Gruppe";
-"Bwq-3k-kqt.normalTitle" = "E-Mail Betreff";
-"79t-Ou-jNL.normalTitle" = "E-Mail Vorlage";
+"Bwq-3k-kqt.normalTitle" = "E-Mail-Betreff";
+"79t-Ou-jNL.normalTitle" = "E-Mail-Vorlage";
 "WbU-vC-Isj.normalTitle" = "Newsletter-Text";
-"qRo-pe-v0f.normalTitle" = "Export-Mail Betreff";
-"VKV-Jb-RaS.normalTitle" = "Export-Mail Text";
+"qRo-pe-v0f.normalTitle" = "Export-Mail-Betreff";
+"VKV-Jb-RaS.normalTitle" = "Export-Mail-Text";
+"lrM-bk-fnz.normalTitle" = "Standard-Titel für Termine";
+"xPA-Yx-RNW.normalTitle" = "Standard-Ort für Termine";
 "YzH-pZ-ZBO.text" = "Feld-Konfiguration";
 "Xpy-t9-9YD.text" = "Kundenbild anzeigen";
 "CL1-Ng-7SD.text" = "Telefon-Felder anzeigen";
