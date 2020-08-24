@@ -16,6 +16,7 @@ class CalendarCsvWriter {
     }
     
     func buildCsvContent() -> String {
+        let mDb = CustomerDatabase()
         var content = ""
         
         let headers = [
@@ -24,6 +25,15 @@ class CalendarCsvWriter {
         content += putLine(fields: headers)
         
         for c in mAppointments {
+            var customerText = ""
+            if(c.mCustomerId != nil) {
+                if let c = mDb.getCustomer(id: c.mCustomerId!) {
+                    customerText = c.getFullName(lastNameFirst: false)
+                }
+            } else {
+                customerText = c.mCustomer
+            }
+            
             let fields:[String] = [
                 String(c.mId),
                 c.mTitle,
@@ -31,7 +41,7 @@ class CalendarCsvWriter {
                 c.mTimeStart==nil ? "" : CustomerDatabase.dateToString(date: c.mTimeStart!),
                 c.mTimeEnd==nil ? "" : CustomerDatabase.dateToString(date: c.mTimeEnd!),
                 c.mFullday ? "1" : "0",
-                c.mCustomer,
+                customerText,
                 c.mCustomerId==nil ? "" : String(c.mCustomerId!),
                 c.mLocation,
                 CustomerDatabase.dateToString(date: c.mLastModified)

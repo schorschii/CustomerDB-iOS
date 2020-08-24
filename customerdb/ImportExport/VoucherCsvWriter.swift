@@ -16,6 +16,7 @@ class VoucherCsvWriter {
     }
     
     func buildCsvContent() -> String {
+        let mDb = CustomerDatabase()
         var content = ""
         
         let headers = [
@@ -28,12 +29,30 @@ class VoucherCsvWriter {
         content += putLine(fields: headers)
         
         for v in mVouchers {
+            var fromCustomerText = ""
+            if(v.mFromCustomerId != nil) {
+                if let c = mDb.getCustomer(id: v.mFromCustomerId!) {
+                    fromCustomerText = c.getFullName(lastNameFirst: false)
+                }
+            } else {
+                fromCustomerText = v.mFromCustomer
+            }
+            
+            var forCustomerText = ""
+            if(v.mForCustomerId != nil) {
+                if let c = mDb.getCustomer(id: v.mForCustomerId!) {
+                    forCustomerText = c.getFullName(lastNameFirst: false)
+                }
+            } else {
+                forCustomerText = v.mForCustomer
+            }
+            
             let fields:[String] = [
                 String(v.mId), v.mVoucherNo,
                 String(v.mOriginalValue), String(v.mCurrentValue),
-                v.mFromCustomer,
+                fromCustomerText,
                 v.mFromCustomerId==nil ? "" : String(v.mFromCustomerId!),
-                v.mForCustomer,
+                forCustomerText,
                 v.mForCustomerId==nil ? "" : String(v.mForCustomerId!),
                 CustomerDatabase.dateToString(date: v.mIssued),
                 v.mValidUntil==nil ? "" : CustomerDatabase.dateToString(date: v.mValidUntil!),
