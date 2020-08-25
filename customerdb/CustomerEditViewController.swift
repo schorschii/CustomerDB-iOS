@@ -300,7 +300,9 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
                 }
                 else if picker is ImagePickerCustomerFile {
                     if let jpeg = compressedImage.jpegData(compressionQuality: 0.60) {
-                        self.addFile(name: NSLocalizedString("image", comment: "")+".jpg", content: jpeg)
+                        DispatchQueue.main.async { // use DispatchQueue for potential alert dialog
+                            self.addFile(name: NSLocalizedString("image", comment: "")+".jpg", content: jpeg)
+                        }
                     }
                 }
             }
