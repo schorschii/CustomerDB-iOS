@@ -13,7 +13,7 @@ class AppointmentEditViewController : UIViewController, UIPickerViewDelegate, UI
     @IBOutlet weak var textFieldSubject: UITextField!
     @IBOutlet weak var textFieldCustomer: UITextField!
     @IBOutlet weak var textFieldLocation: UITextField!
-    @IBOutlet weak var textFieldNotes: UITextField!
+    @IBOutlet weak var textFieldNotes: UITextView!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var datePickerStart: UIDatePicker!
     @IBOutlet weak var datePickerEnd: UIDatePicker!
@@ -31,6 +31,8 @@ class AppointmentEditViewController : UIViewController, UIPickerViewDelegate, UI
         if(splitViewController!.isCollapsed) {
             navigationItem.leftBarButtonItem = nil
         }
+        
+        GuiHelper.adjustTextviewStyle(control: textFieldNotes, viewController: self)
         
         mCalendars = mDb.getCalendars(showDeleted: false)
         pickerCalendar.dataSource = self

@@ -37,15 +37,7 @@ class VoucherEditViewController : UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
         
-        var mBorderColor = CustomerEditViewController.BORDER_COLOR_LIGHT
-        if #available(iOS 12.0, *) {
-            if self.traitCollection.userInterfaceStyle == .dark {
-                mBorderColor = CustomerEditViewController.BORDER_COLOR_DARK
-            }
-        }
-        textViewNotes.layer.borderColor = mBorderColor
-        textViewNotes.layer.borderWidth = CustomerEditViewController.BORDER_WIDTH
-        textViewNotes.layer.cornerRadius = CustomerEditViewController.BORDER_RADIUS
+        GuiHelper.adjustTextviewStyle(control: textViewNotes, viewController: self)
         
         let datePickerView = UIDatePicker()
         datePickerView.datePickerMode = .date

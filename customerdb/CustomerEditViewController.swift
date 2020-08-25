@@ -48,22 +48,6 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
     var mCurrentCustomerBirthday:Date? = nil
     var mIsInputOnlyModeActive = false
     
-    static var BORDER_COLOR_LIGHT = UIColor(
-        red: 215.0 / 255.0,
-        green: 215.0 / 255.0,
-        blue: 215.0 / 255.0,
-        alpha: CGFloat(1.0)
-    ).cgColor
-    static var BORDER_COLOR_DARK = UIColor(
-        red: 60.0 / 255.0,
-        green: 60.0 / 255.0,
-        blue: 60.0 / 255.0,
-        alpha: CGFloat(1.0)
-    ).cgColor
-    var mBorderColor = CustomerEditViewController.BORDER_COLOR_LIGHT
-    static var BORDER_WIDTH:CGFloat = 1.0
-    static var BORDER_RADIUS:CGFloat = 5
-    
     override func viewDidLoad() {
         if(splitViewController!.isCollapsed ||
             (!splitViewController!.isCollapsed && mCurrentCustomer != nil)) {
@@ -121,17 +105,8 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
         textFieldCountry.text = UserDefaults.standard.string(forKey: "default-customer-country") ?? ""
         textFieldGroup.text = UserDefaults.standard.string(forKey: "default-customer-group") ?? ""
         
-        if #available(iOS 12.0, *) {
-            if self.traitCollection.userInterfaceStyle == .dark {
-                mBorderColor = CustomerEditViewController.BORDER_COLOR_DARK
-            }
-        }
-        textViewStreet.layer.borderColor = mBorderColor
-        textViewStreet.layer.borderWidth = CustomerEditViewController.BORDER_WIDTH
-        textViewStreet.layer.cornerRadius = CustomerEditViewController.BORDER_RADIUS
-        textViewNotes.layer.borderColor = mBorderColor
-        textViewNotes.layer.borderWidth = CustomerEditViewController.BORDER_WIDTH
-        textViewNotes.layer.cornerRadius = CustomerEditViewController.BORDER_RADIUS
+        GuiHelper.adjustTextviewStyle(control: textViewStreet, viewController: self)
+        GuiHelper.adjustTextviewStyle(control: textViewNotes, viewController: self)
         
         // birthday date picker view
         let toolBar = UIToolbar()
@@ -618,9 +593,7 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
             textView.isScrollEnabled = false
             textView.text = finalText
             textView.font = textFieldTitle.font
-            textView.layer.borderColor = mBorderColor
-            textView.layer.borderWidth = CustomerEditViewController.BORDER_WIDTH
-            textView.layer.cornerRadius = CustomerEditViewController.BORDER_RADIUS
+            GuiHelper.adjustTextviewStyle(control: textView, viewController: self)
             inputView = textView
         } else {
             let textField = UITextField()
