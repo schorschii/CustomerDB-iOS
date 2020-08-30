@@ -147,9 +147,6 @@ class CustomerDatabase {
         dateFormatter.dateFormat = CustomerDatabase.STORAGE_FORMAT
         return dateFormatter.date(from:strDate)
     }
-    static func parseDateToTimestamp(strDate: String) -> Int {
-        return Int((CustomerDatabase.parseDate(strDate: strDate) ?? Date()).timeIntervalSince1970)
-    }
     
     // Calendar Operations
     func getCalendars(showDeleted:Bool) -> [CustomerCalendar] {
