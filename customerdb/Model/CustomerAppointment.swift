@@ -64,12 +64,12 @@ class CustomerAppointment {
             case "notes":
                 mNotes = value; break
             case "time_start":
-                if let date = CustomerDatabase.parseDate(strDate: value) {
+                if let date = CustomerDatabase.parseDateRaw(strDate: value) {
                     mTimeStart = date
                 }
                 break;
             case "time_end":
-                if let date = CustomerDatabase.parseDate(strDate: value) {
+                if let date = CustomerDatabase.parseDateRaw(strDate: value) {
                     mTimeEnd = date
                 }
                 break;

@@ -297,8 +297,8 @@ class AppointmentEditViewController : UIViewController, UIPickerViewDelegate, UI
         let strTimeStart = dateFormatterDate.string(from: datePicker.date) + " " + dateFormatterTime.string(from: datePickerStart.date)
         let strTimeEnd = dateFormatterDate.string(from: datePicker.date) + " " + dateFormatterTime.string(from: datePickerEnd.date)
         
-        mCurrentAppointment?.mTimeStart = CustomerDatabase.parseDate(strDate: strTimeStart)
-        mCurrentAppointment?.mTimeEnd = CustomerDatabase.parseDate(strDate: strTimeEnd)
+        mCurrentAppointment?.mTimeStart = CustomerDatabase.parseDateRaw(strDate: strTimeStart)
+        mCurrentAppointment?.mTimeEnd = CustomerDatabase.parseDateRaw(strDate: strTimeEnd)
         
         if(mCurrentAppointment?.mTimeStart == nil || mCurrentAppointment?.mTimeEnd == nil) {
             return false

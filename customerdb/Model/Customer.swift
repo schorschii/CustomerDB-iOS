@@ -107,7 +107,7 @@ class Customer {
         case "country":
             mCountry = value; break
         case "birthday":
-            if let birthday = CustomerDatabase.parseDate(strDate: value) {
+            if let birthday = CustomerDatabase.parseDateRaw(strDate: value) {
                 mBirthday = birthday
             }
             break

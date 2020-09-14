@@ -38,7 +38,7 @@ class CustomerCsvWriter {
                 c.mPhoneHome, c.mPhoneMobile, c.mPhoneWork, c.mEmail,
                 c.mStreet, c.mZipcode, c.mCity, c.mCountry, c.mGroup,
                 c.mNewsletter ? "1" : "0",
-                c.mBirthday==nil ? "" : CustomerDatabase.dateToString(date: c.mBirthday!),
+                c.mBirthday==nil ? "" : CustomerDatabase.dateToStringRaw(date: c.mBirthday!),
                 CustomerDatabase.dateToString(date: c.mLastModified),
                 c.mNotes
             ]

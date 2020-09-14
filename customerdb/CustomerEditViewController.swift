@@ -226,7 +226,7 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
             
             // convert date to display format
             if(attribute!.mType == CustomField.TYPE.DATE) {
-                let date = CustomerDatabase.parseDate(strDate: attribute!.mValue)
+                let date = CustomerDatabase.parseDateRaw(strDate: attribute!.mValue)
                 if(date != nil) {
                     attribute!.mValue = CustomerDatabase.dateToDisplayStringWithoutTime(date: date!)
                 }
@@ -553,7 +553,7 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
                 if(attribute.mType == CustomField.TYPE.DATE) {
                     let date = CustomerDatabase.parseDisplayDateWithoutTime(strDate: finalValue)
                     if(date != nil) {
-                        finalValue = CustomerDatabase.dateToString(date: date!)
+                        finalValue = CustomerDatabase.dateToStringRaw(date: date!)
                     }
                 }
                 mCurrentCustomer?.setCustomField(title:attribute.mTitle, value:finalValue)

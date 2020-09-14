@@ -28,10 +28,15 @@ class CustomerVcfWriter {
     }
     
     static var FORMAT_WITHOUT_DASHES = "yyyyMMdd"
-    static func formatWithoutDashes(date: Date) -> String {
+    static func formatWithoutDashesRaw(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = CustomerVcfWriter.FORMAT_WITHOUT_DASHES
         return dateFormatter.string(from: date)
+    }
+    private static func parseVcfDateRaw(strDate: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = CustomerVcfWriter.FORMAT_WITHOUT_DASHES
+        return dateFormatter.date(from:strDate)
     }
     
     func buildVcfContent() -> String {
@@ -61,7 +66,7 @@ class CustomerVcfWriter {
                 content += "ORG:"+escapeVcfValue(currentCustomer.mGroup)+"\n";
             }
             if(currentCustomer.mBirthday != nil) {
-                content += "BDAY:"+CustomerVcfWriter.formatWithoutDashes(date:currentCustomer.mBirthday!)+"\n";
+                content += "BDAY:"+CustomerVcfWriter.formatWithoutDashesRaw(date:currentCustomer.mBirthday!)+"\n";
             }
             if(currentCustomer.mNotes != "") {
                 content += "NOTE;ENCODING=QUOTED-PRINTABLE:"+escapeVcfValue(currentCustomer.mNotes)+"\n";
@@ -252,7 +257,7 @@ class CustomerVcfWriter {
                         break
 
                     case "BDAY":
-                        newCustomer.mBirthday = parseVcfDate(strDate: f.mValues[0])
+                        newCustomer.mBirthday = parseVcfDateRaw(strDate: f.mValues[0])
                         break
 
                     case "PHOTO":
@@ -276,13 +281,6 @@ class CustomerVcfWriter {
         }
 
         return newCustomers
-    }
-    
-    private static var VCF_FORMAT = "yyyy-MM-dd HH:mm:ss"
-    private static func parseVcfDate(strDate: String) -> Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = VCF_FORMAT
-        return dateFormatter.date(from:strDate)
     }
     
     private static func addTelephoneNumber(currentCustomer: Customer, telParam: String, telValue: String) {

@@ -174,7 +174,7 @@ class CustomerDetailsViewController : UIViewController, MFMessageComposeViewCont
                 
             // convert date to display format
             if(field.mType == CustomField.TYPE.DATE) {
-                let date = CustomerDatabase.parseDate(strDate: finalText)
+                let date = CustomerDatabase.parseDateRaw(strDate: finalText)
                 if(date != nil) {
                     finalText = CustomerDatabase.dateToDisplayStringWithoutTime(date: date!)
                 }

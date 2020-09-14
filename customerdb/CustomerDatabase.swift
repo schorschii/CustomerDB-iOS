@@ -101,6 +101,72 @@ class CustomerDatabase {
             sqlite3_exec(db, "ALTER TABLE appointment ADD COLUMN customer_id INTEGER;", nil,nil,nil)
             sqlite3_exec(db, "ALTER TABLE voucher ADD COLUMN from_customer_id INTEGER;", nil,nil,nil)
             sqlite3_exec(db, "ALTER TABLE voucher ADD COLUMN for_customer_id INTEGER;", nil,nil,nil)
+            
+            // convert timestamps to UTC
+            var stmt:OpaquePointer?
+            if(sqlite3_prepare(self.db, "SELECT id, last_modified FROM customer", -1, &stmt, nil) == SQLITE_OK) {
+                while sqlite3_step(stmt) == SQLITE_ROW {
+                    let oldDate = CustomerDatabase.parseDateRaw(strDate: String(cString: sqlite3_column_text(stmt, 1)))
+                    let newDateString = CustomerDatabase.dateToString(date: oldDate!) as NSString
+                    var stmt2:OpaquePointer?
+                    if sqlite3_prepare(self.db, "UPDATE customer SET last_modified = ? WHERE id = ?", -1, &stmt2, nil) == SQLITE_OK {
+                        sqlite3_bind_text(stmt2, 1, newDateString.utf8String, -1, nil)
+                        sqlite3_bind_int64(stmt2, 2, sqlite3_column_int64(stmt, 0))
+                        if sqlite3_step(stmt2) == SQLITE_DONE { sqlite3_finalize(stmt2) }
+                    }
+                }
+            }
+            if(sqlite3_prepare(self.db, "SELECT id, last_modified FROM appointment", -1, &stmt, nil) == SQLITE_OK) {
+                while sqlite3_step(stmt) == SQLITE_ROW {
+                    let oldDate = CustomerDatabase.parseDateRaw(strDate: String(cString: sqlite3_column_text(stmt, 1)))
+                    let newDateString = CustomerDatabase.dateToString(date: oldDate!) as NSString
+                    var stmt2:OpaquePointer?
+                    if sqlite3_prepare(self.db, "UPDATE voucher SET last_modified = ? WHERE id = ?", -1, &stmt2, nil) == SQLITE_OK {
+                        sqlite3_bind_text(stmt2, 1, newDateString.utf8String, -1, nil)
+                        sqlite3_bind_int64(stmt2, 2, sqlite3_column_int64(stmt, 0))
+                        if sqlite3_step(stmt2) == SQLITE_DONE { sqlite3_finalize(stmt2) }
+                    }
+                }
+            }
+            if(sqlite3_prepare(self.db, "SELECT id, issued, redeemed, valid_until, last_modified FROM voucher", -1, &stmt, nil) == SQLITE_OK) {
+                while sqlite3_step(stmt) == SQLITE_ROW {
+                    let oldDate1 = CustomerDatabase.parseDateRaw(strDate: String(cString: sqlite3_column_text(stmt, 1)))
+                    let newDateString1 = CustomerDatabase.dateToString(date: oldDate1!) as NSString
+
+                    var newDateString2:NSString? = nil
+                    if let value = sqlite3_column_text(stmt, 2) {
+                        let oldDate2 = CustomerDatabase.parseDateRaw(strDate: String(cString: value))
+                        newDateString2 = CustomerDatabase.dateToString(date: oldDate2!) as NSString
+                    }
+                    
+                    var newDateString3:NSString? = nil
+                    if let value = sqlite3_column_text(stmt, 3) {
+                        let oldDate3 = CustomerDatabase.parseDateRaw(strDate: String(cString: value))
+                        newDateString3 = CustomerDatabase.dateToString(date: oldDate3!) as NSString
+                    }
+                    
+                    let oldDate4 = CustomerDatabase.parseDateRaw(strDate: String(cString: sqlite3_column_text(stmt, 4)))
+                    let newDateString4 = CustomerDatabase.dateToString(date: oldDate4!) as NSString
+                    
+                    var stmt2:OpaquePointer?
+                    if sqlite3_prepare(self.db, "UPDATE voucher SET issued = ?, redeemed = ?, valid_until = ?, last_modified = ? WHERE id = ?", -1, &stmt2, nil) == SQLITE_OK {
+                        sqlite3_bind_text(stmt2, 1, newDateString1.utf8String, -1, nil)
+                        if(newDateString2 == nil) {
+                            sqlite3_bind_null(stmt2, 2)
+                        } else {
+                            sqlite3_bind_text(stmt2, 2, newDateString2!.utf8String, -1, nil)
+                        }
+                        if(newDateString3 == nil) {
+                            sqlite3_bind_null(stmt2, 3)
+                        } else {
+                            sqlite3_bind_text(stmt2, 3, newDateString3!.utf8String, -1, nil)
+                        }
+                        sqlite3_bind_text(stmt2, 4, newDateString4.utf8String, -1, nil)
+                        sqlite3_bind_int64(stmt2, 5, sqlite3_column_int64(stmt, 0))
+                        if sqlite3_step(stmt2) == SQLITE_DONE { sqlite3_finalize(stmt2) }
+                    }
+                }
+            }
             commitTransaction()
         }
     }
@@ -129,9 +195,15 @@ class CustomerDatabase {
     static func dateToString(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = CustomerDatabase.STORAGE_FORMAT
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         return dateFormatter.string(from: date)
     }
-    static func dateToStringWithoutTime(date: Date) -> String {
+    static func dateToStringRaw(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = CustomerDatabase.STORAGE_FORMAT
+        return dateFormatter.string(from: date)
+    }
+    static func dateToStringWithoutTimeRaw(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = CustomerDatabase.STORAGE_FORMAT_WITHOUT_TIME
         return dateFormatter.string(from: date)
@@ -143,6 +215,12 @@ class CustomerDatabase {
         return dateFormatter.date(from:strDate)
     }
     static func parseDate(strDate: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = CustomerDatabase.STORAGE_FORMAT
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        return dateFormatter.date(from:strDate)
+    }
+    static func parseDateRaw(strDate: String) -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = CustomerDatabase.STORAGE_FORMAT
         return dateFormatter.date(from:strDate)
@@ -264,17 +342,17 @@ class CustomerDatabase {
     func getAppointment(id:Int64) -> CustomerAppointment? {
         var appointment:CustomerAppointment? = nil
         var stmt:OpaquePointer?
-        let sql = "SELECT id, calendar_id, title, notes, time_start, time_end, fullday, customer, customer_id, location, last_modified, removed FROM appointment WHERE removed = 0 AND id = ?"
+        let sql = "SELECT id, calendar_id, title, notes, time_start, time_end, fullday, customer, customer_id, location, last_modified, removed FROM appointment WHERE id = ?"
         if sqlite3_prepare(self.db, sql, -1, &stmt, nil) == SQLITE_OK {
             sqlite3_bind_int64(stmt, 1, id)
             while sqlite3_step(stmt) == SQLITE_ROW {
                 var start:Date? = nil
                 if(sqlite3_column_text(stmt, 4) != nil) {
-                    start = CustomerDatabase.parseDate(strDate: String(cString: sqlite3_column_text(stmt, 4)))
+                    start = CustomerDatabase.parseDateRaw(strDate: String(cString: sqlite3_column_text(stmt, 4)))
                 }
                 var end:Date? = nil
                 if(sqlite3_column_text(stmt, 5) != nil) {
-                    end = CustomerDatabase.parseDate(strDate: String(cString: sqlite3_column_text(stmt, 5)))
+                    end = CustomerDatabase.parseDateRaw(strDate: String(cString: sqlite3_column_text(stmt, 5)))
                 }
                 var customerId:Int64? = nil
                 if(sqlite3_column_text(stmt, 8) != nil) { // what a hacky workaround
@@ -304,10 +382,11 @@ class CustomerDatabase {
         var appointments:[CustomerAppointment] = []
         var stmt:OpaquePointer?
         if(calendarId != nil && day != nil && !showDeleted) {
-            let sql = "SELECT id, calendar_id, title, notes, time_start, time_end, fullday, customer, customer_id, location, last_modified, removed FROM appointment WHERE calendar_id = ? AND removed = 0" // BUG : "strftime('%Y-%m-%d',time_start) = ?" returns only one row
+            let dayString = CustomerDatabase.dateToStringWithoutTimeRaw(date: day!) as NSString
+            let sql = "SELECT id, calendar_id, title, notes, time_start, time_end, fullday, customer, customer_id, location, last_modified, removed FROM appointment WHERE calendar_id = ? AND removed = 0 AND strftime('%Y-%m-%d',time_start) = ?"
             if sqlite3_prepare(self.db, sql, -1, &stmt, nil) != SQLITE_OK { return [] }
             sqlite3_bind_int64(stmt, 1, calendarId!)
-            //sqlite3_bind_text(stmt, 2, CustomerDatabase.dateToStringWithoutTime(date: day!), -1, nil)
+            sqlite3_bind_text(stmt, 2, dayString.utf8String, -1, nil)
         } else if(calendarId != nil && day == nil && !showDeleted) {
             let sql = "SELECT id, calendar_id, title, notes, time_start, time_end, fullday, customer, customer_id, location, last_modified, removed FROM appointment WHERE calendar_id = ? AND removed = 0"
             if sqlite3_prepare(self.db, sql, -1, &stmt, nil) != SQLITE_OK { return [] }
@@ -325,22 +404,16 @@ class CustomerDatabase {
             let strStart = sqlite3_column_text(stmt, 4)
             var dateStart:Date? = nil
             if(strStart != nil) {
-                dateStart = CustomerDatabase.parseDate(strDate: String(cString: strStart!))
+                dateStart = CustomerDatabase.parseDateRaw(strDate: String(cString: strStart!))
             }
             let strEnd = sqlite3_column_text(stmt, 5)
             var dateEnd:Date? = nil
             if(strEnd != nil) {
-                dateEnd = CustomerDatabase.parseDate(strDate: String(cString: strEnd!))
+                dateEnd = CustomerDatabase.parseDateRaw(strDate: String(cString: strEnd!))
             }
             var customerId:Int64? = nil
             if(sqlite3_column_text(stmt, 8) != nil) { // what a hacky workaround
                 customerId = Int64(sqlite3_column_int64(stmt, 8))
-            }
-            
-            // workaround for sqlite's strftime() bug
-            if(day != nil && dateStart != nil &&
-                CustomerDatabase.dateToStringWithoutTime(date: dateStart!) != CustomerDatabase.dateToStringWithoutTime(date: day!)) {
-                continue
             }
             
             appointments.append(
@@ -372,12 +445,12 @@ class CustomerDatabase {
             let strStart = sqlite3_column_text(stmt, 4)
             var dateStart:Date? = nil
             if(strStart != nil) {
-                dateStart = CustomerDatabase.parseDate(strDate: String(cString: strStart!))
+                dateStart = CustomerDatabase.parseDateRaw(strDate: String(cString: strStart!))
             }
             let strEnd = sqlite3_column_text(stmt, 5)
             var dateEnd:Date? = nil
             if(strEnd != nil) {
-                dateEnd = CustomerDatabase.parseDate(strDate: String(cString: strEnd!))
+                dateEnd = CustomerDatabase.parseDateRaw(strDate: String(cString: strEnd!))
             }
             var customerId:Int64? = nil
             if(sqlite3_column_text(stmt, 8) != nil) { // what a hacky workaround
@@ -410,8 +483,8 @@ class CustomerDatabase {
             let notes = a.mNotes as NSString
             let customer = a.mCustomer as NSString
             let location = a.mLocation as NSString
-            let start:NSString? = (a.mTimeStart==nil) ? nil : CustomerDatabase.dateToString(date: a.mTimeStart!) as NSString
-            let end:NSString? = (a.mTimeEnd==nil) ? nil : CustomerDatabase.dateToString(date: a.mTimeEnd!) as NSString
+            let start:NSString? = (a.mTimeStart==nil) ? nil : CustomerDatabase.dateToStringRaw(date: a.mTimeStart!) as NSString
+            let end:NSString? = (a.mTimeEnd==nil) ? nil : CustomerDatabase.dateToStringRaw(date: a.mTimeEnd!) as NSString
             let lastModified = CustomerDatabase.dateToString(date: a.mLastModified) as NSString
             sqlite3_bind_int64(stmt, 1, a.mCalendarId)
             sqlite3_bind_text(stmt, 2, title.utf8String, -1, nil)
@@ -449,8 +522,8 @@ class CustomerDatabase {
             let notes = a.mNotes as NSString
             let customer = a.mCustomer as NSString
             let location = a.mLocation as NSString
-            let start:NSString? = (a.mTimeStart==nil) ? nil : CustomerDatabase.dateToString(date: a.mTimeStart!) as NSString
-            let end:NSString? = (a.mTimeEnd==nil) ? nil : CustomerDatabase.dateToString(date: a.mTimeEnd!) as NSString
+            let start:NSString? = (a.mTimeStart==nil) ? nil : CustomerDatabase.dateToStringRaw(date: a.mTimeStart!) as NSString
+            let end:NSString? = (a.mTimeEnd==nil) ? nil : CustomerDatabase.dateToStringRaw(date: a.mTimeEnd!) as NSString
             let lastModified = CustomerDatabase.dateToString(date: a.mLastModified) as NSString
             sqlite3_bind_int64(stmt, 1, a.mId)
             sqlite3_bind_int64(stmt, 2, a.mCalendarId)
@@ -514,7 +587,7 @@ class CustomerDatabase {
             while sqlite3_step(stmt) == SQLITE_ROW {
                 var birthday:Date? = nil
                 if(sqlite3_column_text(stmt, 12) != nil) {
-                    birthday = CustomerDatabase.parseDate(strDate: String(cString: sqlite3_column_text(stmt, 12)))
+                    birthday = CustomerDatabase.parseDateRaw(strDate: String(cString: sqlite3_column_text(stmt, 12)))
                 }
                 customers.append(
                     Customer(
@@ -589,7 +662,7 @@ class CustomerDatabase {
             while sqlite3_step(stmt) == SQLITE_ROW {
                 var birthday:Date? = nil
                 if(sqlite3_column_text(stmt, 12) != nil) {
-                    birthday = CustomerDatabase.parseDate(strDate: String(cString: sqlite3_column_text(stmt, 12)))
+                    birthday = CustomerDatabase.parseDateRaw(strDate: String(cString: sqlite3_column_text(stmt, 12)))
                 }
                 customer = (
                     Customer(
@@ -634,7 +707,7 @@ class CustomerDatabase {
             let zipcode = c.mZipcode as NSString
             let city = c.mCity as NSString
             let country = c.mCountry as NSString
-            let birthday:NSString? = (c.mBirthday==nil) ? nil : CustomerDatabase.dateToString(date: c.mBirthday!) as NSString
+            let birthday:NSString? = (c.mBirthday==nil) ? nil : CustomerDatabase.dateToStringRaw(date: c.mBirthday!) as NSString
             let notes = c.mNotes as NSString
             let group = c.mGroup as NSString
             let customFields = c.mCustomFields as NSString
@@ -739,7 +812,7 @@ class CustomerDatabase {
             if(c.mBirthday == nil) {
                 sqlite3_bind_null(stmt, 13)
             } else {
-                sqlite3_bind_text(stmt, 13, CustomerDatabase.dateToString(date: c.mBirthday!), -1, nil)
+                sqlite3_bind_text(stmt, 13, CustomerDatabase.dateToStringRaw(date: c.mBirthday!), -1, nil)
             }
             sqlite3_bind_text(stmt, 14, notes.utf8String, -1, nil)
             sqlite3_bind_int(stmt, 15, c.mNewsletter ? 1 : 0)
