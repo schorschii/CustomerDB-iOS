@@ -119,6 +119,7 @@
 "open_map" = "Ouvrir la carte";
 "delete_appointment" = "Supprimer le rendez-vous";
 "copy_postal_address" = "Copier l'adresse postale";
+"last_modified" = "Dernière modification";
 
 // Edit
 "name_empty" = "Nom vide";

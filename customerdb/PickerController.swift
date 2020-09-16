@@ -76,7 +76,8 @@ class SortPickerController: NSObject, UIPickerViewDataSource, UIPickerViewDelega
     
     var mSortFields: [KeyValueItem] = [
         KeyValueItem("first_name", NSLocalizedString("first_name", comment: "")),
-        KeyValueItem("last_name", NSLocalizedString("last_name", comment: ""))
+        KeyValueItem("last_name", NSLocalizedString("last_name", comment: "")),
+        KeyValueItem("last_modified", NSLocalizedString("last_modified", comment: ""))
     ]
     var mOrders: [String] = [
         NSLocalizedString("ascending", comment: ""),

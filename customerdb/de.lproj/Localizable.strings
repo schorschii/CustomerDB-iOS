@@ -128,6 +128,7 @@
 "open_map" = "Karte öffnen";
 "delete_appointment" = "Termin löschen";
 "copy_postal_address" = "Postanschrift kopieren";
+"last_modified" = "Zuletzt geändert";
 
 // Edit
 "name_empty" = "Kein Name eingegeben";

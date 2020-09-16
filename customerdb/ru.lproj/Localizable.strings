@@ -119,6 +119,7 @@
 "open_map" = "Открытая карта";
 "delete_appointment" = "Удалить встречу";
 "copy_postal_address" = "Копировать почтовый адрес";
+"last_modified" = "Последнее изменение";
 
 // Edit
 "name_empty" = "Имя пустое";
