@@ -7,6 +7,7 @@ import Foundation
 import UIKit
 import MessageUI
 import Contacts
+import StoreKit
 
 class MainViewController : UITabBarController, MFMailComposeViewControllerDelegate, UISearchResultsUpdating, UIDocumentPickerDelegate, RequestFinishedListener {
     
@@ -53,6 +54,14 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
     }
     override func viewDidAppear(_ animated: Bool) {
         initActiveTab()
+        
+        let startCount = UserDefaults.standard.integer(forKey: "started")
+        UserDefaults.standard.set(startCount+1, forKey: "started")
+        if #available(iOS 10.3, *) {
+            if(startCount == 15) {
+                SKStoreReviewController.requestReview()
+            }
+        }
     }
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         initActiveTab()
