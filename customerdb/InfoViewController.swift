@@ -8,7 +8,7 @@ import UIKit
 import MessageUI
 import StoreKit
 
-class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate, SKProductsRequestDelegate, SKPaymentTransactionObserver {
+class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate, SKProductsRequestDelegate, SKPaymentTransactionObserver, SKStoreProductViewControllerDelegate {
     
     @IBOutlet weak var labelVersion: UILabel!
     
@@ -121,6 +121,24 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
         if let url = URL(string: "https://play.google.com/store/apps/details?id=de.georgsieber.customerdb") {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
+    }
+    @IBAction func onClickBallBreakIos(_ sender: UIButton) {
+        openStoreProductWithiTunesItemIdentifier(identifier: "1409746305");
+    }
+    func openStoreProductWithiTunesItemIdentifier(identifier: String) {
+        let storeViewController = SKStoreProductViewController()
+        storeViewController.delegate = self
+
+        let parameters = [ SKStoreProductParameterITunesItemIdentifier : identifier]
+        storeViewController.loadProduct(withParameters: parameters) { [weak self] (loaded, error) -> Void in
+            if loaded {
+                // Parent class of self is UIViewContorller
+                self?.present(storeViewController, animated: true, completion: nil)
+            }
+        }
+    }
+    func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {
+        //dismiss(animated: true, completion: nil)
     }
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true, completion: nil)
