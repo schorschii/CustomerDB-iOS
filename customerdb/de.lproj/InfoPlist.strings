@@ -4,4 +4,5 @@
 */
 "CFBundleDisplayName" = "Kundendatenbank";
 "NewCustomer" = "Neuer Kunde";
+"NewAppointment" = "Neuer Termin";
 "NewVoucher" = "Neuer Gutschein";

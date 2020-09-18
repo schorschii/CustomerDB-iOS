@@ -82,6 +82,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SKPaymentTransactionObser
                     if(shortcutItem.type == "NewCustomerAction") {
                         let detailViewController = rootvc.storyboard?.instantiateViewController(withIdentifier: "CustomerEditNavigationViewController")
                         rootvc.showDetailViewController(detailViewController!, sender: nil)
+                    } else if(shortcutItem.type == "NewAppointmentAction") {
+                        let detailViewController = rootvc.storyboard?.instantiateViewController(withIdentifier: "AppointmentEditNavigationViewController")
+                        rootvc.showDetailViewController(detailViewController!, sender: nil)
                     } else if(shortcutItem.type == "NewVoucherAction") {
                         let detailViewController = rootvc.storyboard?.instantiateViewController(withIdentifier: "VoucherEditNavigationViewController")
                         rootvc.showDetailViewController(detailViewController!, sender: nil)
