@@ -801,7 +801,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                             newCustomer.putAttribute(key: field.key, value: field.value)
                         }
                         if(newCustomer.mTitle != "" || newCustomer.mFirstName != "" || newCustomer.mLastName != "") {
-                            if(newCustomer.mId < 0 || mDb.getCustomer(id: newCustomer.mId) != nil) {
+                            if(newCustomer.mId < 0 || mDb.getCustomer(id: newCustomer.mId, showDeleted: true) != nil) {
                                 // generate new ID if exists in db or not set in csv file
                                 newCustomer.mId = Customer.generateID(suffix: inserted)
                             }

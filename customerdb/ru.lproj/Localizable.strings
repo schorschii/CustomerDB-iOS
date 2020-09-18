@@ -120,6 +120,7 @@
 "delete_appointment" = "Удалить встречу";
 "copy_postal_address" = "Копировать почтовый адрес";
 "last_modified" = "Последнее изменение";
+"removed_placeholder" = "*УДАЛЕНО*";
 
 // Edit
 "name_empty" = "Имя пустое";

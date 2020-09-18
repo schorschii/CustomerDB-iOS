@@ -31,7 +31,7 @@ class VoucherCsvWriter {
         for v in mVouchers {
             var fromCustomerText = ""
             if(v.mFromCustomerId != nil) {
-                if let c = mDb.getCustomer(id: v.mFromCustomerId!) {
+                if let c = mDb.getCustomer(id: v.mFromCustomerId!, showDeleted: false) {
                     fromCustomerText = c.getFullName(lastNameFirst: false)
                 }
             } else {
@@ -40,7 +40,7 @@ class VoucherCsvWriter {
             
             var forCustomerText = ""
             if(v.mForCustomerId != nil) {
-                if let c = mDb.getCustomer(id: v.mForCustomerId!) {
+                if let c = mDb.getCustomer(id: v.mForCustomerId!, showDeleted: false) {
                     forCustomerText = c.getFullName(lastNameFirst: false)
                 }
             } else {

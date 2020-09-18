@@ -96,15 +96,19 @@ class VoucherDetailsViewController : UIViewController {
         labelOriginalValue.text = Voucher.format(value: mCurrentVoucher!.mOriginalValue) + " " + mCurrency
         labelVoucherNumber.text = mCurrentVoucher?.mVoucherNo
         if(mCurrentVoucher!.mFromCustomerId != nil) {
-            if let c = mDb.getCustomer(id: mCurrentVoucher!.mFromCustomerId!) {
+            if let c = mDb.getCustomer(id: mCurrentVoucher!.mFromCustomerId!, showDeleted: false) {
                 labelFromCustomer.text = c.getFullName(lastNameFirst: false)
+            } else {
+                labelFromCustomer.text = NSLocalizedString("removed_placeholder", comment: "")
             }
         } else {
             labelFromCustomer.text = mCurrentVoucher?.mFromCustomer
         }
         if(mCurrentVoucher!.mForCustomerId != nil) {
-            if let c = mDb.getCustomer(id: mCurrentVoucher!.mForCustomerId!) {
+            if let c = mDb.getCustomer(id: mCurrentVoucher!.mForCustomerId!, showDeleted: false) {
                 labelForCustomer.text = c.getFullName(lastNameFirst: false)
+            } else {
+                labelForCustomer.text = NSLocalizedString("removed_placeholder", comment: "")
             }
         } else {
             labelForCustomer.text = mCurrentVoucher?.mForCustomer

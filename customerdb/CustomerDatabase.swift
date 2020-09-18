@@ -654,10 +654,14 @@ class CustomerDatabase {
         
         return c
     }
-    func getCustomer(id:Int64) -> Customer? {
+    func getCustomer(id:Int64, showDeleted:Bool) -> Customer? {
         var customer:Customer? = nil
+        var sql = "SELECT id, title, first_name, last_name, phone_home, phone_mobile, phone_work, email, street, zipcode, city, country, birthday, customer_group, newsletter, notes, custom_fields, image, consent, last_modified, removed FROM customer WHERE id = ? AND removed = 0"
+        if(showDeleted) {
+            sql = "SELECT id, title, first_name, last_name, phone_home, phone_mobile, phone_work, email, street, zipcode, city, country, birthday, customer_group, newsletter, notes, custom_fields, image, consent, last_modified, removed FROM customer WHERE id = ?"
+        }
         var stmt:OpaquePointer?
-        if sqlite3_prepare(self.db, "SELECT id, title, first_name, last_name, phone_home, phone_mobile, phone_work, email, street, zipcode, city, country, birthday, customer_group, newsletter, notes, custom_fields, image, consent, last_modified, removed FROM customer WHERE id = ?", -1, &stmt, nil) == SQLITE_OK {
+        if sqlite3_prepare(self.db, sql, -1, &stmt, nil) == SQLITE_OK {
             sqlite3_bind_int64(stmt, 1, id)
             while sqlite3_step(stmt) == SQLITE_ROW {
                 var birthday:Date? = nil

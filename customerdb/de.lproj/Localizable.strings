@@ -129,6 +129,7 @@
 "delete_appointment" = "Termin löschen";
 "copy_postal_address" = "Postanschrift kopieren";
 "last_modified" = "Zuletzt geändert";
+"removed_placeholder" = "*GELÖSCHT*";
 
 // Edit
 "name_empty" = "Kein Name eingegeben";

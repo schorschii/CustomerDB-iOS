@@ -139,7 +139,7 @@ class CustomerDetailsViewController : UIViewController, MFMessageComposeViewCont
     
     func loadCustomer() {
         // query customer with image
-        mCurrentCustomer = mDb.getCustomer(id: mCurrentCustomerId)
+        mCurrentCustomer = mDb.getCustomer(id: mCurrentCustomerId, showDeleted: false)
         if(mCurrentCustomer == nil) {
             exitViewController()
             return

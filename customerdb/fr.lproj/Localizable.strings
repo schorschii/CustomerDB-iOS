@@ -120,6 +120,7 @@
 "delete_appointment" = "Supprimer le rendez-vous";
 "copy_postal_address" = "Copier l'adresse postale";
 "last_modified" = "Dernière modification";
+"removed_placeholder" = "*SUPPRIMÉ*";
 
 // Edit
 "name_empty" = "Nom vide";

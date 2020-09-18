@@ -143,9 +143,11 @@ class AppointmentEditViewController : UIViewController, UIPickerViewDelegate, UI
             datePickerEnd.date = mCurrentAppointment!.mTimeEnd!
             datePicker.date = mCurrentAppointment!.mTimeStart!
             if(mCurrentAppointment!.mCustomerId != nil) {
-                if let c = mDb.getCustomer(id: mCurrentAppointment!.mCustomerId!) {
+                if let c = mDb.getCustomer(id: mCurrentAppointment!.mCustomerId!, showDeleted: false) {
                     textFieldCustomer.text = c.getFullName(lastNameFirst: false)
                     buttonShowCustomer.isEnabled = true
+                } else {
+                    textFieldCustomer.text = NSLocalizedString("removed_placeholder", comment: "")
                 }
             } else {
                 textFieldCustomer.text = mCurrentAppointment?.mCustomer

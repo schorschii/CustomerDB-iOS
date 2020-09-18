@@ -179,17 +179,21 @@ class VoucherEditViewController : UIViewController {
                 buttonGenerateVoucherNumber.isEnabled = false
             }
             if(mCurrentVoucher!.mFromCustomerId != nil) {
-                if let c = mDb.getCustomer(id: mCurrentVoucher!.mFromCustomerId!) {
+                if let c = mDb.getCustomer(id: mCurrentVoucher!.mFromCustomerId!, showDeleted: false) {
                     textFieldFromCustomer.text = c.getFullName(lastNameFirst: false)
                     buttonShowFromCustomer.isEnabled = true
+                } else {
+                    textFieldFromCustomer.text = NSLocalizedString("removed_placeholder", comment: "")
                 }
             } else {
                 textFieldFromCustomer.text = mCurrentVoucher?.mFromCustomer
             }
             if(mCurrentVoucher!.mForCustomerId != nil) {
-                if let c = mDb.getCustomer(id: mCurrentVoucher!.mForCustomerId!) {
+                if let c = mDb.getCustomer(id: mCurrentVoucher!.mForCustomerId!, showDeleted: false) {
                     textFieldForCustomer.text = c.getFullName(lastNameFirst: false)
                     buttonShowForCustomer.isEnabled = true
+                } else {
+                    textFieldForCustomer.text = NSLocalizedString("removed_placeholder", comment: "")
                 }
             } else {
                 textFieldForCustomer.text = mCurrentVoucher?.mForCustomer

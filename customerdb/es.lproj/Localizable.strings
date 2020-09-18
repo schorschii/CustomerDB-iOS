@@ -120,6 +120,7 @@
 "delete_appointment" = "Eliminar cita";
 "copy_postal_address" = "Copiar dirección postal";
 "last_modified" = "Última modificación";
+"removed_placeholder" = "*REMOTO*";
 
 // Edit
 "name_empty" = "Nombre vacía";

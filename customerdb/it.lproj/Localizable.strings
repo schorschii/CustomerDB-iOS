@@ -120,6 +120,7 @@
 "delete_appointment" = "Elimina appuntamento";
 "copy_postal_address" = "Copia indirizzo postale";
 "last_modified" = "Ultima modifica";
+"removed_placeholder" = "*RIMOSSO*";
 
 // Edit
 "name_empty" = "Nome vuoto";

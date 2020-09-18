@@ -130,7 +130,7 @@ class AppointmentViewController : UIViewController {
                     viewAppointments.addSubview(appointmentView)
                     var customerText = ""
                     if(a.mCustomerId != nil) {
-                        if let c = mDb.getCustomer(id: a.mCustomerId!) {
+                        if let c = mDb.getCustomer(id: a.mCustomerId!, showDeleted: false) {
                             customerText = c.getFullName(lastNameFirst: false)
                         }
                     } else {

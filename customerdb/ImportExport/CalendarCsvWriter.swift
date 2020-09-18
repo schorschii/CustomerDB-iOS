@@ -27,7 +27,7 @@ class CalendarCsvWriter {
         for c in mAppointments {
             var customerText = ""
             if(c.mCustomerId != nil) {
-                if let c = mDb.getCustomer(id: c.mCustomerId!) {
+                if let c = mDb.getCustomer(id: c.mCustomerId!, showDeleted: false) {
                     customerText = c.getFullName(lastNameFirst: false)
                 }
             } else {
