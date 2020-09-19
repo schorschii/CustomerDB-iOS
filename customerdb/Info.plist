@@ -53,14 +53,14 @@
 			<key>UIApplicationShortcutItemType</key>
 			<string>NewAppointmentAction</string>
 		</dict>
-        <dict>
-            <key>UIApplicationShortcutItemIconType</key>
-            <string>UIApplicationShortcutIconTypeAdd</string>
-            <key>UIApplicationShortcutItemTitle</key>
-            <string>NewVoucher</string>
-            <key>UIApplicationShortcutItemType</key>
-            <string>NewVoucherAction</string>
-        </dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeAdd</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>NewVoucher</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>NewVoucherAction</string>
+		</dict>
 	</array>
 	<key>UIFileSharingEnabled</key>
 	<true/>
