@@ -152,6 +152,7 @@
 "choose_from_gallery" = "Aus Galerie auswählen";
 "choose_from_files" = "Aus Dateien auswählen";
 "file_name" = "Dateiname";
+"customer" = "Kunde";
 
 // Sync
 "reset_password" = "Passwort zurücksetzen";

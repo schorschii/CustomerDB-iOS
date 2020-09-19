@@ -143,6 +143,7 @@
 "choose_from_gallery" = "Elegir de la galería";
 "choose_from_files" = "Elija entre archivos";
 "file_name" = "Nombre del archivo";
+"customer" = "Cliente";
 
 // Sync
 "reset_password" = "Restablecer la contraseña";
