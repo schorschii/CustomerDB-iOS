@@ -287,6 +287,45 @@ class AppointmentEditViewController : UIViewController, UIPickerViewDelegate, UI
     }
     
     func saveAppointment() -> Bool {
+        if(mCalendars.count <= pickerCalendar.selectedRow(inComponent: 0)) {
+            infoBox(title: nil, text: NSLocalizedString("no_calendar_selected", comment: ""))
+            return false
+        }
+        
+        if(!updateAppointmentObjectByInputs()) {
+            return false
+        }
+        
+        if(mCurrentAppointment!.mTimeStart!.timeIntervalSince1970 > mCurrentAppointment!.mTimeEnd!.timeIntervalSince1970) {
+            infoBox(title: nil, text: NSLocalizedString("end_date_before_start_date", comment: ""))
+            return false
+        }
+        if(mCurrentAppointment!.mTimeEnd!.timeIntervalSince1970 - mCurrentAppointment!.mTimeStart!.timeIntervalSince1970 < 60*5) {
+            infoBox(title: nil, text: NSLocalizedString("appointment_too_short", comment: ""))
+            return false
+        }
+        
+        var success = false
+        if(mIsNewAppointment) {
+            success = mDb.insertAppointment(a: mCurrentAppointment!)
+        } else {
+            success = mDb.updateAppointment(a: mCurrentAppointment!)
+        }
+        
+        if(success) {
+            setUnsyncedChanges()
+        }
+        
+        return success
+    }
+    
+    func updateAppointmentObjectByInputs() -> Bool {
+        // check if a calendar is selected
+        if(mCalendars.count <= pickerCalendar.selectedRow(inComponent: 0)) {
+            return false
+        }
+        mCurrentAppointment?.mCalendarId = mCalendars[pickerCalendar.selectedRow(inComponent: 0)].mId
+        
         let dateFormatterDateTime = DateFormatter()
         dateFormatterDateTime.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
@@ -306,37 +345,12 @@ class AppointmentEditViewController : UIViewController, UIPickerViewDelegate, UI
             return false
         }
         
-        if(mCalendars.count <= pickerCalendar.selectedRow(inComponent: 0)) {
-            infoBox(title: nil, text: NSLocalizedString("no_calendar_selected", comment: ""))
-            return false
-        }
-        if(mCurrentAppointment!.mTimeStart!.timeIntervalSince1970 > mCurrentAppointment!.mTimeEnd!.timeIntervalSince1970) {
-            infoBox(title: nil, text: NSLocalizedString("end_date_before_start_date", comment: ""))
-            return false
-        }
-        if(mCurrentAppointment!.mTimeEnd!.timeIntervalSince1970 - mCurrentAppointment!.mTimeStart!.timeIntervalSince1970 < 60*5) {
-            infoBox(title: nil, text: NSLocalizedString("appointment_too_short", comment: ""))
-            return false
-        }
-        
-        mCurrentAppointment?.mCalendarId = mCalendars[pickerCalendar.selectedRow(inComponent: 0)].mId
         mCurrentAppointment?.mTitle = textFieldSubject.text!
         mCurrentAppointment?.mLocation = textFieldLocation.text!
         mCurrentAppointment?.mNotes = textFieldNotes.text!
         mCurrentAppointment?.mLastModified = Date()
         
-        var success = false
-        if(mIsNewAppointment) {
-            success = mDb.insertAppointment(a: mCurrentAppointment!)
-        } else {
-            success = mDb.updateAppointment(a: mCurrentAppointment!)
-        }
-        
-        if(success) {
-            setUnsyncedChanges()
-        }
-        
-        return success
+        return true
     }
     
     func infoBox(title: String?, text: String?) {
@@ -352,12 +366,13 @@ class AppointmentEditViewController : UIViewController, UIPickerViewDelegate, UI
     
     var mLastQrContent = ""
     @objc func refreshQrCode() {
+        if(!updateAppointmentObjectByInputs()) { return }
         var content = "BEGIN:VEVENT" + "\n"
         content += "SUMMARY:" + textFieldSubject.text! + "\n"
         content +=  "DESCRIPTION:" + textFieldNotes.text!.replacingOccurrences(of: "\n", with: "\\n") + "\n"
         content +=  "LOCATION:" + textFieldLocation.text! + "\n"
-        content +=  "DTSTART:" + "" + "\n"
-        content +=  "DTEND:" + "" + "\n"
+        content +=  "DTSTART:" + CalendarIcsWriter.format(date: mCurrentAppointment!.mTimeStart!) + "\n"
+        content +=  "DTEND:" + CalendarIcsWriter.format(date: mCurrentAppointment!.mTimeEnd!) + "\n"
         content +=  "END:VEVENT" + "\n"
         if(mLastQrContent == content) {return}
         mLastQrContent = content
