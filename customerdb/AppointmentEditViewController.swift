@@ -333,10 +333,10 @@ class AppointmentEditViewController : UIViewController, UIPickerViewDelegate, UI
         dateFormatterDate.dateFormat = "yyyy-MM-dd"
         
         let dateFormatterTime = DateFormatter()
-        dateFormatterTime.dateFormat = "HH:mm:ss"
+        dateFormatterTime.dateFormat = "HH:mm"
         
-        let strTimeStart = dateFormatterDate.string(from: datePicker.date) + " " + dateFormatterTime.string(from: datePickerStart.date)
-        let strTimeEnd = dateFormatterDate.string(from: datePicker.date) + " " + dateFormatterTime.string(from: datePickerEnd.date)
+        let strTimeStart = dateFormatterDate.string(from: datePicker.date) + " " + dateFormatterTime.string(from: datePickerStart.date) + ":00"
+        let strTimeEnd = dateFormatterDate.string(from: datePicker.date) + " " + dateFormatterTime.string(from: datePickerEnd.date) + ":00"
         
         mCurrentAppointment?.mTimeStart = CustomerDatabase.parseDateRaw(strDate: strTimeStart)
         mCurrentAppointment?.mTimeEnd = CustomerDatabase.parseDateRaw(strDate: strTimeEnd)
