@@ -52,7 +52,7 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
         labelVersion.text = "v" + (versionString ?? "?")
         navigationController?.navigationBar.barStyle = .black
         
-        let singleTap = UITapGestureRecognizer(target: self, action: #selector(onClickDebugUnlock(_:)))
+        let singleTap = UILongPressGestureRecognizer(target: self, action: #selector(onClickManualUnlock(_:)))
         imageLogo.isUserInteractionEnabled = true
         imageLogo.addGestureRecognizer(singleTap)
     }
@@ -368,7 +368,7 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
         }
     }
     
-    @IBAction func onClickDebugUnlock(_ sender: UIButton) {
+    @objc func onClickManualUnlock(_ sender: UIButton) {
         let alert = UIAlertController(title: NSLocalizedString("manual_unlock", comment: ""), message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: NSLocalizedString("commercial_usage", comment: ""), style: .default, handler: { (_) in
             self.openUnlockInputBox(productId: InfoViewController.inappCommercialUsageId)
