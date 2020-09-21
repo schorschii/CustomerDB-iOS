@@ -52,9 +52,10 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
         labelVersion.text = "v" + (versionString ?? "?")
         navigationController?.navigationBar.barStyle = .black
         
-        let singleTap = UILongPressGestureRecognizer(target: self, action: #selector(onClickManualUnlock(_:)))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(onClickManualUnlock(_:)))
+        tap.numberOfTapsRequired = 2
         imageLogo.isUserInteractionEnabled = true
-        imageLogo.addGestureRecognizer(singleTap)
+        imageLogo.addGestureRecognizer(tap)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
