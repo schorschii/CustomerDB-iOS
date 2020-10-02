@@ -8,30 +8,33 @@ import UIKit
 
 class FilterPickerController: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
     
-    var mGroups: [String] = [""]
-    var mCities: [String] = [""]
-    var mCountries: [String] = [""]
+    static var ALL = NSLocalizedString("all", comment: "")
+    static var EMPTY = NSLocalizedString("empty", comment: "")
     
-    var mSelectedGroup = ""
-    var mSelectedCity = ""
-    var mSelectedCountry = ""
+    var mGroups: [String] = [ ALL, EMPTY ]
+    var mCities: [String] = [ ALL, EMPTY ]
+    var mCountries: [String] = [ ALL, EMPTY ]
+    
+    var mSelectedGroup: String? = ""
+    var mSelectedCity: String? = ""
+    var mSelectedCountry: String? = ""
     
     init(db: CustomerDatabase) {
         for customer in db.getCustomers(showDeleted: false, withFiles: false) {
-            if(!mGroups.contains(customer.mGroup)) {
+            if(!mGroups.contains(customer.mGroup) && customer.mGroup != "") {
                 mGroups.append(customer.mGroup)
             }
-            if(!mCities.contains(customer.mCity)) {
+            if(!mCities.contains(customer.mCity) && customer.mCity != "") {
                 mCities.append(customer.mCity)
             }
-            if(!mCountries.contains(customer.mCountry)) {
+            if(!mCountries.contains(customer.mCountry) && customer.mCountry != "") {
                 mCountries.append(customer.mCountry)
             }
         }
         
-        mSelectedGroup = mGroups[0]
-        mSelectedCity = mCities[0]
-        mSelectedCountry = mCountries[0]
+        mSelectedGroup = FilterPickerController.realString(mGroups[0])
+        mSelectedCity = FilterPickerController.realString(mCities[0])
+        mSelectedCountry = FilterPickerController.realString(mCountries[0])
     }
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -62,11 +65,21 @@ class FilterPickerController: NSObject, UIPickerViewDataSource, UIPickerViewDele
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if(component == 0) {
-            mSelectedGroup = mGroups[row]
+            mSelectedGroup = FilterPickerController.realString(mGroups[row])
         } else if(component == 1) {
-            mSelectedCity = mCities[row]
+            mSelectedCity = FilterPickerController.realString(mCities[row])
         } else if(component == 2) {
-            mSelectedCountry = mCountries[row]
+            mSelectedCountry = FilterPickerController.realString(mCountries[row])
+        }
+    }
+    
+    private static func realString(_ string: String) -> String? {
+        if(string == FilterPickerController.ALL) {
+            return nil
+        } else if(string == FilterPickerController.EMPTY) {
+            return ""
+        } else {
+            return string
         }
     }
 

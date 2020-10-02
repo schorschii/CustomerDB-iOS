@@ -13,6 +13,8 @@
 "input_only_mode" = "Mode entrée uniquement";
 "lock_app" = "Lock App";
 "filter" = "Filtre";
+"all" = "<Tout>";
+"empty" = "<Vide>";
 "order" = "Ordre";
 "newsletter" = "Bulletin";
 "birthdays" = "Anniversaires";

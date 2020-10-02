@@ -13,6 +13,8 @@
 "input_only_mode" = "Nur-Eingabe-Modus";
 "lock_app" = "App sperren";
 "filter" = "Filtern";
+"all" = "<Alle>";
+"empty" = "<Leer>";
 "order" = "Sortieren";
 "newsletter" = "Newsletter";
 "birthdays" = "Geburtstage";

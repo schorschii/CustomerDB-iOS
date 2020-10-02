@@ -88,13 +88,13 @@ class CustomerTableViewController : UIViewController, UITableViewDelegate, UITab
         // apply filter
         if(mCurrentFilterGroup != nil || mCurrentFilterCity != nil || mCurrentFilterCountry != nil) {
             if(mCurrentFilterGroup != nil) {
-                title += mCurrentFilterGroup! + " "
+                title += (mCurrentFilterGroup! == "" ? NSLocalizedString("empty", comment: "") : mCurrentFilterGroup!) + " "
             }
             if(mCurrentFilterCity != nil) {
-                title += mCurrentFilterCity! + " "
+                title += (mCurrentFilterCity! == "" ? NSLocalizedString("empty", comment: "") : mCurrentFilterCity!) + " "
             }
             if(mCurrentFilterCountry != nil) {
-                title += mCurrentFilterCountry! + " "
+                title += (mCurrentFilterCountry! == "" ? NSLocalizedString("empty", comment: "") : mCurrentFilterCountry!) + " "
             }
             var filteredCustomers: [Customer] = []
             for customer in tempCustomers {
@@ -185,21 +185,9 @@ class CustomerTableViewController : UIViewController, UITableViewDelegate, UITab
         let filterAlert = UIAlertController(title: NSLocalizedString("filter", comment: ""), message: nil, preferredStyle: UIAlertController.Style.alert)
         filterAlert.setValue(vc, forKey: "contentViewController")
         filterAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { (alert) in
-            if(self.mFilterPickerController!.mSelectedGroup == "") {
-                self.mCurrentFilterGroup = nil
-            } else {
-                self.mCurrentFilterGroup = self.mFilterPickerController!.mSelectedGroup
-            }
-            if(self.mFilterPickerController!.mSelectedCity == "") {
-                self.mCurrentFilterCity = nil
-            } else {
-                self.mCurrentFilterCity = self.mFilterPickerController!.mSelectedCity
-            }
-            if(self.mFilterPickerController!.mSelectedCountry == "") {
-                self.mCurrentFilterCountry = nil
-            } else {
-                self.mCurrentFilterCountry = self.mFilterPickerController!.mSelectedCountry
-            }
+            self.mCurrentFilterGroup = self.mFilterPickerController!.mSelectedGroup
+            self.mCurrentFilterCity = self.mFilterPickerController!.mSelectedCity
+            self.mCurrentFilterCountry = self.mFilterPickerController!.mSelectedCountry
             self.reloadCustomers(search: nil, refreshTable: true)
         }))
         filterAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: { (alert) in
