@@ -116,6 +116,9 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
         toolBar.isUserInteractionEnabled = true
         let datePickerView = UIDatePicker()
         datePickerView.datePickerMode = .date
+        if #available(iOS 13.4, *) {
+            datePickerView.preferredDatePickerStyle = .wheels
+        }
         textFieldBirthday.inputAccessoryView = toolBar
         textFieldBirthday.inputView = datePickerView
         if let bday = mCurrentCustomer?.mBirthday {
@@ -614,6 +617,9 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
                 let datePickerView = UITextFieldDatePicker()
                 datePickerView.textFieldReference = textField
                 datePickerView.datePickerMode = .date
+                if #available(iOS 13.4, *) {
+                    datePickerView.preferredDatePickerStyle = .wheels
+                }
                 textField.inputAccessoryView = toolBar
                 textField.inputView = datePickerView
                 if let date = CustomerDatabase.parseDisplayDateWithoutTime(strDate: finalText!) {

@@ -41,6 +41,9 @@ class VoucherEditViewController : UIViewController {
         
         let datePickerView = UIDatePicker()
         datePickerView.datePickerMode = .date
+        if #available(iOS 13.4, *) {
+            datePickerView.preferredDatePickerStyle = .wheels
+        }
         textFieldValidUntil.inputView = datePickerView
         datePickerView.addTarget(self, action: #selector(handleDatePicker(sender:)), for: .valueChanged)
         
