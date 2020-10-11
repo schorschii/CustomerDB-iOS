@@ -34,6 +34,8 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
     private var inappFilesProduct: SKProduct?
     private var inappCalendarProduct: SKProduct?
     
+    @IBOutlet weak var labelEulaTitle: UILabel!
+    @IBOutlet weak var labelEulaText: UILabel!
     @IBOutlet weak var imageLogo: UIImageView!
     @IBOutlet weak var buttonBuyCloudAccessLicense: UIButton!
     @IBOutlet weak var buttonBuyCommercialUsage: UIButton!
@@ -51,6 +53,10 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
         let versionString = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         labelVersion.text = "v" + (versionString ?? "?")
         navigationController?.navigationBar.barStyle = .black
+        
+        // load eula from localizable.strings, so we don't need to translate it a second time in main.strings (thanks Apple, best translation system ever!)
+        labelEulaTitle.text = NSLocalizedString("eula_title", comment: "")
+        labelEulaText.text = NSLocalizedString("eula", comment: "")
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(onClickManualUnlock(_:)))
         tap.numberOfTapsRequired = 2
