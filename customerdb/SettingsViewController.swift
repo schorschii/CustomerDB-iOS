@@ -663,7 +663,8 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
     var mCurrentCalendarColorPreview:UIView? = nil
     func createCalendarAlert() -> UIAlertController {
         let vc = UIViewController()
-        vc.preferredContentSize = CGSize(width: 250, height: 200)
+        vc.preferredContentSize = CGSize(width: 250, height: 150)
+        
         mCurrentCalendarTextField = UITextField()
         mCurrentCalendarTextField!.borderStyle = .roundedRect
         mCurrentCalendarTextField!.delegate = self
@@ -714,7 +715,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         stackViewColorsInner.addArrangedSubview(stackViewGreen)
         stackViewColorsInner.addArrangedSubview(stackViewBlue)
         
-        mCurrentCalendarColorPreview = UIView(frame: CGRect(x: 0, y: 0, width: 1, height: 10))
+        mCurrentCalendarColorPreview = UIView()
         mCurrentCalendarColorPreview!.backgroundColor = UIColor.blue
         NSLayoutConstraint.activate([
             mCurrentCalendarColorPreview!.widthAnchor.constraint(equalToConstant: 30),
@@ -725,13 +726,19 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         let stackViewColorsOuter = UIStackView()
         stackViewColorsOuter.axis = .horizontal
         stackViewColorsOuter.distribution = .fill
+        stackViewColorsOuter.setContentHuggingPriority(.defaultLow, for: .vertical)
+        stackViewColorsOuter.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         stackViewColorsOuter.addArrangedSubview(stackViewColorsInner)
         stackViewColorsOuter.addArrangedSubview(mCurrentCalendarColorPreview!)
         
-        let stackView = UIStackView(frame: CGRect(x: 0, y: 0, width: 250, height: 200))
+        let stackView = UIStackView()
+        stackView.frame.size = vc.preferredContentSize
         stackView.axis = .vertical
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 5
         stackView.addArrangedSubview(mCurrentCalendarTextField!)
         stackView.addArrangedSubview(stackViewColorsOuter)
+        stackView.addArrangedSubview(UIView())
         
         vc.view.addSubview(stackView)
         let alert = UIAlertController(title: NSLocalizedString("new_calendar", comment: ""), message: nil, preferredStyle: UIAlertController.Style.alert)
