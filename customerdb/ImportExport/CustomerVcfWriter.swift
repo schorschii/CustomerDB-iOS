@@ -129,15 +129,15 @@ class CustomerVcfWriter {
     }
     
     static func readVcfFile(url: URL) -> [Customer] {
-        var text = ""
-        
         do {
-            text = try String(contentsOf: url, encoding: .utf8)
+            let text = try String(contentsOf: url, encoding: .utf8)
+            return readVcfString(text: text)
         } catch let error {
             print(error.localizedDescription)
             return []
         }
-        
+    }
+    static func readVcfString(text: String) -> [Customer] {
         // STEP 0 : a vcf field can be broken up into multiple lines
         // we concatenate them here into a single line again
         var vcfFields: [String] = []

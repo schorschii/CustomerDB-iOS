@@ -33,6 +33,12 @@
 "import_ics" = "Импортировать файл ICS";
 "import_vcf" = "Импортировать файл VCF";
 "import_csv" = "Импортировать файл CSV";
+"import_qr_code" = "Импортировать QR-код";
+"scanning_not_supported" = "Сканирование не поддерживается";
+"scanning_not_supported_description" = "Ваше устройство не поддерживает сканирование кода объекта. Пожалуйста, используйте устройство с камерой.";
+"do_you_want_to_import_this_customer" = "Вы хотите импортировать этого клиента?";
+"invalid_code" = "Неверный код";
+"could_not_find_valid_entries_in_this_code" = "Не удалось найти никаких действительных записей в этом коде.";
 "export_ics" = "Экспорт файла ICS";
 "export_vcf" = "Экспорт файла VCF";
 "export_csv" = "Экспорт файла CSV";

@@ -33,6 +33,12 @@
 "import_ics" = "Import ICS File";
 "import_vcf" = "Import VCF File";
 "import_csv" = "Import CSV File";
+"import_qr_code" = "Import QR Code";
+"scanning_not_supported" = "Scanning not supported";
+"scanning_not_supported_description" = "Your device does not support scanning a code from an item. Please use a device with a camera.";
+"do_you_want_to_import_this_customer" = "Do you want to import this customer?";
+"invalid_code" = "Invalid Code";
+"could_not_find_valid_entries_in_this_code" = "Could not find any valid entries in this code.";
 "export_ics" = "Export ICS File";
 "export_vcf" = "Export VCF File";
 "export_csv" = "Export CSV File";

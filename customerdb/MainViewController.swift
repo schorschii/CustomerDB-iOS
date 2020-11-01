@@ -505,6 +505,11 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                     self.present(alert, animated: true)
                 }
         }
+        let importCodeAction = UIAlertAction(
+            title: NSLocalizedString("import_qr_code", comment: ""),
+            style: .default) { (action) in
+                self.performSegue(withIdentifier: "segueScanner", sender: nil)
+        }
         let exportVcfAction = UIAlertAction(
             title: NSLocalizedString("export_vcf", comment: ""),
             style: .default) { (action) in
@@ -523,6 +528,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(importVcfAction)
         alert.addAction(importCsvAction)
+        alert.addAction(importCodeAction)
         alert.addAction(exportVcfAction)
         alert.addAction(exportCsvAction)
         alert.addAction(cancelAction)

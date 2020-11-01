@@ -22,6 +22,7 @@
 		563FEE8E20FFD6C600DFD7B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 563FEE8C20FFD6C600DFD7B7 /* LaunchScreen.storyboard */; };
 		563FEE9B20FFDB5300DFD7B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 563FEE9920FFDB5300DFD7B7 /* InfoPlist.strings */; };
 		566FBD9C245B69E3003433FA /* FieldTypePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566FBD9B245B69E3003433FA /* FieldTypePickerController.swift */; };
+		568DFA85254F190C00546F6B /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568DFA84254F190C00546F6B /* ScannerViewController.swift */; };
 		569E14432371EA9E007BFAF0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569E14422371EA9E007BFAF0 /* MainViewController.swift */; };
 		569E1446237310C2007BFAF0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 569E1448237310C2007BFAF0 /* Localizable.strings */; };
 		569E144E23745792007BFAF0 /* CustomerDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569E144D23745792007BFAF0 /* CustomerDatabase.swift */; };
@@ -86,6 +87,7 @@
 		565426FA24707F3300631CE5 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		565426FB24707F3300631CE5 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		566FBD9B245B69E3003433FA /* FieldTypePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldTypePickerController.swift; sourceTree = "<group>"; };
+		568DFA84254F190C00546F6B /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		569E14422371EA9E007BFAF0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		569E144A23733329007BFAF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		569E144B23733406007BFAF0 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				56B2B7CE23E5EAFF00295569 /* MasterNavigationViewController.swift */,
 				56E9C02E246C6E6E00DBB9DA /* NavigationController.swift */,
 				569E14422371EA9E007BFAF0 /* MainViewController.swift */,
+				568DFA84254F190C00546F6B /* ScannerViewController.swift */,
 				562A8BB0249BA20A003CB9C4 /* DocumentPickers.swift */,
 				56C089D2244A32D9005F8A1B /* PickerController.swift */,
 				566FBD9B245B69E3003433FA /* FieldTypePickerController.swift */,
@@ -362,6 +365,7 @@
 				56F4E60D24B1D64C002F5569 /* AppointmentViewController.swift in Sources */,
 				56B34E7724802FF600DEDEA4 /* QuotedPrintable.swift in Sources */,
 				56DDADC523E780DC00879CBD /* EnumeratedView.swift in Sources */,
+				568DFA85254F190C00546F6B /* ScannerViewController.swift in Sources */,
 				562A8BAF249B9EF4003CB9C4 /* VoucherCsvWriter.swift in Sources */,
 				56B2B7D123E5F65D00295569 /* PickerDataController.swift in Sources */,
 				562A8BB324A66DA6003CB9C4 /* CustomerAppointment.swift in Sources */,
