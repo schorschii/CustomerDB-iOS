@@ -706,7 +706,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
     }
     
     func exportVcf() {
-        let vcf = CustomerVcfWriter(customers: self.mDb.getCustomers(showDeleted: false, withFiles: false))
+        let vcf = CustomerVcfWriter(customers: self.mDb.getCustomers(showDeleted: false, withFiles: true))
         
         let fileurl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("export.vcf")
 

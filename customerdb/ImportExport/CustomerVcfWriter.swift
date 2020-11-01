@@ -74,7 +74,9 @@ class CustomerVcfWriter {
             if(currentCustomer.mCustomFields != "") {
                 content += "X-CUSTOM-FIELDS:"+escapeVcfValue(currentCustomer.mCustomFields)+"\n";
             }
-
+            if(currentCustomer.mImage != nil && currentCustomer.mImage!.count > 0) {
+                content += "PHOTO;ENCODING=BASE64;JPEG:"+currentCustomer.mImage!.base64EncodedString()+"\n"
+            }
             content += "END:VCARD\n\n";
         }
 
