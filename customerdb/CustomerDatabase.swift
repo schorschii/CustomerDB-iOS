@@ -18,6 +18,7 @@ class CustomerDatabase {
     ]
     
     var db: OpaquePointer?
+    var mCallDirectoryExtensionDb = CallDirectoryDatabase()
     
     init() {
         let fileurl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent(CustomerDatabase.DB_FILE)
@@ -168,6 +169,29 @@ class CustomerDatabase {
                 }
             }
             commitTransaction()
+        }
+    }
+    
+    func updateCallDirectoryDatabase() {
+        mCallDirectoryExtensionDb.truncateNumbers()
+        for c in getCustomers(showDeleted: false, withFiles: true) {
+            _ = mCallDirectoryExtensionDb.insertNumber(insertNumbers: [
+                CallDirectoryNumber(
+                    customerId: c.mId,
+                    displayName: c.getFullName(lastNameFirst: false),
+                    phoneNumber: c.mPhoneHome
+                ),
+                CallDirectoryNumber(
+                    customerId: c.mId,
+                    displayName: c.getFullName(lastNameFirst: false),
+                    phoneNumber: c.mPhoneMobile
+                ),
+                CallDirectoryNumber(
+                    customerId: c.mId,
+                    displayName: c.getFullName(lastNameFirst: false),
+                    phoneNumber: c.mPhoneWork
+                )
+            ])
         }
     }
     

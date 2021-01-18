@@ -11,17 +11,12 @@ import StoreKit
 class AppDelegate: UIResponder, UIApplicationDelegate, SKPaymentTransactionObserver {
 
     var window: UIWindow?
-
-    var callObserver: CXCallObserver!
     
     var shortcutItemToProcess:UIApplicationShortcutItem?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         initDefaults()
-        
-        callObserver = CXCallObserver()
-        callObserver.setDelegate(self, queue: nil)
         
         if let shortcutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
             shortcutItemToProcess = shortcutItem
@@ -63,6 +58,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SKPaymentTransactionObser
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        
+        CXCallDirectoryManager.sharedInstance.reloadExtension(withIdentifier: "systems.sieber.customerdb.CustomerDatabaseDirectory", completionHandler: {(error) in
+            if let error = error {
+                print("CXCallDirectory update error: \(error.localizedDescription)")
+            } else {
+                print("CXCallDirectory updated")
+            }
+        })
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -121,21 +124,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SKPaymentTransactionObser
         }
     }
     
-}
-
-extension AppDelegate: CXCallObserverDelegate {
-    func callObserver(_ callObserver: CXCallObserver, callChanged call: CXCall) {
-        if call.hasEnded == true {
-            print("Disconnected")
-        }
-        if call.isOutgoing == true && call.hasConnected == false {
-            print("Dialing")
-        }
-        if call.isOutgoing == false && call.hasConnected == false && call.hasEnded == false {
-            print("Incoming")
-        }
-        if call.hasConnected == true && call.hasEnded == false {
-            print("Connected")
-        }
-    }
 }

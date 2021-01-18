@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		561B7C5C25B4D114005ABB43 /* CallDirectoryNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561B7C5B25B4D114005ABB43 /* CallDirectoryNumber.swift */; };
 		562A8BAF249B9EF4003CB9C4 /* VoucherCsvWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562A8BAE249B9EF4003CB9C4 /* VoucherCsvWriter.swift */; };
 		562A8BB1249BA20A003CB9C4 /* DocumentPickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562A8BB0249BA20A003CB9C4 /* DocumentPickers.swift */; };
 		562A8BB324A66DA6003CB9C4 /* CustomerAppointment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562A8BB224A66DA6003CB9C4 /* CustomerAppointment.swift */; };
@@ -23,6 +24,10 @@
 		563FEE9B20FFDB5300DFD7B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 563FEE9920FFDB5300DFD7B7 /* InfoPlist.strings */; };
 		566FBD9C245B69E3003433FA /* FieldTypePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566FBD9B245B69E3003433FA /* FieldTypePickerController.swift */; };
 		568DFA85254F190C00546F6B /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568DFA84254F190C00546F6B /* ScannerViewController.swift */; };
+		568DFA932550AE9100546F6B /* CallDirectoryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568DFA922550AE9100546F6B /* CallDirectoryHandler.swift */; };
+		568DFA972550AE9100546F6B /* CustomerDatabaseDirectory.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 568DFA902550AE9100546F6B /* CustomerDatabaseDirectory.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		568DFAB1255200F900546F6B /* CallDirectoryDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568DFAB0255200F900546F6B /* CallDirectoryDatabase.swift */; };
+		568DFAC02552027D00546F6B /* CallDirectoryDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568DFAB0255200F900546F6B /* CallDirectoryDatabase.swift */; };
 		569E14432371EA9E007BFAF0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569E14422371EA9E007BFAF0 /* MainViewController.swift */; };
 		569E1446237310C2007BFAF0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 569E1448237310C2007BFAF0 /* Localizable.strings */; };
 		569E144E23745792007BFAF0 /* CustomerDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569E144D23745792007BFAF0 /* CustomerDatabase.swift */; };
@@ -61,9 +66,35 @@
 		56FDB94524083CB60018004C /* InputOnlyModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FDB94424083CB60018004C /* InputOnlyModeViewController.swift */; };
 		56FDB947240840620018004C /* LockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FDB946240840620018004C /* LockViewController.swift */; };
 		56FDB949240947E70018004C /* BirthdayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FDB948240947E70018004C /* BirthdayViewController.swift */; };
+		56FFD28F25B4F4A300F1611A /* CallDirectoryNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561B7C5B25B4D114005ABB43 /* CallDirectoryNumber.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		568DFA952550AE9100546F6B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 563FEE7820FFD6C500DFD7B7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 568DFA8F2550AE9100546F6B;
+			remoteInfo = CustomerDatabaseDirectory;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		568DFA982550AE9100546F6B /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				568DFA972550AE9100546F6B /* CustomerDatabaseDirectory.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		561B7C5B25B4D114005ABB43 /* CallDirectoryNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallDirectoryNumber.swift; sourceTree = "<group>"; };
 		562A8BAE249B9EF4003CB9C4 /* VoucherCsvWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoucherCsvWriter.swift; sourceTree = "<group>"; };
 		562A8BB0249BA20A003CB9C4 /* DocumentPickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickers.swift; sourceTree = "<group>"; };
 		562A8BB224A66DA6003CB9C4 /* CustomerAppointment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerAppointment.swift; sourceTree = "<group>"; };
@@ -88,6 +119,10 @@
 		565426FB24707F3300631CE5 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		566FBD9B245B69E3003433FA /* FieldTypePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldTypePickerController.swift; sourceTree = "<group>"; };
 		568DFA84254F190C00546F6B /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
+		568DFA902550AE9100546F6B /* CustomerDatabaseDirectory.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CustomerDatabaseDirectory.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		568DFA922550AE9100546F6B /* CallDirectoryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallDirectoryHandler.swift; sourceTree = "<group>"; };
+		568DFA942550AE9100546F6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		568DFAB0255200F900546F6B /* CallDirectoryDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallDirectoryDatabase.swift; sourceTree = "<group>"; };
 		569E14422371EA9E007BFAF0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		569E144A23733329007BFAF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		569E144B23733406007BFAF0 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -141,10 +176,18 @@
 		56FDB94424083CB60018004C /* InputOnlyModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputOnlyModeViewController.swift; sourceTree = "<group>"; };
 		56FDB946240840620018004C /* LockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockViewController.swift; sourceTree = "<group>"; };
 		56FDB948240947E70018004C /* BirthdayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayViewController.swift; sourceTree = "<group>"; };
+		56FFD29425B6179C00F1611A /* CustomerDatabaseDirectory.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CustomerDatabaseDirectory.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		563FEE7D20FFD6C500DFD7B7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		568DFA8D2550AE9100546F6B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -158,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				563FEE8220FFD6C500DFD7B7 /* customerdb */,
+				568DFA912550AE9100546F6B /* CustomerDatabaseDirectory */,
 				563FEE8120FFD6C500DFD7B7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -166,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				563FEE8020FFD6C500DFD7B7 /* customerdb.app */,
+				568DFA902550AE9100546F6B /* CustomerDatabaseDirectory.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -207,12 +252,23 @@
 				563D8AC323C52E2100A759E3 /* VoucherEditViewController.swift */,
 				56F4E60C24B1D64C002F5569 /* AppointmentViewController.swift */,
 				56F4E60E24B1D660002F5569 /* AppointmentEditViewController.swift */,
+				568DFAB0255200F900546F6B /* CallDirectoryDatabase.swift */,
 				569E144D23745792007BFAF0 /* CustomerDatabase.swift */,
 				56D51FCD239C4A5C0097DBDE /* CustomerDatabaseApi.swift */,
 				56F4E61024B2208D002F5569 /* UIColor.swift */,
 				569E1448237310C2007BFAF0 /* Localizable.strings */,
 			);
 			path = customerdb;
+			sourceTree = "<group>";
+		};
+		568DFA912550AE9100546F6B /* CustomerDatabaseDirectory */ = {
+			isa = PBXGroup;
+			children = (
+				56FFD29425B6179C00F1611A /* CustomerDatabaseDirectory.entitlements */,
+				568DFA922550AE9100546F6B /* CallDirectoryHandler.swift */,
+				568DFA942550AE9100546F6B /* Info.plist */,
+			);
+			path = CustomerDatabaseDirectory;
 			sourceTree = "<group>";
 		};
 		569E144F23745950007BFAF0 /* Model */ = {
@@ -225,6 +281,7 @@
 				562A8BB624A67DF5003CB9C4 /* CustomerFile.swift */,
 				56D51FC3237DEA080097DBDE /* CustomField.swift */,
 				569E145423748EFA007BFAF0 /* Voucher.swift */,
+				561B7C5B25B4D114005ABB43 /* CallDirectoryNumber.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -267,15 +324,34 @@
 				563FEE7C20FFD6C500DFD7B7 /* Sources */,
 				563FEE7D20FFD6C500DFD7B7 /* Frameworks */,
 				563FEE7E20FFD6C500DFD7B7 /* Resources */,
+				568DFA982550AE9100546F6B /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				568DFA962550AE9100546F6B /* PBXTargetDependency */,
 			);
 			name = customerdb;
 			productName = customerdb;
 			productReference = 563FEE8020FFD6C500DFD7B7 /* customerdb.app */;
 			productType = "com.apple.product-type.application";
+		};
+		568DFA8F2550AE9100546F6B /* CustomerDatabaseDirectory */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 568DFA9B2550AE9100546F6B /* Build configuration list for PBXNativeTarget "CustomerDatabaseDirectory" */;
+			buildPhases = (
+				568DFA8C2550AE9100546F6B /* Sources */,
+				568DFA8D2550AE9100546F6B /* Frameworks */,
+				568DFA8E2550AE9100546F6B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CustomerDatabaseDirectory;
+			productName = CustomerDatabaseDirectory;
+			productReference = 568DFA902550AE9100546F6B /* CustomerDatabaseDirectory.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -283,13 +359,16 @@
 		563FEE7820FFD6C500DFD7B7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0940;
+				LastSwiftUpdateCheck = 1200;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Georg Sieber";
 				TargetAttributes = {
 					563FEE7F20FFD6C500DFD7B7 = {
 						CreatedOnToolsVersion = 9.4.1;
 						LastSwiftMigration = 1110;
+					};
+					568DFA8F2550AE9100546F6B = {
+						CreatedOnToolsVersion = 12.0;
 					};
 				};
 			};
@@ -312,6 +391,7 @@
 			projectRoot = "";
 			targets = (
 				563FEE7F20FFD6C500DFD7B7 /* customerdb */,
+				568DFA8F2550AE9100546F6B /* CustomerDatabaseDirectory */,
 			);
 		};
 /* End PBXProject section */
@@ -326,6 +406,13 @@
 				563FEE8B20FFD6C600DFD7B7 /* Assets.xcassets in Resources */,
 				569E1446237310C2007BFAF0 /* Localizable.strings in Resources */,
 				563FEE8920FFD6C500DFD7B7 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		568DFA8E2550AE9100546F6B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,6 +443,7 @@
 				56B2B7CF23E5EAFF00295569 /* MasterNavigationViewController.swift in Sources */,
 				56FDB949240947E70018004C /* BirthdayViewController.swift in Sources */,
 				56E9C02F246C6E6E00DBB9DA /* NavigationController.swift in Sources */,
+				561B7C5C25B4D114005ABB43 /* CallDirectoryNumber.swift in Sources */,
 				56DDADCB23E8B8EA00879CBD /* CreateAccountViewController.swift in Sources */,
 				56D51FC4237DEA080097DBDE /* CustomField.swift in Sources */,
 				56D51FC02376D97E0097DBDE /* CustomerDetailsViewController.swift in Sources */,
@@ -376,6 +464,7 @@
 				56DDADC323E780DC00879CBD /* ParsingState.swift in Sources */,
 				56DDADC423E780DC00879CBD /* NamedView.swift in Sources */,
 				56D51FCC2392C7A70097DBDE /* SettingsViewController.swift in Sources */,
+				568DFAB1255200F900546F6B /* CallDirectoryDatabase.swift in Sources */,
 				562A8BB724A67DF5003CB9C4 /* CustomerFile.swift in Sources */,
 				56D51FCA2392C7810097DBDE /* InfoViewController.swift in Sources */,
 				562A8BB524A66FEB003CB9C4 /* CustomerCalendar.swift in Sources */,
@@ -388,7 +477,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		568DFA8C2550AE9100546F6B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56FFD28F25B4F4A300F1611A /* CallDirectoryNumber.swift in Sources */,
+				568DFAC02552027D00546F6B /* CallDirectoryDatabase.swift in Sources */,
+				568DFA932550AE9100546F6B /* CallDirectoryHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		568DFA962550AE9100546F6B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 568DFA8F2550AE9100546F6B /* CustomerDatabaseDirectory */;
+			targetProxy = 568DFA952550AE9100546F6B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		563FEE8720FFD6C500DFD7B7 /* Main.storyboard */ = {
@@ -565,6 +672,7 @@
 		563FEE9320FFD6C600DFD7B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = customerdb/customerdb.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -588,6 +696,7 @@
 		563FEE9420FFD6C600DFD7B7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = customerdb/customerdb.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -603,6 +712,57 @@
 				PRODUCT_BUNDLE_IDENTIFIER = systems.sieber.customerdb;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		568DFA992550AE9100546F6B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_ENTITLEMENTS = CustomerDatabaseDirectory/CustomerDatabaseDirectory.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 22;
+				DEVELOPMENT_TEAM = 96G8V7UY3M;
+				INFOPLIST_FILE = CustomerDatabaseDirectory/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = systems.sieber.customerdb.CustomerDatabaseDirectory;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		568DFA9A2550AE9100546F6B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_ENTITLEMENTS = CustomerDatabaseDirectory/CustomerDatabaseDirectory.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 22;
+				DEVELOPMENT_TEAM = 96G8V7UY3M;
+				INFOPLIST_FILE = CustomerDatabaseDirectory/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = systems.sieber.customerdb.CustomerDatabaseDirectory;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -625,6 +785,15 @@
 			buildConfigurations = (
 				563FEE9320FFD6C600DFD7B7 /* Debug */,
 				563FEE9420FFD6C600DFD7B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		568DFA9B2550AE9100546F6B /* Build configuration list for PBXNativeTarget "CustomerDatabaseDirectory" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				568DFA992550AE9100546F6B /* Debug */,
+				568DFA9A2550AE9100546F6B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -574,6 +574,7 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
         }
         
         if(success) {
+            mDb.updateCallDirectoryDatabase()
             setUnsyncedChanges()
         }
         

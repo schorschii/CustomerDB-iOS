@@ -115,6 +115,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
     // sync implementation
     func queueFinished(success:Bool, message:String?) {
         DispatchQueue.main.async {
+            self.mDb.updateCallDirectoryDatabase()
             self.refreshSyncIcon()
             self.reloadData()
             self.setupStatusIndicator(visible: false, message: nil, completion: {
@@ -816,6 +817,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                             }
                         }
                     }
+                    mDb.updateCallDirectoryDatabase()
                     handleImportSuccess(imported: inserted)
                 } catch let error {
                     handleImportError(message: error.localizedDescription)
@@ -832,6 +834,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                     }
                 }
                 if(inserted > 0) {
+                    mDb.updateCallDirectoryDatabase()
                     handleImportSuccess(imported: inserted)
                 } else {
                     handleImportError(message: NSLocalizedString("file_does_not_contain_valid_records", comment: ""))
