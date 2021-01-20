@@ -96,6 +96,7 @@
 "green" = "Verde";
 "blue" = "Blu";
 "change_text_template" = "Cambia modello di testo";
+"add_drop_down_value" = "Nuovo valore a discesa";
 
 // Details
 "first_name" = "Nome di battesimo";

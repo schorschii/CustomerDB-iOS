@@ -105,6 +105,7 @@
 "green" = "Green";
 "blue" = "Blue";
 "change_text_template" = "Change Text Template";
+"add_drop_down_value" = "New Drop Down Value";
 
 // Details
 "first_name" = "First Name";

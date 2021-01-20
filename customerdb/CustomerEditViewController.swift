@@ -221,6 +221,7 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
         
         mDisplayAttributes = []
         for field in mDb.getCustomFields() {
+            // get field value
             var attribute = mCurrentCustomer?.getCustomField(key: field.mTitle)
             if(attribute == nil) {
                 attribute = CustomField(title: field.mTitle, value: "")
@@ -235,7 +236,17 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
                 }
             }
             
-            attribute!.mTextFieldHandle = insertDetail(title: field.mTitle, text: attribute?.mValue, type: field.mType)
+            // load presets
+            if(field.mType == CustomField.TYPE.DROPDOWN) {
+                var parsedData: [KeyValueItem] = []
+                for field in mDb.getCustomFieldPresets(customFieldId: field.mId) {
+                    parsedData.append(KeyValueItem(String(field.mId), field.mTitle))
+                }
+                attribute!.mPresetPickerController = PickerDataController(data: parsedData)
+            }
+            
+            // add to view
+            attribute!.mTextFieldHandle = insertDetail(customField: attribute!)
             mDisplayAttributes.append(attribute!)
         }
         
@@ -581,20 +592,18 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
         return success
     }
     
-    func insertDetail(title:String?, text:String?, type:Int) -> UIView? {
-        var finalText = text
-        if(title == nil) { return nil }
-        if(finalText == nil) { finalText = "" }
+    func insertDetail(customField:CustomField) -> UIView? {
+        let finalText = customField.mValue
         let labelTitle = UILabel()
         if #available(iOS 13.0, *) {
             labelTitle.textColor = UIColor.secondaryLabel
         } else {
             labelTitle.textColor = UIColor.gray
         }
-        labelTitle.text = title
+        labelTitle.text = customField.mTitle
         
         var inputView:UIView? = nil
-        if(type == CustomField.TYPE.TEXT_MULTILINE) {
+        if(customField.mType == CustomField.TYPE.TEXT_MULTILINE) {
             let textView = UITextView()
             textView.isScrollEnabled = false
             textView.text = finalText
@@ -606,10 +615,10 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
             textField.text = finalText
             textField.borderStyle = .roundedRect
             textField.font = textFieldTitle.font
-            if(type == CustomField.TYPE.NUMBER) {
+            if(customField.mType == CustomField.TYPE.NUMBER) {
                 textField.keyboardType = .numbersAndPunctuation
             }
-            else if(type == CustomField.TYPE.DATE) {
+            else if(customField.mType == CustomField.TYPE.DATE) {
                 let toolBar = UIToolbar()
                 toolBar.sizeToFit()
                 let doneButton = UIBarButtonItem(title: NSLocalizedString("done", comment: ""), style: .plain, target: self, action: #selector(CustomerEditViewController.dismissKeyboard))
@@ -623,10 +632,34 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
                 }
                 textField.inputAccessoryView = toolBar
                 textField.inputView = datePickerView
-                if let date = CustomerDatabase.parseDisplayDateWithoutTime(strDate: finalText!) {
+                if let date = CustomerDatabase.parseDisplayDateWithoutTime(strDate: finalText) {
                     datePickerView.date = date
                 }
                 datePickerView.addTarget(self, action: #selector(handleCustomDatePicker(sender:)), for: .valueChanged)
+            }
+            else if(customField.mType == CustomField.TYPE.DROPDOWN) {
+                let toolBar = UIToolbar()
+                toolBar.sizeToFit()
+                let doneButton = UIBarButtonItem(title: NSLocalizedString("done", comment: ""), style: .plain, target: self, action: #selector(CustomerEditViewController.dismissKeyboard))
+                toolBar.setItems([doneButton], animated: false)
+                toolBar.isUserInteractionEnabled = true
+                
+                customField.mPresetPickerController!.textField = textField
+                let uiPicker = UIPickerView()
+                uiPicker.delegate = customField.mPresetPickerController!
+                textField.inputView = uiPicker
+                textField.inputAccessoryView = toolBar
+                if(customField.mPresetPickerController!.data.count > 0) {
+                    // select first item
+                    uiPicker.selectRow(0, inComponent: 0, animated: false)
+                    // select given default if exists
+                    for i in 0...customField.mPresetPickerController!.data.count-1 {
+                        if(customField.mPresetPickerController!.data[i].value == finalText) {
+                            uiPicker.selectRow(i, inComponent: 0, animated: false)
+                            break
+                        }
+                    }
+                }
             }
             inputView = textField
         }

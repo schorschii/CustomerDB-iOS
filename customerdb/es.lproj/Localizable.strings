@@ -129,6 +129,7 @@
 "copy_postal_address" = "Copiar dirección postal";
 "last_modified" = "Última modificación";
 "removed_placeholder" = "*REMOTO*";
+"add_drop_down_value" = "Nuevo valor desplegable";
 
 // Edit
 "name_empty" = "Nombre vacía";

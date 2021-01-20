@@ -22,7 +22,6 @@
 		563FEE8B20FFD6C600DFD7B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 563FEE8A20FFD6C600DFD7B7 /* Assets.xcassets */; };
 		563FEE8E20FFD6C600DFD7B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 563FEE8C20FFD6C600DFD7B7 /* LaunchScreen.storyboard */; };
 		563FEE9B20FFDB5300DFD7B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 563FEE9920FFDB5300DFD7B7 /* InfoPlist.strings */; };
-		566FBD9C245B69E3003433FA /* FieldTypePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566FBD9B245B69E3003433FA /* FieldTypePickerController.swift */; };
 		568DFA85254F190C00546F6B /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568DFA84254F190C00546F6B /* ScannerViewController.swift */; };
 		568DFA932550AE9100546F6B /* CallDirectoryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568DFA922550AE9100546F6B /* CallDirectoryHandler.swift */; };
 		568DFA972550AE9100546F6B /* CustomerDatabaseDirectory.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 568DFA902550AE9100546F6B /* CustomerDatabaseDirectory.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -35,7 +34,6 @@
 		569E145323748DFF007BFAF0 /* KeyValueItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569E145223748DFF007BFAF0 /* KeyValueItem.swift */; };
 		569E145523748EFA007BFAF0 /* Voucher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569E145423748EFA007BFAF0 /* Voucher.swift */; };
 		56B2B7CF23E5EAFF00295569 /* MasterNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B2B7CE23E5EAFF00295569 /* MasterNavigationViewController.swift */; };
-		56B2B7D123E5F65D00295569 /* PickerDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B2B7D023E5F65D00295569 /* PickerDataController.swift */; };
 		56B34E7724802FF600DEDEA4 /* QuotedPrintable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B34E7624802FF600DEDEA4 /* QuotedPrintable.swift */; };
 		56B8725424E07F0900E5F32D /* CalendarCsvWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B8725324E07F0900E5F32D /* CalendarCsvWriter.swift */; };
 		56B8725624E080A500E5F32D /* CalendarIcsWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B8725524E080A500E5F32D /* CalendarIcsWriter.swift */; };
@@ -117,7 +115,6 @@
 		565426F924707F3300631CE5 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		565426FA24707F3300631CE5 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		565426FB24707F3300631CE5 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		566FBD9B245B69E3003433FA /* FieldTypePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldTypePickerController.swift; sourceTree = "<group>"; };
 		568DFA84254F190C00546F6B /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		568DFA902550AE9100546F6B /* CustomerDatabaseDirectory.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CustomerDatabaseDirectory.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		568DFA922550AE9100546F6B /* CallDirectoryHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallDirectoryHandler.swift; sourceTree = "<group>"; };
@@ -132,7 +129,6 @@
 		569E145223748DFF007BFAF0 /* KeyValueItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValueItem.swift; sourceTree = "<group>"; };
 		569E145423748EFA007BFAF0 /* Voucher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voucher.swift; sourceTree = "<group>"; };
 		56B2B7CE23E5EAFF00295569 /* MasterNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterNavigationViewController.swift; sourceTree = "<group>"; };
-		56B2B7D023E5F65D00295569 /* PickerDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerDataController.swift; sourceTree = "<group>"; };
 		56B34E7624802FF600DEDEA4 /* QuotedPrintable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotedPrintable.swift; sourceTree = "<group>"; };
 		56B8725324E07F0900E5F32D /* CalendarCsvWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCsvWriter.swift; sourceTree = "<group>"; };
 		56B8725524E080A500E5F32D /* CalendarIcsWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarIcsWriter.swift; sourceTree = "<group>"; };
@@ -235,7 +231,6 @@
 				568DFA84254F190C00546F6B /* ScannerViewController.swift */,
 				562A8BB0249BA20A003CB9C4 /* DocumentPickers.swift */,
 				56C089D2244A32D9005F8A1B /* PickerController.swift */,
-				566FBD9B245B69E3003433FA /* FieldTypePickerController.swift */,
 				56FDB94424083CB60018004C /* InputOnlyModeViewController.swift */,
 				56FDB946240840620018004C /* LockViewController.swift */,
 				56FDB948240947E70018004C /* BirthdayViewController.swift */,
@@ -243,7 +238,6 @@
 				56D51FCB2392C7A70097DBDE /* SettingsViewController.swift */,
 				56DDADC823E8AF5000879CBD /* SyncInfoViewController.swift */,
 				56DDADCA23E8B8EA00879CBD /* CreateAccountViewController.swift */,
-				56B2B7D023E5F65D00295569 /* PickerDataController.swift */,
 				563903C82374C75D00753D93 /* CustomerTableController.swift */,
 				56D51FBF2376D97E0097DBDE /* CustomerDetailsViewController.swift */,
 				56D51FC1237898E70097DBDE /* CustomerEditViewController.swift */,
@@ -425,7 +419,6 @@
 			files = (
 				563D8AC623C52E6800A759E3 /* VoucherTableViewController.swift in Sources */,
 				56D51FC2237898E70097DBDE /* CustomerEditViewController.swift in Sources */,
-				566FBD9C245B69E3003433FA /* FieldTypePickerController.swift in Sources */,
 				56B8725624E080A500E5F32D /* CalendarIcsWriter.swift in Sources */,
 				56D51FCE239C4A5C0097DBDE /* CustomerDatabaseApi.swift in Sources */,
 				56E9C02D246C64CA00DBB9DA /* MainSplitViewController.swift in Sources */,
@@ -455,7 +448,6 @@
 				56DDADC523E780DC00879CBD /* EnumeratedView.swift in Sources */,
 				568DFA85254F190C00546F6B /* ScannerViewController.swift in Sources */,
 				562A8BAF249B9EF4003CB9C4 /* VoucherCsvWriter.swift in Sources */,
-				56B2B7D123E5F65D00295569 /* PickerDataController.swift in Sources */,
 				562A8BB324A66DA6003CB9C4 /* CustomerAppointment.swift in Sources */,
 				563903C92374C75D00753D93 /* CustomerTableController.swift in Sources */,
 				56DDADC623E780DC00879CBD /* CSV.swift in Sources */,

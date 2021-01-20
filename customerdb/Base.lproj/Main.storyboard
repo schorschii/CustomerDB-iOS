@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="36O-zw-ABK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="36O-zw-ABK">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -2178,13 +2178,13 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                                                         <rect key="frame" x="0.0" y="0.0" width="339" height="68"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Red" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VIb-tK-plR">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="14" height="68"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="68"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <slider opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="VyP-I7-L1G">
-                                                                                <rect key="frame" x="17" y="0.0" width="324" height="69"/>
+                                                                                <rect key="frame" x="3" y="0.0" width="338" height="69"/>
                                                                                 <accessibility key="accessibilityConfiguration">
                                                                                     <bool key="isElement" value="NO"/>
                                                                                 </accessibility>
@@ -2198,13 +2198,13 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                                                         <rect key="frame" x="0.0" y="68" width="339" height="30"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Green" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WNo-Ol-mbJ">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="14" height="30"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <slider opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="vrT-RQ-YbS">
-                                                                                <rect key="frame" x="17" y="0.0" width="324" height="31"/>
+                                                                                <rect key="frame" x="3" y="0.0" width="338" height="31"/>
                                                                                 <accessibility key="accessibilityConfiguration">
                                                                                     <bool key="isElement" value="NO"/>
                                                                                 </accessibility>
@@ -2218,13 +2218,13 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                                                         <rect key="frame" x="0.0" y="98" width="339" height="30"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qU6-dt-IYM">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="14" height="30"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                 <nil key="textColor"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <slider opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="bzH-yW-AOv">
-                                                                                <rect key="frame" x="17" y="0.0" width="324" height="31"/>
+                                                                                <rect key="frame" x="3" y="0.0" width="338" height="31"/>
                                                                                 <accessibility key="accessibilityConfiguration">
                                                                                     <bool key="isElement" value="NO"/>
                                                                                 </accessibility>
@@ -2586,6 +2586,37 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
+                                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="g34-hg-uZ9">
+                                                <rect key="frame" x="0.0" y="1630.5" width="374" height="5"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O8g-b9-lSb">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="0.0"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="LqI-Pg-Pxl">
+                                                        <rect key="frame" x="0.0" y="5" width="374" height="0.0"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lof-zn-sfQ">
+                                                                <rect key="frame" x="0.0" y="0.0" width="187" height="0.0"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <state key="normal" title="Add"/>
+                                                                <connections>
+                                                                    <action selector="onClickAddCustomFieldPreset:" destination="Eos-1F-Pem" eventType="touchUpInside" id="wFG-Mn-aQS"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Et-0r-xob">
+                                                                <rect key="frame" x="187" y="0.0" width="187" height="0.0"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <state key="normal" title="Remove"/>
+                                                                <connections>
+                                                                    <action selector="onClickRemoveCustomFieldPreset:" destination="Eos-1F-Pem" eventType="touchUpInside" id="D69-rB-gdN"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cHw-YY-llc">
                                                 <rect key="frame" x="0.0" y="1645.5" width="374" height="97.5"/>
                                                 <subviews>
@@ -2661,6 +2692,7 @@ The backup is even easier if you use the sync feature. The data will then be syn
                         <outlet property="buttonEditCustomField" destination="eKc-om-3g7" id="asC-No-nPh"/>
                         <outlet property="buttonRemoveCalendar" destination="063-8X-vRe" id="CRI-25-DI6"/>
                         <outlet property="buttonRemoveCustomField" destination="YSX-xF-87p" id="Yyl-s4-zy1"/>
+                        <outlet property="buttonRemoveCustomFieldPreset" destination="8Et-0r-xob" id="8Vh-DN-h8A"/>
                         <outlet property="buttonRemoveLogo" destination="ffo-FK-rCO" id="LyC-3e-1MA"/>
                         <outlet property="labelSyncModeDesc" destination="wuy-Yy-e8W" id="34T-XP-nBa"/>
                         <outlet property="scrollView" destination="elV-kw-IkS" id="o1N-YB-bcU"/>
@@ -2668,6 +2700,7 @@ The backup is even easier if you use the sync feature. The data will then be syn
                         <outlet property="sliderBlue" destination="bzH-yW-AOv" id="qmx-kG-FGe"/>
                         <outlet property="sliderGreen" destination="vrT-RQ-YbS" id="3BC-Cv-nYh"/>
                         <outlet property="sliderRed" destination="VyP-I7-L1G" id="RIh-62-UOW"/>
+                        <outlet property="stackViewCustomFieldPresets" destination="g34-hg-uZ9" id="YpF-ia-O4w"/>
                         <outlet property="switchAllowCharsInNumbers" destination="BPR-aJ-uIm" id="jRp-Ij-sXW"/>
                         <outlet property="switchShowAddressField" destination="skf-mb-6np" id="b3R-jO-iBH"/>
                         <outlet property="switchShowBirthdayField" destination="ZDq-s2-bKz" id="Ujx-Ow-Hxc"/>
@@ -2683,6 +2716,7 @@ The backup is even easier if you use the sync feature. The data will then be syn
                         <outlet property="textFieldAppPasswordConfirm" destination="kln-Cr-h59" id="i93-yK-Kpr"/>
                         <outlet property="textFieldCalendars" destination="MSe-hg-kXr" id="IjH-7n-fGs"/>
                         <outlet property="textFieldCurrency" destination="FrN-mQ-IWM" id="ZcF-YR-pf8"/>
+                        <outlet property="textFieldCustomFieldPresets" destination="O8g-b9-lSb" id="wsb-Uj-mqk"/>
                         <outlet property="textFieldCustomFields" destination="9Ht-va-nKj" id="Rwa-m9-OLh"/>
                         <outlet property="textFieldSyncPassword" destination="1W5-81-mIk" id="p3x-2D-Xtq"/>
                         <outlet property="textFieldSyncUrl" destination="8qE-uR-JCT" id="TPi-z8-CQm"/>
@@ -4388,7 +4422,7 @@ City Country</string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="b4I-Iy-NtL"/>
-        <segue reference="VYG-mX-XiC"/>
+        <segue reference="g2l-0z-HdN"/>
         <segue reference="18W-Zu-reX"/>
     </inferredMetricsTieBreakers>
     <resources>

@@ -37,6 +37,9 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
     @IBOutlet weak var buttonRemoveLogo: UIButton!
     @IBOutlet weak var buttonEditCustomField: UIButton!
     @IBOutlet weak var buttonRemoveCustomField: UIButton!
+    @IBOutlet weak var textFieldCustomFieldPresets: UITextField!
+    @IBOutlet weak var stackViewCustomFieldPresets: UIStackView!
+    @IBOutlet weak var buttonRemoveCustomFieldPreset: UIButton!
     @IBOutlet weak var textFieldCalendars: UITextField!
     @IBOutlet weak var buttonEditCalendar: UIButton!
     @IBOutlet weak var buttonRemoveCalendar: UIButton!
@@ -52,6 +55,8 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
     
     var mCustomFieldsController: PickerDataController? = nil
     var mCurrentCustomField: CustomField? = nil
+    var mCustomFieldPresetsController: PickerDataController? = nil
+    var mCurrentCustomFieldPreset: KeyValueItem? = nil
     
     var mCalendarsController: PickerDataController? = nil
     var mCurrentCalendar: CustomerCalendar? = nil
@@ -178,12 +183,14 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
             changed: { item in
                 self.mCurrentCustomField = self.mDb.getCustomField(id: Int(item.key)!)
                 self.reloadCustomField()
+                self.reloadCustomFieldPresets()
             }
         )
         self.createPickerCustomFields(pickerDataController: self.mCustomFieldsController!, defaultValue: "")
         reloadCustomField()
     }
     func reloadCustomField() {
+        stackViewCustomFieldPresets.isHidden = true
         if(self.mCurrentCustomField == nil) {
             textFieldCustomFields.text = ""
             buttonEditCustomField.isEnabled = false
@@ -191,6 +198,34 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         } else {
             buttonEditCustomField.isEnabled = true
             buttonRemoveCustomField.isEnabled = true
+            if(self.mCurrentCustomField?.mType == CustomField.TYPE.DROPDOWN) {
+                stackViewCustomFieldPresets.isHidden = false
+            }
+        }
+    }
+    
+    func reloadCustomFieldPresets() {
+        var parsedData: [KeyValueItem] = []
+        for field in mDb.getCustomFieldPresets(customFieldId: mCurrentCustomField!.mId) {
+            parsedData.append(KeyValueItem(String(field.mId), field.mTitle))
+        }
+        mCustomFieldPresetsController = PickerDataController(
+            textField: textFieldCustomFieldPresets,
+            data: parsedData,
+            changed: { item in
+                self.mCurrentCustomFieldPreset = item
+                self.reloadCustomFieldPreset()
+            }
+        )
+        self.createPickerCustomFieldPresets(pickerDataController: self.mCustomFieldPresetsController!, defaultValue: "")
+        reloadCustomFieldPreset()
+    }
+    func reloadCustomFieldPreset() {
+        if(self.mCurrentCustomFieldPreset == nil) {
+            self.textFieldCustomFieldPresets.text = ""
+            self.buttonRemoveCustomFieldPreset.isEnabled = false
+        } else {
+            self.buttonRemoveCustomFieldPreset.isEnabled = true
         }
     }
     
@@ -231,7 +266,13 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         let imgViewForDropDown2 = UIImageView()
         imgViewForDropDown2.frame = CGRect(x: 0, y: 0, width: 30, height: 48)
         imgViewForDropDown2.image = UIImage(named: "baseline_arrow_drop_down_circle_black_24pt")
-        textFieldCalendars.rightView = imgViewForDropDown2
+        textFieldCustomFieldPresets.rightView = imgViewForDropDown2
+        textFieldCustomFieldPresets.rightViewMode = .always
+        
+        let imgViewForDropDown3 = UIImageView()
+        imgViewForDropDown3.frame = CGRect(x: 0, y: 0, width: 30, height: 48)
+        imgViewForDropDown3.image = UIImage(named: "baseline_arrow_drop_down_circle_black_24pt")
+        textFieldCalendars.rightView = imgViewForDropDown3
         textFieldCalendars.rightViewMode = .always
     }
     
@@ -404,6 +445,30 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
             reloadCustomField()
         }
     }
+    func createPickerCustomFieldPresets(pickerDataController: PickerDataController, defaultValue: String) {
+        pickerDataController.textField?.text = ""
+        mCurrentCustomFieldPreset = nil
+        let uiPicker = UIPickerView()
+        uiPicker.delegate = pickerDataController
+        pickerDataController.textField?.inputView = uiPicker
+        pickerDataController.textField?.inputAccessoryView = toolBar
+        if(pickerDataController.data.count > 0) {
+            // select first item
+            uiPicker.selectRow(0, inComponent: 0, animated: false)
+            pickerDataController.textField?.text = pickerDataController.data[0].value
+            mCurrentCustomFieldPreset = pickerDataController.data[0]
+            // select given default if exists
+            for i in 0...pickerDataController.data.count-1 {
+                if(pickerDataController.data[i].key == defaultValue) {
+                    uiPicker.selectRow(i, inComponent: 0, animated: false)
+                    pickerDataController.textField?.text = pickerDataController.data[i].value
+                    mCurrentCustomFieldPreset = pickerDataController.data[i]
+                    break
+                }
+            }
+            reloadCustomFieldPreset()
+        }
+    }
     func createPickerCalendars(pickerDataController: PickerDataController, defaultValue: String) {
         pickerDataController.textField?.text = ""
         mCurrentCalendar = nil
@@ -559,7 +624,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
             else if(typeString == "field_numeric") {
                 self.addCustomField(title: textField.text!, type: CustomField.TYPE.NUMBER)
             }
-            else if(typeString == "field_dropdown") {
+            else if(typeString == "field_drop_down") {
                 self.addCustomField(title: textField.text!, type: CustomField.TYPE.DROPDOWN)
             }
             else if(typeString == "field_date") {
@@ -624,7 +689,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
             else if(typeString == "field_numeric") {
                 _ = self.mDb.updateCustomField(cf: CustomField(id: prevFieldId, title: newFieldTitle, type: CustomField.TYPE.NUMBER))
             }
-            else if(typeString == "field_dropdown") {
+            else if(typeString == "field_drop_down") {
                 _ = self.mDb.updateCustomField(cf: CustomField(id: prevFieldId, title: newFieldTitle, type: CustomField.TYPE.DROPDOWN))
             }
             else if(typeString == "field_date") {
@@ -653,6 +718,32 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         if(title != "") {
             _ = self.mDb.insertCustomField(cf: CustomField(id: -1, title: title, type: type))
             reloadCustomFields()
+        }
+    }
+    
+    @IBAction func onClickAddCustomFieldPreset(_ sender: UIButton) {
+        if(mCurrentCustomField == nil) { return }
+        inputBox(title: NSLocalizedString("add_drop_down_value", comment: ""), defaultText: "", callback: { newText in
+            if(newText != nil && newText != "") {
+                _ = self.mDb.insertCustomFieldPreset(
+                    fieldId: self.mCurrentCustomField!.mId, preset: newText!
+                )
+                self.reloadCustomFieldPresets()
+            }
+        })
+    }
+    @IBAction func onClickRemoveCustomFieldPreset(_ sender: UIButton) {
+        if(mCurrentCustomFieldPreset != nil) {
+            let alert = UIAlertController(
+                title: NSLocalizedString("are_you_sure", comment: ""),
+                message: "",
+                preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("delete", comment: ""), style: .destructive, handler: { (_) in
+                self.mDb.removeCustomFieldPreset(id: Int64(self.mCurrentCustomFieldPreset!.key)!)
+                self.reloadCustomFieldPresets()
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     

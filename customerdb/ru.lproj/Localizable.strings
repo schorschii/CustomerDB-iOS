@@ -96,6 +96,7 @@
 "green" = "Зеленый";
 "blue" = "Синий";
 "change_text_template" = "Изменить текстовый шаблон";
+"add_drop_down_value" = "Новое раскрывающееся значение";
 
 // Details
 "first_name" = "Имя";

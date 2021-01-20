@@ -986,6 +986,45 @@ class CustomerDatabase {
         }
     }
     
+    func getCustomFieldPresets(customFieldId: Int64) -> [CustomField] {
+        var fields:[CustomField] = []
+        var stmt:OpaquePointer?
+        if sqlite3_prepare(self.db, "SELECT id, title FROM customer_extra_presets WHERE extra_field_id = ?", -1, &stmt, nil) == SQLITE_OK {
+            sqlite3_bind_int64(stmt, 1, customFieldId)
+            while sqlite3_step(stmt) == SQLITE_ROW {
+                fields.append(
+                    CustomField(
+                        id: sqlite3_column_int64(stmt, 0),
+                        title: String(cString: sqlite3_column_text(stmt, 1)),
+                        type: -1
+                    )
+                )
+            }
+        }
+        return fields
+    }
+    func insertCustomFieldPreset(fieldId: Int64, preset: String) -> Bool {
+        var stmt:OpaquePointer?
+        if sqlite3_prepare(self.db, "INSERT INTO customer_extra_presets (title, extra_field_id) VALUES (?,?)", -1, &stmt, nil) == SQLITE_OK {
+            let title = preset as NSString
+            sqlite3_bind_text(stmt, 1, title.utf8String, -1, nil)
+            sqlite3_bind_int64(stmt, 2, fieldId)
+            if sqlite3_step(stmt) == SQLITE_DONE {
+                sqlite3_finalize(stmt)
+            }
+        }
+        return true
+    }
+    func removeCustomFieldPreset(id: Int64) {
+        var stmt:OpaquePointer?
+        if sqlite3_prepare(self.db, "DELETE FROM customer_extra_presets WHERE id = ?", -1, &stmt, nil) == SQLITE_OK {
+            sqlite3_bind_int64(stmt, 1, id)
+            if sqlite3_step(stmt) == SQLITE_DONE {
+                sqlite3_finalize(stmt)
+            }
+        }
+    }
+    
     // Voucher Operations
     func getVouchers(showDeleted:Bool) -> [Voucher] {
         var vouchers:[Voucher] = []

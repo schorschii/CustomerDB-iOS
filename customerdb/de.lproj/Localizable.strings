@@ -98,13 +98,14 @@
 "field_alphanumeric" = "Alphanumerisch";
 "field_alphanumeric_multiline" = "Alphanumerisch (mehrzeilig)";
 "field_numeric" = "Numerisch";
-"field_drop_down" = "Drop Down";
+"field_drop_down" = "Auswahlliste";
 "field_date" = "Datum";
 "new_calendar" = "Neuer Kalender";
 "red" = "Rot";
 "green" = "Grün";
 "blue" = "Blau";
 "change_text_template" = "Textvorlage ändern";
+"add_drop_down_value" = "Neuer Auswahlfeld-Eintrag";
 
 // Details
 "first_name" = "Vorname";
