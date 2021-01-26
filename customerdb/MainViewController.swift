@@ -514,12 +514,12 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
         let exportVcfAction = UIAlertAction(
             title: NSLocalizedString("export_vcf", comment: ""),
             style: .default) { (action) in
-                self.exportVcf()
+                self.exportVcf(barButtonItem: sender)
         }
         let exportCsvAction = UIAlertAction(
             title: NSLocalizedString("export_csv", comment: ""),
             style: .default) { (action) in
-                self.exportCsvCustomer()
+                self.exportCsvCustomer(barButtonItem: sender)
         }
         let cancelAction = UIAlertAction(
             title: NSLocalizedString("close", comment: ""),
@@ -563,7 +563,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
         let exportCsvAction = UIAlertAction(
             title: NSLocalizedString("export_csv", comment: ""),
             style: .default) { (action) in
-                self.exportCsvVoucher()
+                self.exportCsvVoucher(barButtonItem: sender)
         }
         let cancelAction = UIAlertAction(
             title: NSLocalizedString("close", comment: ""),
@@ -625,12 +625,12 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
         let exportIcsAction = UIAlertAction(
             title: NSLocalizedString("export_ics", comment: ""),
             style: .default) { (action) in
-                self.exportIcs()
+                self.exportIcs(barButtonItem: sender)
         }
         let exportCsvAction = UIAlertAction(
             title: NSLocalizedString("export_csv", comment: ""),
             style: .default) { (action) in
-                self.exportCsvAppointment()
+                self.exportCsvAppointment(barButtonItem: sender)
         }
         let cancelAction = UIAlertAction(
             title: NSLocalizedString("close", comment: ""),
@@ -648,7 +648,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
         self.present(alert, animated: true)
     }
     
-    func exportCsvCustomer() {
+    func exportCsvCustomer(barButtonItem:UIBarButtonItem) {
         let csv = CustomerCsvWriter(customers: self.mDb.getCustomers(showDeleted: false, withFiles: false), customFields: self.mDb.getCustomFields())
         
         let fileurl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("export.csv")
@@ -659,6 +659,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
             let activityController = UIActivityViewController(
                 activityItems: [fileurl], applicationActivities: nil
             )
+            activityController.popoverPresentationController?.barButtonItem = barButtonItem
             self.present(activityController, animated: true, completion: nil)
 
         } catch let error {
@@ -666,7 +667,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
         }
     }
     
-    func exportCsvVoucher() {
+    func exportCsvVoucher(barButtonItem:UIBarButtonItem) {
         let csv = VoucherCsvWriter(vouchers: self.mDb.getVouchers(showDeleted: false))
         
         let fileurl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("export.csv")
@@ -677,6 +678,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
             let activityController = UIActivityViewController(
                 activityItems: [fileurl], applicationActivities: nil
             )
+            activityController.popoverPresentationController?.barButtonItem = barButtonItem
             self.present(activityController, animated: true, completion: nil)
 
         } catch let error {
@@ -684,7 +686,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
         }
     }
     
-    func exportCsvAppointment() {
+    func exportCsvAppointment(barButtonItem:UIBarButtonItem) {
         if let calendarSelectionAlert = createCalendarSelectAlert() {
             calendarSelectionAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
                 let csv = CalendarCsvWriter(
@@ -702,6 +704,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                     let activityController = UIActivityViewController(
                         activityItems: [fileurl], applicationActivities: nil
                     )
+                    activityController.popoverPresentationController?.barButtonItem = barButtonItem
                     self.present(activityController, animated: true, completion: nil)
 
                 } catch let error {
@@ -712,7 +715,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
         }
     }
     
-    func exportVcf() {
+    func exportVcf(barButtonItem:UIBarButtonItem) {
         let vcf = CustomerVcfWriter(customers: self.mDb.getCustomers(showDeleted: false, withFiles: true))
         
         let fileurl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("export.vcf")
@@ -723,6 +726,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
             let activityController = UIActivityViewController(
                 activityItems: [fileurl], applicationActivities: nil
             )
+            activityController.popoverPresentationController?.barButtonItem = barButtonItem
             self.present(activityController, animated: true, completion: nil)
 
         } catch let error {
@@ -767,7 +771,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
         return calendarSelectionAlert
     }
     
-    func exportIcs() {
+    func exportIcs(barButtonItem:UIBarButtonItem) {
         if let calendarSelectionAlert = createCalendarSelectAlert() {
             calendarSelectionAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
                 let ics = CalendarIcsWriter(
@@ -785,6 +789,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                     let activityController = UIActivityViewController(
                         activityItems: [fileurl], applicationActivities: nil
                     )
+                    activityController.popoverPresentationController?.barButtonItem = barButtonItem
                     self.present(activityController, animated: true, completion: nil)
 
                 } catch let error {

@@ -375,7 +375,7 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
         }
     }
     
-    @objc func onClickManualUnlock(_ sender: UIButton) {
+    @objc func onClickManualUnlock(_ sender: UITapGestureRecognizer) {
         let alert = UIAlertController(title: NSLocalizedString("manual_unlock", comment: ""), message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: NSLocalizedString("commercial_usage", comment: ""), style: .default, handler: { (_) in
             self.openUnlockInputBox(productId: InfoViewController.inappCommercialUsageId)
@@ -399,7 +399,7 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
             self.openUnlockInputBox(productId: InfoViewController.inappCalendarId)
         }))
         alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil))
-        alert.popoverPresentationController?.sourceView = sender
+        alert.popoverPresentationController?.sourceView = sender.view
         self.present(alert, animated: true, completion: nil)
     }
     @IBAction func onClickBuyCloudAccessLicense(_ sender: UIButton) {
