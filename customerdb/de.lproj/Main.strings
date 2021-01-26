@@ -172,6 +172,8 @@
 "GDY-lL-uEE.normalTitle" = "E-Mail-Betreff";
 "4FB-mG-f0t.normalTitle" = "E-Mail-Vorlage";
 "9y6-Yo-3Zc.normalTitle" = "Newsletter-Text";
+"vCd-44-prd.text" = "Kundennamen-Anzeige bei eingehenden Anrufen";
+"kJr-Mf-Dsx.text" = "Bitte erlauben Sie die Anruferidentifizierung für die Kundendatenbank in den iOS-Einstellungen (Einstellungs-App -> Telefon -> Anruferidentifizierung).";
 
 "dMa-s6-QnY.title" = "Synchronisierung";
 "Cqd-eO-HmS.text" = "Möglichkeiten der Synchronisierungsfunktion";

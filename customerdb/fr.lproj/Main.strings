@@ -631,3 +631,6 @@
 
 "Lof-zn-sfQ.normalTitle" = "Nouveau";
 "8Et-0r-xob.normalTitle" = "Retirer";
+
+"vCd-44-prd.text" = "Affichage du nom du client pour les appels entrants";
+"kJr-Mf-Dsx.text" = "Veuillez autoriser l'identification de l'appelant pour la base de données client dans les paramètres iOS (application Paramètres -> Téléphone -> Identification de l'appelant).";

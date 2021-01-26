@@ -631,3 +631,6 @@
 
 "Lof-zn-sfQ.normalTitle" = "Nuevo";
 "8Et-0r-xob.normalTitle" = "Eliminar";
+
+"vCd-44-prd.text" = "Visualización del nombre del cliente para llamadas entrantes";
+"kJr-Mf-Dsx.text" = "Permita la identificación de la persona que llama para la base de datos del cliente en la configuración de iOS (aplicación Configuración -> Teléfono -> Identificación de la persona que llama).";
