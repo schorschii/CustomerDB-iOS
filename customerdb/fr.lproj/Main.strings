@@ -631,3 +631,7 @@
 
 "vCd-44-prd.text" = "Affichage du nom du client pour les appels entrants";
 "kJr-Mf-Dsx.text" = "Veuillez autoriser l'identification de l'appelant pour la base de données client dans les paramètres iOS (application Paramètres -> Téléphone -> Identification de l'appelant).";
+
+"Jp5-l9-MPC.text" = "Open source";
+"PNY-Ex-yUh.text" = "Cette application est Open Source. Si vous souhaitez améliorer l'application ou ses traductions, veuillez consulter le référentiel sur Github.";
+"AKN-AJ-c9p.normalTitle" = "Base de données clients sur GitHub";

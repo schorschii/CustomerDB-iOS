@@ -631,3 +631,7 @@
 
 "vCd-44-prd.text" = "Visualización del nombre del cliente para llamadas entrantes";
 "kJr-Mf-Dsx.text" = "Permita la identificación de la persona que llama para la base de datos del cliente en la configuración de iOS (aplicación Configuración -> Teléfono -> Identificación de la persona que llama).";
+
+"Jp5-l9-MPC.text" = "Fuente abierta";
+"PNY-Ex-yUh.text" = "Esta aplicación es de código abierto. Si desea mejorar la aplicación o sus traducciones, consulte el repositorio en Github.";
+"AKN-AJ-c9p.normalTitle" = "Base de datos de clientes en GitHub";

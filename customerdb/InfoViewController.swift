@@ -15,6 +15,7 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
     static let activateURL = "https://apps.georg-sieber.de/activate/app.php"
     
     static let homepageURL = "https://georg-sieber.de/"
+    static let repoURL = "https://github.com/schorschii/customerdb-ios"
     static let supportEmail = "support@georg-sieber.de"
     
     static let inappCloudAccessLicenseId = "systems.sieber.customerdb.cal"
@@ -81,6 +82,11 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
     }
     @IBAction func onClickWebsite(_ sender: UIButton) {
         if let url = URL(string: InfoViewController.homepageURL) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    @IBAction func onClickGithub(_ sender: UIButton) {
+        if let url = URL(string: InfoViewController.repoURL) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
