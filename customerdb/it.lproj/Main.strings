@@ -531,9 +531,6 @@
 /* Class = "UINavigationItem"; title = "Information"; ObjectID = "tov-8i-WRr"; */
 "tov-8i-WRr.title" = "Informazione";
 
-/* Class = "UILabel"; text = "© 2017-2020 Georg Sieber"; ObjectID = "ug1-Uu-I6b"; */
-"ug1-Uu-I6b.text" = "© 2017-2020 Georg Sieber";
-
 /* Class = "UILabel"; text = "0000-00-00 00:00:00"; ObjectID = "vGu-e5-EnH"; */
 "vGu-e5-EnH.text" = "Registrazione 00:00:00";
 
