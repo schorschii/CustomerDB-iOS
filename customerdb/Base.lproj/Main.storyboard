@@ -1494,7 +1494,7 @@
                                 <rect key="frame" x="0.0" y="56" width="414" height="752"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="qkB-AG-hm0">
-                                        <rect key="frame" x="20" y="0.0" width="374" height="1707"/>
+                                        <rect key="frame" x="20" y="0.0" width="374" height="1653"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="68r-bN-N0T">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="120"/>
@@ -1826,7 +1826,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="4Uu-Zf-PJu">
-                                                <rect key="frame" x="0.0" y="1065" width="374" height="282.5"/>
+                                                <rect key="frame" x="0.0" y="1065" width="374" height="228.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Backup Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBE-hy-Oyh">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="26.5"/>
@@ -1835,12 +1835,10 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="25" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="In6-6A-pDm">
-                                                        <rect key="frame" x="0.0" y="31.5" width="374" height="251"/>
-                                                        <string key="text">By default, the data is stored only locally on your device. Please back up your database regularly to not lose your data in case of malfunction or loss of your mobile device.
+                                                        <rect key="frame" x="0.0" y="31.5" width="374" height="197"/>
+                                                        <string key="text">By default, the data is stored only locally on your device. Please back up your database regularly to not lose your data in case of malfunction or loss of your mobile device. This is done by simply copying the database files (in directory "Customer Database") to your computer or another external storage.
 
-To backup your customer data, just regularly copy the database files from your iOS device to your computer or another external storage. You can find the files in the folder 'CustomerDatabase'.
-
-The backup is even easier if you use the sync feature. The data will then be synchronized with an (own) MySQL server. For more information about this backup option, see the settings.</string>
+The backup is even easier if you use the sync feature. The data will then be synchronized with an (own) MySQL server. For more information about this backup option, please visit the settings.</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -1848,7 +1846,7 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Wm4-Nc-JUa">
-                                                <rect key="frame" x="0.0" y="1377.5" width="374" height="103.5"/>
+                                                <rect key="frame" x="0.0" y="1323.5" width="374" height="103.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guided Access (Kiosk Mode)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3TB-PT-Svs">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="26.5"/>
@@ -1866,7 +1864,7 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="sbx-nb-8Y9">
-                                                <rect key="frame" x="0.0" y="1511" width="374" height="49.5"/>
+                                                <rect key="frame" x="0.0" y="1457" width="374" height="49.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End User License Agreement" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sf4-uK-HML">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="26.5"/>
@@ -1883,7 +1881,7 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="7w3-Rw-M05">
-                                                <rect key="frame" x="0.0" y="1590.5" width="374" height="116.5"/>
+                                                <rect key="frame" x="0.0" y="1536.5" width="374" height="116.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More Apps" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CZ8-Cn-piH">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="26.5"/>
