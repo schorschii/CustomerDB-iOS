@@ -204,7 +204,12 @@ class CustomerDatabaseApi {
                     }
                 }
             }
-        } catch {}
+        } catch let error {
+            print(error.localizedDescription)
+            if(delegate != nil) {
+                delegate?.queueFinished(success: false, message: error.localizedDescription)
+            }
+        }
 
         if(delegate != nil) {
             delegate?.queueFinished(success: false, message: String(data:response, encoding: .utf8))
@@ -340,7 +345,12 @@ class CustomerDatabaseApi {
                     }
                 }
             }
-        } catch {}
+        } catch let error {
+            print(error.localizedDescription)
+            if(delegate != nil) {
+                delegate?.queueFinished(success: false, message: error.localizedDescription)
+            }
+        }
         
         if(delegate != nil) {
             delegate?.queueFinished(success: false, message: String(data:response, encoding: .utf8))
