@@ -201,6 +201,9 @@ class CustomerDatabase {
     func commitTransaction() {
         sqlite3_exec(self.db, "COMMIT TRANSACTION", nil, nil, nil)
     }
+    func rollbackTransaction() {
+        sqlite3_exec(self.db, "ROLLBACK TRANSACTION", nil, nil, nil)
+    }
     
     static var STORAGE_FORMAT = "yyyy-MM-dd HH:mm:ss"
     static var STORAGE_FORMAT_WITHOUT_TIME = "yyyy-MM-dd"
@@ -332,8 +335,8 @@ class CustomerDatabase {
         }
         return true
     }
-    func removeCalendar(id: Int64) {
-        beginTransaction()
+    func removeCalendar(id: Int64, transact: Bool = true) {
+        if(transact) { beginTransaction() }
         let lastModified = CustomerDatabase.dateToString(date: Date()) as NSString
         var stmt:OpaquePointer?
         if sqlite3_prepare(self.db, "UPDATE calendar SET title = '', color = '', notes = '', last_modified = ?, removed = 1 WHERE id = ?", -1, &stmt, nil) == SQLITE_OK {
@@ -351,7 +354,7 @@ class CustomerDatabase {
                 sqlite3_finalize(stmt)
             }
         }
-        commitTransaction()
+        if(transact) { commitTransaction() }
     }
     func deleteAllCalendars() {
         var stmt:OpaquePointer?
@@ -720,8 +723,8 @@ class CustomerDatabase {
         }
         return customer
     }
-    func updateCustomer(c: Customer) -> Bool {
-        beginTransaction()
+    func updateCustomer(c: Customer, transact: Bool = true) -> Bool {
+        if(transact) { beginTransaction() }
         var stmt:OpaquePointer?
         if sqlite3_prepare(self.db, "UPDATE customer SET title = ?, first_name = ?, last_name = ?, phone_home = ?, phone_mobile = ?, phone_work = ?, email = ?, street = ?, zipcode = ?, city = ?, country = ?, birthday = ?, notes = ?, newsletter = ?, customer_group = ?, custom_fields = ?, image = ?, consent = ?, last_modified = ? WHERE id = ?", -1, &stmt, nil) == SQLITE_OK {
             let title = c.mTitle as NSString
@@ -800,14 +803,14 @@ class CustomerDatabase {
                 }
             }
         }
-        commitTransaction()
+        if(transact) { commitTransaction() }
         return true
     }
-    func insertCustomer(c: Customer) -> Bool {
+    func insertCustomer(c: Customer, transact: Bool = true) -> Bool {
         if(c.mId == -1) {
             c.mId = Customer.generateID()
         }
-        beginTransaction()
+        if(transact) { beginTransaction() }
         var stmt:OpaquePointer?
         if sqlite3_prepare(self.db, "INSERT INTO customer (id, title, first_name, last_name, phone_home, phone_mobile, phone_work, email, street, zipcode, city, country, birthday, notes, newsletter, customer_group, custom_fields, image, consent, last_modified, removed) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", -1, &stmt, nil) == SQLITE_OK {
             let title = c.mTitle as NSString
@@ -882,12 +885,12 @@ class CustomerDatabase {
                 }
             }
         }
-        commitTransaction()
+        if(transact) { commitTransaction() }
         return true
     }
-    func removeCustomer(id: Int64) {
+    func removeCustomer(id: Int64, transact: Bool = true) {
         var stmt:OpaquePointer?
-        beginTransaction()
+        if(transact) { beginTransaction() }
         if sqlite3_prepare(self.db, "UPDATE customer SET title = '', first_name = '', last_name = '', custom_fields = '', image = '', consent = '', last_modified = ?, removed = 1 WHERE id = ?", -1, &stmt, nil) == SQLITE_OK {
             let lastModified = CustomerDatabase.dateToString(date: Date()) as NSString
             sqlite3_bind_text(stmt, 1, lastModified.utf8String, -1, nil)
@@ -898,10 +901,10 @@ class CustomerDatabase {
             sqlite3_bind_int64(stmt, 1, id)
             if sqlite3_step(stmt) == SQLITE_DONE { sqlite3_finalize(stmt) }
         }
-        commitTransaction()
+        if(transact) { commitTransaction() }
     }
-    func deleteAllCustomers() {
-        beginTransaction()
+    func deleteAllCustomers(transact: Bool = true) {
+        if(transact) { beginTransaction() }
         var stmt:OpaquePointer?
         if sqlite3_prepare(self.db, "DELETE FROM customer WHERE 1=1", -1, &stmt, nil) == SQLITE_OK {
             if sqlite3_step(stmt) == SQLITE_DONE {
@@ -914,7 +917,7 @@ class CustomerDatabase {
                 sqlite3_finalize(stmt2)
             }
         }
-        commitTransaction()
+        if(transact) { commitTransaction() }
     }
     
     // Custom Field Operations

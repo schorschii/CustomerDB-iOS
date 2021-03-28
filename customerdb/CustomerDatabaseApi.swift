@@ -90,7 +90,7 @@ class CustomerDatabaseApi {
                 "country": customer.mCountry,
                 "birthday": customer.mBirthday==nil ? nil : CustomerDatabase.dateToStringRaw(date: customer.mBirthday!),
                 "customer_group": customer.mGroup,
-                "newsletter": customer.mNewsletter,
+                "newsletter": customer.mNewsletter ? 1 : 0,
                 "notes": customer.mNotes,
                 "custom_fields": customer.mCustomFields,
                 "image": customer.mImage==nil ? nil : customer.mImage!.base64EncodedString(),
@@ -250,7 +250,8 @@ class CustomerDatabaseApi {
     }
     func parseReadCustomersResponse(response:Data) {
         do {
-            mDb.deleteAllCustomers()
+            mDb.beginTransaction()
+            mDb.deleteAllCustomers(transact: false)
             mDb.deleteAllVouchers()
             mDb.deleteAllCalendars()
             mDb.deleteAllAppointments()
@@ -270,7 +271,7 @@ class CustomerDatabaseApi {
                                 c.putAttribute(key: key, value: parsedValue)
                             }
                             if(c.mId > 0) {
-                                _ = mDb.insertCustomer(c: c)
+                                _ = mDb.insertCustomer(c: c, transact: false)
                             }
                         }
                     }
@@ -331,12 +332,16 @@ class CustomerDatabaseApi {
                         }
                     }
                     
+                    mDb.commitTransaction()
+                    
                     if(delegate != nil) {
                         UserDefaults.standard.set(false, forKey: "unsynced-changes")
                         delegate?.queueFinished(success: true, message: nil)
                     }
                     return
                 } else {
+                    mDb.rollbackTransaction()
+                    
                     if let message = response["error"] as? String {
                         if(delegate != nil) {
                             delegate?.queueFinished(success: false, message: message)
@@ -346,6 +351,8 @@ class CustomerDatabaseApi {
                 }
             }
         } catch let error {
+            mDb.rollbackTransaction()
+            
             print(error.localizedDescription)
             if(delegate != nil) {
                 delegate?.queueFinished(success: false, message: error.localizedDescription)
