@@ -46,7 +46,6 @@ class CallDirectoryHandler: CXCallDirectoryProvider {
         //
         // Numbers must be provided in numerically ascending order.
 
-        NSLog("add_all")
         for number in db.getNumbers() {
             if let phoneNumber = Int64(number.mPhoneNumber.replacingOccurrences(of: " ", with: "")) {
                 if phoneNumber > 0 {
@@ -63,12 +62,10 @@ class CallDirectoryHandler: CXCallDirectoryProvider {
         // Retrieve any changes to the set of phone numbers to identify (and their identification labels) from data store. For optimal performance and memory usage when there are many phone numbers,
         // consider only loading a subset of numbers at a given time and using autorelease pool(s) to release objects allocated during each batch of numbers which are loaded.
 
-        NSLog("add_incremental")
         context.removeAllIdentificationEntries()
         for number in db.getNumbers() {
             if let phoneNumber = Int64(number.mPhoneNumber.replacingOccurrences(of: " ", with: "")) {
                 if phoneNumber > 0 {
-                    NSLog("add: "+String(phoneNumber))
                     context.addIdentificationEntry(
                         withNextSequentialPhoneNumber: phoneNumber,
                         label: number.mDisplayName

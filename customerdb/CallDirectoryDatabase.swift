@@ -33,7 +33,7 @@ class CallDirectoryDatabase {
     func getNumbers() -> [CallDirectoryNumber] {
         var entries:[CallDirectoryNumber] = []
         var stmt:OpaquePointer?
-        let sql = "SELECT id, display_name, phone_number FROM insert_number"
+        let sql = "SELECT id, display_name, phone_number FROM insert_number ORDER BY CAST(phone_number AS INTEGER)"
         if sqlite3_prepare(self.db, sql, -1, &stmt, nil) == SQLITE_OK {
             while sqlite3_step(stmt) == SQLITE_ROW {
                 entries.append(
@@ -50,6 +50,10 @@ class CallDirectoryDatabase {
     func insertNumber(insertNumbers: [CallDirectoryNumber]) -> Bool {
         var stmt:OpaquePointer?
         for insertNumber in insertNumbers {
+            if(insertNumber.mDisplayName.trimmingCharacters(in: .whitespacesAndNewlines) == ""
+            || insertNumber.mPhoneNumber.trimmingCharacters(in: .whitespacesAndNewlines) == "") {
+                continue
+            }
             if sqlite3_prepare(self.db, "INSERT INTO insert_number (customer_id, display_name, phone_number) VALUES (?,?,?)", -1, &stmt, nil) == SQLITE_OK {
                 let displayName = insertNumber.mDisplayName as NSString
                 let phoneNumber = insertNumber.mPhoneNumber as NSString
