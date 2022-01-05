@@ -8,8 +8,13 @@ import UIKit
 
 class SyncInfoViewController : UIViewController {
     
+    @IBOutlet weak var buttonGithub: UIButton!
+    
+    static let REPO_URL = "https://github.com/schorschii/CustomerDB-Server"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        buttonGithub.setTitle(SyncInfoViewController.REPO_URL, for: .normal)
         navigationController?.navigationBar.barStyle = .black
     }
     
@@ -64,7 +69,7 @@ class SyncInfoViewController : UIViewController {
     }
     
     @IBAction func onClickServerGithub(_ sender: UIButton) {
-        if let url = URL(string: "https://github.com/schorschii/customerdb-server") {
+        if let url = URL(string: SyncInfoViewController.REPO_URL) {
             UIApplication.shared.open(url)
         }
     }

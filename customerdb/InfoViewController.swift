@@ -11,12 +11,15 @@ import StoreKit
 class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate, SKProductsRequestDelegate, SKPaymentTransactionObserver, SKStoreProductViewControllerDelegate {
     
     @IBOutlet weak var labelVersion: UILabel!
+    @IBOutlet weak var buttonGithub: UIButton!
+    @IBOutlet weak var buttonHomepage: UIButton!
+    @IBOutlet weak var buttonEmail: UIButton!
     
-    static let activateURL = "https://apps.georg-sieber.de/activate/app.php"
+    static let ACTIVATE_URL = "https://apps.georg-sieber.de/activate/app.php"
     
-    static let homepageURL = "https://georg-sieber.de/"
-    static let repoURL = "https://github.com/schorschii/customerdb-ios"
-    static let supportEmail = "support@georg-sieber.de"
+    static let HOMEPAGE_URL = "https://georg-sieber.de/"
+    static let REPO_URL = "https://github.com/schorschii/Customerdb-iOS"
+    static let SUPPORT_EMAIL = "support@georg-sieber.de"
     
     static let inappCloudAccessLicenseId = "systems.sieber.customerdb.cal"
     static let inappCommercialUsageId = "systems.sieber.customerdb.cu"
@@ -53,6 +56,9 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
         initIAP()
         let versionString = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         labelVersion.text = "v" + (versionString ?? "?")
+        buttonGithub.setTitle(InfoViewController.REPO_URL, for: .normal)
+        buttonHomepage.setTitle(InfoViewController.HOMEPAGE_URL, for: .normal)
+        buttonEmail.setTitle(InfoViewController.SUPPORT_EMAIL, for: .normal)
         navigationController?.navigationBar.barStyle = .black
         
         // load eula from localizable.strings, so we don't need to translate it a second time in main.strings (thanks Apple, best translation system ever!)
@@ -81,12 +87,12 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
         dismiss(animated: true, completion: nil)
     }
     @IBAction func onClickWebsite(_ sender: UIButton) {
-        if let url = URL(string: InfoViewController.homepageURL) {
+        if let url = URL(string: InfoViewController.HOMEPAGE_URL) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
     @IBAction func onClickGithub(_ sender: UIButton) {
-        if let url = URL(string: InfoViewController.repoURL) {
+        if let url = URL(string: InfoViewController.REPO_URL) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
@@ -94,7 +100,7 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
         if(MFMailComposeViewController.canSendMail()) {
             let composeVC = MFMailComposeViewController()
             composeVC.mailComposeDelegate = self
-            composeVC.setToRecipients([InfoViewController.supportEmail])
+            composeVC.setToRecipients([InfoViewController.SUPPORT_EMAIL])
             composeVC.setSubject(NSLocalizedString("feedback_title", comment: ""))
             composeVC.setMessageBody("", isHTML: false)
             self.present(composeVC, animated: true, completion: nil)
@@ -479,7 +485,7 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
         alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .destructive, handler: nil))
         alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { [weak alert] (_) in
             let text = alert?.textFields![0].text
-            let url = URL(string: InfoViewController.activateURL)!
+            let url = URL(string: InfoViewController.ACTIVATE_URL)!
             let session = URLSession.shared
             var request = URLRequest(url: url, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: 5.0)
             request.httpMethod = "POST"

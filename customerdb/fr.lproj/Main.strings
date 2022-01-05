@@ -456,9 +456,6 @@
 /* Class = "UILabel"; text = "0000-00-00 00:00:00"; ObjectID = "mA8-yL-xHn"; */
 "mA8-yL-xHn.text" = "0000-00-00 00:00:00";
 
-/* Class = "UIButton"; normalTitle = "Customer Database Server on GitHub"; ObjectID = "mwc-km-vKJ"; */
-"mwc-km-vKJ.normalTitle" = "Serveur de base de données client sur GitHub";
-
 /* Class = "UILabel"; text = "Label"; ObjectID = "n9t-1L-TzA"; */
 "n9t-1L-TzA.text" = "Étiquette";
 
@@ -634,4 +631,3 @@
 
 "Jp5-l9-MPC.text" = "Open source";
 "PNY-Ex-yUh.text" = "Cette application est Open Source. Si vous souhaitez améliorer l'application ou ses traductions, veuillez consulter le référentiel sur Github.";
-"AKN-AJ-c9p.normalTitle" = "Base de données clients sur GitHub";

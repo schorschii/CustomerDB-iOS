@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="36O-zw-ABK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="36O-zw-ABK">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -122,24 +122,24 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CustomerBirthdayCell" id="jJU-q8-wll" customClass="CustomerBirthdayCell" customModule="customerdb" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="65.5"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="65.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jJU-q8-wll" id="MN7-ER-ost">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="65.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="384.5" height="65.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="FNk-DL-suT">
-                                                    <rect key="frame" x="18" y="12" width="347" height="41.5"/>
+                                                    <rect key="frame" x="18" y="12" width="348.5" height="41.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="per-Ow-d7g">
-                                                            <rect key="frame" x="0.0" y="0.0" width="347" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="348.5" height="20.5"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n9t-1L-TzA">
-                                                            <rect key="frame" x="0.0" y="20.5" width="347" height="21"/>
+                                                            <rect key="frame" x="0.0" y="20.5" width="348.5" height="21"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" systemColor="secondaryLabelColor"/>
@@ -200,24 +200,24 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VoucherCell" id="uaY-2G-Wkk" customClass="VoucherCell" customModule="customerdb" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="65.5"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="65.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uaY-2G-Wkk" id="bgc-Q9-lGv">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="65.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="384.5" height="65.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8qA-HH-koa">
-                                                    <rect key="frame" x="18" y="12" width="347" height="41.5"/>
+                                                    <rect key="frame" x="18" y="12" width="348.5" height="41.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qyG-d8-MKg">
-                                                            <rect key="frame" x="0.0" y="0.0" width="347" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="348.5" height="20.5"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6sK-Hw-bl6">
-                                                            <rect key="frame" x="0.0" y="20.5" width="347" height="21"/>
+                                                            <rect key="frame" x="0.0" y="20.5" width="348.5" height="21"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" systemColor="secondaryLabelColor"/>
@@ -1341,26 +1341,26 @@
                                                         <rect key="frame" x="0.0" y="22.5" width="374" height="34"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hkH-Oe-J6z">
-                                                                <rect key="frame" x="0.0" y="0.0" width="287" height="34"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="32" height="34"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ngk-C1-Iq5">
-                                                                <rect key="frame" x="292" y="0.0" width="24" height="34"/>
+                                                                <rect key="frame" x="37" y="0.0" width="24" height="34"/>
                                                                 <state key="normal" image="baseline_person_black_24pt"/>
                                                                 <connections>
                                                                     <action selector="onClickShowForCustomer:" destination="kvK-me-Sob" eventType="touchUpInside" id="egf-eS-y5c"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HrE-ao-4u3">
-                                                                <rect key="frame" x="321" y="0.0" width="24" height="34"/>
+                                                                <rect key="frame" x="66" y="0.0" width="24" height="34"/>
                                                                 <state key="normal" image="baseline_people_black_24pt"/>
                                                                 <connections>
                                                                     <action selector="onClickAddForCustomer:" destination="kvK-me-Sob" eventType="touchUpInside" id="r0o-j2-Jsl"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLb-nL-nJ4">
-                                                                <rect key="frame" x="350" y="0.0" width="24" height="34"/>
+                                                                <rect key="frame" x="95" y="0.0" width="279" height="34"/>
                                                                 <state key="normal" image="baseline_clear_black_24pt"/>
                                                                 <connections>
                                                                     <action selector="onClickRemoveForCustomer:" destination="kvK-me-Sob" eventType="touchUpInside" id="QtA-SG-pD6"/>
@@ -1825,7 +1825,7 @@
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AKN-AJ-c9p">
                                                         <rect key="frame" x="0.0" y="97.5" width="374" height="30"/>
-                                                        <state key="normal" title="Customer Database on GitHub"/>
+                                                        <state key="normal" title="https://github.com"/>
                                                         <connections>
                                                             <action selector="onClickGithub:" destination="Jnc-ov-Vlt" eventType="touchUpInside" id="xYL-eb-cgQ"/>
                                                         </connections>
@@ -1984,6 +1984,9 @@ The backup is even easier if you use the sync feature. The data will then be syn
                         <outlet property="buttonBuyFiles" destination="K87-nV-UWS" id="YZi-75-nsi"/>
                         <outlet property="buttonBuyInputOnlyMode" destination="fdH-Rp-LgK" id="1Tb-c7-3vh"/>
                         <outlet property="buttonBuyLargeCompany" destination="cfr-HQ-AEn" id="o2l-Wh-Ldj"/>
+                        <outlet property="buttonEmail" destination="p22-NJ-lhc" id="D6m-FD-gyX"/>
+                        <outlet property="buttonGithub" destination="AKN-AJ-c9p" id="a4y-Hc-QcY"/>
+                        <outlet property="buttonHomepage" destination="ZHU-KM-ije" id="q8r-lh-11k"/>
                         <outlet property="buttonRestore" destination="LOf-JF-9JY" id="zWc-pY-5bA"/>
                         <outlet property="imageLogo" destination="68r-bN-N0T" id="LRO-yI-4Bz"/>
                         <outlet property="labelEulaText" destination="oVy-iQ-ee7" id="VxR-wT-Gye"/>
@@ -2875,7 +2878,7 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mwc-km-vKJ">
                                                         <rect key="frame" x="0.0" y="126.5" width="374" height="30"/>
-                                                        <state key="normal" title="Customer Database Server on GitHub"/>
+                                                        <state key="normal" title="https://github.com"/>
                                                         <connections>
                                                             <action selector="onClickServerGithub:" destination="2fM-Ak-Hih" eventType="touchUpInside" id="fZN-4t-AAU"/>
                                                         </connections>
@@ -2918,6 +2921,9 @@ The backup is even easier if you use the sync feature. The data will then be syn
                             <constraint firstItem="aly-vL-3Nd" firstAttribute="leading" secondItem="Dv3-zV-i1P" secondAttribute="leading" id="xRd-k9-Do6"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="buttonGithub" destination="mwc-km-vKJ" id="na7-Mm-cY5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bGh-ai-74V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3059,24 +3065,24 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CustomerCell" id="b4t-UG-HbC" customClass="CustomerCell" customModule="customerdb" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="65.5"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="65.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b4t-UG-HbC" id="D2T-mc-9zK">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="65.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="384.5" height="65.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="nG1-TH-zoo">
-                                                    <rect key="frame" x="18" y="12" width="347" height="41.5"/>
+                                                    <rect key="frame" x="18" y="12" width="348.5" height="41.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="014-ob-4m4">
-                                                            <rect key="frame" x="0.0" y="0.0" width="347" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="348.5" height="20.5"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fob-2D-7Zm">
-                                                            <rect key="frame" x="0.0" y="20.5" width="347" height="21"/>
+                                                            <rect key="frame" x="0.0" y="20.5" width="348.5" height="21"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" systemColor="secondaryLabelColor"/>
@@ -4444,7 +4450,7 @@ City Country</string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="b4I-Iy-NtL"/>
-        <segue reference="g2l-0z-HdN"/>
+        <segue reference="Jxd-z2-kNP"/>
         <segue reference="18W-Zu-reX"/>
     </inferredMetricsTieBreakers>
     <resources>
