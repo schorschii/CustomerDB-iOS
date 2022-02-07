@@ -58,6 +58,7 @@
 "file_does_not_contain_valid_records" = "Il file non contiene alcun record valido.";
 "not_supported" = "Non supportato su questo dispositivo";
 "file_selection_not_supported" = "La tua versione iOS non supporta la selezione dei file.";
+"no_birthdays_in_the_next_days" = "Nessun compleanno nei prossimi %d giorni.";
 "eula_title" = "Contratto di licenza per l'utente";
 "eula" = "Non esiste alcuna garanzia per questo software, nella misura consentita dalla legge applicabile. I titolari del copyright forniscono il programma »così com'è«, senza alcuna garanzia, né espressamente né implicitamente, includendo - ma non limitandosi a - le garanzie implicite di commerciabilità e idoneità per uno scopo particolare. L'intero rischio per la qualità e le prestazioni del programma è con te. Se il programma risulta difettoso, si assume il costo di tutti gli interventi di manutenzione, riparazione o correzione necessari. In nessun caso, a meno che non sia richiesto dalla legge applicabile o concordato per iscritto, qualsiasi detentore del copyright, o qualsiasi altra parte che modifica e / o trasmette il programma, sarà responsabile nei confronti dell'utente per danni.\n\nSe si utilizza l'abbonamento alla sincronizzazione cloud si applicano termini aggiuntivi. Questi termini sono disponibili nella pagina di registrazione dell'account cloud.\n\nAssicurati di informare i tuoi clienti in merito al trattamento digitale dei dati personali in conformità al Regolamento generale sulla protezione dei dati (GDPR UE).";
 

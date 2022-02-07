@@ -271,8 +271,10 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
     }
     @IBAction func onClickMenu(_ sender: UIBarButtonItem) {
         let db = CustomerDatabase()
-        let infoString = String(db.getCustomers(showDeleted: false, withFiles: false).count) + " " + NSLocalizedString("customers", comment: "")
-            + "\n" + String(db.getVouchers(showDeleted: false).count) + " " + NSLocalizedString("vouchers", comment: "")
+        let customers = db.getCustomers(showDeleted: false, withFiles: false)
+        let vouchers = db.getVouchers(showDeleted: false)
+        let infoString = String(customers.count) + " " + NSLocalizedString("customers", comment: "")
+            + "\n" + String(vouchers.count) + " " + NSLocalizedString("vouchers", comment: "")
         
         var infoString2:String? = NSLocalizedString("backup_note_menu", comment: "")
         let apiType = UserDefaults.standard.integer(forKey: "sync-mode")
@@ -391,6 +393,21 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
         let birthdayAction = UIAlertAction(
             title: NSLocalizedString("birthdays", comment: ""),
             style: .default) { (action) in
+                let previewDays = UserDefaults.standard.integer(forKey: "birthday-preview-days")
+                let birthdays = CustomerBirthdayTableViewController.getSoonBirthdayCustomers(customers: customers, days: previewDays )
+                if(birthdays.count == 0) {
+                    let alert = UIAlertController(
+                        title: nil,
+                        message: NSLocalizedString("no_birthdays_in_the_next_days", comment: "").replacingOccurrences(of: "%d", with: String(previewDays)),
+                        preferredStyle: .alert
+                    )
+                    alert.addAction(UIAlertAction(
+                        title: NSLocalizedString("ok", comment: ""),
+                        style: .cancel) { (action) in
+                    })
+                    self.present(alert, animated: true)
+                    return
+                }
                 self.performSegue(withIdentifier: "segueBirthday", sender: nil)
         }
         birthdayAction.setValue(UIImage(named:"baseline_cake_black_24pt"), forKey: "image")

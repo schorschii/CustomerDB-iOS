@@ -15,6 +15,8 @@ class CustomerBirthdayTableViewController : UIViewController, UITableViewDelegat
     
     @IBOutlet weak var tableView: UITableView!
     
+    static var DEFAULT_BIRTHDAY_PREVIEW_DAYS = 14
+    
     let mDb = CustomerDatabase()
     var mCustomers:[Customer] = []
     
@@ -50,11 +52,12 @@ class CustomerBirthdayTableViewController : UIViewController, UITableViewDelegat
     }
     
     func reloadCustomers() {
-        mCustomers = getSoonBirthdayCustomers(customers: mDb.getCustomers(showDeleted: false, withFiles: false) )
+        let previewDays = UserDefaults.standard.integer(forKey: "birthday-preview-days")
+        mCustomers = CustomerBirthdayTableViewController.getSoonBirthdayCustomers(customers: mDb.getCustomers(showDeleted: false, withFiles: false), days: previewDays )
         tableView.reloadData()
     }
     
-    func getSoonBirthdayCustomers(customers:[Customer]) -> [Customer] {
+    static func getSoonBirthdayCustomers(customers:[Customer], days:Int) -> [Customer] {
         var birthdayCustomers:[Customer] = []
         let cal = Calendar.current
         
@@ -63,7 +66,7 @@ class CustomerBirthdayTableViewController : UIViewController, UITableViewDelegat
         let start = cal.date(byAdding: dayComponent, to: Date())
         
         var dayComponent2 = DateComponents()
-        dayComponent2.day = 14
+        dayComponent2.day = days
         let end = cal.date(byAdding: dayComponent2, to: Date())
         
         for c in customers {
@@ -80,7 +83,7 @@ class CustomerBirthdayTableViewController : UIViewController, UITableViewDelegat
         return birthdayCustomers
     }
     
-    func isWithinRange(_ birthday:Date?, _ start:Date?, _ end:Date?) -> Bool {
+    static func isWithinRange(_ birthday:Date?, _ start:Date?, _ end:Date?) -> Bool {
         if(birthday == nil || start == nil || end == nil) {
             return false
         }

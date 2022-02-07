@@ -58,6 +58,7 @@
 "file_does_not_contain_valid_records" = "Die Datei besitzt keine gültigen Einträge.";
 "not_supported" = "Auf diesem Gerät nicht unterstützt";
 "file_selection_not_supported" = "Ihre iOS-Version unterstützt keine Dateiauswahl.";
+"no_birthdays_in_the_next_days" = "Keine Geburtstage in den nächsten %d Tagen.";
 "eula_title" = "Endbenutzer-Lizenzvereinbarung";
 "eula" = "Es besteht keinerlei Gewährleistung für diese Software, soweit dies gesetzlich zulässig ist. Die Copyright-Inhaber stellen das Programm so zur Verfügung, „wie es ist“, ohne irgendeine Gewährleistung, weder ausdrücklich noch implizit, einschließlich – aber nicht begrenzt auf – Marktreife oder Verwendbarkeit für einen bestimmten Zweck. Das volle Risiko bezüglich Qualität und Leistungsfähigkeit des Programms liegt bei Ihnen. Sollte sich das Programm als fehlerhaft herausstellen, liegen die Kosten für notwendigen Service, Reparatur oder Korrektur bei Ihnen. In keinem Fall, außer wenn durch geltendes Recht gefordert oder schriftlich zugesichert, ist irgendein Copyright-Inhaber Ihnen gegenüber für irgendwelche Schäden haftbar.\n\nZusätzliche Bedingungen gelten, wenn Sie das Cloud-Synchronisierungsabonnement verwenden. Diese Bedingungen finden Sie auf der Registrierungsseite für das Cloud-Konto.\n\nBitte achten Sie darauf, Ihre Kunden laut Datenschutz-Grundverordnung (EU-DSGVO) auf die digitale Verarbeitung personenbezogener Daten zu unterrichten.";
 

@@ -25,6 +25,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
     @IBOutlet weak var switchShowBirthdayField: UISwitch!
     @IBOutlet weak var switchShowFiles: UISwitch!
     @IBOutlet weak var switchShowConsentField: UISwitch!
+    @IBOutlet weak var textFieldBirthdayPreviewDays: UITextField!
     @IBOutlet weak var textFieldCurrency: UITextField!
     @IBOutlet weak var textFieldAppPassword: UITextField!
     @IBOutlet weak var textFieldAppPasswordConfirm: UITextField!
@@ -87,6 +88,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         switchShowBirthdayField.isOn = mDefaults.bool(forKey: "show-birthday-field")
         switchShowFiles.isOn = mDefaults.bool(forKey: "show-files")
         switchShowConsentField.isOn = mDefaults.bool(forKey: "show-consent-field")
+        textFieldBirthdayPreviewDays.text = String(mDefaults.integer(forKey: "birthday-preview-days"))
         textFieldCurrency.text = mDefaults.string(forKey: "currency")
         textFieldAppPassword.text = mDefaults.string(forKey: "iom-password")
         textFieldAppPasswordConfirm.text = mDefaults.string(forKey: "iom-password")
@@ -143,6 +145,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         mDefaults.set(switchShowBirthdayField.isOn, forKey: "show-birthday-field")
         mDefaults.set(switchShowFiles.isOn, forKey: "show-files")
         mDefaults.set(switchShowConsentField.isOn, forKey: "show-consent-field")
+        mDefaults.set(Int(textFieldBirthdayPreviewDays.text!), forKey: "birthday-preview-days")
         mDefaults.set(textFieldCurrency.text!, forKey: "currency")
         mDefaults.set(textFieldAppPassword.text!, forKey: "iom-password")
         mDefaults.set(Int(sliderRed.value), forKey: "color-red")

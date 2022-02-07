@@ -41,7 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SKPaymentTransactionObser
             "color-red" : SettingsViewController.DEFAULT_COLOR_R,
             "color-green" : SettingsViewController.DEFAULT_COLOR_G,
             "color-blue" : SettingsViewController.DEFAULT_COLOR_B,
-            "currency" : "€"
+            "currency" : "€",
+            "birthday-preview-days": CustomerBirthdayTableViewController.DEFAULT_BIRTHDAY_PREVIEW_DAYS
         ])
         defaults.synchronize()
     }
