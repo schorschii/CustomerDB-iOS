@@ -59,6 +59,8 @@
 "not_supported" = "Auf diesem Gerät nicht unterstützt";
 "file_selection_not_supported" = "Ihre iOS-Version unterstützt keine Dateiauswahl.";
 "no_birthdays_in_the_next_days" = "Keine Geburtstage in den nächsten %d Tagen.";
+"please_set_password_first" = "Bitte legen Sie zuerst ein Passwort in den Einstellungen fest.";
+"input_only_mode_instructions" = "In diesem Modus können Sie das Tablet an Kunden herausgeben, sodass diese sich selbstständig registrieren können, ohne die anderen Kundendaten einsehen oder löschen zu können.\n\nSie können den geführten Zugriff verwenden um zu verhindern, dass andere Apps verwendet werden oder die Kundendatenbank-App gelöscht wird. Bitte öffnen Sie die iOS-Einstellungen 'Erleichterte Bedienung' - 'Geführter Zugriff' um die Funktion zu aktivieren.";
 "eula_title" = "Endbenutzer-Lizenzvereinbarung";
 "eula" = "Es besteht keinerlei Gewährleistung für diese Software, soweit dies gesetzlich zulässig ist. Die Copyright-Inhaber stellen das Programm so zur Verfügung, „wie es ist“, ohne irgendeine Gewährleistung, weder ausdrücklich noch implizit, einschließlich – aber nicht begrenzt auf – Marktreife oder Verwendbarkeit für einen bestimmten Zweck. Das volle Risiko bezüglich Qualität und Leistungsfähigkeit des Programms liegt bei Ihnen. Sollte sich das Programm als fehlerhaft herausstellen, liegen die Kosten für notwendigen Service, Reparatur oder Korrektur bei Ihnen. In keinem Fall, außer wenn durch geltendes Recht gefordert oder schriftlich zugesichert, ist irgendein Copyright-Inhaber Ihnen gegenüber für irgendwelche Schäden haftbar.\n\nZusätzliche Bedingungen gelten, wenn Sie das Cloud-Synchronisierungsabonnement verwenden. Diese Bedingungen finden Sie auf der Registrierungsseite für das Cloud-Konto.\n\nBitte achten Sie darauf, Ihre Kunden laut Datenschutz-Grundverordnung (EU-DSGVO) auf die digitale Verarbeitung personenbezogener Daten zu unterrichten.";
 
@@ -86,6 +88,9 @@
 "calendar" = "Kalender";
 
 // Settings
+"set_password" = "Passwort ändern";
+"choose_a_password" = "Wählen Sie ein Passwort";
+"confirm_password" = "Passwort bestätigen";
 "new_custom_field" = "Neues benutzerdefiniertes Feld";
 "add_alphanumeric" = "Alphanumerisch";
 "add_alphanumeric_multiline" = "Alphanumerisch (mehrzeilig)";
@@ -170,7 +175,6 @@
 "email_address" = "E-Mail-Adresse";
 "please_check_inbox" = "Bitte schauen Sie in Ihr Postfach";
 "passwords_do_not_match" = "Passwörter stimmen nicht überein";
-"settings_were_not_saved" = "Einstellungen wurden nicht gespeichert.";
 "please_wait" = "Bitte warten...";
 "registration_failed" = "Registrierung fehlgeschlagen";
 "registration_succeeded" = "Registrierung war erfolgreich";

@@ -106,8 +106,6 @@
 "Xk1-bC-0w5.text" = "Kalender";
 "8sP-Eh-96i.text" = "Schaltet die Kalenderfunktionen frei.";
 "In6-6A-pDm.text" = "Standardmäßig werden die Daten nur lokal auf Ihrem Gerät gespeichert. Bitte sichern Sie Ihre Datenbank regelmäßig, um Ihre Daten im Falle einer Fehlfunktion oder eines Verlusts Ihres Mobilgeräts nicht zu verlieren. Dazu kopieren Sie einfach die Datenbankdateien (im Verzeichnis 'Kundendatenbank') auf Ihren Computer oder einen anderen externen Speicher.\n\nDie Sicherung ist noch einfacher, wenn Sie die Synchronisierungsfunktion verwenden. Die Daten werden dann mit einem (eigenen) MySQL-Server synchronisiert. Weitere Informationen zu dieser Sicherungsoption finden Sie in den Einstellungen.";
-"3TB-PT-Svs.text" = "Geführter Zugriff (Kiosk-Modus)";
-"VY3-ob-Wjk.text" = "Sie können den geführten Zugriff verwenden um zu verhindern dass andere Apps verwendet werden sowie dass die App gelöscht wird. Bitte öffnen Sie die iOS-Einstellungen 'Erleichterte Bedienung' - 'Geführter Zugriff' um die Funktion zu aktivieren.";
 "CZ8-Cn-piH.text" = "Weitere Apps";
 "O2Q-Hr-2qq.normalTitle" = "Kundendatenbank für Android";
 "ip1-ah-Dnu.normalTitle" = "BallBreak für iOS";
@@ -126,6 +124,8 @@
 "ZbR-UF-fU1.text" = "Geburtstagsvorschau";
 "pUZ-ch-7kn.placeholder" = "Tage";
 "DK5-gg-Yue.text" = "Währung";
+"6wa-1N-CmM.text" = "Nur-Eingabe-Modus und App-Sperre";
+"RYL-Xd-zU4.normalTitle" = "Passwort ändern...";
 "cUw-3d-uV7.text" = "App-Sperr-Kennwort";
 "WP9-XR-yON.text" = "Kennwort bestätigen";
 "doB-WO-m5c.text" = "Designoptionen";

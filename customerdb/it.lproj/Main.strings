@@ -23,9 +23,6 @@
 /* Class = "UILabel"; text = "Valid Until"; ObjectID = "2rg-NO-PwJ"; */
 "2rg-NO-PwJ.text" = "Valido fino a";
 
-/* Class = "UILabel"; text = "Guided Access (Kiosk Mode)"; ObjectID = "3TB-PT-Svs"; */
-"3TB-PT-Svs.text" = "Accesso guidato (modalità Kiosk)";
-
 /* Class = "UIButton"; normalTitle = "Unlock"; ObjectID = "3nc-A0-iIY"; */
 "3nc-A0-iIY.normalTitle" = "Sbloccare";
 
@@ -262,9 +259,6 @@
 
 /* Class = "UIButton"; normalTitle = "Export eMail Text"; ObjectID = "VKV-Jb-RaS"; */
 "VKV-Jb-RaS.normalTitle" = "Esporta testo e-mail";
-
-/* Class = "UILabel"; text = "You can use Guided Access to prevent using other apps and to prevent deletion of the Customer Database app. Please go to iOS settings - 'Accessibility' - 'Guided Access' to enable this feature."; ObjectID = "VY3-ob-Wjk"; */
-"VY3-ob-Wjk.text" = "È possibile utilizzare l'accesso guidato per impedire l'utilizzo di altre app e per impedire la cancellazione dell'app Database clienti. Vai su Impostazioni iOS - 'Accessibilità' - 'Accesso guidato' per abilitare questa funzione.";
 
 /* Class = "UILabel"; text = "Phone Mobile"; ObjectID = "VmC-tt-RC6"; */
 "VmC-tt-RC6.text" = "Cellulare";
@@ -634,3 +628,6 @@
 
 "ZbR-UF-fU1.text" = "Anteprima di compleanno";
 "pUZ-ch-7kn.placeholder" = "Giorni";
+
+"RYL-Xd-zU4.normalTitle" = "Impostare la password...";
+"6wa-1N-CmM.text" = "Modalità di solo input e Blocco app";

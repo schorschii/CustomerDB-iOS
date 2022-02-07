@@ -59,6 +59,8 @@
 "not_supported" = "Not Supported On This Device";
 "file_selection_not_supported" = "Your iOS version does not support file selection.";
 "no_birthdays_in_the_next_days" = "No birthdays in the next %d days.";
+"please_set_password_first" = "Please set a password in the settings first.";
+"input_only_mode_instructions" = "In this mode, you can give the tablet to customers so that they can register themselves without being able to view or delete the other customer data.\n\nYou can use guided access to prevent other apps from being used or the customer database app is deleted. Please open the iOS settings 'Ease of Access' - 'Guided Access' to enable the feature.";
 "eula_title" = "End User License Agreement";
 "eula" = "There is no warranty for this software, to the extent permitted by applicable law. The copyright holders provide the program \"as is\", without any guarantee, neither expressly nor implicitly, including - but not limited to - the implied warranties of merchantability and fitness for a particular purpose. The entire risk as to the quality and performance of the program is with you. Should the program prove defective, you assume the cost of all necessary servicing, repair or correction. In no event unless required by applicable law or agreed to in writing will any copyright holder, or any other party who modifies and/or conveys the program, be liable to you for damages.\n\nAdditional terms apply if you use the cloud sync subscription. These terms can be found on the cloud account registration page.\n\nPlease make sure to inform your customers about the digital processing of personal data in accordance with the General Data Protection Regulation (EU GDPR).";
 
@@ -85,6 +87,9 @@
 "calendar" = "Calendar";
 
 // Settings
+"set_password" = "Set Password";
+"choose_a_password" = "Choose a Password";
+"confirm_password" = "Confirm Password";
 "new_custom_field" = "New Custom Field";
 "add_alphanumeric" = "Add Alphanumeric Field";
 "add_alphanumeric_multiline" = "Add Alphanumeric Multiline Field";
@@ -170,7 +175,6 @@
 "email_address" = "Email Address";
 "please_check_inbox" = "Please check your inbox";
 "passwords_do_not_match" = "Passwords do not match";
-"settings_were_not_saved" = "Settings were not saved.";
 "please_wait" = "Please wait...";
 "registration_failed" = "Registration failed";
 "registration_succeeded" = "Registration succeeded";

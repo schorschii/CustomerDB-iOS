@@ -27,8 +27,6 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
     @IBOutlet weak var switchShowConsentField: UISwitch!
     @IBOutlet weak var textFieldBirthdayPreviewDays: UITextField!
     @IBOutlet weak var textFieldCurrency: UITextField!
-    @IBOutlet weak var textFieldAppPassword: UITextField!
-    @IBOutlet weak var textFieldAppPasswordConfirm: UITextField!
     @IBOutlet weak var sliderRed: UISlider!
     @IBOutlet weak var sliderGreen: UISlider!
     @IBOutlet weak var sliderBlue: UISlider!
@@ -51,6 +49,8 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
     
     let mDefaults = UserDefaults.standard
     let mDb = CustomerDatabase()
+    
+    var mAppPassword = ""
     
     var mMainViewControllerRef: MainViewController? = nil
     
@@ -90,8 +90,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         switchShowConsentField.isOn = mDefaults.bool(forKey: "show-consent-field")
         textFieldBirthdayPreviewDays.text = String(mDefaults.integer(forKey: "birthday-preview-days"))
         textFieldCurrency.text = mDefaults.string(forKey: "currency")
-        textFieldAppPassword.text = mDefaults.string(forKey: "iom-password")
-        textFieldAppPasswordConfirm.text = mDefaults.string(forKey: "iom-password")
+        mAppPassword = mDefaults.string(forKey: "iom-password") ?? ""
         sliderRed.isEnabled = mDefaults.bool(forKey: "unlocked-do")
         sliderGreen.isEnabled = mDefaults.bool(forKey: "unlocked-do")
         sliderBlue.isEnabled = mDefaults.bool(forKey: "unlocked-do")
@@ -115,21 +114,6 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         reloadCalendars()
     }
     func saveSettings() -> Bool {
-        if(textFieldAppPassword.text != textFieldAppPasswordConfirm.text) {
-            let alert = UIAlertController(
-                title: NSLocalizedString("passwords_do_not_match", comment: ""),
-                message: NSLocalizedString("settings_were_not_saved", comment: ""),
-                preferredStyle: .alert
-            )
-            alert.addAction(UIAlertAction(
-                title: NSLocalizedString("ok", comment: ""),
-                style: .cancel) { (action) in
-            })
-            dismissKeyboard()
-            self.present(alert, animated: true)
-            return false
-        }
-        
         mDefaults.set(segmentedControlSync.selectedSegmentIndex, forKey: "sync-mode")
         mDefaults.set(textFieldSyncUrl.text!, forKey: "sync-url")
         mDefaults.set(textFieldSyncUsername.text!, forKey: "sync-username")
@@ -147,7 +131,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         mDefaults.set(switchShowConsentField.isOn, forKey: "show-consent-field")
         mDefaults.set(Int(textFieldBirthdayPreviewDays.text!), forKey: "birthday-preview-days")
         mDefaults.set(textFieldCurrency.text!, forKey: "currency")
-        mDefaults.set(textFieldAppPassword.text!, forKey: "iom-password")
+        mDefaults.set(mAppPassword, forKey: "iom-password")
         mDefaults.set(Int(sliderRed.value), forKey: "color-red")
         mDefaults.set(Int(sliderGreen.value), forKey: "color-green")
         mDefaults.set(Int(sliderBlue.value), forKey: "color-blue")
@@ -350,6 +334,35 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
             textFieldSyncUsername.isHidden = false
             textFieldSyncPassword.isHidden = false
         }
+    }
+    
+    @IBAction func onClickSetPassword(_ sender: UIButton) {
+        let alert = UIAlertController(title: NSLocalizedString("set_password", comment: ""), message: nil, preferredStyle: .alert)
+        alert.addTextField(configurationHandler: { (password1) in
+            password1.text = ""
+            password1.placeholder = NSLocalizedString("choose_a_password", comment: "")
+            password1.isSecureTextEntry = true
+        })
+        alert.addTextField(configurationHandler: { (password2) in
+            password2.text = ""
+            password2.placeholder = NSLocalizedString("confirm_password", comment: "")
+            password2.isSecureTextEntry = true
+        })
+        alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { [weak alert] (_) in
+            let password1 = alert?.textFields![0].text
+            let password2 = alert?.textFields![1].text
+            if(password1 != password2) {
+                let alert2 = UIAlertController(
+                    title: nil, message: NSLocalizedString("passwords_do_not_match", comment: ""), preferredStyle: .alert
+                )
+                alert2.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .cancel, handler: nil))
+                self.present(alert2, animated: true, completion: nil)
+            } else {
+                self.mAppPassword = password1!
+            }
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func onColorSliderChanged(_ sender: UISlider) {

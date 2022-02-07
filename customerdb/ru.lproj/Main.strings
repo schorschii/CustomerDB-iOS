@@ -23,9 +23,6 @@
 /* Class = "UILabel"; text = "Valid Until"; ObjectID = "2rg-NO-PwJ"; */
 "2rg-NO-PwJ.text" = "Действует до";
 
-/* Class = "UILabel"; text = "Guided Access (Kiosk Mode)"; ObjectID = "3TB-PT-Svs"; */
-"3TB-PT-Svs.text" = "Управляемый доступ (режим киоска)";
-
 /* Class = "UIButton"; normalTitle = "Unlock"; ObjectID = "3nc-A0-iIY"; */
 "3nc-A0-iIY.normalTitle" = "разблокировка";
 
@@ -262,9 +259,6 @@
 
 /* Class = "UIButton"; normalTitle = "Export eMail Text"; ObjectID = "VKV-Jb-RaS"; */
 "VKV-Jb-RaS.normalTitle" = "Экспорт текста электронной почты";
-
-/* Class = "UILabel"; text = "You can use Guided Access to prevent using other apps and to prevent deletion of the Customer Database app. Please go to iOS settings - 'Accessibility' - 'Guided Access' to enable this feature."; ObjectID = "VY3-ob-Wjk"; */
-"VY3-ob-Wjk.text" = "Вы можете использовать Guided Access, чтобы предотвратить использование других приложений и предотвратить удаление приложения базы данных клиентов. Перейдите в настройки iOS - «Доступность» - «Управляемый доступ», чтобы включить эту функцию.";
 
 /* Class = "UILabel"; text = "Phone Mobile"; ObjectID = "VmC-tt-RC6"; */
 "VmC-tt-RC6.text" = "Телефон мобильный";
@@ -637,3 +631,6 @@
 
 "ZbR-UF-fU1.text" = "Предварительный просмотр дня рождения";
 "pUZ-ch-7kn.placeholder" = "Дни";
+
+"RYL-Xd-zU4.normalTitle" = "Установка пароля...";
+"6wa-1N-CmM.text" = "Режим «только ввод» и блокировка приложений";

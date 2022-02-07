@@ -59,6 +59,8 @@
 "not_supported" = "Non pris en charge sur cet appareil";
 "file_selection_not_supported" = "Votre version iOS ne prend pas en charge la sélection de fichiers.";
 "no_birthdays_in_the_next_days" = "Pas d'anniversaires dans les %d prochains jours.";
+"please_set_password_first" = "Veuillez d'abord définir un mot de passe dans les paramètres.";
+"input_only_mode_instructions" = "Dans ce mode, vous pouvez donner une tablette aux clients afin qu'ils puissent s'inscrire sans pouvoir afficher ou supprimer d'autres données client.\n\nVous pouvez utiliser l'accès guidé pour empêcher d'autres applications d'utiliser ou de supprimer l'application de base de données client. Veuillez ouvrir les paramètres iOS 'Facilité d'accès' - 'Accès guidé' pour activer cette fonctionnalité.";
 "eula_title" = "Contrat de licence de l'utilisateur final";
 "eula" = "Il n'y a aucune garantie pour ce logiciel, dans la mesure permise par la loi applicable. Les titulaires des droits d'auteur fournissent le programme «tel quel», sans aucune garantie, ni expressément ni implicitement, y compris, mais sans s'y limiter, les garanties implicites de qualité marchande et d'adéquation à un usage particulier. Le risque entier quant à la qualité et la performance du programme est avec vous. Si le programme s'avérait défectueux, vous assumez le coût de tous les services, réparations ou corrections nécessaires. En aucun cas, sauf si requis par la loi applicable ou convenu par écrit, tout détenteur de droits d'auteur ou toute autre partie qui modifie et / ou transmet le programme sera responsable envers vous des dommages et intérêts.\n\nDes conditions supplémentaires s'appliquent si vous utilisez l'abonnement Cloud Sync. Ces conditions peuvent être trouvées sur la page d'enregistrement du compte cloud.\n\nVeuillez vous assurer d'informer vos clients de la traitement numérique des données personnelles conformément au règlement général sur la protection des données (RGPD UE).";
 
@@ -76,6 +78,9 @@
 "feedback_title" = "Feedback Customer Database iOS";
 
 // Settings
+"set_password" = "Définir le mot de passe";
+"choose_a_password" = "Choisissez un mot de passe";
+"confirm_password" = "Confirmez le mot de passe";
 "new_custom_field" = "Nouveau champ personnalisé";
 "add_alphanumeric" = "Ajouter un champ alphanumérique";
 "add_alphanumeric_multiline" = "Ajouter un champ multiligne alphanumérique";
@@ -161,7 +166,6 @@
 "email_address" = "Adresse électronique";
 "please_check_inbox" = "Veuillez vérifier votre boîte de réception";
 "passwords_do_not_match" = "Les mots de passe ne correspondent pas";
-"settings_were_not_saved" = "Les paramètres n'ont pas été enregistrés.";
 "please_wait" = "S'il vous plaît, attendez...";
 "registration_failed" = "Échec de l'enregistrement";
 "registration_succeeded" = "Inscription réussie";

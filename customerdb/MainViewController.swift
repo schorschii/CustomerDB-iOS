@@ -119,24 +119,16 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
             self.refreshSyncIcon()
             self.reloadData()
             self.setupStatusIndicator(visible: false, message: nil, completion: {
-                let okAction = UIAlertAction(
-                    title: NSLocalizedString("ok", comment: ""),
-                    style: .cancel) { (action) in
-                }
                 if(success) {
-                    let alert = UIAlertController(
+                    self.dialog(
                         title: NSLocalizedString("sync_succeeded", comment: ""),
-                        message: message,
-                        preferredStyle: .alert)
-                    alert.addAction(okAction)
-                    self.present(alert, animated: true)
+                        text: message
+                    )
                 } else {
-                    let alert = UIAlertController(
+                    self.dialog(
                         title: NSLocalizedString("sync_failed", comment: ""),
-                        message: message,
-                        preferredStyle: .alert)
-                    alert.addAction(okAction)
-                    self.present(alert, animated: true)
+                        text: message
+                    )
                 }
             })
         }
@@ -248,17 +240,10 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
         } else if(apiType == 2 && apiUrl != nil && apiUsername != nil && apiPassword != nil && apiUrl != "" && apiUsername != "") {
             api = CustomerDatabaseApi(db: mDb, url: apiUrl!, username: apiUsername!, password: apiPassword!)
         } else {
-            let cancelAction = UIAlertAction(
-                title: NSLocalizedString("close", comment: ""),
-                style: .cancel) { (action) in
-            }
-            let alert = UIAlertController(
+            self.dialog(
                 title: NSLocalizedString("sync_not_configured", comment: ""),
-                message: NSLocalizedString("please_setup_sync", comment: ""),
-                preferredStyle: .alert
+                text: NSLocalizedString("please_setup_sync", comment: "")
             )
-            alert.addAction(cancelAction)
-            self.present(alert, animated: true)
         }
         if let api2 = api {
             api2.delegate = self
@@ -300,11 +285,25 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
             title: NSLocalizedString("input_only_mode", comment: ""),
             style: .default) { (action) in
                 if(UserDefaults.standard.bool(forKey: "unlocked-iom")) {
-                    UserDefaults.standard.set(true, forKey: "iom")
-                    UserDefaults.standard.synchronize()
-                    self.performSegue(withIdentifier: "segueInputOnlyMode", sender: nil)
-                    if let msvc = self.splitViewController as? MainSplitViewController {
-                        msvc.closeDetailViewController()
+                    if(UserDefaults.standard.string(forKey: "iom-password") ?? "" == "") {
+                        self.dialog(
+                            title: nil,
+                            text: NSLocalizedString("please_set_password_first", comment: "")
+                        )
+                    } else {
+                        UserDefaults.standard.set(true, forKey: "iom")
+                        UserDefaults.standard.synchronize()
+                        self.performSegue(withIdentifier: "segueInputOnlyMode", sender: nil)
+                        if let msvc = self.splitViewController as? MainSplitViewController {
+                            msvc.closeDetailViewController()
+                        }
+                        if(!UserDefaults.standard.bool(forKey: "input-only-mode-instructions-shown")) {
+                            self.dialog(
+                                title: NSLocalizedString("input_only_mode", comment: ""),
+                                text: NSLocalizedString("input_only_mode_instructions", comment: "")
+                            )
+                            UserDefaults.standard.set(true, forKey: "input-only-mode-instructions-shown")
+                        }
                     }
                 } else {
                     self.dialogInApp()
@@ -316,11 +315,18 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
             title: NSLocalizedString("lock_app", comment: ""),
             style: .default) { (action) in
                 if(UserDefaults.standard.bool(forKey: "unlocked-iom")) {
-                    UserDefaults.standard.set(true, forKey: "lock")
-                    UserDefaults.standard.synchronize()
-                    self.performSegue(withIdentifier: "segueLock", sender: nil)
-                    if let msvc = self.splitViewController as? MainSplitViewController {
-                        msvc.closeDetailViewController()
+                    if(UserDefaults.standard.string(forKey: "iom-password") ?? "" == "") {
+                        self.dialog(
+                            title: nil,
+                            text: NSLocalizedString("please_set_password_first", comment: "")
+                        )
+                    } else {
+                        UserDefaults.standard.set(true, forKey: "lock")
+                        UserDefaults.standard.synchronize()
+                        self.performSegue(withIdentifier: "segueLock", sender: nil)
+                        if let msvc = self.splitViewController as? MainSplitViewController {
+                            msvc.closeDetailViewController()
+                        }
                     }
                 } else {
                     self.dialogInApp()
@@ -357,16 +363,10 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                         }
                     }
                     if(recipients.count == 0) {
-                        let alert = UIAlertController(
+                        self.dialog(
                             title: NSLocalizedString("no_newsletter_customers", comment: ""),
-                            message: NSLocalizedString("no_newsletter_customers_text", comment: ""),
-                            preferredStyle: .alert
+                            text: NSLocalizedString("no_newsletter_customers_text", comment: "")
                         )
-                        alert.addAction(UIAlertAction(
-                            title: NSLocalizedString("ok", comment: ""),
-                            style: .cancel) { (action) in
-                        })
-                        self.present(alert, animated: true, completion: nil)
                         return
                     }
                     let composeVC = MFMailComposeViewController()
@@ -376,16 +376,10 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                     composeVC.setMessageBody(UserDefaults.standard.string(forKey: "email-newsletter-template") ?? "", isHTML: false)
                     self.present(composeVC, animated: true, completion: nil)
                 } else {
-                    let alert = UIAlertController(
+                    self.dialog(
                         title: NSLocalizedString("no_email_account", comment: ""),
-                        message: NSLocalizedString("please_set_up_email", comment: ""),
-                        preferredStyle: .alert
+                        text: NSLocalizedString("please_set_up_email", comment: "")
                     )
-                    alert.addAction(UIAlertAction(
-                        title: NSLocalizedString("ok", comment: ""),
-                        style: .cancel) { (action) in
-                    })
-                    self.present(alert, animated: true, completion: nil)
                 }
         }
         newsletterAction.setValue(UIImage(named:"baseline_markunread_mailbox_black_24pt"), forKey: "image")
@@ -396,16 +390,10 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                 let previewDays = UserDefaults.standard.integer(forKey: "birthday-preview-days")
                 let birthdays = CustomerBirthdayTableViewController.getSoonBirthdayCustomers(customers: customers, days: previewDays )
                 if(birthdays.count == 0) {
-                    let alert = UIAlertController(
+                    self.dialog(
                         title: nil,
-                        message: NSLocalizedString("no_birthdays_in_the_next_days", comment: "").replacingOccurrences(of: "%d", with: String(previewDays)),
-                        preferredStyle: .alert
+                        text: NSLocalizedString("no_birthdays_in_the_next_days", comment: "").replacingOccurrences(of: "%d", with: String(previewDays))
                     )
-                    alert.addAction(UIAlertAction(
-                        title: NSLocalizedString("ok", comment: ""),
-                        style: .cancel) { (action) in
-                    })
-                    self.present(alert, animated: true)
                     return
                 }
                 self.performSegue(withIdentifier: "segueBirthday", sender: nil)
@@ -462,6 +450,17 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
         self.present(alert, animated: true)
     }
     
+    func dialog(title:String?, text:String?) {
+        let alert = UIAlertController(
+            title: title, message: text, preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(
+            title: NSLocalizedString("ok", comment: ""),
+            style: .cancel) { (action) in
+        })
+        self.present(alert, animated: true, completion: nil)
+        return
+    }
     func dialogInApp() {
         let alert = UIAlertController(
             title: NSLocalizedString("not_unlocked", comment: ""),
@@ -489,17 +488,10 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                     documentPicker.delegate = self
                     self.present(documentPicker, animated: true, completion: nil)
                 } else {
-                    let alert = UIAlertController(
+                    self.dialog(
                         title: NSLocalizedString("not_supported", comment: ""),
-                        message: NSLocalizedString("file_selection_not_supported", comment: ""),
-                        preferredStyle: .alert
+                        text: NSLocalizedString("file_selection_not_supported", comment: "")
                     )
-                    alert.addAction(UIAlertAction(
-                        title: NSLocalizedString("ok", comment: ""),
-                        style: .default,
-                        handler: nil)
-                    )
-                    self.present(alert, animated: true)
                 }
         }
         let importCsvAction = UIAlertAction(
@@ -510,17 +502,10 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                     documentPicker.delegate = self
                     self.present(documentPicker, animated: true, completion: nil)
                 } else {
-                    let alert = UIAlertController(
+                    self.dialog(
                         title: NSLocalizedString("not_supported", comment: ""),
-                        message: NSLocalizedString("file_selection_not_supported", comment: ""),
-                        preferredStyle: .alert
+                        text: NSLocalizedString("file_selection_not_supported", comment: "")
                     )
-                    alert.addAction(UIAlertAction(
-                        title: NSLocalizedString("ok", comment: ""),
-                        style: .default,
-                        handler: nil)
-                    )
-                    self.present(alert, animated: true)
                 }
         }
         let importCodeAction = UIAlertAction(
@@ -564,17 +549,10 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                     documentPicker.delegate = self
                     self.present(documentPicker, animated: true, completion: nil)
                 } else {
-                    let alert = UIAlertController(
+                    self.dialog(
                         title: NSLocalizedString("not_supported", comment: ""),
-                        message: NSLocalizedString("file_selection_not_supported", comment: ""),
-                        preferredStyle: .alert
+                        text: NSLocalizedString("file_selection_not_supported", comment: "")
                     )
-                    alert.addAction(UIAlertAction(
-                        title: NSLocalizedString("ok", comment: ""),
-                        style: .default,
-                        handler: nil)
-                    )
-                    self.present(alert, animated: true)
                 }
         }
         let exportCsvAction = UIAlertAction(
@@ -605,17 +583,10 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                     documentPicker.delegate = self
                     self.present(documentPicker, animated: true, completion: nil)
                 } else {
-                    let alert = UIAlertController(
+                    self.dialog(
                         title: NSLocalizedString("not_supported", comment: ""),
-                        message: NSLocalizedString("file_selection_not_supported", comment: ""),
-                        preferredStyle: .alert
+                        text: NSLocalizedString("file_selection_not_supported", comment: "")
                     )
-                    alert.addAction(UIAlertAction(
-                        title: NSLocalizedString("ok", comment: ""),
-                        style: .default,
-                        handler: nil)
-                    )
-                    self.present(alert, animated: true)
                 }
         }
         let importCsvAction = UIAlertAction(
@@ -626,17 +597,10 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                     documentPicker.delegate = self
                     self.present(documentPicker, animated: true, completion: nil)
                 } else {
-                    let alert = UIAlertController(
+                    self.dialog(
                         title: NSLocalizedString("not_supported", comment: ""),
-                        message: NSLocalizedString("file_selection_not_supported", comment: ""),
-                        preferredStyle: .alert
+                        text: NSLocalizedString("file_selection_not_supported", comment: "")
                     )
-                    alert.addAction(UIAlertAction(
-                        title: NSLocalizedString("ok", comment: ""),
-                        style: .default,
-                        handler: nil)
-                    )
-                    self.present(alert, animated: true)
                 }
         }
         let exportIcsAction = UIAlertAction(
@@ -761,17 +725,10 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
             mCalendars.append(KeyValueItem(String(c.mId), c.mTitle))
         }
         if(mCalendars.count == 0) {
-            let alert = UIAlertController(
+            self.dialog(
                 title: nil,
-                message: NSLocalizedString("no_calendar_selected", comment: ""),
-                preferredStyle: .alert
+                text: NSLocalizedString("no_calendar_selected", comment: "")
             )
-            alert.addAction(UIAlertAction(
-                title: NSLocalizedString("ok", comment: ""),
-                style: .default,
-                handler: nil)
-            )
-            self.present(alert, animated: true)
             return nil
         }
         
@@ -953,26 +910,16 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
     }
     
     func handleImportError(message:String) {
-        let alert = UIAlertController(
+        self.dialog(
             title: NSLocalizedString("import_failed", comment: ""),
-            message: message, preferredStyle: .alert
+            text: message
         )
-        alert.addAction(UIAlertAction(
-            title: NSLocalizedString("ok", comment: ""),
-            style: .default) { (action) in
-        })
-        self.present(alert, animated: true)
     }
     func handleImportSuccess(imported:Int) {
-        let alert = UIAlertController(
+        self.dialog(
             title: NSLocalizedString("import_succeeded", comment: ""),
-            message: NSLocalizedString("imported_records", comment: "") + " " + String(imported), preferredStyle: .alert
+            text: NSLocalizedString("imported_records", comment: "") + " " + String(imported)
         )
-        alert.addAction(UIAlertAction(
-            title: NSLocalizedString("ok", comment: ""),
-            style: .default) { (action) in
-        })
-        self.present(alert, animated: true)
     }
     
 }

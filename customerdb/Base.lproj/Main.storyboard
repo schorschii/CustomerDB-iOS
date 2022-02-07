@@ -1494,7 +1494,7 @@
                                 <rect key="frame" x="0.0" y="56" width="414" height="752"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="qkB-AG-hm0">
-                                        <rect key="frame" x="20" y="0.0" width="374" height="1810.5"/>
+                                        <rect key="frame" x="20" y="0.0" width="374" height="1677"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="68r-bN-N0T">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="120"/>
@@ -1852,26 +1852,8 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Wm4-Nc-JUa">
-                                                <rect key="frame" x="0.0" y="1481" width="374" height="103.5"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guided Access (Kiosk Mode)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3TB-PT-Svs">
-                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="26.5"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VY3-ob-Wjk">
-                                                        <rect key="frame" x="0.0" y="31.5" width="374" height="72"/>
-                                                        <string key="text">You can use Guided Access to prevent using other apps and to prevent deletion of the Customer Database app. Please go to iOS settings - 'Accessibility' - 'Guided Access' to enable this feature.</string>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="sbx-nb-8Y9">
-                                                <rect key="frame" x="0.0" y="1614.5" width="374" height="49.5"/>
+                                                <rect key="frame" x="0.0" y="1481" width="374" height="49.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End User License Agreement" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sf4-uK-HML">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="26.5"/>
@@ -1888,7 +1870,7 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="7w3-Rw-M05">
-                                                <rect key="frame" x="0.0" y="1694" width="374" height="116.5"/>
+                                                <rect key="frame" x="0.0" y="1560.5" width="374" height="116.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More Apps" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CZ8-Cn-piH">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="26.5"/>
@@ -2027,7 +2009,7 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                 <rect key="frame" x="0.0" y="56" width="414" height="752"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="oA7-RC-Pmy">
-                                        <rect key="frame" x="20" y="20" width="374" height="1898.5"/>
+                                        <rect key="frame" x="20" y="20" width="374" height="1904"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="oym-5S-hdK">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="237"/>
@@ -2081,7 +2063,7 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ciE-Ct-XF0">
-                                                <rect key="frame" x="0.0" y="267" width="374" height="176.5"/>
+                                                <rect key="frame" x="0.0" y="267" width="374" height="98.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Miscellaneous" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZLM-OW-LBz">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
@@ -2093,13 +2075,13 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                                         <rect key="frame" x="0.0" y="25.5" width="374" height="34"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Birthday Preview" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZbR-UF-fU1">
-                                                                <rect key="frame" x="0.0" y="0.0" width="149.5" height="34"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="128" height="34"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Days" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pUZ-ch-7kn">
-                                                                <rect key="frame" x="154.5" y="0.0" width="219.5" height="34"/>
+                                                                <rect key="frame" x="133" y="0.0" width="241" height="34"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
@@ -2109,59 +2091,44 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                                         <rect key="frame" x="0.0" y="64.5" width="374" height="34"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DK5-gg-Yue">
-                                                                <rect key="frame" x="0.0" y="0.0" width="149.5" height="34"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="128" height="34"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FrN-mQ-IWM">
-                                                                <rect key="frame" x="154.5" y="0.0" width="219.5" height="34"/>
+                                                                <rect key="frame" x="133" y="0.0" width="241" height="34"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
-                                                            </textField>
-                                                        </subviews>
-                                                    </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="HcO-gE-G0O">
-                                                        <rect key="frame" x="0.0" y="103.5" width="374" height="34"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App Lock Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cUw-3d-uV7">
-                                                                <rect key="frame" x="0.0" y="0.0" width="149.5" height="34"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ohQ-nZ-cyc">
-                                                                <rect key="frame" x="154.5" y="0.0" width="219.5" height="34"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
-                                                            </textField>
-                                                        </subviews>
-                                                    </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="pgY-2i-UoS">
-                                                        <rect key="frame" x="0.0" y="142.5" width="374" height="34"/>
-                                                        <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WP9-XR-yON">
-                                                                <rect key="frame" x="0.0" y="0.0" width="149.5" height="34"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kln-Cr-h59">
-                                                                <rect key="frame" x="154.5" y="0.0" width="219.5" height="34"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="pUZ-ch-7kn" firstAttribute="width" secondItem="FrN-mQ-IWM" secondAttribute="width" id="Pgu-dN-CMz"/>
-                                                    <constraint firstItem="ohQ-nZ-cyc" firstAttribute="width" secondItem="FrN-mQ-IWM" secondAttribute="width" id="bJx-gq-Ml8"/>
-                                                    <constraint firstItem="FrN-mQ-IWM" firstAttribute="width" secondItem="kln-Cr-h59" secondAttribute="width" id="ulY-oV-pmk"/>
                                                 </constraints>
                                             </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="6LH-CS-iWD">
+                                                <rect key="frame" x="0.0" y="395.5" width="374" height="53.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Input-Only Mode and App Lock" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wa-1N-CmM">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RYL-Xd-zU4">
+                                                        <rect key="frame" x="0.0" y="20.5" width="374" height="33"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <state key="normal" title="Set Password..."/>
+                                                        <connections>
+                                                            <action selector="onClickSetPassword:" destination="Eos-1F-Pem" eventType="touchUpInside" id="JQd-wN-jbu"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="clb-ma-Iel">
-                                                <rect key="frame" x="0.0" y="473.5" width="374" height="267.5"/>
+                                                <rect key="frame" x="0.0" y="479" width="374" height="267.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Design Options" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="doB-WO-m5c">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
@@ -2277,7 +2244,7 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                                 </subviews>
                                             </stackView>
                                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Ge7-qT-Mh1">
-                                                <rect key="frame" x="0.0" y="756" width="374" height="35"/>
+                                                <rect key="frame" x="0.0" y="761.5" width="374" height="35"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text Templates" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9G0-cJ-HcG">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="0.0"/>
@@ -2316,7 +2283,7 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="0O4-Aa-MWX">
-                                                <rect key="frame" x="0.0" y="771" width="374" height="290.5"/>
+                                                <rect key="frame" x="0.0" y="776.5" width="374" height="290.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text Templates" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gV-7E-IKy">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
@@ -2390,7 +2357,7 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="LYS-ig-juI">
-                                                <rect key="frame" x="0.0" y="1091.5" width="374" height="435.5"/>
+                                                <rect key="frame" x="0.0" y="1097" width="374" height="435.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Field Configuration" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YzH-pZ-ZBO">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
@@ -2567,7 +2534,7 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="MWx-vw-Oav">
-                                                <rect key="frame" x="0.0" y="1557" width="374" height="97.5"/>
+                                                <rect key="frame" x="0.0" y="1562.5" width="374" height="97.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Custom Fields" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E4N-0z-FUj">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
@@ -2612,7 +2579,7 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                                 </subviews>
                                             </stackView>
                                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="g34-hg-uZ9">
-                                                <rect key="frame" x="0.0" y="1669.5" width="374" height="5"/>
+                                                <rect key="frame" x="0.0" y="1675" width="374" height="5"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O8g-b9-lSb">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="0.0"/>
@@ -2643,7 +2610,7 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cHw-YY-llc">
-                                                <rect key="frame" x="0.0" y="1684.5" width="374" height="97.5"/>
+                                                <rect key="frame" x="0.0" y="1690" width="374" height="97.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendars" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQZ-GW-AaP">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
@@ -2688,7 +2655,7 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="H8r-Nz-yr5">
-                                                <rect key="frame" x="0.0" y="1812" width="374" height="86.5"/>
+                                                <rect key="frame" x="0.0" y="1817.5" width="374" height="86.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Customer Name On Incoming Calls" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vCd-44-prd">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
@@ -2754,8 +2721,6 @@ The backup is even easier if you use the sync feature. The data will then be syn
                         <outlet property="switchShowNoteField" destination="qmx-Ef-VRp" id="OMC-Oy-uVx"/>
                         <outlet property="switchShowPhoneField" destination="A8g-v8-cTp" id="cU6-j1-FM1"/>
                         <outlet property="switchShowPicture" destination="bGB-3K-lzy" id="mJt-Ki-22K"/>
-                        <outlet property="textFieldAppPassword" destination="ohQ-nZ-cyc" id="ydr-9x-czq"/>
-                        <outlet property="textFieldAppPasswordConfirm" destination="kln-Cr-h59" id="i93-yK-Kpr"/>
                         <outlet property="textFieldBirthdayPreviewDays" destination="pUZ-ch-7kn" id="24Y-Qh-NPx"/>
                         <outlet property="textFieldCalendars" destination="MSe-hg-kXr" id="IjH-7n-fGs"/>
                         <outlet property="textFieldCurrency" destination="FrN-mQ-IWM" id="ZcF-YR-pf8"/>

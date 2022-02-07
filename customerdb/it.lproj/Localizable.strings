@@ -59,6 +59,8 @@
 "not_supported" = "Non supportato su questo dispositivo";
 "file_selection_not_supported" = "La tua versione iOS non supporta la selezione dei file.";
 "no_birthdays_in_the_next_days" = "Nessun compleanno nei prossimi %d giorni.";
+"please_set_password_first" = "Si prega di impostare prima una password nelle impostazioni.";
+"input_only_mode_instructions" = "In questa modalità, puoi dare un tablet ai clienti in modo che possano registrarsi senza poter visualizzare o eliminare altri dati dei clienti.\n\nPuoi utilizzare l'accesso guidato per impedire ad altre app di utilizzare o eliminare l'app del database clienti. Si prega di aprire le impostazioni iOS 'Accesso facilitato' - 'Accesso guidato' per abilitare questa funzione.";
 "eula_title" = "Contratto di licenza per l'utente";
 "eula" = "Non esiste alcuna garanzia per questo software, nella misura consentita dalla legge applicabile. I titolari del copyright forniscono il programma »così com'è«, senza alcuna garanzia, né espressamente né implicitamente, includendo - ma non limitandosi a - le garanzie implicite di commerciabilità e idoneità per uno scopo particolare. L'intero rischio per la qualità e le prestazioni del programma è con te. Se il programma risulta difettoso, si assume il costo di tutti gli interventi di manutenzione, riparazione o correzione necessari. In nessun caso, a meno che non sia richiesto dalla legge applicabile o concordato per iscritto, qualsiasi detentore del copyright, o qualsiasi altra parte che modifica e / o trasmette il programma, sarà responsabile nei confronti dell'utente per danni.\n\nSe si utilizza l'abbonamento alla sincronizzazione cloud si applicano termini aggiuntivi. Questi termini sono disponibili nella pagina di registrazione dell'account cloud.\n\nAssicurati di informare i tuoi clienti in merito al trattamento digitale dei dati personali in conformità al Regolamento generale sulla protezione dei dati (GDPR UE).";
 
@@ -76,6 +78,9 @@
 "feedback_title" = "Feedback Customer Database iOS";
 
 // Settings
+"set_password" = "Impostare la password";
+"choose_a_password" = "Scegli una password";
+"confirm_password" = "Conferma password";
 "new_custom_field" = "Nuovo campo personalizzato";
 "add_alphanumeric" = "Aggiungi campo alfanumerico";
 "add_alphanumeric_multiline" = "Aggiungi campo alfanumerico multilinea";
@@ -161,7 +166,6 @@
 "email_address" = "Indirizzo email";
 "please_check_inbox" = "Controlla la tua casella di posta";
 "passwords_do_not_match" = "le passwords non corrispondono";
-"settings_were_not_saved" = "Le impostazioni non sono state salvate.";
 "please_wait" = "Attendere prego...";
 "registration_failed" = "Registrazione fallita";
 "registration_succeeded" = "Registrazione riuscita";
