@@ -186,9 +186,9 @@
 
 // Input Only Mode
 "unlock" = "Entsperren";
-"please_enter_password_to_exit" = "Bitte geben Sie das Kennwort zum Entsperren ein.";
-"password" = "Kennwort";
-"incorrect_password" = "Kennwort nicht korrekt";
+"please_enter_password_to_exit" = "Bitte geben Sie das Passwort zum Entsperren ein.";
+"password" = "Passwort";
+"incorrect_password" = "Passwort nicht korrekt";
 
 // Birthday View
 "today_note" = "(heute)";
