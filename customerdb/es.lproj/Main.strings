@@ -269,9 +269,6 @@
 /* Class = "UILabel"; text = "Issued"; ObjectID = "WOq-Fn-qTv"; */
 "WOq-Fn-qTv.text" = "Emitida";
 
-/* Class = "UILabel"; text = "Confirm Password"; ObjectID = "WP9-XR-yON"; */
-"WP9-XR-yON.text" = "Confirmar contraseña";
-
 /* Class = "UIButton"; normalTitle = "Newsletter Text"; ObjectID = "WbU-vC-Isj"; */
 "WbU-vC-Isj.normalTitle" = "Boletín de texto";
 
@@ -331,9 +328,6 @@
 
 /* Class = "UILabel"; text = "1234567890"; ObjectID = "c5c-2p-9F8"; */
 "c5c-2p-9F8.text" = "1234567890";
-
-/* Class = "UILabel"; text = "App Lock Password"; ObjectID = "cUw-3d-uV7"; */
-"cUw-3d-uV7.text" = "Contraseña de bloqueo de aplicación";
 
 /* Class = "UIButton"; normalTitle = "Buy"; ObjectID = "cfr-HQ-AEn"; */
 "cfr-HQ-AEn.normalTitle" = "Comprar";
