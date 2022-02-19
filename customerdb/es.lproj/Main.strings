@@ -158,9 +158,6 @@
 /* Class = "UILabel"; text = "Original Value"; ObjectID = "IYg-5w-lxz"; */
 "IYg-5w-lxz.text" = "Valor original";
 
-/* Class = "UILabel"; text = "By default, the data is stored only locally on your device. Please back up your database regularly to not lose your data in case of malfunction or loss of your mobile device.\n\nTo backup your customer data, just regularly copy the database files from your iOS device to your computer or another external storage. You can find the files in the folder 'CustomerDatabase'.\n\nThe backup is even easier if you use the sync feature. The data will then be synchronized with an (own) MySQL server. For more information about this backup option, see the settings."; ObjectID = "In6-6A-pDm"; */
-"In6-6A-pDm.text" = "De forma predeterminada, los datos se almacenan solo localmente en su dispositivo. Haga una copia de seguridad de su base de datos con regularidad para no perder sus datos en caso de mal funcionamiento o pérdida de su dispositivo móvil. Esto se hace simplemente copiando los archivos de la base de datos (en el directorio 'Base de datos del cliente') a su computadora u otro almacenamiento externo.\n\nLa copia de seguridad es aún más fácil si usa la función de sincronización. A continuación, los datos se sincronizarán con un servidor MySQL (propio). Para obtener más información sobre esta opción de copia de seguridad, visite la configuración.";
-
 /* Class = "UIButton"; normalTitle = "Remove"; ObjectID = "J5z-eY-YWf"; */
 "J5z-eY-YWf.normalTitle" = "Eliminar";
 
@@ -625,3 +622,8 @@
 
 "RYL-Xd-zU4.normalTitle" = "Configurar la clave...";
 "6wa-1N-CmM.text" = "Modo de solo entrada y bloqueo de aplicaciones";
+
+"5Hq-nQ-xgr.normalTitle" = "Respaldo »";
+"b5P-at-nMt.normalTitle" = "Modo de solo entrada »";
+"AqS-ex-nRV.normalTitle" = "API CardDAV de solo lectura »";
+"jXe-So-e1J.normalTitle" = "Acuerdo de licencia de usuario final »";

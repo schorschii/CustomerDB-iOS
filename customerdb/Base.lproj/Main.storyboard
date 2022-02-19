@@ -1470,6 +1470,55 @@
             </objects>
             <point key="canvasLocation" x="5058" y="1150"/>
         </scene>
+        <!--Text View View Controller-->
+        <scene sceneID="gIz-xc-MNo">
+            <objects>
+                <viewController storyboardIdentifier="TextViewViewController" id="iBb-Ar-uVN" customClass="TextViewViewController" customModule="customerdb" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eu3-e7-IYH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PjP-K9-Aph">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                                <items>
+                                    <navigationItem title="Information" id="PpC-7r-3Ln">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="7UI-7r-PPc">
+                                            <connections>
+                                                <action selector="onClickDone:" destination="iBb-Ar-uVN" id="lPv-5T-MwQ"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hKf-b1-YlJ">
+                                <rect key="frame" x="20" y="66" width="374" height="722"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="waa-JL-foC"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="hKf-b1-YlJ" firstAttribute="leading" secondItem="waa-JL-foC" secondAttribute="leading" constant="20" id="GSy-St-EAO"/>
+                            <constraint firstItem="hKf-b1-YlJ" firstAttribute="top" secondItem="PjP-K9-Aph" secondAttribute="bottom" constant="10" id="Jb3-tP-1YG"/>
+                            <constraint firstItem="PjP-K9-Aph" firstAttribute="top" secondItem="waa-JL-foC" secondAttribute="top" id="LZN-og-ogz"/>
+                            <constraint firstItem="waa-JL-foC" firstAttribute="trailing" secondItem="PjP-K9-Aph" secondAttribute="trailing" id="cMT-kb-9de"/>
+                            <constraint firstItem="PjP-K9-Aph" firstAttribute="leading" secondItem="waa-JL-foC" secondAttribute="leading" id="cjZ-aq-Hrx"/>
+                            <constraint firstItem="waa-JL-foC" firstAttribute="bottom" secondItem="hKf-b1-YlJ" secondAttribute="bottom" constant="20" id="hDB-i8-fix"/>
+                            <constraint firstItem="waa-JL-foC" firstAttribute="trailing" secondItem="hKf-b1-YlJ" secondAttribute="trailing" constant="20" id="my8-bp-ouU"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="navigationBar" destination="PjP-K9-Aph" id="Mmd-bA-zhF"/>
+                        <outlet property="textViewText" destination="hKf-b1-YlJ" id="bgT-KX-F12"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ujt-bJ-V9N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="66.666666666666671" y="-12.053571428571429"/>
+        </scene>
         <!--Info View Controller-->
         <scene sceneID="PYf-ZC-FL0">
             <objects>
@@ -1478,8 +1527,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1jE-qO-Oio">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1jE-qO-Oio">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                 <items>
                                     <navigationItem title="Information" id="tov-8i-WRr">
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="fHd-1I-5PU">
@@ -1494,7 +1543,7 @@
                                 <rect key="frame" x="0.0" y="56" width="414" height="752"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="qkB-AG-hm0">
-                                        <rect key="frame" x="20" y="0.0" width="374" height="1677"/>
+                                        <rect key="frame" x="20" y="0.0" width="374" height="1535.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="68r-bN-N0T">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="120"/>
@@ -1833,7 +1882,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="4Uu-Zf-PJu">
-                                                <rect key="frame" x="0.0" y="1222.5" width="374" height="228.5"/>
+                                                <rect key="frame" x="0.0" y="1222.5" width="374" height="166.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Backup Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rBE-hy-Oyh">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="26.5"/>
@@ -1841,36 +1890,38 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="25" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="In6-6A-pDm">
-                                                        <rect key="frame" x="0.0" y="31.5" width="374" height="197"/>
-                                                        <string key="text">By default, the data is stored only locally on your device. Please back up your database regularly to not lose your data in case of malfunction or loss of your mobile device. This is done by simply copying the database files (in directory "Customer Database") to your computer or another external storage.
-
-The backup is even easier if you use the sync feature. The data will then be synchronized with an (own) MySQL server. For more information about this backup option, please visit the settings.</string>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="sbx-nb-8Y9">
-                                                <rect key="frame" x="0.0" y="1481" width="374" height="49.5"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End User License Agreement" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sf4-uK-HML">
-                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="26.5"/>
-                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="25" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oVy-iQ-ee7">
-                                                        <rect key="frame" x="0.0" y="31.5" width="374" height="18"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Hq-nQ-xgr">
+                                                        <rect key="frame" x="0.0" y="31.5" width="374" height="30"/>
+                                                        <state key="normal" title="Backup »"/>
+                                                        <connections>
+                                                            <action selector="onClickBackupInfo:" destination="Jnc-ov-Vlt" eventType="touchUpInside" id="esC-bh-Hx4"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5P-at-nMt">
+                                                        <rect key="frame" x="0.0" y="66.5" width="374" height="30"/>
+                                                        <state key="normal" title="Input-Only Mode »"/>
+                                                        <connections>
+                                                            <action selector="onClickInputOnlyModeInfo:" destination="Jnc-ov-Vlt" eventType="touchUpInside" id="Nrh-uH-r8c"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AqS-ex-nRV">
+                                                        <rect key="frame" x="0.0" y="101.5" width="374" height="30"/>
+                                                        <state key="normal" title="Read-Only CardDAV API »"/>
+                                                        <connections>
+                                                            <action selector="onClickCardDavApiInfo:" destination="Jnc-ov-Vlt" eventType="touchUpInside" id="1X7-sD-YaX"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jXe-So-e1J">
+                                                        <rect key="frame" x="0.0" y="136.5" width="374" height="30"/>
+                                                        <state key="normal" title="End User License Agreement »"/>
+                                                        <connections>
+                                                            <action selector="onClickEula:" destination="Jnc-ov-Vlt" eventType="touchUpInside" id="eZc-4Z-U4B"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="7w3-Rw-M05">
-                                                <rect key="frame" x="0.0" y="1560.5" width="374" height="116.5"/>
+                                                <rect key="frame" x="0.0" y="1419" width="374" height="116.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More Apps" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CZ8-Cn-piH">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="26.5"/>
@@ -1971,9 +2022,8 @@ The backup is even easier if you use the sync feature. The data will then be syn
                         <outlet property="buttonHomepage" destination="ZHU-KM-ije" id="q8r-lh-11k"/>
                         <outlet property="buttonRestore" destination="LOf-JF-9JY" id="zWc-pY-5bA"/>
                         <outlet property="imageLogo" destination="68r-bN-N0T" id="LRO-yI-4Bz"/>
-                        <outlet property="labelEulaText" destination="oVy-iQ-ee7" id="VxR-wT-Gye"/>
-                        <outlet property="labelEulaTitle" destination="sf4-uK-HML" id="eOR-pJ-DH0"/>
                         <outlet property="labelVersion" destination="h3Y-y0-LXw" id="dgO-9F-fpg"/>
+                        <segue destination="iBb-Ar-uVN" kind="showDetail" identifier="segueTextView" id="Svl-Aj-CH9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BFQ-BW-Rs7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2879,8 +2929,8 @@ The backup is even easier if you use the sync feature. The data will then be syn
                                     <constraint firstItem="UCD-50-VYw" firstAttribute="centerX" secondItem="aly-vL-3Nd" secondAttribute="centerX" id="iCw-N8-0xb"/>
                                 </constraints>
                             </scrollView>
-                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jN7-zN-H7e">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jN7-zN-H7e">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                 <items>
                                     <navigationItem title="Sync" id="dMa-s6-QnY">
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="e7d-y3-l2N">
@@ -4433,7 +4483,7 @@ City Country</string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="b4I-Iy-NtL"/>
-        <segue reference="g2l-0z-HdN"/>
+        <segue reference="Jxd-z2-kNP"/>
         <segue reference="18W-Zu-reX"/>
     </inferredMetricsTieBreakers>
     <resources>

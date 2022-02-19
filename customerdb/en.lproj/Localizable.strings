@@ -85,6 +85,10 @@
 "custom_fields" = "Custom Fields";
 "files" = "Files";
 "calendar" = "Calendar";
+"backup" = "Backup";
+"backup_info_text" = "By default, the data is stored only locally on your device. Please back up your database regularly to not lose your data in case of malfunction or loss of your mobile device. This is done by simply copying the database files (in directory 'Customer Database') to your computer or another external storage.\n\nThe backup is even easier if you use the sync feature. The data will then be synchronized with an (own) MySQL server. For more information about this backup option, please visit the settings.";
+"carddav_api" = "CardDAV API";
+"carddav_api_info_text" = "The customer database cloud and self-hosted server offers a read-only CardDAV API for syncing your customers into AVM FRITZ!Box, Thunderbird (with CardBook addon), Evolution or macOS/iOS contacts app (the customers can only be read into these programs, but not edited!).\n\nCardDAV Server:\nhttps://customerdb.sieber.systems/carddav.php\n\nUsername:\n<your customer database account email address>\n\nPassword:\n<your customer database account password>";
 
 // Settings
 "set_password" = "Set Password";

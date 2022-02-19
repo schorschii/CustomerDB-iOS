@@ -86,6 +86,10 @@
 "custom_fields" = "Benutzerdefinierte Felder";
 "files" = "Dateien";
 "calendar" = "Kalender";
+"backup" = "Backup";
+"backup_info_text" = "Standardmäßig werden die Daten nur lokal auf Ihrem Gerät gespeichert. Bitte sichern Sie Ihre Datenbank regelmäßig, um Ihre Daten im Falle einer Fehlfunktion oder eines Verlusts Ihres Mobilgeräts nicht zu verlieren. Dazu kopieren Sie einfach die Datenbankdateien (im Verzeichnis 'Kundendatenbank') auf Ihren Computer oder einen anderen externen Speicher.\n\nDie Sicherung ist noch einfacher, wenn Sie die Synchronisierungsfunktion verwenden. Die Daten werden dann mit einem (eigenen) MySQL-Server synchronisiert. Weitere Informationen zu dieser Sicherungsoption finden Sie in den Einstellungen.";
+"carddav_api" = "CardDAV-API";
+"carddav_api_info_text" = "Die Kundendatenbank-Cloud sowie die selbst-gehostete Server bieten eine nur-lesende CardDAV-API zur Synchronisierung Ihrer Kunden in eine AVM FRITZ!Box, Thunderbird (mit CardBook-Addon), Evolution oder in die macOS/iOS Kontakte-App (die Kunden können über diese Programme nur gelesen, jedoch nicht bearbeitet werden!).\n\nCardDAV-Server:\nhttps://customerdb.sieber.systems/carddav.php\n\nBenutzername:\n<Ihre Kundendatenbank-Account E-Mailadresse>\n\nPasswort:\n<Ihr Kundendatenbank-Account Passwort>";
 
 // Settings
 "set_password" = "Passwort ändern";

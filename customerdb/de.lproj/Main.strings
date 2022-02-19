@@ -105,7 +105,10 @@
 "KoK-NQ-8nE.text" = "Fügen Sie Dateien an Kundendatensätze an (maximal 20 Dateien pro Kunde und 1MB pro Datei).";
 "Xk1-bC-0w5.text" = "Kalender";
 "8sP-Eh-96i.text" = "Schaltet die Kalenderfunktionen frei.";
-"In6-6A-pDm.text" = "Standardmäßig werden die Daten nur lokal auf Ihrem Gerät gespeichert. Bitte sichern Sie Ihre Datenbank regelmäßig, um Ihre Daten im Falle einer Fehlfunktion oder eines Verlusts Ihres Mobilgeräts nicht zu verlieren. Dazu kopieren Sie einfach die Datenbankdateien (im Verzeichnis 'Kundendatenbank') auf Ihren Computer oder einen anderen externen Speicher.\n\nDie Sicherung ist noch einfacher, wenn Sie die Synchronisierungsfunktion verwenden. Die Daten werden dann mit einem (eigenen) MySQL-Server synchronisiert. Weitere Informationen zu dieser Sicherungsoption finden Sie in den Einstellungen.";
+"5Hq-nQ-xgr.normalTitle" = "Backup »";
+"b5P-at-nMt.normalTitle" = "Nur-Eingabe-Modus »";
+"AqS-ex-nRV.normalTitle" = "CardDAV-API (nur lesender Zugriff) »";
+"jXe-So-e1J.normalTitle" = "Endbenutzer-Lizenzvereinbarung »";
 "CZ8-Cn-piH.text" = "Weitere Apps";
 "O2Q-Hr-2qq.normalTitle" = "Kundendatenbank für Android";
 "ip1-ah-Dnu.normalTitle" = "BallBreak für iOS";

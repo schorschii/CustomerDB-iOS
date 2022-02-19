@@ -22,6 +22,7 @@
 		563FEE8B20FFD6C600DFD7B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 563FEE8A20FFD6C600DFD7B7 /* Assets.xcassets */; };
 		563FEE8E20FFD6C600DFD7B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 563FEE8C20FFD6C600DFD7B7 /* LaunchScreen.storyboard */; };
 		563FEE9B20FFDB5300DFD7B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 563FEE9920FFDB5300DFD7B7 /* InfoPlist.strings */; };
+		564EC39E27BEEDDA00C7BE81 /* TextViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564EC39D27BEEDDA00C7BE81 /* TextViewViewController.swift */; };
 		568DFA85254F190C00546F6B /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568DFA84254F190C00546F6B /* ScannerViewController.swift */; };
 		568DFA932550AE9100546F6B /* CallDirectoryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568DFA922550AE9100546F6B /* CallDirectoryHandler.swift */; };
 		568DFA972550AE9100546F6B /* CustomerDatabaseDirectory.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 568DFA902550AE9100546F6B /* CustomerDatabaseDirectory.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -111,6 +112,7 @@
 		563FEE8F20FFD6C600DFD7B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		563FEE9620FFD84300DFD7B7 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		563FEE9E20FFDD3700DFD7B7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		564EC39D27BEEDDA00C7BE81 /* TextViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewViewController.swift; sourceTree = "<group>"; };
 		565426F824707F3300631CE5 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		565426F924707F3300631CE5 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		565426FA24707F3300631CE5 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -143,7 +145,7 @@
 		56BF996724745B1C00EBFDA5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		56BF996824745B1C00EBFDA5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		56BF996924745B1C00EBFDA5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		56BF996A24745B1C00EBFDA5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		56BF996A24745B1C00EBFDA5 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; wrapsLines = 1; };
 		56C089D2244A32D9005F8A1B /* PickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerController.swift; sourceTree = "<group>"; };
 		56D51FBF2376D97E0097DBDE /* CustomerDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerDetailsViewController.swift; sourceTree = "<group>"; };
 		56D51FC1237898E70097DBDE /* CustomerEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerEditViewController.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				56FDB946240840620018004C /* LockViewController.swift */,
 				56FDB948240947E70018004C /* BirthdayViewController.swift */,
 				56D51FC92392C7810097DBDE /* InfoViewController.swift */,
+				564EC39D27BEEDDA00C7BE81 /* TextViewViewController.swift */,
 				56D51FCB2392C7A70097DBDE /* SettingsViewController.swift */,
 				56DDADC823E8AF5000879CBD /* SyncInfoViewController.swift */,
 				56DDADCA23E8B8EA00879CBD /* CreateAccountViewController.swift */,
@@ -451,6 +454,7 @@
 				562A8BB324A66DA6003CB9C4 /* CustomerAppointment.swift in Sources */,
 				563903C92374C75D00753D93 /* CustomerTableController.swift in Sources */,
 				56DDADC623E780DC00879CBD /* CSV.swift in Sources */,
+				564EC39E27BEEDDA00C7BE81 /* TextViewViewController.swift in Sources */,
 				56F4E60F24B1D660002F5569 /* AppointmentEditViewController.swift in Sources */,
 				56FDB94524083CB60018004C /* InputOnlyModeViewController.swift in Sources */,
 				56DDADC323E780DC00879CBD /* ParsingState.swift in Sources */,

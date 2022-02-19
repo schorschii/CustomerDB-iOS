@@ -76,6 +76,10 @@
 "buy" = "Acheter";
 "only_german_and_english_messages" = "Veuillez noter que seuls les messages en allemand et en anglais peuvent être affichés.";
 "feedback_title" = "Feedback Customer Database iOS";
+"backup" = "Sauvegarde";
+"backup_info_text" = "Par défaut, les données sont stockées uniquement localement sur votre appareil. Veuillez sauvegarder régulièrement votre base de données pour ne pas perdre vos données en cas de dysfonctionnement ou de perte de votre appareil mobile. Cela se fait en copiant simplement les fichiers de la base de données (dans le répertoire 'Customer Database') sur votre ordinateur ou sur un autre stockage externe.\n\nLa sauvegarde est encore plus facile si vous utilisez la fonction de synchronisation. Les données seront ensuite synchronisées avec un (propre) serveur MySQL. Pour plus d'informations sur cette option de sauvegarde, veuillez visiter les paramètres.";
+"carddav_api" = "CardDAV API";
+"carddav_api_info_text" = "Le cloud de base de données client et le serveur auto-hébergé offrent une API CardDAV en lecture seule pour synchroniser vos clients dans AVM FRITZ!Box, Thunderbird (avec l'addon CardBook), Evolution ou l'application de contacts macOS/iOS (les clients ne peuvent être lus que dans ces programmes , mais pas édité !).\n\nServeurs CardDAV :\nhttps://customerdb.sieber.systems/carddav.php\n\nNom d'utilisateur:\n<l'adresse e-mail de votre compte de base de données clients>\n\nMot de passe:\n<le mot de passe de votre compte de base de données client>";
 
 // Settings
 "set_password" = "Définir le mot de passe";
