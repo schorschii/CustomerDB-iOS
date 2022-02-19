@@ -486,8 +486,8 @@
 /* Class = "UILabel"; text = "Label"; ObjectID = "qyG-d8-MKg"; */
 "qyG-d8-MKg.text" = "Étiquette";
 
-/* Class = "UILabel"; text = "Backup Notes"; ObjectID = "rBE-hy-Oyh"; */
-"rBE-hy-Oyh.text" = "Notes de sauvegarde";
+/* Class = "UILabel"; text = "More Information"; ObjectID = "rBE-hy-Oyh"; */
+"rBE-hy-Oyh.text" = "Plus d'information";
 
 /* Class = "UILabel"; text = "Data Processing Consent"; ObjectID = "rCh-Ts-eBc"; */
 "rCh-Ts-eBc.text" = "Consentement au traitement des données";
