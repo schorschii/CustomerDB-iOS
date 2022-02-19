@@ -1543,7 +1543,7 @@
                                 <rect key="frame" x="0.0" y="56" width="414" height="752"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="qkB-AG-hm0">
-                                        <rect key="frame" x="20" y="0.0" width="374" height="1535.5"/>
+                                        <rect key="frame" x="20" y="0.0" width="374" height="1625.5"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="68r-bN-N0T">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="120"/>
@@ -1921,7 +1921,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="7w3-Rw-M05">
-                                                <rect key="frame" x="0.0" y="1419" width="374" height="116.5"/>
+                                                <rect key="frame" x="0.0" y="1419" width="374" height="206.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="More Apps" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CZ8-Cn-piH">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="26.5"/>
@@ -1975,6 +1975,56 @@
                                                                 <state key="normal" title="BallBreak for iOS"/>
                                                                 <connections>
                                                                     <action selector="onClickBallBreakIos:" destination="Jnc-ov-Vlt" eventType="touchUpInside" id="gMl-wo-DiM"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="9oN-x4-bxc">
+                                                        <rect key="frame" x="0.0" y="121.5" width="374" height="40"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_oco" translatesAutoresizingMaskIntoConstraints="NO" id="jvd-w1-Wfu">
+                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="40" id="OUR-Gj-HtB"/>
+                                                                    <constraint firstAttribute="width" constant="40" id="aYW-DP-vx9"/>
+                                                                </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                        <integer key="value" value="5"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </imageView>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0mH-mV-QAU">
+                                                                <rect key="frame" x="50" y="0.0" width="324" height="40"/>
+                                                                <state key="normal" title="Open Computer Orchestration"/>
+                                                                <connections>
+                                                                    <action selector="onClickOco:" destination="Jnc-ov-Vlt" eventType="touchUpInside" id="Boc-mg-bBc"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mpp-tV-TJZ">
+                                                        <rect key="frame" x="0.0" y="166.5" width="374" height="40"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_masterplan" translatesAutoresizingMaskIntoConstraints="NO" id="typ-fG-b6o">
+                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="40" id="1qS-5m-Goq"/>
+                                                                    <constraint firstAttribute="width" constant="40" id="Zke-FW-heD"/>
+                                                                </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                        <integer key="value" value="5"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </imageView>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Zq-bh-bYW">
+                                                                <rect key="frame" x="50" y="0.0" width="324" height="40"/>
+                                                                <state key="normal" title="MASTERPLAN Dienstplaner"/>
+                                                                <connections>
+                                                                    <action selector="onClickMasterplan:" destination="Jnc-ov-Vlt" eventType="touchUpInside" id="UL9-Wh-RVY"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -4507,6 +4557,8 @@ City Country</string>
         <image name="icon_plain" width="1024" height="1024"/>
         <image name="icon_plain_ballbreak" width="1024" height="1024"/>
         <image name="logo" width="999" height="354"/>
+        <image name="logo_masterplan" width="512" height="512"/>
+        <image name="logo_oco" width="512" height="512"/>
         <image name="outline_info_black_24pt" width="24" height="24"/>
         <image name="person" width="96" height="96"/>
         <systemColor name="labelColor">

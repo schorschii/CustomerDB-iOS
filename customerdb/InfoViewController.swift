@@ -172,6 +172,17 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
     @IBAction func onClickBallBreakIos(_ sender: UIButton) {
         openStoreProductWithiTunesItemIdentifier(identifier: "1409746305");
     }
+    @IBAction func onClickOco(_ sender: UIButton) {
+        if let url = URL(string: "https://github.com/schorschii/OCO-Server") {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    @IBAction func onClickMasterplan(_ sender: UIButton) {
+        if let url = URL(string: "https://github.com/schorschii/MASTERPLAN") {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
     func openStoreProductWithiTunesItemIdentifier(identifier: String) {
         let storeViewController = SKStoreProductViewController()
         storeViewController.delegate = self
