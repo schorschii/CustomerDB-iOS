@@ -405,7 +405,7 @@ class CustomerDatabase {
         }
         return appointment
     }
-    func getAppointments(calendarId:Int64?, day:Date?, showDeleted:Bool) -> [CustomerAppointment] {
+    func getAppointments(calendarId:Int64?, day:Date?, showDeleted:Bool, modifiedSince:Date?=nil) -> [CustomerAppointment] {
         var appointments:[CustomerAppointment] = []
         var stmt:OpaquePointer?
         if(calendarId != nil && day != nil && !showDeleted) {
@@ -442,23 +442,28 @@ class CustomerDatabase {
             if(sqlite3_column_text(stmt, 8) != nil) { // what a hacky workaround
                 customerId = Int64(sqlite3_column_int64(stmt, 8))
             }
-            
-            appointments.append(
-                CustomerAppointment(
-                    id: Int64(sqlite3_column_int64(stmt, 0)),
-                    calendarId: Int64(sqlite3_column_int64(stmt, 1)),
-                    title: String(cString: sqlite3_column_text(stmt, 2)),
-                    notes: String(cString: sqlite3_column_text(stmt, 3)),
-                    timeStart: dateStart,
-                    timeEnd: dateEnd,
-                    fullday: sqlite3_column_int(stmt, 6) > 0,
-                    customer: String(cString: sqlite3_column_text(stmt, 7)),
-                    customerId: customerId,
-                    location: String(cString: sqlite3_column_text(stmt, 9)),
-                    lastModified: CustomerDatabase.parseDate(strDate: String(cString: sqlite3_column_text(stmt, 10))) ?? Date(),
-                    removed: Int(sqlite3_column_int(stmt, 11))
+            var lastModified:Date = Date()
+            if let date = CustomerDatabase.parseDate(strDate: String(cString: sqlite3_column_text(stmt, 10))) {
+                lastModified = date
+            }
+            if(modifiedSince == nil || lastModified > modifiedSince!) {
+                appointments.append(
+                    CustomerAppointment(
+                        id: Int64(sqlite3_column_int64(stmt, 0)),
+                        calendarId: Int64(sqlite3_column_int64(stmt, 1)),
+                        title: String(cString: sqlite3_column_text(stmt, 2)),
+                        notes: String(cString: sqlite3_column_text(stmt, 3)),
+                        timeStart: dateStart,
+                        timeEnd: dateEnd,
+                        fullday: sqlite3_column_int(stmt, 6) > 0,
+                        customer: String(cString: sqlite3_column_text(stmt, 7)),
+                        customerId: customerId,
+                        location: String(cString: sqlite3_column_text(stmt, 9)),
+                        lastModified: lastModified,
+                        removed: Int(sqlite3_column_int(stmt, 11))
+                    )
                 )
-            )
+            }
         }
         return appointments
     }
@@ -603,7 +608,7 @@ class CustomerDatabase {
     }
     
     // Customer Operations
-    func getCustomers(showDeleted:Bool, withFiles:Bool) -> [Customer] {
+    func getCustomers(showDeleted:Bool, withFiles:Bool, modifiedSince:Date?=nil) -> [Customer] {
         var customers:[Customer] = []
         var stmt:OpaquePointer?
         var sql = "SELECT id, title, first_name, last_name, phone_home, phone_mobile, phone_work, email, street, zipcode, city, country, birthday, customer_group, newsletter, notes, custom_fields, last_modified, removed FROM customer WHERE removed = 0 ORDER BY last_name, first_name"
@@ -616,29 +621,35 @@ class CustomerDatabase {
                 if(sqlite3_column_text(stmt, 12) != nil) {
                     birthday = CustomerDatabase.parseDateRaw(strDate: String(cString: sqlite3_column_text(stmt, 12)))
                 }
-                customers.append(
-                    Customer(
-                        id: Int64(sqlite3_column_int64(stmt, 0)),
-                        title: String(cString: sqlite3_column_text(stmt, 1)),
-                        firstName: String(cString: sqlite3_column_text(stmt, 2)),
-                        lastName: String(cString: sqlite3_column_text(stmt, 3)),
-                        phoneHome: String(cString: sqlite3_column_text(stmt, 4)),
-                        phoneMobile: String(cString: sqlite3_column_text(stmt, 5)),
-                        phoneWork: String(cString: sqlite3_column_text(stmt, 6)),
-                        email: String(cString: sqlite3_column_text(stmt, 7)),
-                        street: String(cString: sqlite3_column_text(stmt, 8)),
-                        zipcode: String(cString: sqlite3_column_text(stmt, 9)),
-                        city: String(cString: sqlite3_column_text(stmt, 10)),
-                        country: String(cString: sqlite3_column_text(stmt, 11)),
-                        birthday: birthday,
-                        group: String(cString: sqlite3_column_text(stmt, 13)),
-                        newsletter: Int(sqlite3_column_int(stmt, 14)) > 0,
-                        notes: String(cString: sqlite3_column_text(stmt, 15)),
-                        customFields: String(cString: sqlite3_column_text(stmt, 16)),
-                        lastModified: CustomerDatabase.parseDate(strDate: String(cString: sqlite3_column_text(stmt, 17))) ?? Date(),
-                        removed: Int(sqlite3_column_int(stmt, 18))
+                var lastModified:Date = Date()
+                if let date = CustomerDatabase.parseDate(strDate: String(cString: sqlite3_column_text(stmt, 17))) {
+                    lastModified = date
+                }
+                if(modifiedSince == nil || lastModified > modifiedSince!) {
+                    customers.append(
+                        Customer(
+                            id: Int64(sqlite3_column_int64(stmt, 0)),
+                            title: String(cString: sqlite3_column_text(stmt, 1)),
+                            firstName: String(cString: sqlite3_column_text(stmt, 2)),
+                            lastName: String(cString: sqlite3_column_text(stmt, 3)),
+                            phoneHome: String(cString: sqlite3_column_text(stmt, 4)),
+                            phoneMobile: String(cString: sqlite3_column_text(stmt, 5)),
+                            phoneWork: String(cString: sqlite3_column_text(stmt, 6)),
+                            email: String(cString: sqlite3_column_text(stmt, 7)),
+                            street: String(cString: sqlite3_column_text(stmt, 8)),
+                            zipcode: String(cString: sqlite3_column_text(stmt, 9)),
+                            city: String(cString: sqlite3_column_text(stmt, 10)),
+                            country: String(cString: sqlite3_column_text(stmt, 11)),
+                            birthday: birthday,
+                            group: String(cString: sqlite3_column_text(stmt, 13)),
+                            newsletter: Int(sqlite3_column_int(stmt, 14)) > 0,
+                            notes: String(cString: sqlite3_column_text(stmt, 15)),
+                            customFields: String(cString: sqlite3_column_text(stmt, 16)),
+                            lastModified: lastModified,
+                            removed: Int(sqlite3_column_int(stmt, 18))
+                        )
                     )
-                )
+                }
             }
         }
         
@@ -1029,7 +1040,7 @@ class CustomerDatabase {
     }
     
     // Voucher Operations
-    func getVouchers(showDeleted:Bool) -> [Voucher] {
+    func getVouchers(showDeleted:Bool, modifiedSince:Date?=nil) -> [Voucher] {
         var vouchers:[Voucher] = []
         var stmt:OpaquePointer?
         var sql = "SELECT id, original_value, current_value, voucher_no, from_customer, from_customer_id, for_customer, for_customer_id, issued, valid_until, redeemed, notes, last_modified, removed FROM voucher WHERE removed = 0 ORDER BY issued DESC"
@@ -1054,24 +1065,30 @@ class CustomerDatabase {
                 if(sqlite3_column_text(stmt, 7) != nil) { // what a hacky workaround
                     forCustomerId = Int64(sqlite3_column_int64(stmt, 7))
                 }
-                vouchers.append(
-                    Voucher(
-                        id: Int64(sqlite3_column_int64(stmt, 0)),
-                        originalValue: Double(sqlite3_column_double(stmt, 1)),
-                        currentValue: Double(sqlite3_column_double(stmt, 2)),
-                        voucherNo: String(cString: sqlite3_column_text(stmt, 3)),
-                        fromCustomer: String(cString: sqlite3_column_text(stmt, 4)),
-                        fromCustomerId: fromCustomerId,
-                        forCustomer: String(cString: sqlite3_column_text(stmt, 6)),
-                        forCustomerId: forCustomerId,
-                        issued: CustomerDatabase.parseDate(strDate: String(cString: sqlite3_column_text(stmt, 8))) ?? Date(),
-                        validUntil: validUntil,
-                        redeemed: redeemed,
-                        notes: String(cString: sqlite3_column_text(stmt, 11)),
-                        lastModified: CustomerDatabase.parseDate(strDate: String(cString: sqlite3_column_text(stmt, 12))) ?? Date(),
-                        removed: Int(sqlite3_column_int(stmt, 13))
+                var lastModified:Date = Date()
+                if let date = CustomerDatabase.parseDate(strDate: String(cString: sqlite3_column_text(stmt, 12))) {
+                    lastModified = date
+                }
+                if(modifiedSince == nil || lastModified > modifiedSince!) {
+                    vouchers.append(
+                        Voucher(
+                            id: Int64(sqlite3_column_int64(stmt, 0)),
+                            originalValue: Double(sqlite3_column_double(stmt, 1)),
+                            currentValue: Double(sqlite3_column_double(stmt, 2)),
+                            voucherNo: String(cString: sqlite3_column_text(stmt, 3)),
+                            fromCustomer: String(cString: sqlite3_column_text(stmt, 4)),
+                            fromCustomerId: fromCustomerId,
+                            forCustomer: String(cString: sqlite3_column_text(stmt, 6)),
+                            forCustomerId: forCustomerId,
+                            issued: CustomerDatabase.parseDate(strDate: String(cString: sqlite3_column_text(stmt, 8))) ?? Date(),
+                            validUntil: validUntil,
+                            redeemed: redeemed,
+                            notes: String(cString: sqlite3_column_text(stmt, 11)),
+                            lastModified: lastModified,
+                            removed: Int(sqlite3_column_int(stmt, 13))
+                        )
                     )
-                )
+                }
             }
         }
         return vouchers

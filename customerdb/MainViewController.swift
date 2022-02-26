@@ -120,6 +120,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
             self.reloadData()
             self.setupStatusIndicator(visible: false, message: nil, completion: {
                 if(success) {
+                    UserDefaults.standard.set(Date(), forKey: "last-successful-sync")
                     self.dialog(
                         title: NSLocalizedString("sync_succeeded", comment: ""),
                         text: message
@@ -246,8 +247,12 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
             )
         }
         if let api2 = api {
+            var diffSince = Date(timeIntervalSince1970: 0)
+            if let date = UserDefaults.standard.object(forKey: "last-successful-sync") as? Date {
+                diffSince = date
+            }
             api2.delegate = self
-            api2.sync()
+            api2.sync(diffSince: diffSince)
             setupStatusIndicator(visible: true, message: NSLocalizedString("syncing", comment: ""), completion: nil)
         }
     }

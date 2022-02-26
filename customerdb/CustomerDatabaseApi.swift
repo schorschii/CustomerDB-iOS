@@ -57,13 +57,13 @@ class CustomerDatabaseApi {
         }
     }
     
-    func sync() {
-        putCustomers()
+    func sync(diffSince:Date?=nil) {
+        putCustomers(diffSince: diffSince)
     }
     
-    private func putCustomers() {
+    private func putCustomers(diffSince:Date?=nil) {
         var customersDataArray:[[String:Any?]] = []
-        for customer in mDb.getCustomers(showDeleted: true, withFiles: true) {
+        for customer in mDb.getCustomers(showDeleted: true, withFiles: true, modifiedSince: diffSince) {
             var customerFilesDataArray:[[String:Any?]] = []
             for file in customer.getFiles() {
                 if file.mContent != nil {
@@ -114,7 +114,7 @@ class CustomerDatabaseApi {
         }
         
         var appointmentsDataArray:[[String:Any?]] = []
-        for appointment in mDb.getAppointments(calendarId: nil, day: nil, showDeleted: true) {
+        for appointment in mDb.getAppointments(calendarId: nil, day: nil, showDeleted: true, modifiedSince: diffSince) {
             appointmentsDataArray.append([
                 "id": appointment.mId,
                 "calendar_id": appointment.mCalendarId,
@@ -132,7 +132,7 @@ class CustomerDatabaseApi {
         }
         
         var vouchersDataArray:[[String:Any?]] = []
-        for voucher in mDb.getVouchers(showDeleted: true) {
+        for voucher in mDb.getVouchers(showDeleted: true, modifiedSince: diffSince) {
             vouchersDataArray.append([
                 "id": voucher.mId,
                 "original_value": voucher.mOriginalValue,
