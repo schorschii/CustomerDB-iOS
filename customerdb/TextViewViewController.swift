@@ -15,12 +15,10 @@ class TextViewViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if(mTitle != nil && mTitle != "") {
+        if(mTitle != "") {
             navigationBar.topItem?.title = mTitle
         }
-        if(mText != nil) {
-            textViewText.text = mText
-        }
+        textViewText.text = mText
     }
 
     @IBAction func onClickDone(_ sender: UIBarButtonItem) {
