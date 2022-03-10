@@ -39,7 +39,7 @@
 "4na-ll-Zyt.placeholder" = "Nombre de pila";
 
 /* Class = "UILabel"; text = "Create more than 500 customers."; ObjectID = "5yb-35-5h8"; */
-"5yb-35-5h8.text" = "Crea más de 500 clientes.";
+"5yb-35-5h8.text" = "Crea más de 500 clientes. Pago único.";
 
 /* Class = "UIButton"; normalTitle = "Delete Account"; ObjectID = "6Ns-3b-kS1"; */
 "6Ns-3b-kS1.normalTitle" = "Borrar cuenta";
@@ -93,7 +93,7 @@
 "Ahn-xK-rIG.text" = "Boletín";
 
 /* Class = "UILabel"; text = "Allows you to set your own title bar color in the settings."; ObjectID = "BAP-dq-wyr"; */
-"BAP-dq-wyr.text" = "Le permite establecer su propio color de barra de título en la configuración.";
+"BAP-dq-wyr.text" = "Le permite establecer su propio color de barra de título en la configuración. Pago único.";
 
 /* Class = "UILabel"; text = "Name"; ObjectID = "BCv-uQ-hGV"; */
 "BCv-uQ-hGV.text" = "Nombre";
@@ -189,7 +189,7 @@
 "Lvv-ze-3xB.placeholder" = "Confirmar contraseña";
 
 /* Class = "UILabel"; text = "Allows you to add any number of custom fields to customer records. You can also add drop down lists."; ObjectID = "N09-a4-S8u"; */
-"N09-a4-S8u.text" = "Le permite agregar cualquier número de campos personalizados a los registros de clientes. También puede agregar listas desplegables.";
+"N09-a4-S8u.text" = "Le permite agregar cualquier número de campos personalizados a los registros de clientes. También puede agregar listas desplegables. Pago único.";
 
 /* Class = "UITextField"; placeholder = "Title"; ObjectID = "NFE-cV-6ga"; */
 "NFE-cV-6ga.placeholder" = "Título";
@@ -249,7 +249,7 @@
 "Tkq-jF-a4z.normalTitle" = "Restablecer la contraseña";
 
 /* Class = "UILabel"; text = "Subscribe to the cloud sync service to backup your customer data in the cloud and sync it over multiple devices."; ObjectID = "UjQ-6k-UuY"; */
-"UjQ-6k-UuY.text" = "Suscríbase al servicio de sincronización en la nube para hacer una copia de seguridad de los datos de sus clientes en la nube y sincronizarlos en varios dispositivos.";
+"UjQ-6k-UuY.text" = "Suscríbase al servicio de sincronización en la nube para hacer una copia de seguridad de los datos de sus clientes en la nube y sincronizarlos en varios dispositivos. Es necesario un pago mensual porque el servidor de la base de datos incurre en costos de funcionamiento.";
 
 /* Class = "UILabel"; text = "Red"; ObjectID = "VIb-tK-plR"; */
 "VIb-tK-plR.text" = "Roja";
@@ -309,7 +309,7 @@
 "Zlm-by-Rm8.text" = "Para la cliente";
 
 /* Class = "UILabel"; text = "Optonal activatable mode that allows only data entry. For example, the device can be handed to showroom visitors. Furthermore you can lock the app completely."; ObjectID = "a3w-jB-j03"; */
-"a3w-jB-j03.text" = "Modo activable opcional que solo permite la entrada de datos. Por ejemplo, el dispositivo se puede entregar a los visitantes de la sala de exposición. Además, puedes bloquear la aplicación por completo.";
+"a3w-jB-j03.text" = "Modo activable opcional que solo permite la entrada de datos. Por ejemplo, el dispositivo se puede entregar a los visitantes de la sala de exposición. Además, puedes bloquear la aplicación por completo. Pago único.";
 
 /* Class = "UINavigationItem"; title = "Edit Voucher"; ObjectID = "aQN-x7-NUJ"; */
 "aQN-x7-NUJ.title" = "Editar comprobante";
@@ -505,7 +505,7 @@
 "t1n-iE-y8C.text" = "Caracteristicas";
 
 /* Class = "UILabel"; text = "Free only for private use, non-profit organisations and educational or testing purposes. Please contact me via email if you are not sure whether your application needs commercial licensing."; ObjectID = "t6w-wc-FFY"; */
-"t6w-wc-FFY.text" = "Gratis solo para uso privado, organizaciones sin fines de lucro y con fines educativos o de prueba. Comuníquese conmigo por correo electrónico si no está seguro de si su aplicación necesita una licencia comercial.";
+"t6w-wc-FFY.text" = "Gratis solo para uso privado, organizaciones sin fines de lucro y con fines educativos o de prueba. Comuníquese conmigo por correo electrónico si no está seguro de si su aplicación necesita una licencia comercial. Pago único.";
 
 /* Class = "UILabel"; text = "Notes"; ObjectID = "taZ-fW-vCN"; */
 "taZ-fW-vCN.text" = "Notas";
@@ -563,9 +563,9 @@
 "QUK-XO-amn.normalTitle" = "Agregar archivo";
 
 "7EC-pT-lyN.text" = "Archivos";
-"KoK-NQ-8nE.text" = "Adjunte archivos a los registros del cliente (máximo 20 archivos por cliente y 1 MB por archivo).";
+"KoK-NQ-8nE.text" = "Adjunte archivos a los registros del cliente (máximo 20 archivos por cliente y 1 MB por archivo). Pago único.";
 "Xk1-bC-0w5.text" = "Calendario";
-"8sP-Eh-96i.text" = "Desbloquea las funciones del calendario.";
+"JAO-Su-J9g.text" = "Desbloquea las funciones del calendario. Pago único.";
 
 "TTf-X6-kdL.text" = "Mostrar archivos";
 

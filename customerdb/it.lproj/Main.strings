@@ -39,7 +39,7 @@
 "4na-ll-Zyt.placeholder" = "Nome di battesimo";
 
 /* Class = "UILabel"; text = "Create more than 500 customers."; ObjectID = "5yb-35-5h8"; */
-"5yb-35-5h8.text" = "Crea più di 500 clienti.";
+"5yb-35-5h8.text" = "Crea più di 500 clienti. Pagamento unico.";
 
 /* Class = "UIButton"; normalTitle = "Delete Account"; ObjectID = "6Ns-3b-kS1"; */
 "6Ns-3b-kS1.normalTitle" = "Eliminare l'account";
@@ -93,7 +93,7 @@
 "Ahn-xK-rIG.text" = "Newsletter";
 
 /* Class = "UILabel"; text = "Allows you to set your own title bar color in the settings."; ObjectID = "BAP-dq-wyr"; */
-"BAP-dq-wyr.text" = "Consente di impostare il colore della barra del titolo nelle impostazioni.";
+"BAP-dq-wyr.text" = "Consente di impostare il colore della barra del titolo nelle impostazioni. Pagamento unico.";
 
 /* Class = "UILabel"; text = "Name"; ObjectID = "BCv-uQ-hGV"; */
 "BCv-uQ-hGV.text" = "Nome";
@@ -189,7 +189,7 @@
 "Lvv-ze-3xB.placeholder" = "conferma password";
 
 /* Class = "UILabel"; text = "Allows you to add any number of custom fields to customer records. You can also add drop down lists."; ObjectID = "N09-a4-S8u"; */
-"N09-a4-S8u.text" = "Consente di aggiungere un numero qualsiasi di campi personalizzati ai record dei clienti. È inoltre possibile aggiungere elenchi a discesa.";
+"N09-a4-S8u.text" = "Consente di aggiungere un numero qualsiasi di campi personalizzati ai record dei clienti. È inoltre possibile aggiungere elenchi a discesa. Pagamento unico.";
 
 /* Class = "UITextField"; placeholder = "Title"; ObjectID = "NFE-cV-6ga"; */
 "NFE-cV-6ga.placeholder" = "Titolo";
@@ -249,7 +249,7 @@
 "Tkq-jF-a4z.normalTitle" = "Resetta la password";
 
 /* Class = "UILabel"; text = "Subscribe to the cloud sync service to backup your customer data in the cloud and sync it over multiple devices."; ObjectID = "UjQ-6k-UuY"; */
-"UjQ-6k-UuY.text" = "Abbonati al servizio di sincronizzazione cloud per eseguire il backup dei dati dei clienti nel cloud e sincronizzarli su più dispositivi.";
+"UjQ-6k-UuY.text" = "Abbonati al servizio di sincronizzazione cloud per eseguire il backup dei dati dei clienti nel cloud e sincronizzarli su più dispositivi. È necessario un pagamento mensile perché il server del database sostiene i costi di gestione.";
 
 /* Class = "UILabel"; text = "Red"; ObjectID = "VIb-tK-plR"; */
 "VIb-tK-plR.text" = "Rossa";
@@ -309,7 +309,7 @@
 "Zlm-by-Rm8.text" = "Per il cliente";
 
 /* Class = "UILabel"; text = "Optonal activatable mode that allows only data entry. For example, the device can be handed to showroom visitors. Furthermore you can lock the app completely."; ObjectID = "a3w-jB-j03"; */
-"a3w-jB-j03.text" = "Modalità attivabile opzionale che consente solo l'immissione di dati. Ad esempio, il dispositivo può essere consegnato ai visitatori dello showroom. Inoltre puoi bloccare completamente l'app.";
+"a3w-jB-j03.text" = "Modalità attivabile opzionale che consente solo l'immissione di dati. Ad esempio, il dispositivo può essere consegnato ai visitatori dello showroom. Inoltre puoi bloccare completamente l'app. Pagamento unico.";
 
 /* Class = "UINavigationItem"; title = "Edit Voucher"; ObjectID = "aQN-x7-NUJ"; */
 "aQN-x7-NUJ.title" = "Modifica voucher";
@@ -505,7 +505,7 @@
 "t1n-iE-y8C.text" = "Caratteristiche";
 
 /* Class = "UILabel"; text = "Free only for private use, non-profit organisations and educational or testing purposes. Please contact me via email if you are not sure whether your application needs commercial licensing."; ObjectID = "t6w-wc-FFY"; */
-"t6w-wc-FFY.text" = "Gratuito solo per uso privato, organizzazioni senza scopo di lucro e scopi educativi o di test. Vi prego di contattarmi via e-mail se non siete sicuri se la vostra applicazione necessita di licenze commerciali.";
+"t6w-wc-FFY.text" = "Gratuito solo per uso privato, organizzazioni senza scopo di lucro e scopi educativi o di test. Vi prego di contattarmi via e-mail se non siete sicuri se la vostra applicazione necessita di licenze commerciali. Pagamento unico.";
 
 /* Class = "UILabel"; text = "Notes"; ObjectID = "taZ-fW-vCN"; */
 "taZ-fW-vCN.text" = "Appunti";
@@ -563,9 +563,9 @@
 "QUK-XO-amn.normalTitle" = "Aggiungi file";
 
 "7EC-pT-lyN.text" = "File";
-"KoK-NQ-8nE.text" = "Allega file ai record dei clienti (massimo 20 file per cliente e 1 MB per file).";
+"KoK-NQ-8nE.text" = "Allega file ai record dei clienti (massimo 20 file per cliente e 1 MB per file). Pagamento unico.";
 "Xk1-bC-0w5.text" = "Calendario";
-"8sP-Eh-96i.text" = "Sblocca le funzioni del calendario.";
+"JAO-Su-J9g.text" = "Sblocca le funzioni del calendario. Pagamento unico.";
 
 "TTf-X6-kdL.text" = "Mostra file";
 

@@ -39,7 +39,7 @@
 "4na-ll-Zyt.placeholder" = "Имя";
 
 /* Class = "UILabel"; text = "Create more than 500 customers."; ObjectID = "5yb-35-5h8"; */
-"5yb-35-5h8.text" = "Создайте более 500 клиентов.";
+"5yb-35-5h8.text" = "Создайте более 500 клиентов. Одноразовый платеж.";
 
 /* Class = "UIButton"; normalTitle = "Delete Account"; ObjectID = "6Ns-3b-kS1"; */
 "6Ns-3b-kS1.normalTitle" = "Удалить аккаунт";
@@ -93,7 +93,7 @@
 "Ahn-xK-rIG.text" = "Информационный бюллетень";
 
 /* Class = "UILabel"; text = "Allows you to set your own title bar color in the settings."; ObjectID = "BAP-dq-wyr"; */
-"BAP-dq-wyr.text" = "Позволяет установить собственный цвет строки заголовка в настройках.";
+"BAP-dq-wyr.text" = "Позволяет установить собственный цвет строки заголовка в настройках. Одноразовый платеж.";
 
 /* Class = "UILabel"; text = "Name"; ObjectID = "BCv-uQ-hGV"; */
 "BCv-uQ-hGV.text" = "имя";
@@ -189,7 +189,7 @@
 "Lvv-ze-3xB.placeholder" = "Подтвердите Пароль";
 
 /* Class = "UILabel"; text = "Allows you to add any number of custom fields to customer records. You can also add drop down lists."; ObjectID = "N09-a4-S8u"; */
-"N09-a4-S8u.text" = "Позволяет добавлять любое количество настраиваемых полей в записи клиентов. Вы также можете добавить выпадающие списки.";
+"N09-a4-S8u.text" = "Позволяет добавлять любое количество настраиваемых полей в записи клиентов. Вы также можете добавить выпадающие списки. Одноразовый платеж.";
 
 /* Class = "UITextField"; placeholder = "Title"; ObjectID = "NFE-cV-6ga"; */
 "NFE-cV-6ga.placeholder" = "заглавие";
@@ -249,7 +249,7 @@
 "Tkq-jF-a4z.normalTitle" = "Сброс пароля";
 
 /* Class = "UILabel"; text = "Subscribe to the cloud sync service to backup your customer data in the cloud and sync it over multiple devices."; ObjectID = "UjQ-6k-UuY"; */
-"UjQ-6k-UuY.text" = "Подпишитесь на службу облачной синхронизации, чтобы создавать резервные копии данных ваших клиентов в облаке и синхронизировать их на нескольких устройствах.";
+"UjQ-6k-UuY.text" = "Подпишитесь на службу облачной синхронизации, чтобы создавать резервные копии данных ваших клиентов в облаке и синхронизировать их на нескольких устройствах. Ежемесячный платеж необходим, поскольку сервер базы данных несет текущие расходы.";
 
 /* Class = "UILabel"; text = "Red"; ObjectID = "VIb-tK-plR"; */
 "VIb-tK-plR.text" = "красный";
@@ -309,7 +309,7 @@
 "Zlm-by-Rm8.text" = "Для клиента";
 
 /* Class = "UILabel"; text = "Optonal activatable mode that allows only data entry. For example, the device can be handed to showroom visitors. Furthermore you can lock the app completely."; ObjectID = "a3w-jB-j03"; */
-"a3w-jB-j03.text" = "Дополнительный активируемый режим, который позволяет только ввод данных. Например, устройство может быть передано посетителям выставочного зала. Кроме того, вы можете полностью заблокировать приложение.";
+"a3w-jB-j03.text" = "Дополнительный активируемый режим, который позволяет только ввод данных. Например, устройство может быть передано посетителям выставочного зала. Кроме того, вы можете полностью заблокировать приложение. Одноразовый платеж.";
 
 /* Class = "UINavigationItem"; title = "Edit Voucher"; ObjectID = "aQN-x7-NUJ"; */
 "aQN-x7-NUJ.title" = "Редактировать ваучер";
@@ -505,7 +505,7 @@
 "t1n-iE-y8C.text" = "особенности";
 
 /* Class = "UILabel"; text = "Free only for private use, non-profit organisations and educational or testing purposes. Please contact me via email if you are not sure whether your application needs commercial licensing."; ObjectID = "t6w-wc-FFY"; */
-"t6w-wc-FFY.text" = "Бесплатно только для частного использования, некоммерческих организаций и в образовательных или тестовых целях. Пожалуйста, свяжитесь со мной по электронной почте, если вы не уверены, нуждается ли ваше приложение в коммерческом лицензировании.";
+"t6w-wc-FFY.text" = "Бесплатно только для частного использования, некоммерческих организаций и в образовательных или тестовых целях. Пожалуйста, свяжитесь со мной по электронной почте, если вы не уверены, нуждается ли ваше приложение в коммерческом лицензировании. Одноразовый платеж.";
 
 /* Class = "UILabel"; text = "Notes"; ObjectID = "taZ-fW-vCN"; */
 "taZ-fW-vCN.text" = "Ноты";
@@ -566,9 +566,9 @@
 "QUK-XO-amn.normalTitle" = "Добавить файл";
 
 "7EC-pT-lyN.text" = "файлы";
-"KoK-NQ-8nE.text" = "Прикрепляйте файлы к записям о клиентах (максимум 20 файлов для каждого клиента и 1 МБ на файл).";
+"KoK-NQ-8nE.text" = "Прикрепляйте файлы к записям о клиентах (максимум 20 файлов для каждого клиента и 1 МБ на файл). Одноразовый платеж.";
 "Xk1-bC-0w5.text" = "Календарь";
-"8sP-Eh-96i.text" = "Разблокирует функции календаря.";
+"JAO-Su-J9g.text" = "Разблокирует функции календаря. Одноразовый платеж.";
 
 "TTf-X6-kdL.text" = "Показать файлы";
 
