@@ -503,9 +503,18 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
             title: NSLocalizedString("import_csv", comment: ""),
             style: .default) { (action) in
                 if #available(iOS 11, *) {
-                    let documentPicker = CustomerDocumentPickerViewController(documentTypes: ["public.comma-separated-values-text"], in: .import)
-                    documentPicker.delegate = self
-                    self.present(documentPicker, animated: true, completion: nil)
+                    let alert = UIAlertController(
+                        title: "", message: NSLocalizedString("import_csv_note", comment: ""),
+                        preferredStyle: .alert
+                    )
+                    alert.addAction(UIAlertAction(
+                        title: NSLocalizedString("ok", comment: ""),
+                        style: .default) { (action) in
+                            let documentPicker = CustomerDocumentPickerViewController(documentTypes: ["public.comma-separated-values-text"], in: .import)
+                            documentPicker.delegate = self
+                            self.present(documentPicker, animated: true, completion: nil)
+                    })
+                    self.present(alert, animated: true, completion: nil)
                 } else {
                     self.dialog(
                         title: NSLocalizedString("not_supported", comment: ""),
@@ -550,9 +559,18 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
             title: NSLocalizedString("import_csv", comment: ""),
             style: .default) { (action) in
                 if #available(iOS 11, *) {
-                    let documentPicker = VoucherDocumentPickerViewController(documentTypes: ["public.comma-separated-values-text"], in: .import)
-                    documentPicker.delegate = self
-                    self.present(documentPicker, animated: true, completion: nil)
+                    let alert = UIAlertController(
+                        title: "", message: NSLocalizedString("import_csv_note_voucher", comment: ""),
+                        preferredStyle: .alert
+                    )
+                    alert.addAction(UIAlertAction(
+                        title: NSLocalizedString("ok", comment: ""),
+                        style: .default) { (action) in
+                            let documentPicker = VoucherDocumentPickerViewController(documentTypes: ["public.comma-separated-values-text"], in: .import)
+                            documentPicker.delegate = self
+                            self.present(documentPicker, animated: true, completion: nil)
+                    })
+                    self.present(alert, animated: true, completion: nil)
                 } else {
                     self.dialog(
                         title: NSLocalizedString("not_supported", comment: ""),

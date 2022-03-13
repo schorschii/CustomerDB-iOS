@@ -39,6 +39,8 @@
 "do_you_want_to_import_this_customer" = "Do you want to import this customer?";
 "invalid_code" = "Invalid Code";
 "could_not_find_valid_entries_in_this_code" = "Could not find any valid entries in this code.";
+"import_csv_note" = "Please note the following important information for the CSV import.\n\nThe first line is interpreted as column title. Your CSV file should contain the following columns: id, title, first_name, last_name, phone_home, phone_mobile, phone_work, email, street, zipcode, city, country, customer_group, newsletter, birthday, last_modified, notes\n\nOther columns are imported as custom fields.\n\nImportant: Please use a comma (,) as field separator. The customer ID is generated when the field is empty or the ID already exists. The field \"newsletter\" may only contain 0 or 1. The date format must be \"YYYY-MM-DD HH:MM:SS\".\n\nYou can edit your CSV file for example with a software like LibreOffice Calc before you start the import.";
+"import_csv_note_voucher" = "Please note the following important information for the CSV import.\n\nThe first line is interpreted as column title. Your CSV file should contain the following columns: id, number, original_value, current_value, from_customer, for_customer, issued, valid_until, redeemed, last_modified, notes\n\nImportant: Please use a comma (,) as field separator. The customer ID is generated when the field is empty or the ID already exists. The date format must be \"YYYY-MM-DD HH:MM:SS\".\n\nYou can edit your CSV file for example with a software like LibreOffice Calc before you start the import.";
 "export_ics" = "Export ICS File";
 "export_vcf" = "Export VCF File";
 "export_csv" = "Export CSV File";
