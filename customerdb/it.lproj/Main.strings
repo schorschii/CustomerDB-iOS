@@ -231,7 +231,7 @@
 "RCG-IE-piD.placeholder" = "Numero del buono";
 
 /* Class = "UITabBarItem"; title = "Vouchers"; ObjectID = "Rde-ds-wAi"; */
-"Rde-ds-wAi.title" = "Buone";
+"Rde-ds-wAi.title" = "Buoni";
 
 /* Class = "UILabel"; text = "Commercial Usage"; ObjectID = "Ru1-yi-LkT"; */
 "Ru1-yi-LkT.text" = "Uso commerciale";
