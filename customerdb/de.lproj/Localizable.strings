@@ -70,6 +70,7 @@
 "success" = "Erfolg";
 "error" = "Fehler";
 "feature_now_available" = "Funktion ist jetzt verfügbar";
+"x_activations_remaining" = "%d Aktivierungen verbleiben";
 "more" = "Mehr...";
 "not_unlocked" = "Noch nicht freigeschaltet";
 "unlock_feature_via_inapp" = "Sie können dieses Feature mit einem In-App-Kauf freischalten.";

@@ -14,8 +14,9 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
     @IBOutlet weak var buttonGithub: UIButton!
     @IBOutlet weak var buttonHomepage: UIButton!
     @IBOutlet weak var buttonEmail: UIButton!
+    @IBOutlet weak var labelLicensee: UILabel!
     
-    static let ACTIVATE_URL = "https://apps.georg-sieber.de/activate/app.php"
+    static let ACTIVATE_URL = "https://apps.sieber.systems/activate"
     
     static let HOMEPAGE_URL = "https://georg-sieber.de/"
     static let REPO_URL = "https://github.com/schorschii/Customerdb-iOS"
@@ -60,6 +61,13 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
         buttonHomepage.setTitle(InfoViewController.HOMEPAGE_URL, for: .normal)
         buttonEmail.setTitle(InfoViewController.SUPPORT_EMAIL, for: .normal)
         navigationController?.navigationBar.barStyle = .black
+        
+        if let licensee = UserDefaults.standard.string(forKey: "licensee") {
+            if licensee != "" {
+                labelLicensee.isHidden = false
+                labelLicensee.text = licensee
+            }
+        }
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(onClickManualUnlock(_:)))
         tap.numberOfTapsRequired = 2
@@ -387,39 +395,39 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
             }
         }
     }
-    func unlock(productId: String) {
+    func unlock(productId: String, remaining: Int? = nil) {
         switch(productId) {
             case InfoViewController.inappCloudAccessLicenseId:
                 UserDefaults.standard.set(true, forKey: "unlocked-cal")
-                handleSuccess()
+                handleSuccess(remaining: remaining)
                 break
             case InfoViewController.inappCommercialUsageId:
                 UserDefaults.standard.set(true, forKey: "unlocked-cu")
-                handleSuccess()
+                handleSuccess(remaining: remaining)
                 break
             case InfoViewController.inappLargeCompanyId:
                 UserDefaults.standard.set(true, forKey: "unlocked-lc")
-                handleSuccess()
+                handleSuccess(remaining: remaining)
                 break
             case InfoViewController.inappInputOnlyModeId:
                 UserDefaults.standard.set(true, forKey: "unlocked-iom")
-                handleSuccess()
+                handleSuccess(remaining: remaining)
                 break
             case InfoViewController.inappDesignOptionsId:
                 UserDefaults.standard.set(true, forKey: "unlocked-do")
-                handleSuccess()
+                handleSuccess(remaining: remaining)
                 break
             case InfoViewController.inappCustomFieldsId:
                 UserDefaults.standard.set(true, forKey: "unlocked-cf")
-                handleSuccess()
+                handleSuccess(remaining: remaining)
                 break
             case InfoViewController.inappFilesId:
                 UserDefaults.standard.set(true, forKey: "unlocked-fs")
-                handleSuccess()
+                handleSuccess(remaining: remaining)
                 break
             case InfoViewController.inappCalendarId:
                 UserDefaults.standard.set(true, forKey: "unlocked-cl")
-                handleSuccess()
+                handleSuccess(remaining: remaining)
                 break
             default:
                 print("UNKNOWN: "+productId)
@@ -535,11 +543,22 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
                 if let httpResponse = response as? HTTPURLResponse {
                     //print(String(httpResponse.statusCode))
                     //print(String(data: data!, encoding: String.Encoding.utf8))
-                    if(httpResponse.statusCode == 999) {
-                        DispatchQueue.main.async {
-                            self.unlock(productId: productId)
+                    do {
+                        if(httpResponse.statusCode != 999) {
+                            throw UnlockError.invalidResponse
                         }
-                    } else {
+                        if let json = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any],
+                            let licensee = json["licensee"] as? String,
+                            let remaining = json["remaining"] as? Int {
+
+                            UserDefaults.standard.set(licensee, forKey: "licensee")
+                            DispatchQueue.main.async {
+                                self.unlock(productId: productId, remaining: remaining)
+                            }
+                        } else {
+                            throw UnlockError.invalidResponse
+                        }
+                    } catch {
                         DispatchQueue.main.async {
                             self.handleError(text: NSLocalizedString("invalid_unlock_code", comment: ""))
                         }
@@ -558,15 +577,19 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
             self.present(alert, animated: true, completion: nil)
         }
     }
-    func handleSuccess() {
+    func handleSuccess(remaining: Int? = nil) {
         DispatchQueue.main.async {
             let alert = UIAlertController(
                 title: NSLocalizedString("success", comment: ""),
-                message: NSLocalizedString("feature_now_available", comment: ""),
+                message: NSLocalizedString("feature_now_available", comment: "") + (remaining==nil ? "" : "\n\n" + NSLocalizedString("x_activations_remaining", comment: "").replacingOccurrences(of: "%d", with: String(remaining!))),
                 preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { (_) in self.dismiss(animated: true, completion: nil)}))
             self.present(alert, animated: true, completion: nil)
         }
     }
     
+}
+
+enum UnlockError: Error {
+    case invalidResponse
 }

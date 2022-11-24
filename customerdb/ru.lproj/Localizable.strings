@@ -70,6 +70,7 @@
 "success" = "успех";
 "error" = "ошибка";
 "feature_now_available" = "Функция теперь доступна";
+"x_activations_remaining" = "%d активаций осталось";
 "more" = "Больше...";
 "not_unlocked" = "Функция заблокирована";
 "unlock_feature_via_inapp" = "Вы можете разблокировать эту функцию через покупку в приложении.";
