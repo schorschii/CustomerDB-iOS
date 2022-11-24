@@ -25,7 +25,7 @@
 		564EC39E27BEEDDA00C7BE81 /* TextViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564EC39D27BEEDDA00C7BE81 /* TextViewViewController.swift */; };
 		568DFA85254F190C00546F6B /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568DFA84254F190C00546F6B /* ScannerViewController.swift */; };
 		568DFA932550AE9100546F6B /* CallDirectoryHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568DFA922550AE9100546F6B /* CallDirectoryHandler.swift */; };
-		568DFA972550AE9100546F6B /* CustomerDatabaseDirectory.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 568DFA902550AE9100546F6B /* CustomerDatabaseDirectory.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		568DFA972550AE9100546F6B /* CustomerDatabaseDirectory.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 568DFA902550AE9100546F6B /* CustomerDatabaseDirectory.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		568DFAB1255200F900546F6B /* CallDirectoryDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568DFAB0255200F900546F6B /* CallDirectoryDatabase.swift */; };
 		568DFAC02552027D00546F6B /* CallDirectoryDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568DFAB0255200F900546F6B /* CallDirectoryDatabase.swift */; };
 		569E14432371EA9E007BFAF0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569E14422371EA9E007BFAF0 /* MainViewController.swift */; };
@@ -79,15 +79,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		568DFA982550AE9100546F6B /* Embed App Extensions */ = {
+		568DFA982550AE9100546F6B /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				568DFA972550AE9100546F6B /* CustomerDatabaseDirectory.appex in Embed App Extensions */,
+				568DFA972550AE9100546F6B /* CustomerDatabaseDirectory.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -321,7 +321,7 @@
 				563FEE7C20FFD6C500DFD7B7 /* Sources */,
 				563FEE7D20FFD6C500DFD7B7 /* Frameworks */,
 				563FEE7E20FFD6C500DFD7B7 /* Resources */,
-				568DFA982550AE9100546F6B /* Embed App Extensions */,
+				568DFA982550AE9100546F6B /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -357,7 +357,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1200;
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1410;
 				ORGANIZATIONNAME = "Georg Sieber";
 				TargetAttributes = {
 					563FEE7F20FFD6C500DFD7B7 = {
