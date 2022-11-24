@@ -382,12 +382,19 @@ class CustomerDetailsViewController : UIViewController, MFMessageComposeViewCont
         let viewAction = UIAlertAction(
             title: NSLocalizedString("open_map", comment: ""),
             style: .default) { (action) in
-                self.coordinates(forAddress: self.mCurrentCustomer!.getAddressString()) {
-                    (location) in
-                    guard let location = location else {
-                        return
+                if(UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
+                    let strUrl = "comgooglemaps://?saddr=&daddr="+self.mCurrentCustomer!.getAddressString().addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!+"&directionsmode=driving"
+                    print(strUrl)
+                    if let url = URL(string: strUrl), !url.absoluteString.isEmpty {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
                     }
-                    self.openMapForPlace(lat: location.latitude, long: location.longitude)
+                } else {
+                    self.coordinates(forAddress: self.mCurrentCustomer!.getAddressString()) {
+                        (location) in
+                        if let location = location {
+                            self.openMapForPlace(lat: location.latitude, long: location.longitude)
+                        }
+                    }
                 }
         }
         let copyAction = UIAlertAction(
@@ -665,5 +672,12 @@ class AppointmentButton: UIButton {
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+}
+extension String {
+    func safeAddingPercentEncoding(withAllowedCharacters allowedCharacters: CharacterSet) -> String? {
+        // using a copy to workaround magic: https://stackoverflow.com/q/44754996/1033581
+        let allowedCharacters = CharacterSet(bitmapRepresentation: allowedCharacters.bitmapRepresentation)
+        return addingPercentEncoding(withAllowedCharacters: allowedCharacters)
     }
 }
