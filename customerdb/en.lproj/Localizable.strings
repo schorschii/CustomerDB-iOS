@@ -98,6 +98,7 @@
 "choose_a_password" = "Choose a Password";
 "confirm_password" = "Confirm Password";
 "new_custom_field" = "New Custom Field";
+"edit_custom_field" = "Edit Custom Field";
 "add_alphanumeric" = "Add Alphanumeric Field";
 "add_alphanumeric_multiline" = "Add Alphanumeric Multiline Field";
 "add_numeric" = "Add Numeric Field";
@@ -114,11 +115,14 @@
 "field_date" = "Date";
 "logo_deleted" = "Image deleted.";
 "new_calendar" = "New Calendar";
+"edit_calendar" = "Edit Calendar";
 "red" = "Red";
 "green" = "Green";
 "blue" = "Blue";
 "change_text_template" = "Change Text Template";
 "add_drop_down_value" = "New Drop Down Value";
+"name" = "Name";
+"name_cannot_be_empty" = "Name cannot be empty";
 
 // Details
 "first_name" = "First Name";

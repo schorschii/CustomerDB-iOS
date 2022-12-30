@@ -89,6 +89,7 @@
 "choose_a_password" = "Choisissez un mot de passe";
 "confirm_password" = "Confirmez le mot de passe";
 "new_custom_field" = "Nouveau champ personnalisé";
+"edit_custom_field" = "Modifier le champ personnalisé";
 "add_alphanumeric" = "Ajouter un champ alphanumérique";
 "add_alphanumeric_multiline" = "Ajouter un champ multiligne alphanumérique";
 "add_numeric" = "Ajouter un champ numérique";
@@ -105,11 +106,14 @@
 "field_date" = "Date";
 "logo_deleted" = "Image supprimée.";
 "new_calendar" = "Nouveau calendrier";
+"edit_calendar" = "Modifier le calendrier";
 "red" = "Rouge";
 "green" = "Vert";
 "blue" = "Bleu";
 "change_text_template" = "Modifier le modèle de texte";
 "add_drop_down_value" = "Nouvelle valeur déroulante";
+"name" = "Désignation";
+"name_cannot_be_empty" = "L'étiquette ne peut pas être vide";
 
 // Details
 "first_name" = "Prénom";

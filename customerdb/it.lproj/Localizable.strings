@@ -89,6 +89,7 @@
 "choose_a_password" = "Scegli una password";
 "confirm_password" = "Conferma password";
 "new_custom_field" = "Nuovo campo personalizzato";
+"edit_custom_field" = "Modifica campo personalizzato";
 "add_alphanumeric" = "Aggiungi campo alfanumerico";
 "add_alphanumeric_multiline" = "Aggiungi campo alfanumerico multilinea";
 "add_numeric" = "Aggiungi campo numerico";
@@ -105,11 +106,14 @@
 "field_date" = "Data";
 "logo_deleted" = "Immagine rimossa.";
 "new_calendar" = "Nuovo calendario";
+"edit_calendar" = "Modifica calendario";
 "red" = "Rosso";
 "green" = "Verde";
 "blue" = "Blu";
 "change_text_template" = "Cambia modello di testo";
 "add_drop_down_value" = "Nuovo valore a discesa";
+"name" = "Designazione";
+"name_cannot_be_empty" = "L'etichetta non può essere vuota";
 
 // Details
 "first_name" = "Nome di battesimo";

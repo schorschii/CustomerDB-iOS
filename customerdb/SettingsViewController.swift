@@ -586,6 +586,11 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         })
     }
     
+    func messageBox(title: String, text: String) {
+        let alert = UIAlertController(title: title, message: text, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     func inputBox(title: String, defaultText: String, callback: @escaping (String?)->()) {
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         alert.addTextField(configurationHandler: { (textField) -> Void in
@@ -628,6 +633,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         alert.setValue(vc, forKey: "contentViewController")
         alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { (_) in
             if(textField.text == nil || textField.text == "") {
+                self.messageBox(title: NSLocalizedString("error", comment: ""), text: NSLocalizedString("name_cannot_be_empty", comment: ""))
                 return
             }
             let typeString = self.mFieldTypePickerController!.mTypes[self.mFieldTypePickerController!.mSelected]
@@ -672,10 +678,11 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         }
         vc.view.addSubview(textField)
         vc.view.addSubview(pickerView)
-        let alert = UIAlertController(title: NSLocalizedString("new_custom_field", comment: ""), message: nil, preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: NSLocalizedString("edit_custom_field", comment: ""), message: nil, preferredStyle: UIAlertController.Style.alert)
         alert.setValue(vc, forKey: "contentViewController")
         alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { (_) in
             if(textField.text == nil || textField.text == "") {
+                self.messageBox(title: NSLocalizedString("error", comment: ""), text: NSLocalizedString("name_cannot_be_empty", comment: ""))
                 return
             }
             let newFieldTitle = textField.text!
@@ -720,7 +727,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         if(mCurrentCustomField != nil) {
             let alert = UIAlertController(
                 title: NSLocalizedString("are_you_sure", comment: ""),
-                message: "",
+                message: mCurrentCustomField!.mTitle,
                 preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil))
             alert.addAction(UIAlertAction(title: NSLocalizedString("delete", comment: ""), style: .destructive, handler: { (_) in
@@ -740,19 +747,24 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
     @IBAction func onClickAddCustomFieldPreset(_ sender: UIButton) {
         if(mCurrentCustomField == nil) { return }
         inputBox(title: NSLocalizedString("add_drop_down_value", comment: ""), defaultText: "", callback: { newText in
-            if(newText != nil && newText != "") {
-                _ = self.mDb.insertCustomFieldPreset(
-                    fieldId: self.mCurrentCustomField!.mId, preset: newText!
-                )
-                self.reloadCustomFieldPresets()
+            if(newText == nil) { // cancel pressed
+                return
             }
+            if(newText == "") {
+                self.messageBox(title: NSLocalizedString("error", comment: ""), text: NSLocalizedString("name_cannot_be_empty", comment: ""))
+                return
+            }
+            _ = self.mDb.insertCustomFieldPreset(
+                fieldId: self.mCurrentCustomField!.mId, preset: newText!
+            )
+            self.reloadCustomFieldPresets()
         })
     }
     @IBAction func onClickRemoveCustomFieldPreset(_ sender: UIButton) {
         if(mCurrentCustomFieldPreset != nil) {
             let alert = UIAlertController(
                 title: NSLocalizedString("are_you_sure", comment: ""),
-                message: "",
+                message: mCurrentCustomFieldPreset!.value,
                 preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil))
             alert.addAction(UIAlertAction(title: NSLocalizedString("delete", comment: ""), style: .destructive, handler: { (_) in
@@ -768,11 +780,12 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
     var mCurrentCalendarSliderGreen:UISlider? = nil
     var mCurrentCalendarSliderBlue:UISlider? = nil
     var mCurrentCalendarColorPreview:UIView? = nil
-    func createCalendarAlert() -> UIAlertController {
+    func createCalendarAlert(edit: Bool) -> UIAlertController {
         let vc = UIViewController()
         vc.preferredContentSize = CGSize(width: 250, height: 150)
         
         mCurrentCalendarTextField = UITextField()
+        mCurrentCalendarTextField!.placeholder = NSLocalizedString("name", comment: "")
         mCurrentCalendarTextField!.borderStyle = .roundedRect
         mCurrentCalendarTextField!.delegate = self
         mCurrentCalendarTextField!.becomeFirstResponder()
@@ -848,7 +861,10 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         stackView.addArrangedSubview(UIView())
         
         vc.view.addSubview(stackView)
-        let alert = UIAlertController(title: NSLocalizedString("new_calendar", comment: ""), message: nil, preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(
+            title: NSLocalizedString(edit ? "edit_calendar" : "new_calendar", comment: ""),
+            message: nil, preferredStyle: UIAlertController.Style.alert
+        )
         alert.setValue(vc, forKey: "contentViewController")
         return alert
     }
@@ -866,9 +882,10 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
             return
         }
         
-        let alert = createCalendarAlert()
+        let alert = createCalendarAlert(edit: false)
         alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { (_) in
             if(self.mCurrentCalendarTextField!.text == nil || self.mCurrentCalendarTextField!.text == "") {
+                self.messageBox(title: NSLocalizedString("error", comment: ""), text: NSLocalizedString("name_cannot_be_empty", comment: ""))
                 return
             }
             let c = CustomerCalendar()
@@ -888,13 +905,14 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         refreshCalendarColorPreview()
     }
     @IBAction func onClickEditCalendar(_ sender: UIButton) {
-        let alert = createCalendarAlert()
+        let alert = createCalendarAlert(edit: true)
         mCurrentCalendarTextField?.text = mCurrentCalendar?.mTitle
         mCurrentCalendarSliderRed?.value = Float(UIColor(hex: mCurrentCalendar!.mColor).red()) * 255
         mCurrentCalendarSliderGreen?.value = Float(UIColor(hex: mCurrentCalendar!.mColor).green()) * 255
         mCurrentCalendarSliderBlue?.value = Float(UIColor(hex: mCurrentCalendar!.mColor).blue()) * 255
         alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { (_) in
             if(self.mCurrentCalendarTextField!.text == nil || self.mCurrentCalendarTextField!.text == "") {
+                self.messageBox(title: NSLocalizedString("error", comment: ""), text: NSLocalizedString("name_cannot_be_empty", comment: ""))
                 return
             }
             self.mCurrentCalendar!.mTitle = self.mCurrentCalendarTextField!.text!
@@ -916,7 +934,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         if(mCurrentCalendar != nil) {
             let alert = UIAlertController(
                 title: NSLocalizedString("are_you_sure", comment: ""),
-                message: "",
+                message: mCurrentCalendar!.mTitle,
                 preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil))
             alert.addAction(UIAlertAction(title: NSLocalizedString("delete", comment: ""), style: .destructive, handler: { (_) in

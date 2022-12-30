@@ -89,6 +89,7 @@
 "choose_a_password" = "Elije una contraseña";
 "confirm_password" = "Confirmar contraseña";
 "new_custom_field" = "Nuevo campo personalizado";
+"edit_custom_field" = "Editar campo personalizado";
 "add_alphanumeric" = "Agregar campo alfanumérico";
 "add_alphanumeric_multiline" = "Agregar campo alfanumérico multilínea";
 "add_numeric" = "Agregar campo numérico";
@@ -105,10 +106,13 @@
 "field_date" = "Fecha";
 "logo_deleted" = "Imagen eliminada";
 "new_calendar" = "Nuevo calendario";
+"edit_calendar" = "Editar calendario";
 "red" = "Rojo";
 "green" = "Verde";
 "blue" = "Azul";
 "change_text_template" = "Cambiar plantilla de texto";
+"name" = "Designacion";
+"name_cannot_be_empty" = "La etiqueta no puede estar vacía";
 
 // Details
 "first_name" = "Nombre de pila";
