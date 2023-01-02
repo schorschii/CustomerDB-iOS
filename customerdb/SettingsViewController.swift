@@ -632,7 +632,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         let alert = UIAlertController(title: NSLocalizedString("new_custom_field", comment: ""), message: nil, preferredStyle: UIAlertController.Style.alert)
         alert.setValue(vc, forKey: "contentViewController")
         alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { (_) in
-            if(textField.text == nil || textField.text == "") {
+            if(textField.text == nil || textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "") {
                 self.messageBox(title: NSLocalizedString("error", comment: ""), text: NSLocalizedString("name_cannot_be_empty", comment: ""))
                 return
             }
@@ -681,7 +681,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         let alert = UIAlertController(title: NSLocalizedString("edit_custom_field", comment: ""), message: nil, preferredStyle: UIAlertController.Style.alert)
         alert.setValue(vc, forKey: "contentViewController")
         alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { (_) in
-            if(textField.text == nil || textField.text == "") {
+            if(textField.text == nil || textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "") {
                 self.messageBox(title: NSLocalizedString("error", comment: ""), text: NSLocalizedString("name_cannot_be_empty", comment: ""))
                 return
             }
@@ -748,10 +748,6 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         if(mCurrentCustomField == nil) { return }
         inputBox(title: NSLocalizedString("add_drop_down_value", comment: ""), defaultText: "", callback: { newText in
             if(newText == nil) { // cancel pressed
-                return
-            }
-            if(newText == "") {
-                self.messageBox(title: NSLocalizedString("error", comment: ""), text: NSLocalizedString("name_cannot_be_empty", comment: ""))
                 return
             }
             _ = self.mDb.insertCustomFieldPreset(
@@ -884,7 +880,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         
         let alert = createCalendarAlert(edit: false)
         alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { (_) in
-            if(self.mCurrentCalendarTextField!.text == nil || self.mCurrentCalendarTextField!.text == "") {
+            if(self.mCurrentCalendarTextField!.text == nil || self.mCurrentCalendarTextField!.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "") {
                 self.messageBox(title: NSLocalizedString("error", comment: ""), text: NSLocalizedString("name_cannot_be_empty", comment: ""))
                 return
             }
@@ -911,7 +907,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         mCurrentCalendarSliderGreen?.value = Float(UIColor(hex: mCurrentCalendar!.mColor).green()) * 255
         mCurrentCalendarSliderBlue?.value = Float(UIColor(hex: mCurrentCalendar!.mColor).blue()) * 255
         alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { (_) in
-            if(self.mCurrentCalendarTextField!.text == nil || self.mCurrentCalendarTextField!.text == "") {
+            if(self.mCurrentCalendarTextField!.text == nil || self.mCurrentCalendarTextField!.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "") {
                 self.messageBox(title: NSLocalizedString("error", comment: ""), text: NSLocalizedString("name_cannot_be_empty", comment: ""))
                 return
             }
