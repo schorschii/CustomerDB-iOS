@@ -182,17 +182,17 @@ class CustomerDatabaseApi {
                 return
             }
             //print(String(decoding:data, as: UTF8.self))
-            self.parsePutCustomersResponse(response:data)
+            self.parsePutCustomersResponse(response:data, diffSince:diffSince)
         }
 
         task.resume()
     }
-    func parsePutCustomersResponse(response:Data) {
+    func parsePutCustomersResponse(response:Data, diffSince:Date?) {
         do {
             if let response = try JSONSerialization.jsonObject(with: response, options: []) as? [String : Any] {
                 if let result = response["result"] as? Bool {
                     if(result == true) {
-                        readCustomers()
+                        readCustomers(diffSince: diffSince)
                         return
                     }
                 } else {
@@ -216,7 +216,7 @@ class CustomerDatabaseApi {
         }
     }
     
-    private func readCustomers() {
+    private func readCustomers(diffSince:Date?) {
         let json: [String:Any?] = [
             "jsonrpc":"2.0",
             "id":1,
@@ -224,7 +224,9 @@ class CustomerDatabaseApi {
             "params":[
                 "username": mUsername,
                 "password": mPassword,
-                "appstore_receipt": mReceipt
+                "appstore_receipt": mReceipt,
+                "diff_since": CustomerDatabase.dateToString(date: diffSince),
+                "files": false
             ] as [String:Any?]
         ]
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
@@ -251,16 +253,13 @@ class CustomerDatabaseApi {
     func parseReadCustomersResponse(response:Data) {
         do {
             mDb.beginTransaction()
-            mDb.deleteAllCustomers(transact: false)
-            mDb.deleteAllVouchers()
-            mDb.deleteAllCalendars()
-            mDb.deleteAllAppointments()
             
             if let response = try JSONSerialization.jsonObject(with: response, options: []) as? [String : Any] {
                 if let result = response["result"] as? [String:Any] {
                     if let customers = result["customers"] as? [[String:Any]] {
                         for customer in customers {
                             let c = Customer()
+                            c.mFiles = []
                             for (key, value) in customer {
                                 var parsedValue = ""
                                 if let int64Value = value as? Int64 {
@@ -270,8 +269,13 @@ class CustomerDatabaseApi {
                                 }
                                 c.putAttribute(key: key, value: parsedValue)
                             }
-                            if(c.mId > 0) {
+                            if(mDb.getCustomer(id: c.mId, showDeleted: true) == nil) {
                                 _ = mDb.insertCustomer(c: c, transact: false)
+                            } else {
+                                _ = mDb.updateCustomer(c: c, transact: false)
+                            }
+                            if(!(customer["files"] is NSNull)) {
+                                try readCustomer(customerId: c.mId)
                             }
                         }
                     }
@@ -288,8 +292,10 @@ class CustomerDatabaseApi {
                                 }
                                 c.putAttribute(key: key, value: parsedValue)
                             }
-                            if(c.mId > 0) {
+                            if(mDb.getCalendar(id: c.mId, showDeleted: true) == nil) {
                                 _ = mDb.insertCalendar(c: c)
+                            } else {
+                                _ = mDb.updateCalendar(c: c)
                             }
                         }
                     }
@@ -306,8 +312,10 @@ class CustomerDatabaseApi {
                                 }
                                 a.putAttribute(key: key, value: parsedValue)
                             }
-                            if(a.mId > 0) {
+                            if(mDb.getAppointment(id: a.mId, showDeleted: true) == nil) {
                                 _ = mDb.insertAppointment(a: a)
+                            } else {
+                                _ = mDb.updateAppointment(a: a)
                             }
                         }
                     }
@@ -326,8 +334,10 @@ class CustomerDatabaseApi {
                                 }
                                 v.putAttribute(key: key, value: parsedValue)
                             }
-                            if(v.mId > 0) {
+                            if(mDb.getVoucher(id: v.mId, showDeleted: true) == nil) {
                                 _ = mDb.insertVoucher(v: v)
+                            } else {
+                                _ = mDb.updateVoucher(v: v)
                             }
                         }
                     }
@@ -362,6 +372,65 @@ class CustomerDatabaseApi {
         if(delegate != nil) {
             delegate?.queueFinished(success: false, message: String(data:response, encoding: .utf8))
         }
+    }
+    
+    private func readCustomer(customerId:Int64) throws {
+        let json: [String:Any?] = [
+            "jsonrpc":"2.0",
+            "id":1,
+            "method":"customerdb.read.customer",
+            "params":[
+                "username": mUsername,
+                "password": mPassword,
+                "appstore_receipt": mReceipt,
+                "customer_id": customerId
+            ] as [String:Any?]
+        ]
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
+        let url = URL(string: mUrl)!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+        
+        let queue = OperationQueue()
+        queue.name = "queue2"
+        let session = URLSession(configuration: URLSessionConfiguration.default, delegate: nil, delegateQueue: queue)
+        let c = Customer()
+        let sem = DispatchSemaphore.init(value: 0) // wait before executing next to avoid multithread database access error
+        let task = session.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                if(self.delegate != nil) {
+                    self.delegate?.queueFinished(success: false, message: error?.localizedDescription)
+                }
+                sem.signal()
+                return
+            }
+            //print(String(decoding:data, as: UTF8.self))
+            do {
+                if let response = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] {
+                    if let result = response["result"] as? [String:Any] {
+                        for (key, value) in result {
+                            var parsedValue = ""
+                            if let int64Value = value as? Int64 {
+                                parsedValue = String(int64Value)
+                            } else if let strValue = value as? String {
+                                parsedValue = strValue
+                            }
+                            c.putAttribute(key: key, value: parsedValue)
+                        }
+                        _ = self.mDb.updateCustomer(c: c, transact: false)
+                    }
+                }
+            } catch let error {
+                print(error)
+            }
+            sem.signal()
+        }
+        
+        task.resume()
+        sem.wait()
     }
     
     func tryInt32(_ inVal:Int) -> Int32 {

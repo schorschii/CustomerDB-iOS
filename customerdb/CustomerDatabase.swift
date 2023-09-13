@@ -219,11 +219,13 @@ class CustomerDatabase {
         dateFormatter.timeStyle = .none
         return dateFormatter.string(from: date)
     }
-    static func dateToString(date: Date) -> String {
+    static func dateToString(date: Date?) -> String {
+        var date2 = Date()
+        if(date != nil) { date2 = date! }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = CustomerDatabase.STORAGE_FORMAT
         dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
-        return dateFormatter.string(from: date)
+        return dateFormatter.string(from: date2)
     }
     static func dateToStringRaw(date: Date) -> String {
         let dateFormatter = DateFormatter()
@@ -277,10 +279,13 @@ class CustomerDatabase {
         }
         return calendars
     }
-    func getCalendar(id:Int64) -> CustomerCalendar? {
+    func getCalendar(id:Int64, showDeleted:Bool=false) -> CustomerCalendar? {
         var calendar:CustomerCalendar? = nil
         var stmt:OpaquePointer?
-        let sql = "SELECT id, title, color, notes, last_modified, removed FROM calendar WHERE id = ? AND removed = 0"
+        var sql = "SELECT id, title, color, notes, last_modified, removed FROM calendar WHERE id = ?"
+        if(!showDeleted) {
+            sql = sql + " AND removed = 0"
+        }
         if sqlite3_prepare(self.db, sql, -1, &stmt, nil) == SQLITE_OK {
             sqlite3_bind_int64(stmt, 1, id)
             while sqlite3_step(stmt) == SQLITE_ROW {
@@ -366,10 +371,13 @@ class CustomerDatabase {
     }
     
     // Appointment Operations
-    func getAppointment(id:Int64) -> CustomerAppointment? {
+    func getAppointment(id:Int64, showDeleted:Bool=false) -> CustomerAppointment? {
         var appointment:CustomerAppointment? = nil
         var stmt:OpaquePointer?
-        let sql = "SELECT id, calendar_id, title, notes, time_start, time_end, fullday, customer, customer_id, location, last_modified, removed FROM appointment WHERE id = ?"
+        var sql = "SELECT id, calendar_id, title, notes, time_start, time_end, fullday, customer, customer_id, location, last_modified, removed FROM appointment WHERE id = ?"
+        if(!showDeleted) {
+            sql = sql + " AND removed = 0"
+        }
         if sqlite3_prepare(self.db, sql, -1, &stmt, nil) == SQLITE_OK {
             sqlite3_bind_int64(stmt, 1, id)
             while sqlite3_step(stmt) == SQLITE_ROW {
@@ -692,11 +700,11 @@ class CustomerDatabase {
         
         return c
     }
-    func getCustomer(id:Int64, showDeleted:Bool) -> Customer? {
+    func getCustomer(id:Int64, showDeleted:Bool=false) -> Customer? {
         var customer:Customer? = nil
-        var sql = "SELECT id, title, first_name, last_name, phone_home, phone_mobile, phone_work, email, street, zipcode, city, country, birthday, customer_group, newsletter, notes, custom_fields, image, consent, last_modified, removed FROM customer WHERE id = ? AND removed = 0"
-        if(showDeleted) {
-            sql = "SELECT id, title, first_name, last_name, phone_home, phone_mobile, phone_work, email, street, zipcode, city, country, birthday, customer_group, newsletter, notes, custom_fields, image, consent, last_modified, removed FROM customer WHERE id = ?"
+        var sql = "SELECT id, title, first_name, last_name, phone_home, phone_mobile, phone_work, email, street, zipcode, city, country, birthday, customer_group, newsletter, notes, custom_fields, image, consent, last_modified, removed FROM customer WHERE id = ?"
+        if(!showDeleted) {
+            sql = sql + " AND removed = 0"
         }
         var stmt:OpaquePointer?
         if sqlite3_prepare(self.db, sql, -1, &stmt, nil) == SQLITE_OK {
@@ -1139,10 +1147,14 @@ class CustomerDatabase {
         }
         return vouchers
     }
-    func getVoucher(id:Int64) -> Voucher? {
+    func getVoucher(id:Int64, showDeleted:Bool=false) -> Voucher? {
         var voucher:Voucher? = nil
         var stmt:OpaquePointer?
-        if sqlite3_prepare(self.db, "SELECT id, original_value, current_value, voucher_no, from_customer, from_customer_id, for_customer, for_customer_id, issued, valid_until, redeemed, notes, last_modified, removed FROM voucher WHERE id = ?", -1, &stmt, nil) == SQLITE_OK {
+        var sql = "SELECT id, original_value, current_value, voucher_no, from_customer, from_customer_id, for_customer, for_customer_id, issued, valid_until, redeemed, notes, last_modified, removed FROM voucher WHERE id = ?"
+        if(!showDeleted) {
+            sql = sql + " AND removed = 0"
+        }
+        if sqlite3_prepare(self.db, sql, -1, &stmt, nil) == SQLITE_OK {
             sqlite3_bind_int64(stmt, 1, id)
             while sqlite3_step(stmt) == SQLITE_ROW {
                 var validUntil:Date? = nil
