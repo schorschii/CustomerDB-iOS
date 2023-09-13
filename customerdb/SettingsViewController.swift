@@ -144,6 +144,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         mDefaults.set(mNewsletterText, forKey: "email-newsletter-template")
         mDefaults.set(mDefaultAppointmentTitle, forKey: "default-appointment-title")
         mDefaults.set(mDefaultAppointmentLocation, forKey: "default-appointment-location")
+        UserDefaults.standard.set(0, forKey: "last-successful-sync")
         
         if let msvc = presentingViewController as? MainSplitViewController {
             if let mnvc = msvc.viewControllers[0] as? MasterNavigationController {
