@@ -35,6 +35,16 @@ class GuiHelper {
         control.layer.borderWidth = GuiHelper.BORDER_WIDTH
         control.layer.cornerRadius = GuiHelper.BORDER_RADIUS
     }
+    
+    static func loadImage(file: URL) -> UIImage? {
+        do {
+            let imageData = try Data(contentsOf: file)
+            return UIImage(data: imageData)
+        } catch {
+            print("Error loading image : \(error)")
+        }
+        return nil
+    }
 }
 
 class UITextFieldDatePicker: UIDatePicker {

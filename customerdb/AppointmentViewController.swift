@@ -7,6 +7,7 @@ import Foundation
 import UIKit
 
 class AppointmentViewController : UIViewController {
+    @IBOutlet weak var imageLogo: UIImageView!
     @IBOutlet weak var viewAppointments: UIView!
     @IBOutlet weak var buttonAdd: UIButton!
     @IBOutlet weak var buttonChangeDay: UIButton!
@@ -36,6 +37,15 @@ class AppointmentViewController : UIViewController {
     
     func initColor() {
         buttonAdd.backgroundColor = navigationController?.navigationBar.barTintColor
+        
+        if(UserDefaults.standard.bool(forKey: "unlocked-do")) {
+            if let image = GuiHelper.loadImage(file: SettingsViewController.getLogoFile()) {
+                imageLogo.contentMode = .scaleAspectFit
+                imageLogo.image = image
+            } else {
+                imageLogo.image = UIImage(named: "icon_gray")
+            }
+        }
     }
     
     @IBAction func onClickAdd(_ sender: UIButton) {

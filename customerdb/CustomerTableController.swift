@@ -13,6 +13,7 @@ class CustomerCell : UITableViewCell {
 
 class CustomerTableViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating {
     
+    @IBOutlet weak var imageLogo: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buttonAdd: UIButton!
     @IBOutlet weak var labelCommercialUsage: UIView!
@@ -79,8 +80,41 @@ class CustomerTableViewController : UIViewController, UITableViewDelegate, UITab
     
     func initColor() {
         buttonAdd.backgroundColor = navigationController?.navigationBar.barTintColor
+
+        // todo: programatically assign background image
+        //view.backgroundColor = UIColor(patternImage: imageScaledToFillSize(size: view.frame.size, image: UIImage(named: "icon_gray")!))
+        if(UserDefaults.standard.bool(forKey: "unlocked-do")) {
+            if let image = GuiHelper.loadImage(file: SettingsViewController.getLogoFile()) {
+                imageLogo.contentMode = .scaleAspectFit
+                imageLogo.image = image
+            } else {
+                imageLogo.image = UIImage(named: "icon_gray")
+            }
+        }
     }
-    
+    /*func imageScaledToFillSize(size: CGSize, image: UIImage) -> UIImage
+    {
+        var factor = 1.0
+        if(image.size.height > image.size.width) {
+            factor = size.height / image.size.height
+        } else {
+            factor = size.width / image.size.width
+        }
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+            let resizedImg = self.imageScaledToSize(size: CGSize(width: image.size.width * factor, height: image.size.height * factor), image: image)
+            resizedImg.draw(in: CGRectMake((size.width - resizedImg.size.width)/2, (size.height - resizedImg.size.height)/2, resizedImg.size.width, resizedImg.size.height))
+        let imageR = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return imageR!;
+    }
+    func imageScaledToSize(size: CGSize, image: UIImage) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0);
+        image.draw(in: CGRectMake(0.0, 0.0, size.width, size.height))
+        let imageR = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext();
+        return imageR!;
+    }*/
+
     func reloadCustomers(search:String?, refreshTable:Bool) {
         var tempCustomers = mDb.getCustomers(showDeleted: false, withFiles: false)
         var title = ""

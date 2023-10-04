@@ -15,21 +15,11 @@ class LockViewController : UIViewController {
         view.backgroundColor = navigationController?.navigationBar.barTintColor
         
         if(UserDefaults.standard.bool(forKey: "unlocked-do")) {
-            if let image = load(file: SettingsViewController.getLogoFile()) {
+            if let image = GuiHelper.loadImage(file: SettingsViewController.getLogoFile()) {
                 imageViewLogo.contentMode = .scaleAspectFit
                 imageViewLogo.image = image
             }
         }
-    }
-    
-    private func load(file: URL) -> UIImage? {
-        do {
-            let imageData = try Data(contentsOf: file)
-            return UIImage(data: imageData)
-        } catch {
-            print("Error loading image : \(error)")
-        }
-        return nil
     }
     
     @IBAction func onClickUnlock(_ sender: UIButton) {

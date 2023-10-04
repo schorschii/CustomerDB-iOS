@@ -13,6 +13,7 @@ class VoucherCell : UITableViewCell {
 
 class VoucherTableViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating {
     
+    @IBOutlet weak var imageLogo: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buttonAdd: UIButton!
     
@@ -76,6 +77,15 @@ class VoucherTableViewController : UIViewController, UITableViewDelegate, UITabl
             navBarAppearance.backgroundColor = navigationBar.barTintColor
             navigationBar.standardAppearance = navBarAppearance
             navigationBar.scrollEdgeAppearance = navBarAppearance
+        }
+        
+        if(UserDefaults.standard.bool(forKey: "unlocked-do")) {
+            if let image = GuiHelper.loadImage(file: SettingsViewController.getLogoFile()) {
+                imageLogo.contentMode = .scaleAspectFit
+                imageLogo.image = image
+            } else {
+                imageLogo.image = UIImage(named: "icon_gray")
+            }
         }
     }
     

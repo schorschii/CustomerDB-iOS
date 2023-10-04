@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="36O-zw-ABK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="36O-zw-ABK">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -192,11 +192,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.050000000000000003" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_gray" translatesAutoresizingMaskIntoConstraints="NO" id="tod-4P-odH">
-                                <rect key="frame" x="40" y="184" width="334" height="569"/>
-                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lj4-IM-nbm">
-                                <rect key="frame" x="0.0" y="144" width="414" height="669"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="721"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="VoucherCell" id="uaY-2G-Wkk" customClass="VoucherCell" customModule="customerdb" customModuleProvider="target">
@@ -243,6 +240,9 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_gray" translatesAutoresizingMaskIntoConstraints="NO" id="tod-4P-odH">
+                                <rect key="frame" x="40" y="132" width="334" height="621"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="15p-wF-yRd">
                                 <rect key="frame" x="344" y="743" width="60" height="60"/>
                                 <color key="backgroundColor" red="0.058823529409999999" green="0.4823529412" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -292,6 +292,7 @@
                     <tabBarItem key="tabBarItem" title="Vouchers" image="baseline_card_giftcard_black_24pt" id="Rde-ds-wAi"/>
                     <connections>
                         <outlet property="buttonAdd" destination="15p-wF-yRd" id="Fzn-46-ORT"/>
+                        <outlet property="imageLogo" destination="tod-4P-odH" id="9qk-gN-zgj"/>
                         <outlet property="tableView" destination="lj4-IM-nbm" id="Kj6-eU-N8C"/>
                     </connections>
                 </viewController>
@@ -307,9 +308,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.05000000074505806" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_gray" translatesAutoresizingMaskIntoConstraints="NO" id="VIS-24-Lfx">
-                                <rect key="frame" x="40" y="184" width="334" height="569"/>
-                            </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gBd-dB-eIJ">
                                 <rect key="frame" x="0.0" y="144" width="414" height="669"/>
                                 <subviews>
@@ -849,6 +847,9 @@
                                     <constraint firstItem="j7O-uq-ytZ" firstAttribute="width" secondItem="gBd-dB-eIJ" secondAttribute="width" id="oST-kS-chj"/>
                                 </constraints>
                             </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_gray" translatesAutoresizingMaskIntoConstraints="NO" id="VIS-24-Lfx">
+                                <rect key="frame" x="40" y="184" width="334" height="569"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7US-Br-Us8">
                                 <rect key="frame" x="344" y="743" width="60" height="60"/>
                                 <color key="backgroundColor" red="0.058823529409999999" green="0.4823529412" blue="0.61176470589999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -900,6 +901,7 @@
                     <connections>
                         <outlet property="buttonAdd" destination="7US-Br-Us8" id="muD-7E-GX5"/>
                         <outlet property="buttonChangeDay" destination="ud5-1J-Q0b" id="lzW-P5-BHQ"/>
+                        <outlet property="imageLogo" destination="VIS-24-Lfx" id="WB3-PR-DiN"/>
                         <outlet property="viewAppointments" destination="gMt-vZ-dFw" id="hf5-zX-5f3"/>
                     </connections>
                 </viewController>
@@ -1475,11 +1477,11 @@
             <objects>
                 <viewController storyboardIdentifier="TextViewViewController" id="iBb-Ar-uVN" customClass="TextViewViewController" customModule="customerdb" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eu3-e7-IYH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PjP-K9-Aph">
-                                <rect key="frame" x="0.0" y="48" width="414" height="56"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                 <items>
                                     <navigationItem title="Information" id="PpC-7r-3Ln">
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="7UI-7r-PPc">
@@ -1491,7 +1493,7 @@
                                 </items>
                             </navigationBar>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hKf-b1-YlJ">
-                                <rect key="frame" x="20" y="114" width="374" height="704"/>
+                                <rect key="frame" x="20" y="66" width="374" height="800"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1524,11 +1526,11 @@
             <objects>
                 <viewController id="Jnc-ov-Vlt" customClass="InfoViewController" customModule="customerdb" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vcH-Wr-gFd">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1jE-qO-Oio">
-                                <rect key="frame" x="0.0" y="48" width="414" height="56"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                 <items>
                                     <navigationItem title="Information" id="tov-8i-WRr">
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="fHd-1I-5PU">
@@ -1540,7 +1542,7 @@
                                 </items>
                             </navigationBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1O8-TH-axK">
-                                <rect key="frame" x="0.0" y="104" width="414" height="734"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="830"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="qkB-AG-hm0">
                                         <rect key="frame" x="20" y="0.0" width="374" height="1715.5"/>
@@ -2082,11 +2084,11 @@
             <objects>
                 <viewController id="Eos-1F-Pem" customClass="SettingsViewController" customModule="customerdb" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4wP-2d-o6B">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oR8-3s-dZh">
-                                <rect key="frame" x="0.0" y="48" width="414" height="56"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                 <items>
                                     <navigationItem title="Settings" id="1vI-Ic-1Tn">
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="XCJ-4x-eNs">
@@ -2103,7 +2105,7 @@
                                 </items>
                             </navigationBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="elV-kw-IkS">
-                                <rect key="frame" x="0.0" y="104" width="414" height="734"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="830"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="oA7-RC-Pmy">
                                         <rect key="frame" x="20" y="20" width="374" height="1904"/>
@@ -2839,11 +2841,11 @@
             <objects>
                 <viewController id="2fM-Ak-Hih" customClass="SyncInfoViewController" customModule="customerdb" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="b3y-fq-hJa">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aly-vL-3Nd">
-                                <rect key="frame" x="0.0" y="104" width="414" height="734"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="830"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="UCD-50-VYw">
                                         <rect key="frame" x="20" y="20" width="374" height="691.5"/>
@@ -2977,7 +2979,7 @@
                                 </constraints>
                             </scrollView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jN7-zN-H7e">
-                                <rect key="frame" x="0.0" y="48" width="414" height="56"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                 <items>
                                     <navigationItem title="Sync" id="dMa-s6-QnY">
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="e7d-y3-l2N">
@@ -3014,11 +3016,11 @@
             <objects>
                 <viewController id="7Py-3Z-r6Z" customClass="CreateAccountViewController" customModule="customerdb" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qwt-bf-GLg">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ePf-va-7Qg">
-                                <rect key="frame" x="0.0" y="104" width="414" height="734"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="830"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="XSp-1n-yTm">
                                         <rect key="frame" x="20" y="20" width="374" height="259"/>
@@ -3093,7 +3095,7 @@
                                 </constraints>
                             </scrollView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oZM-oj-e4X">
-                                <rect key="frame" x="0.0" y="48" width="414" height="56"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                 <items>
                                     <navigationItem title="Create Account" id="qAm-xZ-WHk">
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="CJd-3V-bDv">
@@ -3137,11 +3139,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.050000000000000003" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_gray" translatesAutoresizingMaskIntoConstraints="NO" id="MIt-dg-Zak">
-                                <rect key="frame" x="40" y="184" width="334" height="569"/>
-                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="c18-aj-7lQ">
-                                <rect key="frame" x="0.0" y="144" width="414" height="669"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="721"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CustomerCell" id="b4t-UG-HbC" customClass="CustomerCell" customModule="customerdb" customModuleProvider="target">
@@ -3188,6 +3187,9 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_gray" translatesAutoresizingMaskIntoConstraints="NO" id="MIt-dg-Zak">
+                                <rect key="frame" x="40" y="132" width="334" height="621"/>
+                            </imageView>
                             <view alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vHx-D2-mtx">
                                 <rect key="frame" x="0.0" y="775" width="414" height="38"/>
                                 <subviews>
@@ -3263,6 +3265,7 @@
                     <tabBarItem key="tabBarItem" title="Customers" image="baseline_people_black_24pt" id="rL6-MY-BWb"/>
                     <connections>
                         <outlet property="buttonAdd" destination="hwC-1s-UWf" id="hxk-1c-GxR"/>
+                        <outlet property="imageLogo" destination="MIt-dg-Zak" id="0eG-95-9wd"/>
                         <outlet property="labelCommercialUsage" destination="vHx-D2-mtx" id="hxi-BG-k0F"/>
                         <outlet property="tableView" destination="c18-aj-7lQ" id="P3u-Z1-nt9"/>
                         <segue destination="Jnc-ov-Vlt" kind="showDetail" identifier="segueInfo" id="mve-0J-uBD"/>
@@ -4530,7 +4533,7 @@ City Country</string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="b4I-Iy-NtL"/>
-        <segue reference="Jxd-z2-kNP"/>
+        <segue reference="mve-0J-uBD"/>
         <segue reference="18W-Zu-reX"/>
     </inferredMetricsTieBreakers>
     <resources>
