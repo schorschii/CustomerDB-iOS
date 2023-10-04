@@ -57,9 +57,12 @@ class AppointmentViewController : UIViewController {
     }
     @IBAction func onClickChangeDay(_ sender: UIButton) {
         let vc = UIViewController()
-        vc.preferredContentSize = CGSize(width: 250, height: 300)
-        let pickerView = UIDatePicker(frame: CGRect(x: 0, y: 0, width: 250, height: 300))
+        vc.preferredContentSize = CGSize(width: 300, height: 300)
+        let pickerView = UIDatePicker(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
         pickerView.datePickerMode = .date
+        if #available(iOS 14.0, *) {
+            pickerView.preferredDatePickerStyle = .inline
+        }
         pickerView.date = mCurrentDate
         vc.view.addSubview(pickerView)
         let changeDateAlert = UIAlertController(title: "", message: "", preferredStyle: .alert)
