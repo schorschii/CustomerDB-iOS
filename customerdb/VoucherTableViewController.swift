@@ -83,8 +83,10 @@ class VoucherTableViewController : UIViewController, UITableViewDelegate, UITabl
             if let image = GuiHelper.loadImage(file: SettingsViewController.getLogoFile()) {
                 imageLogo.contentMode = .scaleAspectFit
                 imageLogo.image = image
+                imageLogo.alpha = 0.2
             } else {
                 imageLogo.image = UIImage(named: "icon_gray")
+                imageLogo.alpha = 0.05
             }
         }
     }

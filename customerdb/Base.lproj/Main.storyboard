@@ -240,7 +240,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_gray" translatesAutoresizingMaskIntoConstraints="NO" id="tod-4P-odH">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.050000000000000003" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_gray" translatesAutoresizingMaskIntoConstraints="NO" id="tod-4P-odH">
                                 <rect key="frame" x="40" y="132" width="334" height="621"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="15p-wF-yRd">
@@ -848,7 +848,7 @@
                                     <constraint firstItem="j7O-uq-ytZ" firstAttribute="width" secondItem="gBd-dB-eIJ" secondAttribute="width" id="oST-kS-chj"/>
                                 </constraints>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_gray" translatesAutoresizingMaskIntoConstraints="NO" id="VIS-24-Lfx">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.050000000000000003" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_gray" translatesAutoresizingMaskIntoConstraints="NO" id="VIS-24-Lfx">
                                 <rect key="frame" x="40" y="184" width="334" height="569"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7US-Br-Us8">
@@ -3188,7 +3188,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_gray" translatesAutoresizingMaskIntoConstraints="NO" id="MIt-dg-Zak">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.050000000000000003" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_gray" translatesAutoresizingMaskIntoConstraints="NO" id="MIt-dg-Zak">
                                 <rect key="frame" x="40" y="132" width="334" height="621"/>
                             </imageView>
                             <view alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vHx-D2-mtx">

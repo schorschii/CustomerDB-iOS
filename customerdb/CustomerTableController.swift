@@ -40,7 +40,6 @@ class CustomerTableViewController : UIViewController, UITableViewDelegate, UITab
         tableView.delegate = self
         initColor()
         initSearch()
-        initCommercialUsageNote()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +56,14 @@ class CustomerTableViewController : UIViewController, UITableViewDelegate, UITab
     func initCommercialUsageNote() {
         if(mDefaults.bool(forKey: "unlocked-cu")) {
             labelCommercialUsage.isHidden = true
+        } else {
+            labelCommercialUsage.isHidden = false
+            labelCommercialUsage.alpha = 0.85
+            UIView.animate(withDuration: 0.3, delay: 5.0, options: [], animations: {
+                self.labelCommercialUsage.alpha = 0.2
+            }) { (completion) in
+                self.labelCommercialUsage.isHidden = true
+            }
         }
     }
     
@@ -87,8 +94,10 @@ class CustomerTableViewController : UIViewController, UITableViewDelegate, UITab
             if let image = GuiHelper.loadImage(file: SettingsViewController.getLogoFile()) {
                 imageLogo.contentMode = .scaleAspectFit
                 imageLogo.image = image
+                imageLogo.alpha = 0.2
             } else {
                 imageLogo.image = UIImage(named: "icon_gray")
+                imageLogo.alpha = 0.05
             }
         }
     }
