@@ -319,17 +319,17 @@
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8oc-GP-dKe">
-                                        <rect key="frame" x="0.0" y="15" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="15" width="414" height="40"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ftO-Lz-0l4">
-                                                <rect key="frame" x="0.0" y="0.0" width="10" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="10" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="10" id="bbE-AV-rAC"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jfj-2Y-Cjl">
-                                                <rect key="frame" x="10" y="0.0" width="50" height="50"/>
+                                                <rect key="frame" x="10" y="0.0" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="Jfj-2Y-Cjl" secondAttribute="height" multiplier="1:1" id="pPs-cM-Ten"/>
                                                 </constraints>
@@ -338,16 +338,17 @@
                                                     <action selector="onClickDayPrev:" destination="z5G-tA-SYU" eventType="touchUpInside" id="HFj-4f-MSf"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ud5-1J-Q0b">
-                                                <rect key="frame" x="60" y="0.0" width="294" height="50"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                                <state key="normal" title="Date"/>
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="uvq-EY-Csb">
+                                                <rect key="frame" x="50" y="0.0" width="314" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="Dbl-Be-fj1"/>
+                                                </constraints>
                                                 <connections>
-                                                    <action selector="onClickChangeDay:" destination="z5G-tA-SYU" eventType="touchUpInside" id="Bl8-Rn-ej9"/>
+                                                    <action selector="onChangeDay:" destination="z5G-tA-SYU" eventType="valueChanged" id="66i-Dw-fHX"/>
                                                 </connections>
-                                            </button>
+                                            </datePicker>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3kA-RO-oau">
-                                                <rect key="frame" x="354" y="0.0" width="50" height="50"/>
+                                                <rect key="frame" x="364" y="0.0" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="3kA-RO-oau" secondAttribute="height" multiplier="1:1" id="3YC-TM-ejy"/>
                                                 </constraints>
@@ -357,7 +358,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GPa-6G-0tK">
-                                                <rect key="frame" x="404" y="0.0" width="10" height="50"/>
+                                                <rect key="frame" x="404" y="0.0" width="10" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="10" id="2Fq-AA-tED"/>
@@ -370,7 +371,7 @@
                                         </constraints>
                                     </stackView>
                                     <scrollView clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6F2-nW-hp9">
-                                        <rect key="frame" x="0.0" y="75" width="414" height="594"/>
+                                        <rect key="frame" x="0.0" y="65" width="414" height="604"/>
                                         <subviews>
                                             <view autoresizesSubviews="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gMt-vZ-dFw">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="2000"/>
@@ -900,7 +901,7 @@
                     <tabBarItem key="tabBarItem" title="Calendar" image="baseline_date_range_black_24pt" id="MQh-mS-8vU"/>
                     <connections>
                         <outlet property="buttonAdd" destination="7US-Br-Us8" id="muD-7E-GX5"/>
-                        <outlet property="buttonChangeDay" destination="ud5-1J-Q0b" id="lzW-P5-BHQ"/>
+                        <outlet property="calendarChooser" destination="uvq-EY-Csb" id="xDd-xc-kds"/>
                         <outlet property="imageLogo" destination="VIS-24-Lfx" id="WB3-PR-DiN"/>
                         <outlet property="viewAppointments" destination="gMt-vZ-dFw" id="hf5-zX-5f3"/>
                     </connections>

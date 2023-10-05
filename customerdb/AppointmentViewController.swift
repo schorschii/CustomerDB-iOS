@@ -10,7 +10,7 @@ class AppointmentViewController : UIViewController {
     @IBOutlet weak var imageLogo: UIImageView!
     @IBOutlet weak var viewAppointments: UIView!
     @IBOutlet weak var buttonAdd: UIButton!
-    @IBOutlet weak var buttonChangeDay: UIButton!
+    @IBOutlet weak var calendarChooser: UIDatePicker!
     
     let mDb = CustomerDatabase()
     var mShowCalendars:[CustomerCalendar] = []
@@ -31,6 +31,7 @@ class AppointmentViewController : UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        calendarChooser.contentHorizontalAlignment = .center
         drawEvents()
         initColor()
     }
@@ -55,37 +56,22 @@ class AppointmentViewController : UIViewController {
         }
         splitViewController?.showDetailViewController(detailViewController, sender: nil)
     }
-    @IBAction func onClickChangeDay(_ sender: UIButton) {
-        let vc = UIViewController()
-        vc.preferredContentSize = CGSize(width: 300, height: 300)
-        let pickerView = UIDatePicker(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-        pickerView.datePickerMode = .date
-        if #available(iOS 14.0, *) {
-            pickerView.preferredDatePickerStyle = .inline
-        }
-        pickerView.date = mCurrentDate
-        vc.view.addSubview(pickerView)
-        let changeDateAlert = UIAlertController(title: "", message: "", preferredStyle: .alert)
-        changeDateAlert.setValue(vc, forKey: "contentViewController")
-        changeDateAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
-            self.mCurrentDate = pickerView.date
-            self.drawEvents()
-        }))
-        changeDateAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil))
-        self.present(changeDateAlert, animated: true)
+    @IBAction func onChangeDay(_ sender: UIDatePicker) {
+        mCurrentDate = sender.date
+        drawEvents()
     }
     @IBAction func onClickDayPrev(_ sender: UIButton) {
         mCurrentDate = Calendar.current.date(byAdding: .day, value: -1, to: mCurrentDate) ?? Date()
+        calendarChooser.date = mCurrentDate
         drawEvents()
     }
     @IBAction func onClickDayNext(_ sender: UIButton) {
         mCurrentDate = Calendar.current.date(byAdding: .day, value: 1, to: mCurrentDate) ?? Date()
+        calendarChooser.date = mCurrentDate
         drawEvents()
     }
     
     func drawEvents() {
-        buttonChangeDay.setTitle(CustomerDatabase.dateToDisplayStringWithoutTime(date: mCurrentDate), for: .normal)
-        
         // clear old entries
         mAppointments.removeAll()
         for view in viewAppointments.subviews {
