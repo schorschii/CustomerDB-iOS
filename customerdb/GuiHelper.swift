@@ -8,18 +8,18 @@ import Foundation
 import UIKit
 
 class GuiHelper {
-    private static var BORDER_WIDTH:CGFloat = 1.0
+    private static var BORDER_WIDTH:CGFloat = 0.5
     private static var BORDER_RADIUS:CGFloat = 5
     private static var BORDER_COLOR_LIGHT = UIColor(
-        red: 215.0 / 255.0,
-        green: 215.0 / 255.0,
-        blue: 215.0 / 255.0,
+        red: 204.0 / 255.0,
+        green: 204.0 / 255.0,
+        blue: 204.0 / 255.0,
         alpha: CGFloat(1.0)
     ).cgColor
     private static var BORDER_COLOR_DARK = UIColor(
-        red: 60.0 / 255.0,
-        green: 60.0 / 255.0,
-        blue: 60.0 / 255.0,
+        red: 51.0 / 255.0,
+        green: 51.0 / 255.0,
+        blue: 51.0 / 255.0,
         alpha: CGFloat(1.0)
     ).cgColor
     
