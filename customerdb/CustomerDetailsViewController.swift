@@ -220,6 +220,7 @@ class CustomerDetailsViewController : UIViewController, MFMessageComposeViewCont
             title: NSLocalizedString("delete_customer", comment: ""),
             style: .destructive) { (action) in
                 self.mDb.removeCustomer(id: self.mCurrentCustomer?.mId ?? -1)
+                self.mDb.updateCallDirectoryDatabase()
                 self.setUnsyncedChanges()
                 self.exitViewController()
         }

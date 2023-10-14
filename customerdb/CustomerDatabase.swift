@@ -175,23 +175,27 @@ class CustomerDatabase {
     func updateCallDirectoryDatabase() {
         mCallDirectoryExtensionDb.truncateNumbers()
         for c in getCustomers(showDeleted: false, withFiles: false) {
-            _ = mCallDirectoryExtensionDb.insertNumber(insertNumbers: [
+            mCallDirectoryExtensionDb.insertNumber(
                 CallDirectoryNumber(
                     customerId: c.mId,
                     displayName: c.getFullName(lastNameFirst: false),
                     phoneNumber: c.mPhoneHome
-                ),
+                )
+            )
+            mCallDirectoryExtensionDb.insertNumber(
                 CallDirectoryNumber(
                     customerId: c.mId,
                     displayName: c.getFullName(lastNameFirst: false),
                     phoneNumber: c.mPhoneMobile
-                ),
+                )
+            )
+            mCallDirectoryExtensionDb.insertNumber(
                 CallDirectoryNumber(
                     customerId: c.mId,
                     displayName: c.getFullName(lastNameFirst: false),
                     phoneNumber: c.mPhoneWork
                 )
-            ])
+            )
         }
     }
     

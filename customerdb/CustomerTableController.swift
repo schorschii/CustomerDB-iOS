@@ -295,6 +295,7 @@ class CustomerTableViewController : UIViewController, UITableViewDelegate, UITab
             mDb.removeCustomer(id: mCustomers[indexPath.row].mId)
             reloadCustomers(search: mCurrentSearch, refreshTable: false)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            mDb.updateCallDirectoryDatabase()
         }
     }
     
