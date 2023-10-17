@@ -172,7 +172,7 @@ class CustomerPickerController: NSObject, UIPickerViewDataSource, UIPickerViewDe
 
 class FieldTypePickerController: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
     
-    var mSelected = 0
+    private var mSelected = 0
     var mTypes: [String] = [
         "field_alphanumeric",
         "field_alphanumeric_multiline",

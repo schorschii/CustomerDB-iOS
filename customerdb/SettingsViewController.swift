@@ -637,7 +637,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
                 self.messageBox(title: NSLocalizedString("error", comment: ""), text: NSLocalizedString("name_cannot_be_empty", comment: ""))
                 return
             }
-            let typeString = self.mFieldTypePickerController!.mTypes[self.mFieldTypePickerController!.mSelected]
+            let typeString = self.mFieldTypePickerController!.mTypes[pickerView.selectedRow(inComponent: 0)]
             if(typeString == "field_alphanumeric") {
                 self.addCustomField(title: textField.text!, type: CustomField.TYPE.TEXT)
             }
@@ -668,6 +668,17 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         let pickerView = UIPickerView(frame: CGRect(x: 0, y: 30, width: 250, height: 270))
         pickerView.delegate = self.mFieldTypePickerController
         pickerView.dataSource = self.mFieldTypePickerController
+        if(mCurrentCustomField!.mType == CustomField.TYPE.TEXT) {
+            pickerView.selectRow(0, inComponent: 0, animated: false)
+        } else if(mCurrentCustomField!.mType == CustomField.TYPE.TEXT_MULTILINE) {
+            pickerView.selectRow(1, inComponent: 0, animated: false)
+        } else if(mCurrentCustomField!.mType == CustomField.TYPE.NUMBER) {
+            pickerView.selectRow(2, inComponent: 0, animated: false)
+        } else if(mCurrentCustomField!.mType == CustomField.TYPE.DROPDOWN) {
+            pickerView.selectRow(3, inComponent: 0, animated: false)
+        } else if(mCurrentCustomField!.mType == CustomField.TYPE.DATE) {
+           pickerView.selectRow(4, inComponent: 0, animated: false)
+        }
         let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 250, height: 30))
         textField.text = prevFieldTitle
         textField.placeholder = NSLocalizedString("field_description", comment: "")
@@ -703,7 +714,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
                     }
                 }
             }
-            let typeString = self.mFieldTypePickerController!.mTypes[self.mFieldTypePickerController!.mSelected]
+            let typeString = self.mFieldTypePickerController!.mTypes[pickerView.selectedRow(inComponent: 0)]
             if(typeString == "field_alphanumeric") {
                 _ = self.mDb.updateCustomField(cf: CustomField(id: prevFieldId, title: newFieldTitle, type: CustomField.TYPE.TEXT))
             }
