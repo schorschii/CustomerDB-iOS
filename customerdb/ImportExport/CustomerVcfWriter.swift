@@ -27,7 +27,8 @@ class CustomerVcfWriter {
         mCustomers = customers
     }
     
-    static var FORMAT_WITHOUT_DASHES = "yyyyMMdd"
+    static var FORMAT_WITHOUT_DASHES = "yyyyMMdd" // vCard 4.0
+    static var FORMAT_WITH_DASHES = "yyyy-MM-dd" // vCard 2.1, 3.0, 4.0
     static func formatWithoutDashesRaw(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = CustomerVcfWriter.FORMAT_WITHOUT_DASHES
@@ -35,7 +36,11 @@ class CustomerVcfWriter {
     }
     private static func parseVcfDateRaw(strDate: String) -> Date? {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = CustomerVcfWriter.FORMAT_WITHOUT_DASHES
+        if(strDate.trimmingCharacters(in: .whitespacesAndNewlines).count == 10) {
+            dateFormatter.dateFormat = CustomerVcfWriter.FORMAT_WITH_DASHES
+        } else {
+            dateFormatter.dateFormat = CustomerVcfWriter.FORMAT_WITHOUT_DASHES
+        }
         return dateFormatter.date(from:strDate)
     }
     

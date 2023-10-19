@@ -847,6 +847,7 @@ class CustomerDatabase {
             let zipcode = c.mZipcode as NSString
             let city = c.mCity as NSString
             let country = c.mCountry as NSString
+            let birthday:NSString? = (c.mBirthday==nil) ? nil : CustomerDatabase.dateToStringRaw(date: c.mBirthday!) as NSString
             let notes = c.mNotes as NSString
             let group = c.mGroup as NSString
             let customFields = c.mCustomFields as NSString
@@ -866,7 +867,7 @@ class CustomerDatabase {
             if(c.mBirthday == nil) {
                 sqlite3_bind_null(stmt, 13)
             } else {
-                sqlite3_bind_text(stmt, 13, CustomerDatabase.dateToStringRaw(date: c.mBirthday!), -1, nil)
+                sqlite3_bind_text(stmt, 13, birthday!.utf8String, -1, nil)
             }
             sqlite3_bind_text(stmt, 14, notes.utf8String, -1, nil)
             sqlite3_bind_int(stmt, 15, c.mNewsletter ? 1 : 0)
