@@ -11,6 +11,7 @@ import StoreKit
 
 class MainViewController : UITabBarController, MFMailComposeViewControllerDelegate, UISearchResultsUpdating, UIDocumentPickerDelegate, RequestFinishedListener {
     
+    @IBOutlet weak var buttonSearch: UIBarButtonItem!
     @IBOutlet weak var buttonSync: UIBarButtonItem!
     
     let mDb = CustomerDatabase()
@@ -26,6 +27,14 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
         initSearch()
         refreshSyncIcon()
         initLock()
+        
+        if(UIDevice.current.userInterfaceIdiom == .pad) {
+            // iOS automatically displays a search button in iPads
+            // so we show our own search icon only on iPhone to match the Android behavior
+            if #available(iOS 16.0, *) {
+                buttonSearch.isHidden = true
+            }
+        }
         
         if(!UserDefaults.standard.bool(forKey: "eulaok")) {
             let alert = UIAlertController(
@@ -145,9 +154,10 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
             vc.drawEvents()
         }
     }
+    var syncInProgressAlert: UIAlertController? = nil
     func setupStatusIndicator(visible: Bool, message: String?, completion: (()->Void)?) {
         if(visible) {
-            let alert = UIAlertController(title: nil, message: message ?? "", preferredStyle: .alert)
+            syncInProgressAlert = UIAlertController(title: nil, message: message ?? "", preferredStyle: .alert)
             let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
             loadingIndicator.hidesWhenStopped = true
             loadingIndicator.style = UIActivityIndicatorView.Style.gray
@@ -157,13 +167,15 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                     loadingIndicator.color = .white
                 }
             }
-            alert.view.addSubview(loadingIndicator)
-            present(alert, animated: false, completion: nil)
+            syncInProgressAlert!.view.addSubview(loadingIndicator)
+            present(syncInProgressAlert!, animated: false, completion: nil)
         } else {
-            DispatchQueue.main.async {
-                self.dismiss(animated: true, completion: {
-                    if(completion != nil) { completion!() }
-                })
+            if let alert = syncInProgressAlert {
+                DispatchQueue.main.async {
+                    alert.dismiss(animated: true, completion: {
+                        if(completion != nil) { completion!() }
+                    })
+                }
             }
         }
     }

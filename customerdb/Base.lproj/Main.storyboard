@@ -3778,6 +3778,7 @@ City Country</string>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
+                        <outlet property="buttonSearch" destination="B0e-41-Z5R" id="k9f-G9-Zkv"/>
                         <outlet property="buttonSync" destination="dCP-UC-JMG" id="AfK-tE-dBs"/>
                         <segue destination="Eos-1F-Pem" kind="presentation" identifier="segueSettings" id="SCH-p0-D9Y"/>
                         <segue destination="Jnc-ov-Vlt" kind="presentation" identifier="segueInfo" id="VYG-mX-XiC"/>
@@ -4531,7 +4532,7 @@ City Country</string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="b4I-Iy-NtL"/>
-        <segue reference="mve-0J-uBD"/>
+        <segue reference="VYG-mX-XiC"/>
         <segue reference="18W-Zu-reX"/>
     </inferredMetricsTieBreakers>
     <resources>
