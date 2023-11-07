@@ -64,7 +64,9 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
     
     override func viewDidLoad() {
         navigationController?.navigationBar.barStyle = .default
-        initDropDownStyle()
+        initDropDownStyle(textField: textFieldCustomFields)
+        initDropDownStyle(textField: textFieldCustomFieldPresets)
+        initDropDownStyle(textField: textFieldCalendars)
         createToolbar()
         loadSettings()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
@@ -243,24 +245,16 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         }
     }
     
-    func initDropDownStyle() {
-        let imgViewForDropDown = UIImageView()
-        imgViewForDropDown.frame = CGRect(x: 0, y: 0, width: 30, height: 48)
-        imgViewForDropDown.image = UIImage(named: "baseline_arrow_drop_down_circle_black_24pt")
-        textFieldCustomFields.rightView = imgViewForDropDown
-        textFieldCustomFields.rightViewMode = .always
+    func initDropDownStyle(textField:UITextField) {
+        let imgViewForDropDown = UIImageView(frame: CGRect(x: 0, y: 0, width: 32, height: 48))
+        imgViewForDropDown.image = UIImage(named: "expand_more")
+        imgViewForDropDown.contentMode = .center
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 32, height: 48))
+        paddingView.addSubview(imgViewForDropDown)
+        paddingView.isUserInteractionEnabled = false
         
-        let imgViewForDropDown2 = UIImageView()
-        imgViewForDropDown2.frame = CGRect(x: 0, y: 0, width: 30, height: 48)
-        imgViewForDropDown2.image = UIImage(named: "baseline_arrow_drop_down_circle_black_24pt")
-        textFieldCustomFieldPresets.rightView = imgViewForDropDown2
-        textFieldCustomFieldPresets.rightViewMode = .always
-        
-        let imgViewForDropDown3 = UIImageView()
-        imgViewForDropDown3.frame = CGRect(x: 0, y: 0, width: 30, height: 48)
-        imgViewForDropDown3.image = UIImage(named: "baseline_arrow_drop_down_circle_black_24pt")
-        textFieldCalendars.rightView = imgViewForDropDown3
-        textFieldCalendars.rightViewMode = .always
+        textField.rightView = paddingView
+        textField.rightViewMode = .always
     }
     
     @objc func keyboardWillShow(notification:NSNotification){

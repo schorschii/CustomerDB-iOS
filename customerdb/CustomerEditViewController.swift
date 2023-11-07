@@ -181,6 +181,18 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
         scrollView.contentInset = contentInset
     }
     
+    func initDropDownStyle(textField:UITextField) {
+        let imgViewForDropDown = UIImageView(frame: CGRect(x: 0, y: 0, width: 32, height: 48))
+        imgViewForDropDown.image = UIImage(named: "expand_more")
+        imgViewForDropDown.contentMode = .center
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 32, height: 48))
+        paddingView.addSubview(imgViewForDropDown)
+        paddingView.isUserInteractionEnabled = false
+        
+        textField.rightView = paddingView
+        textField.rightViewMode = .always
+    }
+    
     func loadCustomer() {
         for view in stackViewAttributes.arrangedSubviews {
             view.removeFromSuperview()
@@ -638,6 +650,8 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
                 datePickerView.addTarget(self, action: #selector(handleCustomDatePicker(sender:)), for: .valueChanged)
             }
             else if(customField.mType == CustomField.TYPE.DROPDOWN) {
+                initDropDownStyle(textField: textField)
+                
                 let toolBar = UIToolbar()
                 toolBar.sizeToFit()
                 let doneButton = UIBarButtonItem(title: NSLocalizedString("done", comment: ""), style: .plain, target: self, action: #selector(CustomerEditViewController.dismissKeyboard))
