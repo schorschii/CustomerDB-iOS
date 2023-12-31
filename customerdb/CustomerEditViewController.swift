@@ -5,6 +5,7 @@
 
 import Foundation
 import UIKit
+import UniformTypeIdentifiers
 
 class CustomerEditViewController : UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIDocumentPickerDelegate, UITextFieldDelegate {
     
@@ -474,7 +475,12 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
                 title: NSLocalizedString("choose_from_files", comment: ""),
                 style: .default,
                 handler: { alert in
-                    let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data"], in: .import)
+                    let documentPicker: UIDocumentPickerViewController
+                    if #available(iOS 14.0, *) {
+                        documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [UTType.data], asCopy: false)
+                    } else {
+                        documentPicker = UIDocumentPickerViewController(documentTypes: ["public.data"], in: .import)
+                    }
                     documentPicker.delegate = self
                     self.present(documentPicker, animated: true, completion: nil)
             }))

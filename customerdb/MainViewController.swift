@@ -5,6 +5,7 @@
 
 import Foundation
 import UIKit
+import UniformTypeIdentifiers
 import MessageUI
 import Contacts
 import StoreKit
@@ -501,7 +502,12 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
             title: NSLocalizedString("import_vcf", comment: ""),
             style: .default) { (action) in
                 if #available(iOS 11, *) {
-                    let documentPicker = CustomerDocumentPickerViewController(documentTypes: ["public.vcard"], in: .import)
+                    let documentPicker: UIDocumentPickerViewController
+                    if #available(iOS 14.0, *) {
+                        documentPicker = CustomerDocumentPickerViewController(forOpeningContentTypes: [UTType.vCard], asCopy: false)
+                    } else {
+                        documentPicker = CustomerDocumentPickerViewController(documentTypes: ["public.vcard"], in: .import)
+                    }
                     documentPicker.delegate = self
                     self.present(documentPicker, animated: true, completion: nil)
                 } else {
@@ -522,7 +528,12 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                     alert.addAction(UIAlertAction(
                         title: NSLocalizedString("ok", comment: ""),
                         style: .default) { (action) in
-                            let documentPicker = CustomerDocumentPickerViewController(documentTypes: ["public.comma-separated-values-text"], in: .import)
+                            let documentPicker: UIDocumentPickerViewController
+                            if #available(iOS 14.0, *) {
+                                documentPicker = CustomerDocumentPickerViewController(forOpeningContentTypes: [UTType.commaSeparatedText], asCopy: false)
+                            } else {
+                                documentPicker = CustomerDocumentPickerViewController(documentTypes: ["public.comma-separated-values-text"], in: .import)
+                            }
                             documentPicker.delegate = self
                             self.present(documentPicker, animated: true, completion: nil)
                     })
@@ -578,7 +589,12 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                     alert.addAction(UIAlertAction(
                         title: NSLocalizedString("ok", comment: ""),
                         style: .default) { (action) in
-                            let documentPicker = VoucherDocumentPickerViewController(documentTypes: ["public.comma-separated-values-text"], in: .import)
+                            let documentPicker: UIDocumentPickerViewController
+                            if #available(iOS 14.0, *) {
+                                documentPicker = VoucherDocumentPickerViewController(forOpeningContentTypes: [UTType.commaSeparatedText], asCopy: false)
+                            } else {
+                                documentPicker = VoucherDocumentPickerViewController(documentTypes: ["public.comma-separated-values-text"], in: .import)
+                            }
                             documentPicker.delegate = self
                             self.present(documentPicker, animated: true, completion: nil)
                     })
@@ -614,7 +630,12 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
             title: NSLocalizedString("import_ics", comment: ""),
             style: .default) { (action) in
                 if #available(iOS 11, *) {
-                    let documentPicker = AppointmentDocumentPickerViewController(documentTypes: ["public.calendar-event"], in: .import)
+                    let documentPicker: UIDocumentPickerViewController
+                    if #available(iOS 14.0, *) {
+                        documentPicker = AppointmentDocumentPickerViewController(forOpeningContentTypes: [UTType.calendarEvent], asCopy: false)
+                    } else {
+                        documentPicker = AppointmentDocumentPickerViewController(documentTypes: ["public.calendar-event"], in: .import)
+                    }
                     documentPicker.delegate = self
                     self.present(documentPicker, animated: true, completion: nil)
                 } else {
@@ -628,7 +649,12 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
             title: NSLocalizedString("import_csv", comment: ""),
             style: .default) { (action) in
                 if #available(iOS 11, *) {
-                    let documentPicker = AppointmentDocumentPickerViewController(documentTypes: ["public.comma-separated-values-text"], in: .import)
+                    let documentPicker: UIDocumentPickerViewController
+                    if #available(iOS 14.0, *) {
+                        documentPicker = AppointmentDocumentPickerViewController(forOpeningContentTypes: [UTType.commaSeparatedText], asCopy: false)
+                    } else {
+                        documentPicker = AppointmentDocumentPickerViewController(documentTypes: ["public.comma-separated-values-text"], in: .import)
+                    }
                     documentPicker.delegate = self
                     self.present(documentPicker, animated: true, completion: nil)
                 } else {
