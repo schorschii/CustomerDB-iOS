@@ -508,7 +508,9 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         do {
             try addFile(name: url.lastPathComponent, content: Data(contentsOf: url))
-        } catch {}
+        } catch let error {
+            handleError(text: error.localizedDescription)
+        }
     }
     func addFile(name: String, content: Data) {
         do {
@@ -728,6 +730,13 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
         refreshFiles()
     }
     
+    func handleError(text: String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: NSLocalizedString("error", comment: ""), message: text, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
     func inputBox(title: String, defaultText: String, callback: @escaping (String?)->()) {
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         alert.addTextField(configurationHandler: { (textField) -> Void in
