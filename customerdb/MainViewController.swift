@@ -835,134 +835,136 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
         }
     }
     
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
-        if let _ = controller as? CustomerDocumentPickerViewController {
-            
-            if(url.pathExtension.lowercased() == "csv") {
-                do {
-                    var inserted = 0
-                    let csv: CSV = try CSV(url: url)
-                    for row in csv.namedRows {
-                        let newCustomer = Customer()
-                        for field in row {
-                            newCustomer.putAttribute(key: field.key, value: field.value)
-                        }
-                        if(newCustomer.mTitle != "" || newCustomer.mFirstName != "" || newCustomer.mLastName != "") {
-                            if(newCustomer.mId < 0 || mDb.getCustomer(id: newCustomer.mId, showDeleted: true) != nil) {
-                                // generate new ID if exists in db or not set in csv file
-                                newCustomer.mId = Customer.generateID(suffix: inserted)
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        for url in urls {
+            if let _ = controller as? CustomerDocumentPickerViewController {
+                
+                if(url.pathExtension.lowercased() == "csv") {
+                    do {
+                        var inserted = 0
+                        let csv: CSV = try CSV(url: url)
+                        for row in csv.namedRows {
+                            let newCustomer = Customer()
+                            for field in row {
+                                newCustomer.putAttribute(key: field.key, value: field.value)
                             }
+                            if(newCustomer.mTitle != "" || newCustomer.mFirstName != "" || newCustomer.mLastName != "") {
+                                if(newCustomer.mId < 0 || mDb.getCustomer(id: newCustomer.mId, showDeleted: true) != nil) {
+                                    // generate new ID if exists in db or not set in csv file
+                                    newCustomer.mId = Customer.generateID(suffix: inserted)
+                                }
+                                if(mDb.insertCustomer(c: newCustomer)) {
+                                    inserted += 1
+                                }
+                            }
+                        }
+                        mDb.updateCallDirectoryDatabase()
+                        handleImportSuccess(imported: inserted)
+                    } catch let error {
+                        handleImportError(message: error.localizedDescription)
+                    }
+                } else if(url.pathExtension.lowercased() == "vcf") {
+                    var inserted = 0
+                    for newCustomer in CustomerVcfWriter.readVcfFile(url: url) {
+                        if(newCustomer.mTitle != "" || newCustomer.mFirstName != "" || newCustomer.mLastName != "") {
+                            // generate new ID because ID is not present in vcf file
+                            newCustomer.mId = Customer.generateID(suffix: inserted)
                             if(mDb.insertCustomer(c: newCustomer)) {
                                 inserted += 1
                             }
                         }
                     }
-                    mDb.updateCallDirectoryDatabase()
-                    handleImportSuccess(imported: inserted)
-                } catch let error {
-                    handleImportError(message: error.localizedDescription)
-                }
-            } else if(url.pathExtension.lowercased() == "vcf") {
-                var inserted = 0
-                for newCustomer in CustomerVcfWriter.readVcfFile(url: url) {
-                    if(newCustomer.mTitle != "" || newCustomer.mFirstName != "" || newCustomer.mLastName != "") {
-                        // generate new ID because ID is not present in vcf file
-                        newCustomer.mId = Customer.generateID(suffix: inserted)
-                        if(mDb.insertCustomer(c: newCustomer)) {
-                            inserted += 1
-                        }
+                    if(inserted > 0) {
+                        mDb.updateCallDirectoryDatabase()
+                        handleImportSuccess(imported: inserted)
+                    } else {
+                        handleImportError(message: NSLocalizedString("file_does_not_contain_valid_records", comment: ""))
                     }
-                }
-                if(inserted > 0) {
-                    mDb.updateCallDirectoryDatabase()
-                    handleImportSuccess(imported: inserted)
                 } else {
-                    handleImportError(message: NSLocalizedString("file_does_not_contain_valid_records", comment: ""))
+                    handleImportError(message: NSLocalizedString("unknown_file_format", comment: ""))
                 }
-            } else {
-                handleImportError(message: NSLocalizedString("unknown_file_format", comment: ""))
-            }
-            
-        } else if let _ = controller as? AppointmentDocumentPickerViewController {
-            
-            if let calendarSelectionAlert = createCalendarSelectAlert() {
-                calendarSelectionAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
-                    let calendarId = Int64(self.mCalendars[self.mCalendarPicker!.selectedRow(inComponent: 0)].key)
-                    if(url.pathExtension.lowercased() == "csv") {
-                        do {
-                            var inserted = 0
-                            let csv: CSV = try CSV(url: url)
-                            for row in csv.namedRows {
-                                let newAppointment = CustomerAppointment()
-                                newAppointment.mCalendarId = calendarId!
-                                for field in row {
-                                    newAppointment.putAttribute(key: field.key, value: field.value)
-                                }
-                                if(newAppointment.mTitle != "" && newAppointment.mTimeStart != nil && newAppointment.mTimeEnd != nil) {
-                                    if(newAppointment.mId < 0 || self.mDb.getAppointment(id: newAppointment.mId) != nil) {
-                                        // generate new ID if exists in db or not set in csv file
-                                        newAppointment.mId = CustomerAppointment.generateID(suffix: inserted)
+                
+            } else if let _ = controller as? AppointmentDocumentPickerViewController {
+                
+                if let calendarSelectionAlert = createCalendarSelectAlert() {
+                    calendarSelectionAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
+                        let calendarId = Int64(self.mCalendars[self.mCalendarPicker!.selectedRow(inComponent: 0)].key)
+                        if(url.pathExtension.lowercased() == "csv") {
+                            do {
+                                var inserted = 0
+                                let csv: CSV = try CSV(url: url)
+                                for row in csv.namedRows {
+                                    let newAppointment = CustomerAppointment()
+                                    newAppointment.mCalendarId = calendarId!
+                                    for field in row {
+                                        newAppointment.putAttribute(key: field.key, value: field.value)
                                     }
+                                    if(newAppointment.mTitle != "" && newAppointment.mTimeStart != nil && newAppointment.mTimeEnd != nil) {
+                                        if(newAppointment.mId < 0 || self.mDb.getAppointment(id: newAppointment.mId) != nil) {
+                                            // generate new ID if exists in db or not set in csv file
+                                            newAppointment.mId = CustomerAppointment.generateID(suffix: inserted)
+                                        }
+                                        if(self.mDb.insertAppointment(a: newAppointment)) {
+                                            inserted += 1
+                                        }
+                                    }
+                                }
+                                self.handleImportSuccess(imported: inserted)
+                            } catch let error {
+                                self.handleImportError(message: error.localizedDescription)
+                            }
+                        } else if(url.pathExtension.lowercased() == "ics") {
+                            var inserted = 0
+                            for newAppointment in CalendarIcsWriter.readIcsFile(url: url) {
+                                if(newAppointment.mTitle != "" && newAppointment.mTimeStart != nil && newAppointment.mTimeEnd != nil) {
+                                    // generate new ID because ID is not present in ics file
+                                    newAppointment.mId = CustomerAppointment.generateID(suffix: inserted)
+                                    newAppointment.mCalendarId = calendarId!
                                     if(self.mDb.insertAppointment(a: newAppointment)) {
                                         inserted += 1
                                     }
                                 }
                             }
-                            self.handleImportSuccess(imported: inserted)
-                        } catch let error {
-                            self.handleImportError(message: error.localizedDescription)
+                            if(inserted > 0) {
+                                self.handleImportSuccess(imported: inserted)
+                            } else {
+                                self.handleImportError(message: NSLocalizedString("file_does_not_contain_valid_records", comment: ""))
+                            }
+                        } else {
+                            self.handleImportError(message: NSLocalizedString("unknown_file_format", comment: ""))
                         }
-                    } else if(url.pathExtension.lowercased() == "ics") {
+                    }))
+                    self.present(calendarSelectionAlert, animated: true)
+                }
+                
+            } else if let _ = controller as? VoucherDocumentPickerViewController {
+                
+                if(url.pathExtension.lowercased() == "csv") {
+                    do {
                         var inserted = 0
-                        for newAppointment in CalendarIcsWriter.readIcsFile(url: url) {
-                            if(newAppointment.mTitle != "" && newAppointment.mTimeStart != nil && newAppointment.mTimeEnd != nil) {
-                                // generate new ID because ID is not present in ics file
-                                newAppointment.mId = CustomerAppointment.generateID(suffix: inserted)
-                                newAppointment.mCalendarId = calendarId!
-                                if(self.mDb.insertAppointment(a: newAppointment)) {
-                                    inserted += 1
-                                }
+                        let csv: CSV = try CSV(url: url)
+                        for row in csv.namedRows {
+                            let newVoucher = Voucher()
+                            for field in row {
+                                newVoucher.putAttribute(key: field.key, value: field.value)
+                            }
+                            if(newVoucher.mId < 0 || mDb.getVoucher(id: newVoucher.mId) != nil) {
+                                // generate new ID if exists in db or not set in csv file
+                                newVoucher.mId = Voucher.generateID(suffix: inserted)
+                            }
+                            if(mDb.insertVoucher(v: newVoucher)) {
+                                inserted += 1
                             }
                         }
-                        if(inserted > 0) {
-                            self.handleImportSuccess(imported: inserted)
-                        } else {
-                            self.handleImportError(message: NSLocalizedString("file_does_not_contain_valid_records", comment: ""))
-                        }
-                    } else {
-                        self.handleImportError(message: NSLocalizedString("unknown_file_format", comment: ""))
+                        handleImportSuccess(imported: inserted)
+                    } catch let error {
+                        handleImportError(message: error.localizedDescription)
                     }
-                }))
-                self.present(calendarSelectionAlert, animated: true)
-            }
-            
-        } else if let _ = controller as? VoucherDocumentPickerViewController {
-            
-            if(url.pathExtension.lowercased() == "csv") {
-                do {
-                    var inserted = 0
-                    let csv: CSV = try CSV(url: url)
-                    for row in csv.namedRows {
-                        let newVoucher = Voucher()
-                        for field in row {
-                            newVoucher.putAttribute(key: field.key, value: field.value)
-                        }
-                        if(newVoucher.mId < 0 || mDb.getVoucher(id: newVoucher.mId) != nil) {
-                            // generate new ID if exists in db or not set in csv file
-                            newVoucher.mId = Voucher.generateID(suffix: inserted)
-                        }
-                        if(mDb.insertVoucher(v: newVoucher)) {
-                            inserted += 1
-                        }
-                    }
-                    handleImportSuccess(imported: inserted)
-                } catch let error {
-                    handleImportError(message: error.localizedDescription)
+                } else {
+                    handleImportError(message: NSLocalizedString("unknown_file_format", comment: ""))
                 }
-            } else {
-                handleImportError(message: NSLocalizedString("unknown_file_format", comment: ""))
+                
             }
-            
         }
         
         DispatchQueue.main.async {

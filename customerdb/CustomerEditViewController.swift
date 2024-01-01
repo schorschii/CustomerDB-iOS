@@ -505,9 +505,11 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
             self.present(alert, animated: true)
         }
     }
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         do {
-            try addFile(name: url.lastPathComponent, content: Data(contentsOf: url))
+            for url in urls {
+                try addFile(name: url.lastPathComponent, content: Data(contentsOf: url))
+            }
         } catch let error {
             handleError(text: error.localizedDescription)
         }
