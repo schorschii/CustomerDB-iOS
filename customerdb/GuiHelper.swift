@@ -25,15 +25,18 @@ class GuiHelper {
     
     // this function will optically adjust the UITextView, so that it looks like a UITextField
     static func adjustTextviewStyle(control:UITextView, viewController:UIViewController) {
+        var backgroundColor = UIColor.white.cgColor
         var borderColor = GuiHelper.BORDER_COLOR_LIGHT
         if #available(iOS 12.0, *) {
             if viewController.traitCollection.userInterfaceStyle == .dark {
                 borderColor = GuiHelper.BORDER_COLOR_DARK
+                backgroundColor = UIColor.black.cgColor
             }
         }
         control.layer.borderColor = borderColor
         control.layer.borderWidth = GuiHelper.BORDER_WIDTH
         control.layer.cornerRadius = GuiHelper.BORDER_RADIUS
+        control.layer.backgroundColor = backgroundColor
     }
     
     static func loadImage(file: URL) -> UIImage? {
