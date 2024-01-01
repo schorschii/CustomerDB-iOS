@@ -900,7 +900,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                                         newAppointment.putAttribute(key: field.key, value: field.value)
                                     }
                                     if(newAppointment.mTitle != "" && newAppointment.mTimeStart != nil && newAppointment.mTimeEnd != nil) {
-                                        if(newAppointment.mId < 0 || self.mDb.getAppointment(id: newAppointment.mId) != nil) {
+                                        if(newAppointment.mId < 0 || self.mDb.getAppointment(id: newAppointment.mId, showDeleted: true) != nil) {
                                             // generate new ID if exists in db or not set in csv file
                                             newAppointment.mId = CustomerAppointment.generateID(suffix: inserted)
                                         }
@@ -948,7 +948,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                             for field in row {
                                 newVoucher.putAttribute(key: field.key, value: field.value)
                             }
-                            if(newVoucher.mId < 0 || mDb.getVoucher(id: newVoucher.mId) != nil) {
+                            if(newVoucher.mId < 0 || mDb.getVoucher(id: newVoucher.mId, showDeleted: true) != nil) {
                                 // generate new ID if exists in db or not set in csv file
                                 newVoucher.mId = Voucher.generateID(suffix: inserted)
                             }
