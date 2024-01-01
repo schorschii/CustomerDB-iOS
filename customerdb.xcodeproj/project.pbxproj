@@ -724,7 +724,7 @@
 				CURRENT_PROJECT_VERSION = 38;
 				DEVELOPMENT_TEAM = 96G8V7UY3M;
 				INFOPLIST_FILE = CustomerDatabaseDirectory/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -750,7 +750,7 @@
 				CURRENT_PROJECT_VERSION = 38;
 				DEVELOPMENT_TEAM = 96G8V7UY3M;
 				INFOPLIST_FILE = CustomerDatabaseDirectory/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
