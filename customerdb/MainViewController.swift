@@ -837,6 +837,11 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         for url in urls {
+            if(!url.startAccessingSecurityScopedResource()) {
+                handleImportError(message: NSLocalizedString("permissions_missing", comment: ""))
+                continue
+            }
+            
             if let _ = controller as? CustomerDocumentPickerViewController {
                 
                 if(url.pathExtension.lowercased() == "csv") {
@@ -965,6 +970,8 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                 }
                 
             }
+            
+            url.stopAccessingSecurityScopedResource()
         }
         
         DispatchQueue.main.async {

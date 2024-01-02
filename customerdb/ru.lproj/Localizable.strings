@@ -50,6 +50,7 @@
 "export_failed" = "Экспорт не выполнен";
 "export_succeeded" = "Экспорт успешно завершен";
 "unknown_file_format" = "Неизвестный формат файла";
+"permissions_missing" = "У вас нет необходимых разрешений для доступа к этому файлу.";
 "yes" = "да";
 "no" = "нет";
 "no_newsletter_customers" = "Нет доступных рассылок";
