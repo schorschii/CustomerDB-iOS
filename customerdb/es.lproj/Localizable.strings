@@ -50,7 +50,6 @@
 "export_failed" = "Exportación fallida";
 "export_succeeded" = "Exportación exitosa";
 "unknown_file_format" = "Formato de archivo desconocido";
-"permissions_missing" = "No tienes los permisos necesarios para acceder a este archivo.";
 "yes" = "si";
 "no" = "No";
 "no_newsletter_customers" = "No hay boletines disponibles para clientes";

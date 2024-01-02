@@ -837,13 +837,10 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         for url in urls {
-            if(!url.startAccessingSecurityScopedResource()) {
-                handleImportError(message: NSLocalizedString("permissions_missing", comment: ""))
-                continue
-            }
             
             if let _ = controller as? CustomerDocumentPickerViewController {
                 
+                _ = url.startAccessingSecurityScopedResource()
                 if(url.pathExtension.lowercased() == "csv") {
                     do {
                         var inserted = 0
@@ -888,12 +885,16 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                 } else {
                     handleImportError(message: NSLocalizedString("unknown_file_format", comment: ""))
                 }
+                url.stopAccessingSecurityScopedResource()
                 
             } else if let _ = controller as? AppointmentDocumentPickerViewController {
                 
                 if let calendarSelectionAlert = createCalendarSelectAlert() {
                     calendarSelectionAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { (action: UIAlertAction!) in
                         let calendarId = Int64(self.mCalendars[self.mCalendarPicker!.selectedRow(inComponent: 0)].key)
+                        
+                        // startAccessingSecurityScopedResource must be done inside alert action delegate
+                        _ = url.startAccessingSecurityScopedResource()
                         if(url.pathExtension.lowercased() == "csv") {
                             do {
                                 var inserted = 0
@@ -938,12 +939,14 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                         } else {
                             self.handleImportError(message: NSLocalizedString("unknown_file_format", comment: ""))
                         }
+                        url.stopAccessingSecurityScopedResource()
                     }))
                     self.present(calendarSelectionAlert, animated: true)
                 }
                 
             } else if let _ = controller as? VoucherDocumentPickerViewController {
                 
+                _ = url.startAccessingSecurityScopedResource()
                 if(url.pathExtension.lowercased() == "csv") {
                     do {
                         var inserted = 0
@@ -968,10 +971,10 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                 } else {
                     handleImportError(message: NSLocalizedString("unknown_file_format", comment: ""))
                 }
+                url.stopAccessingSecurityScopedResource()
                 
             }
             
-            url.stopAccessingSecurityScopedResource()
         }
         
         DispatchQueue.main.async {
