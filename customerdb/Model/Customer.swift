@@ -216,18 +216,8 @@ class Customer {
     }
     
     func getAddressString() -> String {
-        if(mStreet == "" && mZipcode == "" && mCity == "" && mCountry == "") {
-            return "";
-        }
-        else if(mStreet != "" && mZipcode != "" && mCity == "" && mCountry == "") {
-            return mStreet + "\n" + mZipcode;
-        }
-        else if(mStreet == "" && mZipcode == "" && mCity != "" && mCountry != "") {
-            return mCity + " " + mCountry;
-        }
-        else {
-            return mStreet + "\n" + mZipcode + ", " + mCity + " " + mCountry;
-        }
+        return (mStreet + "\n" + mZipcode + " " + mCity + "\n" + mCountry)
+                .trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
     func getCustomFields() -> [CustomField] {
