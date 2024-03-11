@@ -1534,6 +1534,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                 <items>
                                     <navigationItem title="Information" id="tov-8i-WRr">
+                                        <barButtonItem key="leftBarButtonItem" image="baseline_help_outline_black_24pt" id="7Pk-1x-cYD">
+                                            <connections>
+                                                <action selector="onClickHelp:" destination="Jnc-ov-Vlt" id="pDS-8V-taa"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="fHd-1I-5PU">
                                             <connections>
                                                 <action selector="onClickDone:" destination="Jnc-ov-Vlt" id="vBe-Da-djP"/>
@@ -2097,11 +2102,18 @@
                                                 <action selector="onClickCancel:" destination="Eos-1F-Pem" id="5gV-3Y-8RP"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="BP7-tR-Px2">
-                                            <connections>
-                                                <action selector="onClickDone:" destination="Eos-1F-Pem" id="coj-iN-ppP"/>
-                                            </connections>
-                                        </barButtonItem>
+                                        <rightBarButtonItems>
+                                            <barButtonItem systemItem="save" id="BP7-tR-Px2">
+                                                <connections>
+                                                    <action selector="onClickDone:" destination="Eos-1F-Pem" id="coj-iN-ppP"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem image="baseline_help_outline_black_24pt" id="azA-8o-dOe">
+                                                <connections>
+                                                    <action selector="onClickHelp:" destination="Eos-1F-Pem" id="juI-nP-XBZ"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -4532,7 +4544,7 @@ City Country</string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="b4I-Iy-NtL"/>
-        <segue reference="VYG-mX-XiC"/>
+        <segue reference="g2l-0z-HdN"/>
         <segue reference="18W-Zu-reX"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -4545,6 +4557,7 @@ City Country</string>
         <image name="baseline_date_range_black_24pt" width="24" height="24"/>
         <image name="baseline_done_black_24pt" width="24" height="24"/>
         <image name="baseline_edit_white_24pt" width="24" height="24"/>
+        <image name="baseline_help_outline_black_24pt" width="24" height="24"/>
         <image name="baseline_import_export_black_24pt" width="24" height="24"/>
         <image name="baseline_menu_black_24pt" width="24" height="24"/>
         <image name="baseline_more_vert_black_24pt" width="24" height="24"/>
@@ -4564,13 +4577,13 @@ City Country</string>
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="tertiaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29803921568627451" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29803921570000003" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

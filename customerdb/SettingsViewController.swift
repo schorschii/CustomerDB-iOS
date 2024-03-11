@@ -271,6 +271,12 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
         scrollView.contentInset = contentInset
     }
     
+    @IBAction func onClickHelp(_ sender: UIBarButtonItem) {
+        if let url = URL(string: SyncInfoViewController.HELP_URL) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
     @IBAction func onClickCancel(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }

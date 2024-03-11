@@ -10,6 +10,7 @@ class SyncInfoViewController : UIViewController {
     
     @IBOutlet weak var buttonGithub: UIButton!
     
+    static let HELP_URL = "https://georg-sieber.de/?page=app-customerdb"
     static let REPO_URL = "https://github.com/schorschii/CustomerDB-Server"
     
     override func viewDidLoad() {
@@ -29,7 +30,7 @@ class SyncInfoViewController : UIViewController {
     }
     
     @IBAction func onClickFaq(_ sender: UIButton) {
-        if let url = URL(string: "https://georg-sieber.de/?page=app-customerdb") {
+        if let url = URL(string: SyncInfoViewController.HELP_URL) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
