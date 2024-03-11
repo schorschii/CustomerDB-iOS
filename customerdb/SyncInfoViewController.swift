@@ -8,6 +8,7 @@ import UIKit
 
 class SyncInfoViewController : UIViewController {
     
+    @IBOutlet weak var buttonFaq: UIButton!
     @IBOutlet weak var buttonGithub: UIButton!
     
     static let HELP_URL = "https://georg-sieber.de/?page=app-customerdb"
@@ -17,6 +18,9 @@ class SyncInfoViewController : UIViewController {
         super.viewDidLoad()
         buttonGithub.setTitle(SyncInfoViewController.REPO_URL, for: .normal)
         navigationController?.navigationBar.barStyle = .black
+        
+        buttonFaq.titleLabel?.lineBreakMode = .byWordWrapping
+        buttonFaq.titleLabel?.textAlignment = .center
     }
     
     func refreshSyncSettings() {

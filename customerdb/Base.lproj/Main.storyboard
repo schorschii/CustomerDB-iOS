@@ -3017,6 +3017,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonFaq" destination="JWp-aD-hZ3" id="bGg-pT-ND0"/>
                         <outlet property="buttonGithub" destination="mwc-km-vKJ" id="na7-Mm-cY5"/>
                     </connections>
                 </viewController>
@@ -4544,7 +4545,7 @@ City Country</string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="b4I-Iy-NtL"/>
-        <segue reference="g2l-0z-HdN"/>
+        <segue reference="Jxd-z2-kNP"/>
         <segue reference="18W-Zu-reX"/>
     </inferredMetricsTieBreakers>
     <resources>
