@@ -274,7 +274,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
     }
     @IBAction func onClickMenu(_ sender: UIBarButtonItem) {
         let db = CustomerDatabase()
-        let customers = db.getCustomers(showDeleted: false, withFiles: false)
+        let customers = db.getCustomers(search: nil, showDeleted: false, withFiles: false)
         let vouchers = db.getVouchers(showDeleted: false)
         let infoString = String(customers.count) + " " + NSLocalizedString("customers", comment: "")
             + "\n" + String(vouchers.count) + " " + NSLocalizedString("vouchers", comment: "")
@@ -375,7 +375,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
             style: .default) { (action) in
                 if(MFMailComposeViewController.canSendMail()) {
                     var recipients:[String] = []
-                    for c in self.mDb.getCustomers(showDeleted: false, withFiles: false) {
+                    for c in self.mDb.getCustomers(search: nil, showDeleted: false, withFiles: false) {
                         if(c.mNewsletter && self.isValidEmail(c.mEmail)) {
                             recipients.append(c.mEmail)
                         }
@@ -691,7 +691,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
     }
     
     func exportCsvCustomer(barButtonItem:UIBarButtonItem) {
-        let csv = CustomerCsvWriter(customers: self.mDb.getCustomers(showDeleted: false, withFiles: false), customFields: self.mDb.getCustomFields())
+        let csv = CustomerCsvWriter(customers: self.mDb.getCustomers(search: nil, showDeleted: false, withFiles: false), customFields: self.mDb.getCustomFields())
         
         let fileurl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("export.csv")
 
@@ -758,7 +758,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
     }
     
     func exportVcf(barButtonItem:UIBarButtonItem) {
-        let vcf = CustomerVcfWriter(customers: self.mDb.getCustomers(showDeleted: false, withFiles: true))
+        let vcf = CustomerVcfWriter(customers: self.mDb.getCustomers(search: nil, showDeleted: false, withFiles: true))
         
         let fileurl = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("export.vcf")
 

@@ -543,7 +543,7 @@ class CustomerEditViewController : UIViewController, UINavigationControllerDeleg
     
     func saveCustomer() -> Bool {
         if(mCurrentCustomer == nil) {
-            if(mDb.getCustomers(showDeleted: false, withFiles: false).count >= 500 && !UserDefaults.standard.bool(forKey: "unlocked-lc")) {
+            if(mDb.getCustomers(search: nil, showDeleted: false, withFiles: false).count >= 500 && !UserDefaults.standard.bool(forKey: "unlocked-lc")) {
                 let alert = UIAlertController(
                     title: NSLocalizedString("not_unlocked", comment: ""),
                     message: NSLocalizedString("unlock_500_via_inapp", comment: ""),

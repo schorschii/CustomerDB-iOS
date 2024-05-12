@@ -63,7 +63,7 @@ class CustomerDatabaseApi {
     
     private func putCustomers(diffSince:Date?=nil) {
         var customersDataArray:[[String:Any?]] = []
-        for customer in mDb.getCustomers(showDeleted: true, withFiles: true, modifiedSince: diffSince) {
+        for customer in mDb.getCustomers(search: nil, showDeleted: true, withFiles: true, modifiedSince: diffSince) {
             var customerFilesDataArray:[[String:Any?]] = []
             for file in customer.getFiles() {
                 if file.mContent != nil {

@@ -125,7 +125,7 @@ class CustomerTableViewController : UIViewController, UITableViewDelegate, UITab
     }*/
 
     func reloadCustomers(search:String?, refreshTable:Bool) {
-        var tempCustomers = mDb.getCustomers(showDeleted: false, withFiles: false)
+        var tempCustomers = mDb.getCustomers(search: search, showDeleted: false, withFiles: false)
         var title = ""
         
         // apply filter
@@ -191,28 +191,10 @@ class CustomerTableViewController : UIViewController, UITableViewDelegate, UITab
         // apply search
         if(search == nil || search == "") {
             mCurrentSearch = nil
-            mCustomers = tempCustomers
         } else {
             mCurrentSearch = search
-            let normalizedSearch = search!.uppercased()
-            mCustomers.removeAll()
-            for customer in tempCustomers {
-                if(customer.mTitle.uppercased().contains(normalizedSearch)
-                    || customer.mFirstName.uppercased().contains(normalizedSearch)
-                    || customer.mLastName.uppercased().contains(normalizedSearch)
-                    || customer.mPhoneHome.uppercased().contains(normalizedSearch)
-                    || customer.mPhoneMobile.uppercased().contains(normalizedSearch)
-                    || customer.mPhoneWork.uppercased().contains(normalizedSearch)
-                    || customer.mEmail.uppercased().contains(normalizedSearch)
-                    || customer.mStreet.uppercased().contains(normalizedSearch)
-                    || customer.mZipcode.uppercased().contains(normalizedSearch)
-                    || customer.mCity.uppercased().contains(normalizedSearch)
-                    || customer.mGroup.uppercased().contains(normalizedSearch)
-                    || customer.mNotes.uppercased().contains(normalizedSearch)) {
-                    mCustomers.append(customer)
-                }
-            }
         }
+        mCustomers = tempCustomers
         
         if(refreshTable) { tableView.reloadData() }
     }

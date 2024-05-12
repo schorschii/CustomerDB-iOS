@@ -20,7 +20,7 @@ class FilterPickerController: NSObject, UIPickerViewDataSource, UIPickerViewDele
     var mSelectedCountry: String? = ""
     
     init(db: CustomerDatabase) {
-        for customer in db.getCustomers(showDeleted: false, withFiles: false) {
+        for customer in db.getCustomers(search: nil, showDeleted: false, withFiles: false) {
             if(!mGroups.contains(customer.mGroup) && customer.mGroup != "") {
                 mGroups.append(customer.mGroup)
             }
@@ -146,7 +146,7 @@ class CustomerPickerController: NSObject, UIPickerViewDataSource, UIPickerViewDe
     var mSelectedCustomer:Customer? = nil
     
     init(db: CustomerDatabase) {
-        mCustomers = db.getCustomers(showDeleted: false, withFiles: false)
+        mCustomers = db.getCustomers(search: nil, showDeleted: false, withFiles: false)
         if(mCustomers.count > 0) {
             mSelectedCustomer = mCustomers[0]
         }

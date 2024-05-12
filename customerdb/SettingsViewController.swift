@@ -700,7 +700,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UINavigatio
             let newFieldTitle = textField.text!
             // rebase custom fields
             if(textField.text != prevFieldTitle) {
-                for customer in self.mDb.getCustomers(showDeleted: false, withFiles: false) {
+                for customer in self.mDb.getCustomers(search: nil, showDeleted: false, withFiles: false) {
                     var fields = customer.getCustomFields()
                     for (index, field) in fields.enumerated() {
                         if field.mTitle == prevFieldTitle {

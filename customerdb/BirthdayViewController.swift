@@ -53,7 +53,9 @@ class CustomerBirthdayTableViewController : UIViewController, UITableViewDelegat
     
     func reloadCustomers() {
         let previewDays = UserDefaults.standard.integer(forKey: "birthday-preview-days")
-        mCustomers = CustomerBirthdayTableViewController.getSoonBirthdayCustomers(customers: mDb.getCustomers(showDeleted: false, withFiles: false), days: previewDays )
+        mCustomers = CustomerBirthdayTableViewController.getSoonBirthdayCustomers(
+            customers: mDb.getCustomers(search: nil, showDeleted: false, withFiles: false), days: previewDays
+        )
         tableView.reloadData()
     }
     

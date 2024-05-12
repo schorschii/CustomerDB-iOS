@@ -174,7 +174,7 @@ class CustomerDatabase {
     
     func updateCallDirectoryDatabase() {
         mCallDirectoryExtensionDb.truncateNumbers()
-        for c in getCustomers(showDeleted: false, withFiles: false) {
+        for c in getCustomers(search: nil, showDeleted: false, withFiles: false) {
             mCallDirectoryExtensionDb.insertNumber(
                 CallDirectoryNumber(
                     customerId: c.mId,
@@ -620,7 +620,7 @@ class CustomerDatabase {
     }
     
     // Customer Operations
-    func getCustomers(showDeleted:Bool, withFiles:Bool, modifiedSince:Date?=nil) -> [Customer] {
+    func getCustomers(search:String?, showDeleted:Bool, withFiles:Bool, modifiedSince:Date?=nil) -> [Customer] {
         var customers:[Customer] = []
         var stmt:OpaquePointer?
         var sql = "SELECT id, title, first_name, last_name, phone_home, phone_mobile, phone_work, email, street, zipcode, city, country, birthday, customer_group, newsletter, notes, custom_fields, last_modified, removed FROM customer WHERE removed = 0 ORDER BY last_name, first_name"
@@ -637,31 +637,52 @@ class CustomerDatabase {
                 if let date = CustomerDatabase.parseDate(strDate: String(cString: sqlite3_column_text(stmt, 17))) {
                     lastModified = date
                 }
-                if(modifiedSince == nil || lastModified > modifiedSince!) {
-                    customers.append(
-                        Customer(
-                            id: Int64(sqlite3_column_int64(stmt, 0)),
-                            title: String(cString: sqlite3_column_text(stmt, 1)),
-                            firstName: String(cString: sqlite3_column_text(stmt, 2)),
-                            lastName: String(cString: sqlite3_column_text(stmt, 3)),
-                            phoneHome: String(cString: sqlite3_column_text(stmt, 4)),
-                            phoneMobile: String(cString: sqlite3_column_text(stmt, 5)),
-                            phoneWork: String(cString: sqlite3_column_text(stmt, 6)),
-                            email: String(cString: sqlite3_column_text(stmt, 7)),
-                            street: String(cString: sqlite3_column_text(stmt, 8)),
-                            zipcode: String(cString: sqlite3_column_text(stmt, 9)),
-                            city: String(cString: sqlite3_column_text(stmt, 10)),
-                            country: String(cString: sqlite3_column_text(stmt, 11)),
-                            birthday: birthday,
-                            group: String(cString: sqlite3_column_text(stmt, 13)),
-                            newsletter: Int(sqlite3_column_int(stmt, 14)) > 0,
-                            notes: String(cString: sqlite3_column_text(stmt, 15)),
-                            customFields: String(cString: sqlite3_column_text(stmt, 16)),
-                            lastModified: lastModified,
-                            removed: Int(sqlite3_column_int(stmt, 18))
-                        )
-                    )
+                if(modifiedSince != nil && lastModified < modifiedSince!) {
+                    continue
                 }
+                
+                let c = Customer(
+                    id: Int64(sqlite3_column_int64(stmt, 0)),
+                    title: String(cString: sqlite3_column_text(stmt, 1)),
+                    firstName: String(cString: sqlite3_column_text(stmt, 2)),
+                    lastName: String(cString: sqlite3_column_text(stmt, 3)),
+                    phoneHome: String(cString: sqlite3_column_text(stmt, 4)),
+                    phoneMobile: String(cString: sqlite3_column_text(stmt, 5)),
+                    phoneWork: String(cString: sqlite3_column_text(stmt, 6)),
+                    email: String(cString: sqlite3_column_text(stmt, 7)),
+                    street: String(cString: sqlite3_column_text(stmt, 8)),
+                    zipcode: String(cString: sqlite3_column_text(stmt, 9)),
+                    city: String(cString: sqlite3_column_text(stmt, 10)),
+                    country: String(cString: sqlite3_column_text(stmt, 11)),
+                    birthday: birthday,
+                    group: String(cString: sqlite3_column_text(stmt, 13)),
+                    newsletter: Int(sqlite3_column_int(stmt, 14)) > 0,
+                    notes: String(cString: sqlite3_column_text(stmt, 15)),
+                    customFields: String(cString: sqlite3_column_text(stmt, 16)),
+                    lastModified: lastModified,
+                    removed: Int(sqlite3_column_int(stmt, 18))
+                )
+                
+                if(search != nil && search != "") {
+                    let normalizedSearch = search!.uppercased()
+                    if(!c.mTitle.uppercased().contains(normalizedSearch)
+                        && !c.mFirstName.uppercased().contains(normalizedSearch)
+                        && !c.mLastName.uppercased().contains(normalizedSearch)
+                        && !c.mPhoneHome.uppercased().contains(normalizedSearch)
+                        && !c.mPhoneMobile.uppercased().contains(normalizedSearch)
+                        && !c.mPhoneWork.uppercased().contains(normalizedSearch)
+                        && !c.mEmail.uppercased().contains(normalizedSearch)
+                        && !c.mStreet.uppercased().contains(normalizedSearch)
+                        && !c.mZipcode.uppercased().contains(normalizedSearch)
+                        && !c.mCity.uppercased().contains(normalizedSearch)
+                        && !c.mGroup.uppercased().contains(normalizedSearch)
+                        && !c.mNotes.uppercased().contains(normalizedSearch)
+                        && !findInCustomFields(searchUpperCase: normalizedSearch, fields: c.getCustomFields())) {
+                        continue
+                    }
+                }
+                
+                customers.append(c)
             }
         }
         
@@ -674,6 +695,14 @@ class CustomerDatabase {
         }
         
         return customers
+    }
+    func findInCustomFields(searchUpperCase:String, fields:[CustomField]) -> Bool {
+        for cf in fields {
+            if(cf.mValue.uppercased().contains(searchUpperCase)) {
+                return true
+            }
+        }
+        return false
     }
     func getCustomerFiles(c: Customer) -> Customer {
         var stmt:OpaquePointer?
