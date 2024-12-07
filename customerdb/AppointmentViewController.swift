@@ -6,9 +6,10 @@
 import Foundation
 import UIKit
 
-class AppointmentViewController : UIViewController {
+class AppointmentViewController : UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var imageLogo: UIImageView!
     @IBOutlet weak var viewAppointments: UIView!
+    @IBOutlet weak var scrollViewAppointments: UIScrollView!
     @IBOutlet weak var buttonAdd: UIButton!
     @IBOutlet weak var calendarChooser: UIDatePicker!
     
@@ -28,12 +29,26 @@ class AppointmentViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        scrollViewAppointments.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         calendarChooser.contentHorizontalAlignment = .center
         drawEvents()
         initColor()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        scrollViewAppointments.contentOffset.y = CGFloat(UserDefaults.standard.float(forKey: "calendar-day-scroll"))
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        NSObject.cancelPreviousPerformRequests(withTarget: self)
+        perform(#selector(UIScrollViewDelegate.scrollViewDidEndScrollingAnimation), with: nil, afterDelay: 0.3)
+    }
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        NSObject.cancelPreviousPerformRequests(withTarget: self)
+        UserDefaults.standard.set(scrollViewAppointments.contentOffset.y, forKey: "calendar-day-scroll")
     }
     
     func initColor() {
@@ -50,6 +65,7 @@ class AppointmentViewController : UIViewController {
             }
         }
     }
+    
     
     @IBAction func onClickAdd(_ sender: UIButton) {
         let detailViewController = storyboard?.instantiateViewController(withIdentifier: "AppointmentEditNavigationViewController") as! UINavigationController
