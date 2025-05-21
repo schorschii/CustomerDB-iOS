@@ -101,9 +101,10 @@ class VoucherTableViewController : UIViewController, UITableViewDelegate, UITabl
             let normalizedSearch = search!.uppercased()
             mVouchers.removeAll()
             for voucher in tempVouchers {
-                if(voucher.mFromCustomer.uppercased().contains(normalizedSearch)
-                    || voucher.mForCustomer.uppercased().contains(normalizedSearch)
-                    || voucher.mNotes.uppercased().contains(normalizedSearch)) {
+                if(voucher.mNotes.uppercased().contains(normalizedSearch)
+                    || voucher.mVoucherNo.uppercased().contains(normalizedSearch)
+                    || voucher.mFromCustomer.uppercased().contains(normalizedSearch)
+                    || voucher.mForCustomer.uppercased().contains(normalizedSearch)) {
                     mVouchers.append(voucher)
                 }
             }
