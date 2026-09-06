@@ -45,8 +45,6 @@ class CustomerDatabaseApi {
                         case .verified(let transaction):
                             if transaction.productID == "systems.sieber.customerdb.cal" {
                                 mTransaction = transaction.id
-                            } else {
-                                print(transaction.productID)
                             }
                         case .unverified(_, let error):
                             print("TRANSACTION UNVERIFIED:", error.localizedDescription)
