@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import StoreKit
 
 protocol RequestFinishedListener {
     func queueFinished(success:Bool, message:String?)
@@ -16,49 +17,63 @@ class CustomerDatabaseApi {
     var mUrl = ""
     var mUsername = ""
     var mPassword = ""
-    var mReceipt:String? = "nil"
+    
+    var mReceipt:String? = nil
+    var mTransaction:UInt64? = nil
     
     var delegate: RequestFinishedListener? = nil
     var queueFinished: (() -> ())? = nil
     
     let mDb:CustomerDatabase
     
-    init(db:CustomerDatabase, username:String, password:String) {
-        mDb = db
-        mUrl = CustomerDatabaseApi.MANAGED_API
-        mUsername = username
-        mPassword = password
-        initReceipt()
+    convenience init(db:CustomerDatabase, username:String, password:String) {
+        self.init(db: db, url: CustomerDatabaseApi.MANAGED_API, username: username, password: password)
     }
     init(db:CustomerDatabase, url:String, username:String, password:String) {
         mDb = db
         mUrl = url
         mUsername = username
         mPassword = password
-        initReceipt()
-    }
-    
-    func initReceipt() {
-        let receiptPath = Bundle.main.appStoreReceiptURL?.path
-        if FileManager.default.fileExists(atPath: receiptPath!) {
-            var receiptData:NSData?
-            do {
-                receiptData = try NSData(
-                    contentsOf: Bundle.main.appStoreReceiptURL!,
-                    options: NSData.ReadingOptions.alwaysMapped
-                )
-                let base64encodedReceipt = receiptData?.base64EncodedString(
-                    options: NSData.Base64EncodingOptions.endLineWithCarriageReturn
-                )
-                mReceipt = base64encodedReceipt
-            } catch {
-                print("RECEIPT ERROR: " + error.localizedDescription)
-            }
-        }
     }
     
     func sync(diffSince:Date?=nil) {
-        putCustomers(diffSince: diffSince)
+        do {
+            if #available(iOS 16.0, *) {
+                Task {
+                    for await result in Transaction.currentEntitlements {
+                        switch result {
+                        case .verified(let transaction):
+                            if transaction.productID == "systems.sieber.customerdb.cal" {
+                                mTransaction = transaction.id
+                            } else {
+                                print(transaction.productID)
+                            }
+                        case .unverified(_, let error):
+                            print("TRANSACTION UNVERIFIED:", error.localizedDescription)
+                        }
+                    }
+                    putCustomers(diffSince: diffSince)
+                }
+            } else {
+                let receiptPath = Bundle.main.appStoreReceiptURL?.path
+                if FileManager.default.fileExists(atPath: receiptPath!) {
+                    var receiptData:NSData?
+                    receiptData = try NSData(
+                        contentsOf: Bundle.main.appStoreReceiptURL!,
+                        options: NSData.ReadingOptions.alwaysMapped
+                    )
+                    let base64encodedReceipt = receiptData?.base64EncodedString(
+                        options: NSData.Base64EncodingOptions.endLineWithCarriageReturn
+                    )
+                    mReceipt = base64encodedReceipt
+                    putCustomers(diffSince: diffSince)
+                }
+            }
+        } catch {
+            print("RECEIPT ERROR: " + error.localizedDescription)
+            // start sync even on error, self-hosted server may not check payment
+            putCustomers(diffSince: diffSince)
+        }
     }
     
     private func putCustomers(diffSince:Date?=nil) {
@@ -159,6 +174,7 @@ class CustomerDatabaseApi {
                 "username": mUsername,
                 "password": mPassword,
                 "appstore_receipt": mReceipt,
+                "appstore_transaction": mTransaction,
                 "customers": customersDataArray,
                 "vouchers": vouchersDataArray,
                 "calendars": calendarsDataArray,
@@ -225,6 +241,7 @@ class CustomerDatabaseApi {
                 "username": mUsername,
                 "password": mPassword,
                 "appstore_receipt": mReceipt,
+                "appstore_transaction": mTransaction,
                 "diff_since": CustomerDatabase.dateToString(date: diffSince),
                 "files": false
             ] as [String:Any?]
@@ -383,6 +400,7 @@ class CustomerDatabaseApi {
                 "username": mUsername,
                 "password": mPassword,
                 "appstore_receipt": mReceipt,
+                "appstore_transaction": mTransaction,
                 "customer_id": customerId
             ] as [String:Any?]
         ]
