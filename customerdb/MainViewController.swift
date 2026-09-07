@@ -36,21 +36,6 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
                 buttonSearch.isHidden = true
             }
         }
-        
-        if(!UserDefaults.standard.bool(forKey: "eulaok")) {
-            let alert = UIAlertController(
-                title: NSLocalizedString("eula_title", comment: ""),
-                message: NSLocalizedString("eula", comment: ""),
-                preferredStyle: .alert
-            )
-            alert.addAction(UIAlertAction(
-                    title: NSLocalizedString("ok", comment: ""),
-                    style: .cancel) { (action) in
-                        UserDefaults.standard.set(true, forKey: "eulaok")
-                }
-            )
-            self.present(alert, animated: true)
-        }
     }
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
