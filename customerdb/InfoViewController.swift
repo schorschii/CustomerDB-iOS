@@ -53,9 +53,10 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initIAP()
+        
+        navigationItem.title = NSLocalizedString("customer_database", comment: "")
         let versionString = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-        labelVersion.text = NSLocalizedString("customer_database", comment: "") + " v" + (versionString ?? "?")
+        labelVersion.text = "Version " + (versionString ?? "?")
         buttonGithub.setTitle(InfoViewController.REPO_URL, for: .normal)
         buttonHomepage.setTitle(InfoViewController.HOMEPAGE_URL, for: .normal)
         buttonEmail.setTitle(InfoViewController.SUPPORT_EMAIL, for: .normal)
@@ -72,6 +73,8 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
         tap.numberOfTapsRequired = 2
         labelVersion.isUserInteractionEnabled = true
         labelVersion.addGestureRecognizer(tap)
+        
+        initIAP()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
