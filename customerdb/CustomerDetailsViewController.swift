@@ -83,7 +83,7 @@ class CustomerDetailsViewController : UIViewController, MFMessageComposeViewCont
     }
     
     func initColor() {
-        buttonEdit.backgroundColor = UINavigationBar.appearance().barTintColor
+        buttonEdit.backgroundColor = UIApplication.shared.windows[0].tintColor
     }
     
     override func viewWillAppear(_ animated: Bool) {

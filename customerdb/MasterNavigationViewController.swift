@@ -28,18 +28,44 @@ class MasterNavigationController: UINavigationController {
     }
     
     func setNavigationBarColor(_ color:UIColor) {
-        navigationBar.barTintColor = color
-        navigationBar.tintColor = .white
-        
-        UINavigationBar.appearance().tintColor = .white
-        UINavigationBar.appearance().barTintColor = color
-        
+        UIApplication.shared.windows[0].tintColor = color
         if #available(iOS 13.0, *) {
             let appearance = UINavigationBarAppearance()
-            appearance.backgroundColor = color
-            appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-            appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-            
+            if #available(iOS 26.0, *) {
+                let gradient = CAGradientLayer()
+                var bounds = navigationBar.bounds
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                    let statusBarHeight = windowScene.statusBarManager?.statusBarFrame.height {
+                    bounds.size.height += statusBarHeight
+                } else {
+                    bounds.size.height += UIApplication.shared.statusBarFrame.height
+                }
+                gradient.frame = bounds
+                gradient.colors = [
+                    color.cgColor,
+                    UIColor.init(red: 0, green: 0, blue: 0, alpha: 0).cgColor
+                ]
+                gradient.startPoint = CGPoint(x: 0.5, y: 0.16)
+                gradient.endPoint = CGPoint(x: 0.5, y: 0.94)
+
+                let image = UIGraphicsImageRenderer(bounds: bounds).image { rendererContext in
+                    gradient.render(in: rendererContext.cgContext)
+                }.resizableImage(withCapInsets: .zero, resizingMode: .stretch)
+
+                appearance.configureWithDefaultBackground()
+                appearance.backgroundImage = image
+            } else {
+                appearance.backgroundColor = color
+                appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+                appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+                
+                navigationBar.barTintColor = color
+                navigationBar.tintColor = .white
+                
+                UINavigationBar.appearance().tintColor = .white
+                UINavigationBar.appearance().barTintColor = color
+            }
+
             navigationBar.standardAppearance = appearance
             navigationBar.compactAppearance = appearance
             navigationBar.scrollEdgeAppearance = appearance
@@ -54,7 +80,9 @@ class MasterNavigationController: UINavigationController {
         }
         
         if let mvc = viewControllers[0] as? MainViewController {
-            mvc.tabBar.tintColor = color
+            if #unavailable(iOS 26.0) {
+                mvc.tabBar.tintColor = color
+            }
             if let cvc = mvc.selectedViewController as? CustomerTableViewController {
                 cvc.initColor()
             } else if let vvc = mvc.selectedViewController as? VoucherTableViewController {

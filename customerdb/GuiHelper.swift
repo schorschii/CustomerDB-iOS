@@ -114,3 +114,12 @@ class UICopyLabel: UILabel {
         return (action == #selector(copy(_:)))
     }
 }
+
+class HardScrollView: UIScrollView {
+    override public func awakeFromNib() {
+        super.awakeFromNib()
+        if #available(iOS 26.0, *) {
+            topEdgeEffect.style = .hard
+        }
+    }
+}

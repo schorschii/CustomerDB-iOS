@@ -49,14 +49,20 @@ class VoucherTableViewController : UIViewController, UITableViewDelegate, UITabl
     
     let mSearchController = UISearchController(searchResultsController: nil)
     func initSearch() {
-        if #available(iOS 11.0, *) {} else {
+        if #available(iOS 26.0, *) {
             mSearchController.searchResultsUpdater = self
             mSearchController.obscuresBackgroundDuringPresentation = false
             // cancel button tint color
             mSearchController.searchBar.tintColor = .white
             mSearchController.searchBar.barTintColor = navigationController?.navigationBar.barTintColor
+            
+            // fix light-gray background when pulling down or bouncing the table view
+            let backgroundView = UIView()
+            backgroundView.backgroundColor = .systemBackground
+            tableView.backgroundView = backgroundView
+            
             tableView.tableHeaderView = mSearchController.searchBar
-            //definesPresentationContext = true
+            definesPresentationContext = true
         }
     }
     func updateSearchResults(for searchController: UISearchController) {
@@ -66,17 +72,20 @@ class VoucherTableViewController : UIViewController, UITableViewDelegate, UITabl
     }
     
     func initColor() {
-        buttonAdd.backgroundColor = navigationController?.navigationBar.barTintColor
-        if #available(iOS 13.0, *) {
-            // applies background color (from navigation controller), also if search field is shown
-            let navigationBar = self.navigationController!.navigationBar
-            let navBarAppearance = UINavigationBarAppearance()
-            navBarAppearance.configureWithOpaqueBackground()
-            navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-            navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-            navBarAppearance.backgroundColor = navigationBar.barTintColor
-            navigationBar.standardAppearance = navBarAppearance
-            navigationBar.scrollEdgeAppearance = navBarAppearance
+        buttonAdd.backgroundColor = UIApplication.shared.windows[0].tintColor
+        
+        if #unavailable(iOS 26.0) {
+            if #available(iOS 13.0, *) {
+                // applies background color (from navigation controller), also if search field is shown
+                let navigationBar = self.navigationController!.navigationBar
+                let navBarAppearance = UINavigationBarAppearance()
+                navBarAppearance.configureWithOpaqueBackground()
+                navBarAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+                navBarAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+                navBarAppearance.backgroundColor = navigationBar.barTintColor
+                navigationBar.standardAppearance = navBarAppearance
+                navigationBar.scrollEdgeAppearance = navBarAppearance
+            }
         }
         
         if(UserDefaults.standard.bool(forKey: "unlocked-do")) {

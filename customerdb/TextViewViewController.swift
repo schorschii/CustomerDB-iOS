@@ -7,7 +7,6 @@ import Foundation
 import UIKit
 
 class TextViewViewController : UIViewController {
-    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var textViewText: UITextView!
     
     var mText = ""
@@ -16,7 +15,10 @@ class TextViewViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if(mTitle != "") {
-            navigationBar.topItem?.title = mTitle
+            navigationItem.title = mTitle
+            if #available(iOS 26.0, *) {
+                navigationItem.largeTitle = mTitle
+            }
         }
         textViewText.text = mText
     }

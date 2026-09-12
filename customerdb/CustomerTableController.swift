@@ -11,7 +11,7 @@ class CustomerCell : UITableViewCell {
     @IBOutlet weak var labelSub: UILabel!
 }
 
-class CustomerTableViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating {
+class CustomerTableViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate {
     
     @IBOutlet weak var imageLogo: UIImageView!
     @IBOutlet weak var tableView: UITableView!
@@ -69,14 +69,20 @@ class CustomerTableViewController : UIViewController, UITableViewDelegate, UITab
     
     let mSearchController = UISearchController(searchResultsController: nil)
     func initSearch() {
-        if #available(iOS 11.0, *) {} else {
+        if #available(iOS 26.0, *) {
             mSearchController.searchResultsUpdater = self
             mSearchController.obscuresBackgroundDuringPresentation = false
             // cancel button tint color
             mSearchController.searchBar.tintColor = .white
             mSearchController.searchBar.barTintColor = navigationController?.navigationBar.barTintColor
+            
+            // fix light-gray background when pulling down or bouncing the table view
+            let backgroundView = UIView()
+            backgroundView.backgroundColor = .systemBackground
+            tableView.backgroundView = backgroundView
+            
             tableView.tableHeaderView = mSearchController.searchBar
-            //definesPresentationContext = true
+            definesPresentationContext = true
         }
     }
     func updateSearchResults(for searchController: UISearchController) {
@@ -86,7 +92,7 @@ class CustomerTableViewController : UIViewController, UITableViewDelegate, UITab
     }
     
     func initColor() {
-        buttonAdd.backgroundColor = navigationController?.navigationBar.barTintColor
+        buttonAdd.backgroundColor = UIApplication.shared.windows[0].tintColor
 
         // todo: programatically assign background image
         //view.backgroundColor = UIColor(patternImage: imageScaledToFillSize(size: view.frame.size, image: UIImage(named: "icon_gray")!))

@@ -23,7 +23,6 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.barStyle = .black
         initColor()
         initSearch()
         refreshSyncIcon()
@@ -71,6 +70,9 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
     }
     
     func initColor() {
+        if #unavailable(iOS 26.0) {
+            navigationController?.navigationBar.barStyle = .black
+        }
         if let cvc = selectedViewController as? CustomerTableViewController {
             cvc.initColor()
         } else if let vvc = selectedViewController as? VoucherTableViewController {
@@ -144,7 +146,11 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
     func setupStatusIndicator(visible: Bool, message: String?, completion: (()->Void)?) {
         if(visible) {
             syncInProgressAlert = UIAlertController(title: nil, message: message ?? "", preferredStyle: .alert)
-            let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+            var y = 5
+            if #available(iOS 26, *) {
+                y = 20
+            }
+            let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: y, width: 50, height: 50))
             loadingIndicator.hidesWhenStopped = true
             loadingIndicator.style = UIActivityIndicatorView.Style.gray
             loadingIndicator.startAnimating()
@@ -169,27 +175,39 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
     // search implementation
     let mSearchController = UISearchController(searchResultsController: nil)
     func initSearch() {
-        mSearchController.searchResultsUpdater = self
-        mSearchController.obscuresBackgroundDuringPresentation = false
-        
-        // cancel button tint color
-        mSearchController.searchBar.tintColor = .white
-        mSearchController.searchBar.barTintColor = navigationController?.navigationBar.barTintColor
-        
+        if #available(iOS 16.0, *) {
+            buttonSearch.isHidden = true
+        } else {
+            buttonSearch.isEnabled = false
+        }
         if #available(iOS 11.0, *) {
-            // get search bar
-            if let textFieldInsideSearchBar = mSearchController.searchBar.textField {
-                // text field placeholder
-                textFieldInsideSearchBar.attributedPlaceholder =
+            if #unavailable(iOS 26) {
+                if #available(iOS 16.0, *) {
+                    buttonSearch.isHidden = false
+                } else {
+                    buttonSearch.isEnabled = true
+                }
+                mSearchController.searchResultsUpdater = self
+                mSearchController.obscuresBackgroundDuringPresentation = false
+                
+                // cancel button tint color
+                mSearchController.searchBar.tintColor = .white
+                mSearchController.searchBar.barTintColor = navigationController?.navigationBar.barTintColor
+                
+                // get search bar
+                if let textFieldInsideSearchBar = mSearchController.searchBar.textField {
+                    // text field placeholder
+                    textFieldInsideSearchBar.attributedPlaceholder =
                     NSAttributedString(string: NSLocalizedString("search", comment: ""), attributes: [NSAttributedString.Key.foregroundColor : UIColor.gray])
-                // magnifying glass color
-                let glassIconView: UIImageView = textFieldInsideSearchBar.leftView as! UIImageView
-                glassIconView.image = glassIconView.image?.withRenderingMode(.alwaysTemplate)
-                glassIconView.tintColor = .gray
-                // text field text & background color
-                UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-                textFieldInsideSearchBar.backgroundColor = UIColor.white
-                textFieldInsideSearchBar.tintColor = UIColor.black
+                    // magnifying glass color
+                    let glassIconView: UIImageView = textFieldInsideSearchBar.leftView as! UIImageView
+                    glassIconView.image = glassIconView.image?.withRenderingMode(.alwaysTemplate)
+                    glassIconView.tintColor = .gray
+                    // text field text & background color
+                    UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+                    textFieldInsideSearchBar.backgroundColor = UIColor.white
+                    textFieldInsideSearchBar.tintColor = UIColor.black
+                }
                 // apply search controller
                 navigationItem.searchController = mSearchController
             }

@@ -39,7 +39,6 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
     private var inappFilesProduct: SKProduct?
     private var inappCalendarProduct: SKProduct?
     
-    @IBOutlet weak var imageLogo: UIImageView!
     @IBOutlet weak var buttonBuyCloudAccessLicense: UIButton!
     @IBOutlet weak var buttonBuyCommercialUsage: UIButton!
     @IBOutlet weak var buttonBuyLargeCompany: UIButton!
@@ -56,7 +55,7 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
         super.viewDidLoad()
         initIAP()
         let versionString = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-        labelVersion.text = "v" + (versionString ?? "?")
+        labelVersion.text = NSLocalizedString("customer_database", comment: "") + " v" + (versionString ?? "?")
         buttonGithub.setTitle(InfoViewController.REPO_URL, for: .normal)
         buttonHomepage.setTitle(InfoViewController.HOMEPAGE_URL, for: .normal)
         buttonEmail.setTitle(InfoViewController.SUPPORT_EMAIL, for: .normal)
@@ -71,8 +70,8 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(onClickManualUnlock(_:)))
         tap.numberOfTapsRequired = 2
-        imageLogo.isUserInteractionEnabled = true
-        imageLogo.addGestureRecognizer(tap)
+        labelVersion.isUserInteractionEnabled = true
+        labelVersion.addGestureRecognizer(tap)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -106,36 +105,28 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
         }
     }
     @IBAction func onClickBackupInfo(_ sender: UIButton) {
-        let vc = mStoryboard.instantiateViewController(withIdentifier: "TextViewViewController")
-        if let tvvc = vc as? TextViewViewController {
-            tvvc.mTitle = NSLocalizedString("backup", comment: "")
-            tvvc.mText = NSLocalizedString("backup_info_text", comment: "")
-        }
-        present(vc, animated: true)
+        showTextViewController(
+            NSLocalizedString("backup", comment: ""),
+            NSLocalizedString("backup_info_text", comment: "")
+        )
     }
     @IBAction func onClickInputOnlyModeInfo(_ sender: UIButton) {
-        let vc = mStoryboard.instantiateViewController(withIdentifier: "TextViewViewController")
-        if let tvvc = vc as? TextViewViewController {
-            tvvc.mTitle = NSLocalizedString("input_only_mode", comment: "")
-            tvvc.mText = NSLocalizedString("input_only_mode_instructions", comment: "")
-        }
-        present(vc, animated: true)
+        showTextViewController(
+            NSLocalizedString("input_only_mode", comment: ""),
+            NSLocalizedString("input_only_mode_instructions", comment: "")
+        )
     }
     @IBAction func onClickCardDavApiInfo(_ sender: UIButton) {
-        let vc = mStoryboard.instantiateViewController(withIdentifier: "TextViewViewController")
-        if let tvvc = vc as? TextViewViewController {
-            tvvc.mTitle = NSLocalizedString("carddav_api", comment: "")
-            tvvc.mText = NSLocalizedString("carddav_api_info_text", comment: "")
-        }
-        present(vc, animated: true)
+        showTextViewController(
+            NSLocalizedString("carddav_api", comment: ""),
+            NSLocalizedString("carddav_api_info_text", comment: "")
+        )
     }
     @IBAction func onClickEula(_ sender: UIButton) {
-        let vc = mStoryboard.instantiateViewController(withIdentifier: "TextViewViewController")
-        if let tvvc = vc as? TextViewViewController {
-            tvvc.mTitle = NSLocalizedString("eula_title", comment: "")
-            tvvc.mText = NSLocalizedString("eula", comment: "")
-        }
-        present(vc, animated: true)
+        showTextViewController(
+            NSLocalizedString("eula_title", comment: ""),
+            NSLocalizedString("eula", comment: "")
+        )
     }
     @IBAction func onClickEmail(_ sender: UIButton) {
         if(MFMailComposeViewController.canSendMail()) {
@@ -194,6 +185,16 @@ class InfoViewController : UIViewController, MFMailComposeViewControllerDelegate
         if let url = URL(string: "https://github.com/schorschii/MASTERPLAN") {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
+    }
+    
+    func showTextViewController(_ title:String, _ text:String) {
+        let vc = mStoryboard.instantiateViewController(withIdentifier: "TextViewViewController")
+        if let tvvc = vc as? TextViewViewController {
+            tvvc.mTitle = title
+            tvvc.mText = text
+        }
+        let nc = UINavigationController(rootViewController: vc)
+        present(nc, animated: true)
     }
     
     func openStoreProductWithiTunesItemIdentifier(identifier: String) {

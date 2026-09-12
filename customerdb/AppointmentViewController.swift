@@ -52,7 +52,7 @@ class AppointmentViewController : UIViewController, UIScrollViewDelegate {
     }
     
     func initColor() {
-        buttonAdd.backgroundColor = navigationController?.navigationBar.barTintColor
+        buttonAdd.backgroundColor = UIApplication.shared.windows[0].tintColor
         
         if(UserDefaults.standard.bool(forKey: "unlocked-do")) {
             if let image = GuiHelper.loadImage(file: SettingsViewController.getLogoFile()) {

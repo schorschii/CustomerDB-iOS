@@ -471,8 +471,8 @@
 /* Class = "UILabel"; text = "Last Changed"; ObjectID = "q36-Mq-pKm"; */
 "q36-Mq-pKm.text" = "Último cambio";
 
-/* Class = "UINavigationItem"; title = "Create Account"; ObjectID = "qAm-xZ-WHk"; */
-"qAm-xZ-WHk.title" = "Crear una cuenta";
+/* Class = "UINavigationItem"; title = "Create Account"; ObjectID = "6Q0-he-Zln"; */
+"6Q0-he-Zln.title" = "Crear una cuenta";
 
 /* Class = "UILabel"; text = "Valid Until"; ObjectID = "qEu-j8-OcW"; */
 "qEu-j8-OcW.text" = "Válida hasta";
