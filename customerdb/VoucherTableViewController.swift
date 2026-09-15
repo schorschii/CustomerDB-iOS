@@ -49,7 +49,7 @@ class VoucherTableViewController : UIViewController, UITableViewDelegate, UITabl
     
     let mSearchController = UISearchController(searchResultsController: nil)
     func initSearch() {
-        if #available(iOS 26.0, *) {
+        if #unavailable(iOS 11.0) {
             mSearchController.searchResultsUpdater = self
             mSearchController.obscuresBackgroundDuringPresentation = false
             // cancel button tint color
