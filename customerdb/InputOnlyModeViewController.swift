@@ -12,7 +12,7 @@ class InputOnlyModeViewController : UIViewController {
     
     override func viewDidLoad() {
         navigationItem.hidesBackButton = true
-        view.backgroundColor = navigationController?.navigationBar.barTintColor
+        view.backgroundColor = UIApplication.shared.windows[0].tintColor
         
         if(UserDefaults.standard.bool(forKey: "unlocked-do")) {
             if let image = load(file: SettingsViewController.getLogoFile()) {

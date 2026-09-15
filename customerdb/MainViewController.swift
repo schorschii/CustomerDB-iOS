@@ -152,7 +152,7 @@ class MainViewController : UITabBarController, MFMailComposeViewControllerDelega
             }
             let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: y, width: 50, height: 50))
             loadingIndicator.hidesWhenStopped = true
-            loadingIndicator.style = UIActivityIndicatorView.Style.gray
+            loadingIndicator.style = .medium
             loadingIndicator.startAnimating()
             if #available(iOS 12.0, *) {
                 if(traitCollection.userInterfaceStyle == .dark) {
